@@ -1,0 +1,26 @@
+.back-drop {
+  background-color: #000;
+  opacity: 0.5;
+}
+
+.modal {
+  position: absolute;
+  inset: 0;
+  background-color: #fff;
+  color: #000;
+}
+
+.title {
+  display: inline-block;
+  color: #000;
+}
+
+.button {
+  color: #000;
+}
+
+.input {
+  background-color: #fff;
+  border: solid 1px #000;
+  color: #000;
+}
