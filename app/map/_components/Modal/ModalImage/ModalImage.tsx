@@ -3,7 +3,7 @@ import { UseFormSetValue } from 'react-hook-form';
 
 import Image from 'next/image';
 
-import { ContentField } from '../../_hooks/useCreateForm';
+import { ContentField } from '../../../_hooks/useCreateForm';
 
 interface ModalImageProps {
   setValue: UseFormSetValue<ContentField>;
