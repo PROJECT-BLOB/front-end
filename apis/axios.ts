@@ -1,12 +1,15 @@
-import axios, { isAxiosError } from 'axios';
+/* eslint-disable no-underscore-dangle */
+import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from 'axios';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const isServer = typeof window === 'undefined';
 const ACCESS_TOKEN = 'accessToken';
+const GET_REFRESH_URL = 'notYet';
 
 const instance = axios.create({
   baseURL: BASE_URL,
   timeout: 5000,
+  withCredentials: true,
 });
 
 instance.interceptors.request.use(
@@ -30,6 +33,31 @@ instance.interceptors.request.use(
   (error) => {
     if (isAxiosError(error)) {
       return; // TODO: Error처리
+    }
+
+    return Promise.reject(error);
+  },
+);
+
+// 인터셉터 사용해서 리스폰스를 가로채서 처리해주면 된다
+instance.interceptors.response.use(
+  // onFulfilled
+  (response) => response,
+
+  // onRejected
+  async (error): Promise<AxiosError> => {
+    const originalRequest = error.config; // error.config에 담겨있는 원래 리퀘스트를 가져온다.
+
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      // 401코드는 임시로 지정 -> 백엔드에서 에러코드 확인 필요합니다.
+      // 만약 토큰 만료로 추정되는 경우에
+
+      // 토큰 발급 요청 시 데이터가 필요없을 경우에 undefined..추후 수정될 수 있음.
+      await instance.post(GET_REFRESH_URL, undefined, { _retry: true } as AxiosRequestConfig<undefined>); // 토큰 재발급 하고
+
+      originalRequest._retry = true;
+
+      return instance(originalRequest); // 리퀘스트 재시도 하도록 설정
     }
 
     return Promise.reject(error);
