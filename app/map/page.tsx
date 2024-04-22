@@ -2,7 +2,7 @@
 
 import useModalStore from '@stores/useBlobModalStore';
 
-import Modal from './_components/Modal';
+import Modal from './_components/Modal/Modal';
 
 export default function Map() {
   const { toggleModal } = useModalStore();
