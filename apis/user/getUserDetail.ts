@@ -1,18 +1,18 @@
-import instance from '@apis/axios';
+// import instance from '@apis/axios';
 
-interface UserDetail {
-  userId: number;
-  blobId: string;
-  nickName: string;
-  postCount: number;
-  bio: string;
-  likedCount: number;
-  profileImageUrl: string;
-  isPrivate: boolean;
-}
+// interface UserDetail {
+//   userId: number;
+//   blobId: string;
+//   nickName: string;
+//   postCount: number;
+//   bio: string;
+//   likedCount: number;
+//   profileImageUrl: string;
+//   isPrivate: boolean;
+// }
 
-export default async function getUserDetail(userId: number) {
-  const { data } = await instance.get<UserDetail>(`/users/${userId}`);
+// export default async function getUserDetail(userId: number) {
+//   const { data } = await instance.get<UserDetail>(`/users/${userId}`);
 
-  return data;
-}
+//   return data;
+// }
