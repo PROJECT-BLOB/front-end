@@ -3,7 +3,7 @@
 
 import instance from '@apis/axios';
 
-export default async function deleteUser(userId: string) {
+export default async function deleteUser(userId: number) {
   const result = await instance.delete(`/user/${userId}`);
 
   return result.data;
