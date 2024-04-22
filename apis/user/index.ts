@@ -17,11 +17,12 @@ export default async function getUserDetail(userId: number) {
   return data;
 }
 
+// 1시 전까지 pr 필수!!
 // ===마이페이지 조회(예진)
 // 유저정보 - getUserDetail(userId: number)
 // 유저 게시글- getUserPostList(userId:number)
 // 유저 북마크- getUserBookmarkList(userId:number)
-// 유저 댓글- getUserCommentList(userId:number)
+// 유저 댓글- getUserCommentList(uerId:number)
 
 // === 내정보 수정 (해용)
 // 프로필 사진 삭제 -deleteProfileImage(userId:number)

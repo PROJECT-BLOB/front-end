@@ -16,10 +16,3 @@ export default async function getUserDetail(userId: number) {
 
   return data;
 }
-
-export default async function (userId: number) {
-    const { data } = await instance.get<UserDetail>(`/users/${userId}`);
-  
-    return data;
-  }
-  
