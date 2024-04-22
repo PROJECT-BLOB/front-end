@@ -14,7 +14,10 @@ interface UserDetail {
 export default async function getUserDetail(userId: number) {
   const { data } = await instance.get<UserDetail>(`/users/${userId}`);
 
-  return data;
+  // Transform data into a plain object
+  const plainData = { ...data };
+
+  return plainData;
 }
 
 // 1시 전까지 pr 필수!!
