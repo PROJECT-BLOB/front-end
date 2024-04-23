@@ -1,6 +1,6 @@
 'use client';
 
-import useModalStore from '@stores/useBlobModalStore';
+import useModalStore from '@stores/useModalStore';
 
 import ModalContainer from './_components/Modal/ModalContainer';
 
