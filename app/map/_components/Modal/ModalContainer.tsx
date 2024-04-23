@@ -1,16 +1,20 @@
-import useModalStore from '@stores/useBlobModalStore';
+import useModalStore from '@stores/useModalStore';
 
 import styles from './ModalContainer.module.scss';
-import ReadModal from './ReadModal/ReadModal';
+import WriteModal from './WritePost/WritePost';
 
 export default function ModalContainer() {
-  const { show } = useModalStore();
+  const { isOpen } = useModalStore();
 
   return (
-    show && (
+    isOpen && (
       <>
         <div className={styles['back-drop']} />
-        <ReadModal />
+
+        {/* <ModalHeader />
+        <ModalBody target={target}/>
+        <ModalFooter /> */}
+        <WriteModal />
       </>
     )
   );
