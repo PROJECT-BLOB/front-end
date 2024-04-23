@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
-import useModalStore from '@stores/useBlobModalStore';
+import useModalStore from '@stores/useModalStore';
 
-import styles from './ReadModal.module.scss';
+import styles from './ReadPost.module.scss';
 
-export default function ReadModal() {
-  const contentData = {
+export default function ReadPost() {
+  const mockImage = {
     title: '사람 살려요',
     content: '뒤에 듀크가 쫓아와요',
     imageList: [
@@ -18,12 +18,12 @@ export default function ReadModal() {
 
   return (
     <div className={styles.modal}>
-      <h2 className={styles.title}>{contentData.title}</h2>
+      <h2 className={styles.title}>{mockImage.title}</h2>
       <button type='button' onClick={toggleModal} className={styles.button}>
         X
       </button>
-      <p>{contentData.content}</p>
-      {contentData.imageList.map((image) => (
+      <p>{mockImage.content}</p>
+      {mockImage.imageList.map((image) => (
         <Image key={image} src={image} alt='이미지' width={200} height={200} />
       ))}
     </div>
