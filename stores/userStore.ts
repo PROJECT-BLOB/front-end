@@ -1,10 +1,10 @@
 import { create } from 'zustand';
 
 interface UserStore {
-  isLogin: boolean;
+  isSignin: boolean;
 
-  login: () => void;
-  logout: () => void;
+  signin: () => void;
+  signout: () => void;
 
   lastLocation: Location;
 }
@@ -17,8 +17,8 @@ interface Location {
 }
 
 export const useUserStore = create<UserStore>((set) => ({
-  isLogin: false,
+  isSignin: false,
   lastLocation: { lat: 0, lng: 0 },
-  login: () => set(() => ({ isLogin: true })),
-  logout: () => set(() => ({ isLogin: false })),
+  signin: () => set(() => ({ isSignin: true })),
+  signout: () => set(() => ({ isSignin: false })),
 }));
