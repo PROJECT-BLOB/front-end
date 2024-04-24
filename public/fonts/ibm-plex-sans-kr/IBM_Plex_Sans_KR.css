@@ -1,0 +1,26 @@
+/* Variable fonts usage:
+:root { font-family: "Inter", sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: "InterVariable", sans-serif; font-optical-sizing: auto; }
+} */
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 400;
+  src: url(./IBMPlexSansKR-Regular.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 500;
+  src: url(./IBMPlexSansKR-Medium.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 600;
+  src: url(./IBMPlexSansKR-SemiBold.ttf) format('ttf');
+}
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 700;
+  src: url(./IBMPlexSansKR-Bold.ttf) format('ttf');
+}

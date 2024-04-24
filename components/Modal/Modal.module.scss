@@ -7,7 +7,11 @@
 
 .title {
   display: inline-block;
-  color: var(--BDS-Secondary-Blue);
+  color: var(--BDS-Grayscale-8, var(--BDS-Grayscale-8, #595959));
+
+  /* BDS/Label 2 */
+  font-weight: 400;
+  font-style: normal;
 }
 
 .content {
