@@ -1,4 +1,7 @@
+import WrapperProvider from '@utils/WrapperProvider';
+
 import type { Metadata } from 'next';
+
 import './globals.scss';
 
 export const metadata: Metadata = {
@@ -12,8 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body>{children}</body>
+    <html lang='ko'>
+      <body>
+        <WrapperProvider>{children}</WrapperProvider>
+      </body>
     </html>
   );
 }
