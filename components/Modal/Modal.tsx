@@ -1,6 +1,6 @@
 import useModalStore from '@stores/useModalStore';
 
-import Portal from '@components/Portal/Portal';
+import Portal from '@components/Portal';
 
 import styles from './Modal.module.scss';
 
