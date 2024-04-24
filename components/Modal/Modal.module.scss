@@ -1,26 +1,30 @@
 .modal {
   position: absolute;
   inset: 0;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--BDS-Grayscale-1);
+  color: var(--BDS-Grayscale-14);
 }
 
 .title {
   display: inline-block;
-  color: #000;
+  color: var(--BDS-Secondary-Blue);
+}
+
+.content {
+  color: var(--BDS-Secondary-Blue);
 }
 
 .button {
-  color: #000;
+  color: var(--BDS-Grayscale-14);
 }
 
 .input {
-  background-color: #fff;
-  border: solid 0.1px #000;
-  color: #000;
+  background-color: var(--BDS-Grayscale-1);
+  border: solid 0.1px var(--BDS-Grayscale-14);
+  color: var(--BDS-Grayscale-14);
 }
 
 .back-drop {
-  background-color: #000;
+  background-color: var(--BDS-Grayscale-14);
   opacity: 0.5;
 }
