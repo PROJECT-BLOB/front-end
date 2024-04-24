@@ -22,7 +22,7 @@ function ModalHeader({ children }: React.PropsWithChildren) {
 }
 
 function ModalBody({ children }: React.PropsWithChildren) {
-  return <div>{children}</div>;
+  return <div className={styles.content}>{children}</div>;
 }
 
 function ModalFooter({ children }: React.PropsWithChildren) {
