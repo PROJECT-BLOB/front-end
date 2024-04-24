@@ -1,19 +1,30 @@
 'use client';
 
-import useModalStore from '@stores/useModalStore';
+import useModalStore, { ModalName } from '@stores/useModalStore';
 
-import ModalContainer from './_components/Modal/ModalContainer';
+import ReadPost from '@components/Modal/ReadPost/ReadPost';
+import WritePost from '@components/Modal/WritePost/WritePost';
 
 export default function Map() {
-  const { toggleModal } = useModalStore();
+  const { toggleModal, name, setName } = useModalStore();
+
+  function handleModalClick(name: ModalName) {
+    setName(name);
+    toggleModal();
+  }
 
   return (
     <>
       <h2>Map 페이지</h2>
-      <button type='button' onClick={toggleModal}>
+      <button type='button' onClick={() => handleModalClick('write')}>
         작성하기
       </button>
-      <ModalContainer />
+      <hr />
+      <button type='button' onClick={() => handleModalClick('read')}>
+        읽기
+      </button>
+      {name === 'write' && <WritePost />}
+      {name === 'read' && <ReadPost />}
     </>
   );
 }
