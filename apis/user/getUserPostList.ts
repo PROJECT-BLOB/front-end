@@ -2,17 +2,28 @@ import instance from '@apis/axios';
 
 export interface Post {
   postId: number;
-  authorId: number;
-  authorNickname: string;
   title: string;
   content: string;
-  createdAt: string;
-  updatedAt: string;
-  likesCount: number;
-  commentsCount: number;
+  category: string;
+  subcategory: string;
+  author: {
+    blobId: string; // blobId를 사용할지 userId를 사용할지...
+    nickname: string;
+    profileUrl: string;
+  };
+  country: string;
+  city: string;
+  lat: number;
+  lng: number;
+  distFromActual: number;
+  views: number;
+  createdDate: string;
+  imageUrl: string[];
+  liked: boolean;
+  bookmarked: boolean;
 }
 
-export type PostSummary = Pick<Post, 'postId' | 'authorId' | 'authorNickname' | 'title' | 'content' | 'createdAt'>;
+export type PostSummary = Pick<Post, 'postId' | 'author' | 'title' | 'content'>;
 
 // getUserPostList : 유저가 작성한 글 모음
 export default async function getUserPostList(userId: number): Promise<PostSummary[]> {
