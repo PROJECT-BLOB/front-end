@@ -1,0 +1,55 @@
+.signin-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 1.6rem 2.6rem;
+
+  width: 315px;
+  height: 60px;
+  border-radius: 5px;
+
+  &.google {
+    background-color: blue;
+    color: var(--BDS-Grayscale-1, #ffffff);
+  }
+
+  &.kakao {
+    background-color: #fee500;
+    color: var(--BDS-Grayscale-13, #000);
+  }
+
+  &.naver {
+    background-color: #31b15a;
+    color: var(--BDS-Grayscale-1, #ffffff);
+  }
+}
+
+.logo {
+  &.google {
+    width: 26.712px;
+    height: 26px;
+  }
+
+  &.kakao {
+    width: 26.712px;
+    height: 26px;
+  }
+
+  &.naver {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.text {
+  position: absolute;
+  right: 86px;
+  text-align: center;
+
+  /* Heading/20 */
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.8rem; /* 140% */
+}
