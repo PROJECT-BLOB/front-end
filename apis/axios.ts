@@ -1,7 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from 'axios';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+// const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = 'http://ec2-13-124-35-140.ap-northeast-2.compute.amazonaws.com:9000';
 const isServer = typeof window === 'undefined';
 const ACCESS_TOKEN = 'accessToken';
 const GET_REFRESH_URL = 'notYet';
