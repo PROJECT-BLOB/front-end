@@ -13,7 +13,7 @@
 }
 
 .title {
-  color: var(--BDS-Grayscale-13, #000);
+  color: var(--BDS-Grayscale-13);
   font-feature-settings: 'ss10' on;
 
   /* BDS/Label 1/Normal */
@@ -26,7 +26,7 @@
 
 .title-gray {
   @extend .title;
-  color: var(--BDS-Grayscale-8, #595959);
+  color: var(--BDS-Grayscale-8);
 
   .underline {
     text-decoration: underline;

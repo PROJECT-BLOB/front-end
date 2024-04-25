@@ -10,17 +10,17 @@
 
   &.google {
     background-color: blue;
-    color: var(--BDS-Grayscale-1, #ffffff);
+    color: var(--BDS-Grayscale-1);
   }
 
   &.kakao {
     background-color: #fee500;
-    color: var(--BDS-Grayscale-13, #000);
+    color: var(--BDS-Grayscale-13);
   }
 
   &.naver {
     background-color: #31b15a;
-    color: var(--BDS-Grayscale-1, #ffffff);
+    color: var(--BDS-Grayscale-1);
   }
 }
 

@@ -56,7 +56,6 @@ export default function Signin() {
         </Link>
       </div>
 
-      {/* <p className={`${styles['title-gray']} ${styles.underline}`}> */}
       <p className={`${styles['title-gray']} ${styles.content}`}>
         <span>아직 BLOB 회원이 아니세요?</span>
         <Link href='/signin'>
