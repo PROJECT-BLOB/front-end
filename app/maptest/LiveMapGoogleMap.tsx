@@ -4,8 +4,6 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 import Markers from '@/app/maptest/Markers';
 
-// import trees from '@/app/maptest/_mock/trees';
-
 /*
  * [Next.js]구글 맵 @react-google-maps/api 활용해서 구현
  * @see: https://velog.io/@hansoom3315/Next.js%EA%B5%AC%EA%B8%80-%EB%A7%B5-react-google-mapsapi-%ED%99%9C%EC%9A%A9%ED%95%B4%EC%84%9C-%EA%B5%AC%ED%98%84
@@ -36,7 +34,7 @@ export default function LiveMapGoogleMap() {
     zoomControl: true,
   };
 
-  const { isLoaded, loadError } = useJsApiLoader({
+  const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey,
   });
@@ -59,7 +57,7 @@ export default function LiveMapGoogleMap() {
     }
   }, []);
 
-  const onUnmount = useCallback(function callback(map: google.maps.Map | null) {
+  const onUnmount = useCallback(function callback() {
     setMap(null);
   }, []);
 

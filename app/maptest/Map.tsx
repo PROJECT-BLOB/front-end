@@ -1,10 +1,10 @@
-import { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-interface MapProps extends google.maps.MapOptions {
-  style: { [key: string]: string };
-  onClick?: (e: google.maps.MapMouseEvent) => void;
-  onIdle?: (map: google.maps.Map) => void;
-}
+// interface MapProps extends google.maps.MapOptions {
+//   style: { [key: string]: string };
+//   onClick?: (e: google.maps.MapMouseEvent) => void;
+//   onIdle?: (map: google.maps.Map) => void;
+// }
 
 export default function Map() {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -22,11 +22,11 @@ export default function Map() {
     lng: -0,
   };
 
-  const options = {
-    disableDefaultUI: true,
-    minZoom: 8,
-    zoomControl: true,
-  };
+  // const options = {
+  //   disableDefaultUI: true,
+  //   minZoom: 8,
+  //   zoomControl: true,
+  // };
 
   useEffect(() => {
     if (ref.current && !map) {
@@ -35,5 +35,5 @@ export default function Map() {
     }
   }, [ref, map]);
 
-  return <div ref={ref} style={{ width: '70%', height: '60vh' }} />;
+  return <div ref={ref} style={containerStyle} />;
 }
