@@ -27,7 +27,12 @@
     "not kaios > 0 "
   ],
   "dependencies": {
+    "@googlemaps/adv-markers-utils": "^1.2.4",
+    "@googlemaps/js-api-loader": "^1.16.6",
+    "@googlemaps/markerclusterer": "^2.5.3",
+    "@googlemaps/react-wrapper": "^1.1.35",
     "@lukemorales/query-key-factory": "^1.3.4",
+    "@react-google-maps/api": "^2.19.3",
     "@tanstack/react-query": "^5.25.0",
     "axios": "^1.6.7",
     "next": "14.2.1",
@@ -51,6 +56,7 @@
     "@storybook/test": "^8.0.4",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query-devtools": "^5.25.0",
+    "@types/google.maps": "^3.55.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

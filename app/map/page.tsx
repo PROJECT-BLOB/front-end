@@ -1,5 +1,8 @@
 'use client';
 
+import React from 'react';
+
+import LiveMapGoogleMap from '@/app/maptest/LiveMapGoogleMap';
 import useModalStore from '@stores/useModalStore';
 
 import ModalContainer from './_components/Modal/ModalContainer';
