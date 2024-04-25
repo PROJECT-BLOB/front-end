@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { useUserStore } from '@/stores/userStore';
-import signout from '@apis/sign/signout';
+import signout from '@apis/user/sign/signout';
 
 import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
 
