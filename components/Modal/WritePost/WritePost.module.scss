@@ -10,8 +10,46 @@
   color: #000;
 }
 
-.button {
-  color: #000;
+.cancelButton {
+  display: flex;
+  width: 7rem;
+  padding: 0.8rem 1.6rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 2.4rem;
+  border: 1.6px solid var(--BDS-Grayscale-6);
+  background: var(--BDS-Grayscale-1);
+  color: var(--BDS-Grayscale-13);
+  text-align: center;
+  cursor: pointer;
+
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.submitButton {
+  display: flex;
+  width: 7rem;
+  padding: 0.8rem 1.6rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 2.4rem;
+  border: 1.6px solid var(--BDS-Primary-5);
+  background: var(--BDS-Primary-5);
+  text-align: center;
+  cursor: pointer;
+
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.footer{
+  display: flex;
+  gap: 1rem;
 }
 
 .input {

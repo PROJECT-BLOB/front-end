@@ -23,10 +23,14 @@ export default function WritePost() {
           <ImageUploader setValue={setValue} />
         </ModalContainer.Body>
         <ModalContainer.Footer>
-          <button type='button' onClick={cancelForm} className={styles.button}>
-            취소
-          </button>
-          <button type='submit'>완료</button>
+          <div className={styles.footer}>
+            <button type='button' onClick={cancelForm} className={styles.cancelButton}>
+              취소
+            </button>
+            <button type='submit' className={styles.submitButton}>
+              완료
+            </button>
+          </div>
         </ModalContainer.Footer>
       </form>
     </ModalContainer>

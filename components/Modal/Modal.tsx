@@ -18,11 +18,11 @@ export default function Modal({ children }: React.PropsWithChildren) {
 }
 
 function ModalHeader({ children }: React.PropsWithChildren) {
-  return <h2 className={styles.title}>{children}</h2>;
+  return <div className={styles.header}>{children}</div>;
 }
 
 function ModalBody({ children }: React.PropsWithChildren) {
-  return <div className={styles.content}>{children}</div>;
+  return <div className={styles.body}>{children}</div>;
 }
 
 function ModalFooter({ children }: React.PropsWithChildren) {
