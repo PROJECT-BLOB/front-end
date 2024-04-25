@@ -3,7 +3,9 @@ import instance from '@apis/axios';
 interface Comment {
   commentId: number;
   postId: number;
-  author: number;
+  responseTo: number; // 대댓글인 경우 부모 댓글의 commentId
+  authorId: number;
+  authorNickname: string;
   createdAt: string;
 }
 

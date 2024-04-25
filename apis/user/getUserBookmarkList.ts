@@ -1,16 +1,10 @@
 import instance from '@apis/axios';
 
-// 재사용됨-나중에 파일 분리
-interface Post {
-  postId: number;
-  author: number;
-  title: string;
-  content: string;
-  createdAt: string;
-}
+import { PostSummary } from './getUserPostList';
 
-export default async function getUserBookmarkList(userId: number): Promise<Post[]> {
-  const { data } = await instance.get<Post[]>(`/users/${userId}/bookmarks`);
+// getUserBookmarkList: 북마크한 글 모음
+export default async function getUserBookmarkList(userId: number): Promise<PostSummary[]> {
+  const { data } = await instance.get<PostSummary[]>(`/users/${userId}/bookmarks`);
 
   return data;
 }
