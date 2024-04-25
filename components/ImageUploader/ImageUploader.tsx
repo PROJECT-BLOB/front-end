@@ -10,7 +10,7 @@ interface ModalImageProps {
   setValue: UseFormSetValue<ContentField>;
 }
 
-export default function ModalImage({ setValue }: ModalImageProps) {
+export default function ImageUploader({ setValue }: ModalImageProps) {
   const { imageList, handleImageChange } = uploadImage({ setValue });
 
   return (
