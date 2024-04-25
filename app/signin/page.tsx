@@ -7,7 +7,7 @@ import BlobLogo from '@/public/icons/logo-BLOB.svg';
 import KakaoLogo from '@/public/icons/logo-kakao.svg';
 import NaverLogo from '@/public/icons/logo-naver.svg';
 import { useUserStore } from '@/stores/userStore';
-import signout from '@apis/sign/signout';
+import signout from '@apis/user/sign/signout';
 
 import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
 

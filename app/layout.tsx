@@ -1,3 +1,5 @@
+import WrapperProvider from '@utils/WrapperProvider';
+
 import type { Metadata } from 'next';
 import '../styles/global-styles/global.css';
 import './globals.scss';
@@ -13,10 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='ko'>
       <body>
         <div id='modal-layer' />
-        {children}
+        <WrapperProvider>{children}</WrapperProvider>
       </body>
     </html>
   );
