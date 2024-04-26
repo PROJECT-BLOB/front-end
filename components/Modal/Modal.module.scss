@@ -1,9 +1,11 @@
 .overlay {
-  position: relative;
+  position: fixed;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--BDS-Grayscale-14);
+  background: rgba(0, 0, 0, 0.5);
+  
 }
 
 .modal {
@@ -11,7 +13,7 @@
   width: 90%;
   top: 0;
   bottom: 0;
-  overflow: scroll;
+  overflow-y: auto;
 }
 
 .header {

@@ -45,20 +45,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--general-beta-08, 8px);
+  gap: var(--general-beta-08, 0.8rem);
   margin-bottom: 2.4rem;
 }
 
 .delete-mention {
   font-feature-settings: 'ss10' on;
-
-  /* BDS/Label 1/Normal */
-  font-family: 'IBM Plex Sans KR';
-  font-size: 14px;
-  font-style: normal;
+  font-size: 1.4rem;
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
-  background: var(--BDS-Primary-5, linear-gradient(90deg, #ff9456 0%, #fe81c4 100%));
+  background: var(--BDS-Primary-5);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -100,7 +96,7 @@
 .profile-container {
   display: flex;
   align-items: center;
-  gap: var(--general-beta-08, 8px);
+  gap: var(--general-beta-08, 0.8rem);
   margin-bottom: 1.6rem;
 }
 
@@ -113,9 +109,8 @@
 }
 
 .profile-nickname {
-  color: var(--BDS-Grayscale-13, var(--BDS-Grayscale-13, #000));
+  color: var(--BDS-Grayscale-13, var(--BDS-Grayscale-13));
   font-feature-settings: 'ss10' on;
-  /* BDS/Label 1/Normal */
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
