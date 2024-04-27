@@ -1,16 +1,16 @@
 import instance, { BASE_URL } from '@apis/axios';
 
-interface Token {
+interface OAuthToken {
   oauthId: string;
   accessToken: string;
   refreshToken: string;
 }
 
 export default async function getAccessToken(
-  type: string,
+  providerType: 'naver' | 'kakao' | 'google',
   code: string | null,
-): Promise<{ data: Token; status: number }> {
-  const { data, status } = await instance.get(`${BASE_URL}/oauth/${type}/callback?code=${code}`);
+): Promise<{ data: OAuthToken; status: number }> {
+  const { data, status } = await instance.get(`${BASE_URL}/oauth/${providerType}/callback?code=${code}`);
 
   return { data, status };
 }

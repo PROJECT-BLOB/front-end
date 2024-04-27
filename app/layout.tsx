@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body>
+      <body suppressHydrationWarning>
         <div id='modal-layer' />
         <WrapperProvider>{children}</WrapperProvider>
       </body>
