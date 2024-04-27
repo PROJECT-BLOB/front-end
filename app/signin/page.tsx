@@ -47,10 +47,10 @@ export default function Signin() {
   }
 
   return (
-    <div className={styles.signin}>
+    <main className={styles.signin}>
       <Image className={styles.logo} src={BlobLogo} alt='Blob 로고' />
-      <div className={styles.title}>SNS로 간편하게 로그인하기</div>
-      <div className={styles.buttons}>
+      <h1 className={styles.title}>SNS로 간편하게 로그인하기</h1>
+      <section className={styles.buttons}>
         <SigninButton providerName='google' iconSource={NaverLogo} onClick={() => handleClickSignin('google')}>
           구글 로그인
         </SigninButton>
@@ -60,7 +60,7 @@ export default function Signin() {
         <SigninButton providerName='naver' iconSource={NaverLogo} onClick={() => handleClickSignin('naver')}>
           네이버 로그인
         </SigninButton>
-      </div>
+      </section>
 
       <p className={`${styles['title-gray']} ${styles.content}`}>
         <span>아직 BLOB 회원이 아니세요?</span>
@@ -76,6 +76,6 @@ export default function Signin() {
         로그아웃
       </button>
       {/* 로그아웃-이 부분은 무시하셔도 됩니다 */}
-    </div>
+    </main>
   );
 }
