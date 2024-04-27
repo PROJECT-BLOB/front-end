@@ -1,12 +1,13 @@
 import React from 'react';
 
+
 import { MarkerF } from '@react-google-maps/api';
 
 import trees from '@/app/maptest/_mock/trees';
 
 export default function Markers() {
-  // const map = useGoogleMap();
-  // 위치 정보를 변수에 저장한다.
+    
+  // 위치 정보를 변수에 저장한다.s
   // interface location {
   //   lat: number;
   //   lng: number;
@@ -16,7 +17,6 @@ export default function Markers() {
 
   return (
     <div>
-      {' '}
       {locations.map((location, index) => (
         <MarkerF
           animation={google.maps.Animation.BOUNCE}

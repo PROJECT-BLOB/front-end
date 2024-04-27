@@ -7,14 +7,14 @@ interface ModalStore {
   isOpen: boolean;
   name: string;
   toggleModal: () => void;
-  setName: (modalName: ModalName) => void;
+  setCurrentName: (modalName: ModalName) => void;
 }
 
 const useModalStore = create<ModalStore>((set) => ({
   isOpen: false,
   name: '',
   toggleModal: () => set((state) => ({ isOpen: !state.isOpen })),
-  setName: (modalName) => set(() => ({ name: modalName })),
+  setCurrentName: (modalName) => set(() => ({ name: modalName })),
 }));
 
 export default useModalStore;
