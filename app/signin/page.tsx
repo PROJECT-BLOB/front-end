@@ -39,8 +39,8 @@ export default function Signin() {
 
   // 소셜 로그인
   async function handleClickSignin(type: string) {
-    const response = await getRedirectUrl(type);
-    const { redirectUrl } = response.data;
+    const { data } = await getRedirectUrl(type);
+    const { redirectUrl } = data;
 
     // 소셜 로그인 페이지로 이동
     router.push(redirectUrl);

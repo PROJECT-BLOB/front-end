@@ -1,7 +1,16 @@
 import instance, { BASE_URL } from '@apis/axios';
 
-export default async function getAccessToken(type: string, code: string | null) {
-  const { data } = await instance.get(`${BASE_URL}/oauth/${type}/callback?code=${code}`);
+interface Token {
+  oauthId: string;
+  accessToken: string;
+  refreshToken: string;
+}
 
-  return data;
+export default async function getAccessToken(
+  type: string,
+  code: string | null,
+): Promise<{ data: Token; status: number }> {
+  const { data, status } = await instance.get(`${BASE_URL}/oauth/${type}/callback?code=${code}`);
+
+  return { data, status };
 }

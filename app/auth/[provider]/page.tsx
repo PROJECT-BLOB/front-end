@@ -13,9 +13,9 @@ export default function LoadingSignin({ params }: { params: { provider: string }
 
   useEffect(() => {
     async function fetchData() {
-      const { accessToken, refreshToken } = await getAccessToken(params.provider, code);
+      const { data } = await getAccessToken(params.provider, code);
+      const { accessToken, refreshToken } = data;
 
-      console.log(accessToken, refreshToken);
       document.cookie = `accessToken=${accessToken}; path=/`;
       document.cookie = `refreshToken=${refreshToken}; path=/`;
 

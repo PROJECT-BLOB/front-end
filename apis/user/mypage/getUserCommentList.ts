@@ -9,8 +9,8 @@ interface Comment {
   createdAt: string;
 }
 
-export default async function getUserCommentList(userId: number): Promise<Comment[]> {
-  const { data } = await instance.get<Comment[]>(`/users/${userId}/comments`);
+export default async function getUserCommentList(userId: number): Promise<{ data: Comment[]; status: number }> {
+  const { data, status } = await instance.get<Comment[]>(`/users/${userId}/comments`);
 
-  return data;
+  return { data, status };
 }
