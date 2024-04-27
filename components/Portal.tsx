@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 
 export default function Portal({ children }: React.PropsWithChildren) {
-  const el = document.getElementById('modal-layer')!;
+  const element = document.getElementById('modal-layer')!;
 
-  return ReactDOM.createPortal(children, el);
+  return ReactDOM.createPortal(children, element);
 }
