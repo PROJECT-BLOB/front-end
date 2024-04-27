@@ -7,12 +7,10 @@
 }
 
 .image-container {
-  position: relative;
   display: flex;
   justify-content: center;
   position: relative;
   width: 100%;
-  height: 0;
   padding-bottom: 100%;
   margin-bottom: 1.4rem;
 }
@@ -21,7 +19,7 @@
   object-fit: contain;
 }
 
-.prev-btn {
+.previous-btn {
   display: none;
   position: absolute;
   left: 0;
@@ -60,15 +58,6 @@
   -webkit-text-fill-color: transparent;
 }
 
-@media (min-width: 767px) {
-  .prev-btn {
-    display: block;
-  }
-  .next-btn {
-    display: block;
-  }
-}
-
 .index-wrapper {
   margin-top: 1rem;
   position: absolute;
@@ -91,13 +80,13 @@
   align-items: center;
   gap: 0.7rem;
   align-self: stretch;
+  margin-bottom: 1.6rem;
 }
 
 .profile-container {
   display: flex;
   align-items: center;
   gap: var(--general-beta-08, 0.8rem);
-  margin-bottom: 1.6rem;
 }
 
 .profile-image-wrapper {
@@ -109,7 +98,7 @@
 }
 
 .profile-nickname {
-  color: var(--BDS-Grayscale-13, var(--BDS-Grayscale-13));
+  color: var(--BDS-Grayscale-13);
   font-feature-settings: 'ss10' on;
   font-size: 1.4rem;
   font-weight: 600;
@@ -199,7 +188,7 @@
 }
 
 .time-ago {
-  color: var(--BDS-Grayscale-7, var(--BDS-Grayscale-7));
+  color: var(--BDS-Grayscale-7);
   font-feature-settings: 'ss10' on;
   font-size: 1.4rem;
   font-weight: 600;
@@ -219,12 +208,12 @@
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
-  margin-bottom: 4.8rem;
+  margin-bottom: 8.8rem;
 }
 
 .comment-form {
-  position: fixed;
-  width: 80%;
+  position: absolute;
+  width: 90%;
   bottom: 2rem;
   display: flex;
   gap: 1.2rem;
@@ -263,4 +252,34 @@
   border-radius: 13px;
   background: var(--BDS-Primary-5);
   border: none;
+}
+
+@media (min-width: 768px) {
+  .main {
+    display: flex;
+    flex-direction: row;
+    gap: 2.4rem;
+  }
+
+  .previous-btn {
+    display: block;
+    font-size: 10rem;
+  }
+  .next-btn {
+    display: block;
+    font-size: 10rem;
+  }
+
+  .main-container {
+    width: 41.8rem;
+    flex-shrink: 0;
+  }
+
+  .comment-form {
+    width: 41.8rem;
+  }
+
+  .image-container {
+    padding-bottom: 0;
+  }
 }

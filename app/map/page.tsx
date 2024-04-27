@@ -23,8 +23,7 @@ export default function Map() {
       <button type='button' onClick={() => handleClickModal('read')}>
         읽기
       </button>
-      {name === 'write' && <WritePost />}
-      {name === 'read' && <ReadPost />}
+      {name === 'write' ? <WritePost /> : <ReadPost />}
     </>
   );
 }
