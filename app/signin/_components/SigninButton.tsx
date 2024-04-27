@@ -1,12 +1,12 @@
 import { MouseEventHandler, ReactNode } from 'react';
 
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 import styles from './SigninButton.module.scss';
 
 interface Props {
   providerName: string;
-  iconSource: string;
+  iconSource: StaticImageData;
   onClick: MouseEventHandler<HTMLButtonElement>;
   children: ReactNode;
 }

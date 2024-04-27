@@ -1,7 +1,11 @@
 import instance from '@apis/axios';
 
-export default async function getRedirectUrl(type: string) {
-  const { data } = await instance.get(`/oauth/${type}`);
+interface Url {
+  redirectUrl: string;
+}
 
-  return data;
+export default async function getRedirectUrl(type: string): Promise<{ data: Url; status: number }> {
+  const { data, status } = await instance.get(`/oauth/${type}`);
+
+  return { data, status };
 }
