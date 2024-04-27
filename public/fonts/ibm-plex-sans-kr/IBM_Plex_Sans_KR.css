@@ -1,0 +1,77 @@
+/* Variable fonts usage:
+:root { font-family: "Inter", sans-serif; }
+@supports (font-variation-settings: normal) {
+  :root { font-family: "InterVariable", sans-serif; font-optical-sizing: auto; }
+} */
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 100;
+  font-display: swap;
+  src: local('IBMPlexSansKR-Thin'),
+  url(./woff2/IBMPlexSansKR-Thin.woff2) format('woff2'),
+  url(./woff/IBMPlexSansKR-Thin.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 200;
+  font-display: swap;
+  src: local('IBMPlexSansKR-ExtraLight'),
+  url(./woff2/IBMPlexSansKR-ExtraLight.woff2) format('woff2'),
+  url(./woff/IBMPlexSansKR-ExtraLight.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 300;
+  font-display: swap;
+  src: local('IBMPlexSansKR-Light'),
+  url(./woff2/IBMPlexSansKR-Light.woff2) format('woff2'),
+  url(./woff/IBMPlexSansKR-Light.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 400;
+  font-display: swap;
+  src: local('IBMPlexSansKR-Regular'),
+  url(./woff2/IBMPlexSansKR-Regular.woff2) format('woff2'),
+  url(./woff/IBMPlexSansKR-Regular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 500;
+  font-display: swap;
+  src: local('IBMPlexSansKR-Text'),
+  url(./woff2/IBMPlexSansKR-Text.woff2) format('woff2'),
+  url(./woff/IBMPlexSansKR-Text.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 600;
+  font-display: swap;
+  src: local('IBMPlexSansKR-Medium'),
+  url(./woff2/IBMPlexSansKR-Medium.woff2) format('woff2'),
+  url(./woff/IBMPlexSansKR-Medium.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 700;
+  font-display: swap;
+  src: local('IBMPlexSansKR-SemiBold');
+url(./woff2/IBMPlexSansKR-SemiBold.woff2) format('woff2'),
+url(./woff/IBMPlexSansKR-SemiBold.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'IBM Plex Sans KR';
+  font-weight: 800;
+  font-display: swap;
+  src: local('IBMPlexSansKR-Bold'),
+  url(./woff2/IBMPlexSansKR-Bold.woff2) format('woff2'),
+  url(./woff/IBMPlexSansKR-Bold.woff) format('woff');
+}
