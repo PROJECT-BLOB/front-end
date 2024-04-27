@@ -8,9 +8,10 @@ export const OAUTH_KAKAO = 'kakao.com';
 export const OAUTH_NAVER = 'naver.com';
 
 // 아래와 같이 만들기.
-//  const CLIENT_ID = process.env.REACT_APP_REST_API_KEY;
-//  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URL;
-//  export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+//  const CLIENT_ID = process.env.REACT_APP_REST_API_KEY; - 필요x
+//  const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URL; - 필요x
+//  export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`; - 필요x
+// 예시)getRedirectUrl(google) : 리퀘스트 보내서 리다이렉트 url 받아옴. 2번으로 넘어감
 
 // 2. 리다이렉트 url에서 코드 받아오기
 // ex: http:localhost:3000/login/kakao?code='~~~~~~~~~~~'

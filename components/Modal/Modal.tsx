@@ -1,6 +1,8 @@
+import React from 'react';
+
 import useModalStore from '@stores/useModalStore';
 
-import Portal from '@components/Portal/Portal';
+import Portal from '@components/Portal';
 
 import styles from './Modal.module.scss';
 
@@ -10,8 +12,9 @@ export default function Modal({ children }: React.PropsWithChildren) {
   return (
     isOpen && (
       <Portal>
-        <div className={styles['back-drop']} />
-        <div className={styles.modal}>{children}</div>
+        <div className={styles.overlay}>
+          <div className={styles.modal}>{children}</div>
+        </div>
       </Portal>
     )
   );
