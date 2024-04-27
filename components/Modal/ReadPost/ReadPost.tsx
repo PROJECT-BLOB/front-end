@@ -40,17 +40,17 @@ export interface ReadPostData {
 
 export const mockContent: ReadPostData = {
   postId: 0,
-  title: 'string',
-  content: 'string',
+  title: '도쿄타워 화장실',
+  content: '화장실 어디있나요 알려주세요 ㅜㅜ',
   category: '도와주세요',
-  subcategory: 'string',
+  subcategory: '화장실',
   author: {
-    blobId: 'string',
-    nickname: 'string',
+    blobId: 'tokyo',
+    nickname: 'tokyo',
     profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
   },
-  country: 'string',
-  city: 'string',
+  country: '일본',
+  city: '도쿄',
   lat: 0,
   lng: 0,
   distFromActual: 0,
@@ -62,8 +62,8 @@ export const mockContent: ReadPostData = {
   ],
   liked: true,
   bookmarked: true,
-  likeCount: 0,
-  commentCount: 0,
+  likeCount: 3,
+  commentCount: 2,
   canDelete: true,
 }; // useQuery로 데이터 받아옴
 

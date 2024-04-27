@@ -1,38 +1,50 @@
+.profile-kebab-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.7rem;
+  align-self: stretch;
+}
+
+.kebab-wrapper {
+  background-color: inherit;
+  border: none;
+}
+
 .profile-container {
-    display: flex;
-    align-items: center;
-    gap: var(--general-beta-08, 0.8rem);
-  }
-  
-  .profile-image-wrapper {
-    position: relative;
-    width: 4.1rem;
-    height: 4.1rem;
-    border-radius: 41px;
-    overflow: hidden;
-  }
-  
-  .profile-nickname {
-    color: var(--BDS-Grayscale-13);
-    font-feature-settings: 'ss10' on;
-    font-size: 1.4rem;
-    font-weight: 600;
-    line-height: 142.9%; /* 20.006px */
-  }
-  
-  .like-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  .like-count {
-    font-feature-settings: 'ss10' on;
-    font-size: 1.4rem;
-    font-weight: 600;
-    line-height: 142.9%; /* 20.006px */
-    background: var(--BDS-Primary-5);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
+  display: flex;
+  align-items: center;
+  gap: var(--general-beta-08, 0.8rem);
+}
+
+.profile-image-wrapper {
+  position: relative;
+  width: 4.1rem;
+  height: 4.1rem;
+  border-radius: 41px;
+  overflow: hidden;
+}
+
+.profile-nickname {
+  color: var(--BDS-Grayscale-13);
+  font-feature-settings: 'ss10' on;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142.9%; /* 20.006px */
+}
+
+.like-container {
+  display: flex;
+  align-items: center;
+}
+
+.like-count {
+  font-feature-settings: 'ss10' on;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142.9%; /* 20.006px */
+  background: var(--BDS-Primary-5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
