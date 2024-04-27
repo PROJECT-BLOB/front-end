@@ -1,8 +1,8 @@
 import styles from './Kebab.module.scss';
 
 enum CONTENT {
-  true = '신고하기',
-  false = '삭제하기',
+  user = '삭제하기',
+  notUser = '신고하기',
 }
 
 export default function Kebab({ isUser }: { isUser: boolean }) {
@@ -11,7 +11,7 @@ export default function Kebab({ isUser }: { isUser: boolean }) {
   return (
     <div className={styles['kebab-container']}>
       <button type='button' className='kebab-content' onClick={() => {}}>
-        {isUser ? CONTENT.true : CONTENT.false}
+        {isUser ? CONTENT.user : CONTENT.notUser}
       </button>
     </div>
   );

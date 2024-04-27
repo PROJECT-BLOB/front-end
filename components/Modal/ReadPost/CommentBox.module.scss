@@ -6,40 +6,6 @@
   align-items: start;
 }
 
-.content {
-  color: var(--BDS-Grayscale-13);
-  font-feature-settings: 'ss10' on;
-  font-size: 1.5rem;
-  line-height: 160%; /* 24px */
-  // 글 줄임설정
-  // display: -webkit-box;
-  // text-overflow: ellipsis;
-  // -webkit-box-orient: vertical;
-  // -webkit-line-clamp: 2;
-}
-
-.comment-information-container {
-  display: flex;
-  align-items: flex-start;
-  gap: 17px;
-  color: var(--BDS-Grayscale-8, var(--BDS-Grayscale-8, #595959));
-  font-feature-settings: 'ss10' on;
-
-  /* BDS/Label 1/Normal */
-  font-family: 'IBM Plex Sans KR';
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 142.9%; /* 20.006px */
-  margin-bottom: -0.8rem;
-}
-
-.reply {
-  @extend .comment-box;
-  margin-left: 4rem;
-  margin-bottom: 0;
-}
-
 .comment-form {
   position: absolute;
   width: 90%;

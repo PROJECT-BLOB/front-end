@@ -37,7 +37,7 @@ export default function MainContainer({ contentData }: MainContentProps) {
           <button type='button' onClick={toggleKebab}>
             <Image src={dotsHorizontal} alt='kebab-icon' />
           </button>
-          {isKebabClicked && <Kebab isUser={false} />}
+          {isKebabClicked && <Kebab isUser={contentData.canDelete} />}
         </button>
       </div>
       <div className={styles.distance}>

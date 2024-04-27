@@ -1,10 +1,8 @@
-import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
-
-import styles from './CommentBox.module.module.scss';
-import ProfileContainer from './ProfileContainer';
+import Comment from './Comment';
+import styles from './CommentBox.module.scss';
 import { AuthorData } from './ReadPost';
 
-interface CommentData {
+export interface CommentData {
   id: number;
   content: string;
   author: AuthorData;
@@ -15,49 +13,46 @@ interface CommentData {
   reply: string[];
 }
 
-const Comment: CommentData = {
-  id: 0,
-  content: 'string',
-  author: {
-    blobId: 'string',
-    nickname: 'string',
-    profileUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
+const CommentList: CommentData[] = [
+  {
+    id: 0,
+    content: '1111',
+    author: {
+      blobId: '1111',
+      nickname: '1111',
+      profileUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
+    },
+    createdDate: '2024-04-24T12:59:24',
+    liked: true,
+    likeCount: 1,
+    canDelete: true,
+    reply: ['1111', '11111'],
   },
-  createdDate: '2024-04-24T12:59:24',
-  liked: true,
-  likeCount: 0,
-  canDelete: true,
-  reply: ['string', 'strgin'],
-};
+  {
+    id: 1,
+    content: '2222',
+    author: {
+      blobId: '2222',
+      nickname: '2222',
+      profileUrl:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
+    },
+    createdDate: '2024-04-24T12:59:24',
+    liked: false,
+    likeCount: 2,
+    canDelete: false,
+    reply: ['qwer', 'wertwert'],
+  },
+];
 
 export default function CommentBox() {
   return (
     <>
       <div className={styles['comment-box']}>
-        <ProfileContainer author={Comment.author} />
-        <p className={styles.content}>{Comment.content}</p>
-        <div className={styles['comment-information-container']}>
-          <span>{calculateTimePastSinceItCreated(Comment.createdDate)}</span>
-          <span>좋아요 {Comment.likeCount}개</span>
-          <button type='button'>댓글달기</button>
-        </div>
-        <button type='button'>댓글 {Comment.reply.length}개 보기</button>
-
-        {/* 답글 컴포넌트 구현해야함 */}
-        <div className={styles.reply}>
-          <ProfileContainer author={Comment.author} />
-          <p className={styles.content}>{Comment.content}</p>
-          <div className={styles['comment-information-container']}>
-            <span>{calculateTimePastSinceItCreated(Comment.createdDate)}</span>
-            <span>좋아요 {Comment.likeCount}개</span>
-          </div>
-          <ProfileContainer author={Comment.author} />
-          <p className={styles.content}>{Comment.content}</p>
-          <div className={styles['comment-information-container']}>
-            <span>3시간전</span>
-            <span>좋아요 {Comment.likeCount}개</span>
-          </div>
-        </div>
+        {CommentList.map((comment) => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
       </div>
 
       <form className={styles['comment-form']}>
