@@ -1,22 +1,22 @@
-/* // TODO: module css에서 적용할 방법 확인
+/*  TODO: module css에서 적용할 방법 확인
 
-// import { zIndex } from './z-index';
+ import { zIndex } from './z-index';
 
-// const palette = {
-//   color: {},
-//   zIndex,
-// } as const;
+ const palette = {
+   color: {},
+   zIndex,
+ } as const;
 
-// export type Palette = typeof palette;
+ export type Palette = typeof palette;
 
-// // &:hover {
-// //   background-color: {({ theme }) => theme.color.bg};
-// // }
+  &:hover {
+    background-color: {({ theme }) => theme.color.bg};
+  }
 
-// export { palette }; */
+ export { palette }; */
 
 :root {
-  /* // Primary color */
+  /*  Primary color */
   --BDS-Primary-1: linear-gradient(90deg, #fff2ea 0%, #fff0f8 100%);
   --BDS-Primary-2: linear-gradient(90deg, #ffe0ce 0%, #ffdaee 100%);
   --BDS-Primary-3: linear-gradient(90deg, #ffc7a6 0%, #ffbde0 100%);
@@ -28,12 +28,12 @@
   --BDS-Primary-9: linear-gradient(90deg, #91471c 0%, #913a68 100%);
   --BDS-Primary-10: linear-gradient(90deg, #733816 0%, #722d52 100%);
 
-  /* // Secondary color */
+  /*  Secondary color */
   --BDS-Secondary-Yellow: #fff50c;
   --BDS-Secondary-Blue: #1d2ba4;
   --BDS-Secondary-Green: #96e6bb;
 
-  /* //Category color */
+  /* Category color */
   --BDS-Category-recommend_hover: #f8bfde;
   --BDS-Category-recommend_basic: #eb2f96;
   --BDS-Category-recommend_press: #d32a87;
@@ -54,7 +54,7 @@
   --BDS-Category-help_basic: #a0d911;
   --BDS-Category-help_press: #90c30f;
 
-  /* // System color */
+  /*  System color */
   --BDS-System-Success: #52c41a;
   --BDS-System-Warning: #faad14;
   --BDS-System-Error: #ff4d4f;
@@ -64,7 +64,7 @@
   --BDS-System-Error_bg: #ffaeaf;
   --BDS-System-Complete_bg: #abd6fe;
 
-  /* //Grayscale */
+  /* Grayscale */
   --BDS-Grayscale-1: #fff;
   --BDS-Grayscale-2: #fafafa;
   --BDS-Grayscale-3: #f5f5f5;
