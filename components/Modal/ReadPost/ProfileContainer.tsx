@@ -19,6 +19,7 @@ export default function ProfileContainer({ author }: ProfileContainerProps) {
       <div className={styles['like-container']}>
         <Image src={checkHeart} alt='좋아요 아이콘' className='check-heart' />
         <b className={styles['like-count']}>30</b>
+        {/* 하트 몇개받았는지 프로필에 받아와야함 */}
       </div>
     </div>
   );
