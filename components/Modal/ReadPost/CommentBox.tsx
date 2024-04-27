@@ -1,3 +1,5 @@
+import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
+
 import styles from './CommentBox.module.module.scss';
 import ProfileContainer from './ProfileContainer';
 import { AuthorData } from './ReadPost';
@@ -35,17 +37,18 @@ export default function CommentBox() {
         <ProfileContainer author={Comment.author} />
         <p className={styles.content}>{Comment.content}</p>
         <div className={styles['comment-information-container']}>
-          <span>3시간전</span>
+          <span>{calculateTimePastSinceItCreated(Comment.createdDate)}</span>
           <span>좋아요 {Comment.likeCount}개</span>
           <button type='button'>댓글달기</button>
         </div>
         <button type='button'>댓글 {Comment.reply.length}개 보기</button>
+
         {/* 답글 컴포넌트 구현해야함 */}
         <div className={styles.reply}>
           <ProfileContainer author={Comment.author} />
           <p className={styles.content}>{Comment.content}</p>
           <div className={styles['comment-information-container']}>
-            <span>3시간전</span>
+            <span>{calculateTimePastSinceItCreated(Comment.createdDate)}</span>
             <span>좋아요 {Comment.likeCount}개</span>
           </div>
           <ProfileContainer author={Comment.author} />
