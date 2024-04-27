@@ -16,12 +16,14 @@ export default function ImageContainer({ contentData }: ImageContainerProps) {
   return (
     <section className={styles['image-container']} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <Image src={contentData.imageUrl[currentImageIndex]} className={styles.image} alt='이미지' fill />
+
       <button type='button' className={styles['previous-btn']} onClick={handlePrevImage}>
         &lt;
       </button>
       <button type='button' className={styles['next-btn']} onClick={handleNextImage}>
         &gt;
       </button>
+
       <div className={styles['index-wrapper']}>
         {contentData.imageUrl.map((image, index) => (
           <span key={image} className={`${styles.index} ${currentImageIndex === index ? styles.active : ''}`}>

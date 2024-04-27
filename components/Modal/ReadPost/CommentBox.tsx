@@ -16,10 +16,10 @@ export interface CommentData {
 const CommentList: CommentData[] = [
   {
     id: 0,
-    content: '1111',
+    content: '지하1층에 있어요',
     author: {
       blobId: '1111',
-      nickname: '1111',
+      nickname: '세계여행자',
       profileUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
     },
@@ -31,10 +31,10 @@ const CommentList: CommentData[] = [
   },
   {
     id: 1,
-    content: '2222',
+    content: '나도 급하다',
     author: {
       blobId: '2222',
-      nickname: '2222',
+      nickname: '방랑',
       profileUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
     },
