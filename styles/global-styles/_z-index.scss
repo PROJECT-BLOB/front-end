@@ -1,12 +1,26 @@
 // TODO: module css에서 적용할 방법 확인
 
-// z-index
+// z-index calculation variables
 $above: 1;
 $below: -1;
 
 
-//use
+// global variables
 $z-index-root : 1;
-$z-index-nav: $above + $z-index-root;
-$z-index-modal: 5;
+$z-index-nav: 3;
+$z-index-sidebar: 5;
+$z-index-modal: 7;
+$z-index-floating-menu: 9;
+$z-index-toast: 11;
+
+
+/*
+* ex) 사이드바 위에 그려야할 경우
+* z-index: $above + $z-index-sidebar ;
+*/
+
+/*
+* ex2) 모달 아래 그려야할 경우
+* z-index: $below + $z-index-modal ;
+*/
 
