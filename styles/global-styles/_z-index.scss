@@ -1,0 +1,12 @@
+// TODO: module css에서 적용할 방법 확인
+
+// z-index
+$above: 1;
+$below: -1;
+
+
+//use
+$z-index-root : 1;
+$z-index-nav: $above + $z-index-root;
+$z-index-modal: 5;
+
