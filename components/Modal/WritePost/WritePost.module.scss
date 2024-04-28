@@ -1,8 +1,24 @@
 .modal {
   position: absolute;
   inset: 0;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--BDS-Grayscale-1);
+  color: var(--BDS-Grayscale-14);
+  display: flex;
+  width: 24.6875rem;
+  padding: 2rem 1.75rem 2rem 2.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.postHeader {
+  background-color: var(--BDS-Grayscale-1);
+  color: var(--BDS-Grayscale-14);
+  display: flex;
+  width: 20.6875rem;
+  justify-content: center;
+  align-items: center;
+  gap: 3.75rem;
 }
 
 .title {
@@ -29,6 +45,13 @@
   font-weight: 400;
 }
 
+.postFooter {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.625rem;
+  padding: 0 0 0 200px;
+}
+//버튼 위치 조정 필요
 .submitButton {
   display: flex;
   width: 7rem;
@@ -47,7 +70,7 @@
   font-weight: 400;
 }
 
-.footer{
+.footer {
   display: flex;
   gap: 1rem;
 }

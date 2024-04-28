@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
-  
 }
 
 .modal {
@@ -25,6 +24,11 @@
   background-color: var(--BDS-Grayscale-1);
   padding: 2rem 2.4rem;
   padding-bottom: 9.2rem;
+}
+
+.footer {
+  background-color: var(--BDS-Grayscale-1);
+  display: flex;
 }
 
 // 960px 까지 화면 width의 90%가 모달폭

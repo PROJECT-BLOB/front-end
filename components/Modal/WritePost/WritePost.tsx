@@ -14,7 +14,12 @@ export default function WritePost() {
   return (
     <Modal>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Modal.Header>글 작성</Modal.Header>
+        <Modal.Header>
+          <div className={styles.postHeader}>
+            <span>글 작성</span>
+            <span>X</span>
+          </div>
+        </Modal.Header>
         <Modal.Body>
           <label htmlFor='title'>title</label>
           <input id='title' {...register('title')} type='text' placeholder='제목' className={styles.input} />
@@ -23,10 +28,14 @@ export default function WritePost() {
           <ImageUploader setValue={setValue} />
         </Modal.Body>
         <Modal.Footer>
-          <button type='button' onClick={cancelForm} className={styles.button}>
-            취소
-          </button>
-          <button type='submit'>완료</button>
+          <div className={styles.postFooter}>
+            <button type='button' onClick={cancelForm} className={styles.cancelButton}>
+              취소
+            </button>
+            <button type='submit' className={styles.submitButton}>
+              완료
+            </button>
+          </div>
         </Modal.Footer>
       </form>
     </Modal>
