@@ -11,8 +11,8 @@ interface UserDetail {
   isPrivate: boolean;
 }
 
-export default async function getUserDetail(userId: number) {
-  const { data } = await instance.get<UserDetail>(`/users/${userId}`);
+export default async function getUserDetail(userId: number): Promise<{ data: UserDetail; status: number }> {
+  const { data, status } = await instance.get<UserDetail>(`/users/${userId}`);
 
-  return data;
+  return { data, status };
 }

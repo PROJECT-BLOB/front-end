@@ -6,8 +6,8 @@
 }
 
 .logo {
-  width: 236px;
-  height: 108px;
+  width: 23.6rem;
+  height: 10.8rem;
 
   margin-bottom: 12rem;
 }
@@ -22,11 +22,22 @@
   font-style: normal;
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
+
+  // tablet
+  @media screen and (min-width: 768px) {
+    font-size: 1.7rem;
+  }
+
+  // PC
+  @media screen and (min-width: 1440px) {
+    font-size: 1.8rem;
+  }
 }
 
 .title-gray {
   @extend .title;
   color: var(--BDS-Grayscale-8);
+  font-size: 1.4rem;
 
   .underline {
     text-decoration: underline;

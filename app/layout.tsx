@@ -2,7 +2,7 @@ import WrapperProvider from '@utils/WrapperProvider';
 
 import type { Metadata } from 'next';
 import '../styles/global-styles/global.css';
-import './globals.scss';
+// import './globals.scss';
 
 export const metadata: Metadata = {
   title: '여행자들을 위한 실시간 정보, BLOB',
