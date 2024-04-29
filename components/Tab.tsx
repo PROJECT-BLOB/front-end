@@ -3,7 +3,6 @@ import { PropsWithChildren } from 'react';
 import styles from './Tab.module.scss';
 
 interface TabProps {
-  children: string;
   focused: boolean;
 }
 
