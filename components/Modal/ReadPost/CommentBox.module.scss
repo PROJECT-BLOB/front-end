@@ -1,5 +1,4 @@
 .comment-box {
-  margin-bottom: 8.8rem;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
@@ -7,8 +6,8 @@
 }
 
 .comment-form {
-  position: absolute;
-  width: 90%;
+  position: sticky;
+  width: 100%;
   bottom: 2rem;
   display: flex;
   gap: 1.2rem;

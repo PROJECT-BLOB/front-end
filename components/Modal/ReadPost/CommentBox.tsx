@@ -49,12 +49,10 @@ const CommentList: CommentData[] = [
 
 export default function CommentBox() {
   return (
-    <>
-      <div className={styles['comment-box']}>
-        {CommentList.map((comment) => (
-          <Comment key={comment.id} comment={comment} />
-        ))}
-      </div>
+    <div className={styles['comment-box']}>
+      {CommentList.map((comment) => (
+        <Comment key={comment.id} comment={comment} />
+      ))}
 
       <form className={styles['comment-form']}>
         <input type='text' className={styles['comment-input']} placeholder='댓글 남기기' />
@@ -62,6 +60,6 @@ export default function CommentBox() {
           게시
         </button>
       </form>
-    </>
+    </div>
   );
 }
