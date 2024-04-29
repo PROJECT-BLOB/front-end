@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { Post } from '@/types/Post';
 import bookmark from '@public/icons/bookmark.svg';
 import checkHeart from '@public/icons/check-heart-pink.svg';
 import verifiedIcon from '@public/icons/check-verified-blue.svg';
@@ -12,10 +13,9 @@ import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCrea
 import CommentBox from './CommentBox';
 import styles from './MainContainer.module.scss';
 import ProfileContainer from './ProfileContainer';
-import { ReadPostData } from './ReadPost';
 
 interface MainContentProps {
-  contentData: ReadPostData;
+  contentData: Post;
 }
 
 export default function MainContainer({ contentData }: MainContentProps) {

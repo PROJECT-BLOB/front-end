@@ -17,7 +17,7 @@ import instance from '@apis/axios';
 //   file: File;
 // }
 
-export default async function getPost(formData: FormData): Promise<{ data: Post; status: number }> {
+export default async function createPost(formData: FormData): Promise<{ data: Post; status: number }> {
   const { data, status } = await instance.post(`/post`, formData);
 
   return { data, status };
