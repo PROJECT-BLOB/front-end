@@ -1,6 +1,9 @@
+// import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 
 import { Post } from '@/types/Post';
+// import getPost from '@apis/post/getPost';
 import closeButton from '@public/icons/x.svg';
 
 import useReadPost from './hooks/useReadPost';
@@ -40,6 +43,16 @@ export const mockContent: Post = {
 
 export default function ReadPost() {
   const { toggleModal } = useReadPost();
+  // const [post, setPost] = useState<Post>(mockContent);
+
+  // useEffect(() => {
+  //   const fetch = async () => {
+  //     const { data } = await getPost(1);
+  //     setPost(data);
+  //   };
+
+  //   fetch();
+  // }, []);
 
   return (
     <Modal>

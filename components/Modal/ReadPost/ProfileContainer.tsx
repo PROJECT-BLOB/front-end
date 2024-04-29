@@ -1,5 +1,6 @@
 import Image from 'next/image';
 
+import { Author } from '@/types/Post';
 import checkHeart from '@public/icons/check-heart-pink.svg';
 import dotsHorizontal from '@public/icons/dots-horizontal.svg';
 
@@ -7,10 +8,9 @@ import Kebab from '@components/Kebab';
 
 import useReadPost from './hooks/useReadPost';
 import styles from './ProfileContainer.module.scss';
-import { AuthorData } from './ReadPost';
 
 interface ProfileContainerProps {
-  author: AuthorData;
+  author: Author;
   canDelete: boolean;
 }
 
