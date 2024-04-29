@@ -1,0 +1,23 @@
+/**
+ * - PC: 1440px 이상
+ * - Tablet: 768px 이상 ~ 1440px 미만
+ * - Mobile: 375px 이상 ~ 767px 미만
+ * * `375px 미만 사이즈의 디자인은 고려하지 않습니다`
+ *
+ * mobile first develop: default mobile
+ * */
+
+$breakpoint-tablet: 375px;
+$breakpoint-pc: 768px;
+
+@mixin tablet {
+  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-pc - 1px}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$breakpoint-pc}) {
+    @content;
+  }
+}
