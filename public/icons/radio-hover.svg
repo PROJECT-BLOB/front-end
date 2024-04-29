@@ -1,0 +1,11 @@
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Radio">
+<path id="Rectangle" d="M0.5 8C0.5 3.85786 3.85786 0.5 8 0.5C12.1421 0.5 15.5 3.85786 15.5 8C15.5 12.1421 12.1421 15.5 8 15.5C3.85786 15.5 0.5 12.1421 0.5 8Z" fill="white" stroke="url(#paint0_linear_11_11490)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_11_11490" x1="0" y1="8" x2="16" y2="8" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FF9456"/>
+<stop offset="1" stop-color="#FE81C4"/>
+</linearGradient>
+</defs>
+</svg>
