@@ -1,0 +1,107 @@
+//@import '/styles/global-styles/media-breakpoint';
+//@import '/styles/global-styles/z-index';
+//@import '/styles/global-styles/color-pallete';
+@import '/styles/global-styles/align';
+
+//위의 내용들 한번에 import하는 파일
+@import '/styles/global-styles/index';
+
+
+.page {
+  font-size: 1rem;
+
+  /*mix-in 사용예시*/
+  @include flex-center;
+
+  /* 미디어쿼리 사용법*/
+  @include tablet {
+    font-size: 3rem;
+  }
+  @include desktop {
+    font-size: 5rem;
+  }
+}
+
+.ibmPlex {
+  font-family: "IBM Plex Sans KR";
+
+  .weight-100 {
+    font-weight: 100;
+  }
+
+  .weight-200 {
+    font-weight: 200;
+  }
+
+  .weight-300 {
+    font-weight: 300;
+  }
+
+  .weight-400 {
+    font-weight: 400;
+  }
+
+  .weight-500 {
+    font-weight: 500;
+  }
+
+  .weight-600 {
+    font-weight: 600;
+  }
+
+  .weight-700 {
+    font-weight: 700;
+  }
+
+  .weight-800 {
+
+    font-weight: 800;
+  }
+}
+
+.pretendard {
+
+  font-family: "Pretendard", serif;
+
+  .weight-100 {
+    font-family: inherit;
+    font-weight: 100;
+  }
+
+  .weight-200 {
+    font-family: inherit;
+    font-weight: 200;
+  }
+
+  .weight-300 {
+    font-family: inherit;
+    font-weight: 300;
+  }
+
+  .weight-400 {
+    font-family: inherit;
+    font-weight: 400;
+  }
+
+  .weight-500 {
+    font-family: inherit;
+    font-weight: 500;
+  }
+
+  .weight-600 {
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .weight-700 {
+    font-family: inherit;
+    font-weight: 700;
+  }
+
+  .weight-800 {
+    font-family: inherit;
+    font-weight: 800;
+  }
+}
+
+
