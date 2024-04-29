@@ -1,52 +1,46 @@
 import React, { useState } from 'react';
-import useGoogle from 'react-google-autocomplete/lib/usePlacesAutocompleteService';
+import GooglePlacesAutocomplete, { geocodeByAddress } from 'react-google-places-autocomplete';
 
-import { List } from 'antd';
-
-type Props = {
-  place: string;
-  setPlace: React.Dispatch<React.SetStateAction<string>>;
+type Option = {
+  label: string;
+  value: string;
 };
 
-const AutoComplete = ({ place, setPlace }: Props) => {
-  const { placePredictions, getPlacePredictions, isPlacePredictionsLoading } = useGoogle({
-    apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
-  });
-  const [chosen, setChosen] = useState('');
+const AutoComplete = () => {
+  const [value, setValue] = useState<Option | null>(null);
+  const [geolocation, setGeolocation] = useState<google.maps.LatLng | null>(null);
+  const googleMapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
+
+  const handleSelect = async (address: Option) => {
+    setValue(address);
+
+    try {
+      const results = await geocodeByAddress(address.label); // label을 주소로 사용
+      setGeolocation(results[0].geometry.location);
+    } catch (error) {
+      console.error('Error fetching geolocation:', error);
+    }
+  };
 
   return (
-    <div className='relative flex flex-col w-full'>
-      <span>여행지</span>
-      <input
-        className='w-full p-2 my-2 border rounded'
-        value={place}
-        placeholder='여행지 입력'
-        onChange={(evt: any) => {
-          getPlacePredictions({ input: evt.target.value });
-          setChosen(evt.target.value);
-          setPlace(evt.target.value);
+    <div>
+      <GooglePlacesAutocomplete
+        selectProps={{
+          value,
+          onChange: (newValue) => {
+            setValue(newValue ? newValue.value : null);
+
+            if (newValue) {
+              handleSelect(newValue);
+            }
+          },
         }}
+        apiKey={googleMapApiKey}
       />
-      {chosen && (
-        <div className='absolute h-[10rem] left-0 overflow-x-hidden flex whitespace-nowrap flex-col w-full my-1 bg-white border z-[9999] rounded top-20'>
-          {!isPlacePredictionsLoading && (
-            <List
-              className='px-2'
-              dataSource={placePredictions}
-              renderItem={(item: any) => (
-                <List.Item
-                  className='cursor-pointer'
-                  onClick={() => {
-                    setChosen('');
-                    setPlace(item.description);
-                  }}
-                >
-                  <List.Item.Meta title={item.description} />
-                </List.Item>
-              )}
-            />
-          )}
-        </div>
+      {geolocation && (
+        <p>
+          Latitude: {geolocation.lat()}, Longitude: {geolocation.lng()}
+        </p>
       )}
     </div>
   );
