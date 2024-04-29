@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
-import X from '@public/icons/x.svg';
+import { Post } from '@/types/Post';
+import closeButton from '@public/icons/x.svg';
 
 import useReadPost from './hooks/useReadPost';
 import ImageContainer from './ImageContainer';
@@ -8,37 +9,7 @@ import MainContainer from './MainContainer';
 import styles from './ReadPost.module.scss';
 import Modal from '../Modal';
 
-export type CategoryType = '추천해요' | '도와주세요' | '궁금해요' | '조심하세요' | '비추천해요';
-
-export interface AuthorData {
-  blobId: string;
-  nickname: string;
-  profileUrl: string;
-}
-
-export interface ReadPostData {
-  postId: number;
-  title: string;
-  content: string;
-  category: CategoryType;
-  subcategory: string;
-  author: AuthorData;
-  country: string;
-  city: string;
-  lat: number;
-  lng: number;
-  distFromActual: number;
-  views: number;
-  createdDate: string;
-  imageUrl: string[];
-  liked: boolean;
-  bookmarked: boolean;
-  likeCount: number;
-  commentCount: number;
-  canDelete: boolean;
-}
-
-export const mockContent: ReadPostData = {
+export const mockContent: Post = {
   postId: 0,
   title: '도쿄타워 화장실',
   content: '화장실 어디있나요 알려주세요 ㅜㅜ',
@@ -74,7 +45,7 @@ export default function ReadPost() {
     <Modal>
       <Modal.Header>
         <button type='button' onClick={toggleModal} className={styles['close-button']}>
-          <Image src={X} alt='close-button' />
+          <Image src={closeButton} alt='close-button' />
         </button>
       </Modal.Header>
 
