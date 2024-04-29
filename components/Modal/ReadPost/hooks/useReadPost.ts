@@ -2,19 +2,18 @@ import { TouchEventHandler, useState } from 'react';
 
 import useModalStore from '@stores/useModalStore';
 
-import { mockContent } from '../ReadPost';
-
-export default function useReadPost() {
+export default function useReadPost(imageList: string[] = []) {
+  const [isKebabClicked, setIsKebabClicked] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
   const { toggleModal } = useModalStore();
 
   function handlePrevImage() {
-    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? mockContent.imageUrl.length - 1 : prevIndex - 1));
+    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? imageList.length - 1 : prevIndex - 1));
   }
 
   function handleNextImage() {
-    setCurrentImageIndex((prevIndex) => (prevIndex === mockContent.imageUrl.length - 1 ? 0 : prevIndex + 1));
+    setCurrentImageIndex((prevIndex) => (prevIndex === imageList.length - 1 ? 0 : prevIndex + 1));
   }
 
   const handleTouchStart: TouchEventHandler<HTMLDivElement> = (event) => {
@@ -41,5 +40,18 @@ export default function useReadPost() {
     }
   };
 
-  return { currentImageIndex, toggleModal, handleTouchStart, handleTouchEnd, handlePrevImage, handleNextImage };
+  function toggleKebab() {
+    setIsKebabClicked((prev) => !prev);
+  }
+
+  return {
+    currentImageIndex,
+    toggleModal,
+    handleTouchStart,
+    handleTouchEnd,
+    handlePrevImage,
+    handleNextImage,
+    isKebabClicked,
+    toggleKebab,
+  };
 }
