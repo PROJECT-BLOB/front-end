@@ -2,7 +2,7 @@ import { UseFormSetValue } from 'react-hook-form';
 
 import Image from 'next/image';
 
-import uploadImage from '@utils/uploadImage';
+import useUploadImage from '@hooks/useUploadImage';
 
 import { ContentField } from '../app/map/_hooks/useCreateForm';
 
@@ -11,7 +11,7 @@ interface ModalImageProps {
 }
 
 export default function ImageUploader({ setValue }: ModalImageProps) {
-  const { imageList, handleImageChange } = uploadImage({ setValue });
+  const { imageList, handleChangeImage } = useUploadImage({ setValue });
 
   return (
     <>
@@ -26,7 +26,7 @@ export default function ImageUploader({ setValue }: ModalImageProps) {
           />
         ))}
       <label htmlFor='inputFile'>이미지</label>
-      <input type='file' id='inputFile' accept='image/*' multiple onChange={handleImageChange} />
+      <input type='file' id='inputFile' accept='image/*' multiple onChange={handleChangeImage} />
     </>
   );
 }
