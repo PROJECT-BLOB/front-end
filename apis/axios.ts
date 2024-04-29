@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from 'axios';
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const isServer = typeof window === 'undefined';
 const ACCESS_TOKEN = 'accessToken';
 const GET_REFRESH_URL = 'notYet';
