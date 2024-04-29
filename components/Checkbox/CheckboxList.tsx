@@ -26,7 +26,7 @@ export default function CheckboxList({ checkboxList }: CheckboxListProps) {
     <div>
       {/* 사용예시 */}
       <Checkbox value='disabled' disabled checkedItemHandler={checkedItemHandler}>
-        Disabled
+        Disabled예시
       </Checkbox>
       {checkboxList.map((item, index) => (
         <Checkbox key={index} value={item} checkedItemHandler={checkedItemHandler}>
