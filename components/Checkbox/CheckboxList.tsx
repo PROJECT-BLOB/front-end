@@ -1,10 +1,14 @@
+/* eslint-disable react/no-array-index-key */
 import { useState } from 'react';
 
 import Checkbox from './Checkbox';
 
-export default function CheckboxList() {
+interface CheckboxListProps {
+  checkboxList: Array<string>;
+}
+
+export default function CheckboxList({ checkboxList }: CheckboxListProps) {
   const [checkedItems, setCheckedItems] = useState(new Set<string>());
-  const checkBoxList = ['Apple', 'Banana', 'Pare', 'Grape', 'Melon', 'Water Melon', 'Pineapple']; // 임시 데이터
 
   const checkedItemHandler = (value: string, isChecked: boolean) => {
     const newCheckedItems = new Set(checkedItems);
@@ -20,8 +24,12 @@ export default function CheckboxList() {
 
   return (
     <div>
-      {checkBoxList.map((item, index) => (
-        <Checkbox key={index} id={item} value={item} checkedItemHandler={checkedItemHandler}>
+      {/* 사용예시 */}
+      <Checkbox value='disabled' disabled checkedItemHandler={checkedItemHandler}>
+        Disabled
+      </Checkbox>
+      {checkboxList.map((item, index) => (
+        <Checkbox key={index} value={item} checkedItemHandler={checkedItemHandler}>
           {item}
         </Checkbox>
       ))}
