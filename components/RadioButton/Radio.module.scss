@@ -1,0 +1,75 @@
+@import '/styles/global-styles/index';
+
+.label {
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+
+  /* BDS/Label 1/Normal */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 142.9%; /* 20.006px */
+
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+
+  @include tablet {
+    font-size: 1.6rem;
+  }
+  @include desktop {
+    font-size: 1.7rem;
+    gap: 1.2rem;
+  }
+}
+
+.showRadio {
+  width: 1.6rem;
+  height: 1.6rem;
+
+  @include tablet {
+    width: 2rem;
+    height: 2rem;
+  }
+  @include desktop {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  // default
+  background: url('/icons/radio-default.svg') no-repeat;
+  background-size: contain;
+}
+
+.hiddenRadio {
+  display: none;
+  width: 1.6rem;
+  height: 1.6rem;
+
+  @include tablet {
+    width: 2rem;
+    height: 2rem;
+  }
+  @include desktop {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  &:hover + .showRadio {
+    pointer-events: none;
+    background: url('/icons/radio-hover.svg') no-repeat;
+    background-size: contain;
+  }
+
+  &:active + .showRadio {
+    background: url('/icons/radio-mouse-down.svg') no-repeat;
+    background-size: contain;
+  }
+
+  &:checked + .showRadio {
+    background: url('/icons/radio-active.svg') no-repeat;
+    background-size: contain;
+  }
+}

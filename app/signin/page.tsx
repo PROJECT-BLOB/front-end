@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import BlobLogo from '@/public/icons/logo-BLOB.svg';
+import GoogleLogo from '@/public/icons/logo-google.svg';
 import KakaoLogo from '@/public/icons/logo-kakao.svg';
 import NaverLogo from '@/public/icons/logo-naver.svg';
 import { useUserStore } from '@/stores/userStore';
@@ -51,7 +52,7 @@ export default function Signin() {
       <Image className={styles.logo} src={BlobLogo} alt='Blob 로고' />
       <h1 className={styles.title}>SNS로 간편하게 로그인하기</h1>
       <section className={styles.buttons}>
-        <SigninButton providerName='google' iconSource={NaverLogo} onClick={() => handleClickSignin('google')}>
+        <SigninButton providerName='google' iconSource={GoogleLogo} onClick={() => handleClickSignin('google')}>
           구글 로그인
         </SigninButton>
         <SigninButton providerName='kakao' iconSource={KakaoLogo} onClick={() => handleClickSignin('kakao')}>
