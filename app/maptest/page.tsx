@@ -2,15 +2,17 @@
 
 import React from 'react';
 
-import LiveMapGoogleAdvanced from '@/app/maptest/LiveMapAdvanced';
+import BasicMapAlpha from '@/app/maptest/BasicMapAlpha';
 
+import AutoComplete from './AutoComplete';
 import styles from './MapTest.module.scss';
 
 export default function MapTest() {
   return (
     <div className={styles.body}>
       <h2>Map 페이지</h2>
-      <LiveMapGoogleAdvanced />
+      <AutoComplete />
+      <BasicMapAlpha />
 
       <div className={styles['button-container']}>
         <button className={styles.button} type='button'>
