@@ -1,25 +1,21 @@
-import React, { FC } from 'react';
-import './Button.module.scss';
+import React from 'react';
+
+import styles from './Button.module.scss';
 
 export interface ButtonProps {
-  text: string;
-  type?: string;
-  uiType: string;
-  bgColor: string;
-  color: string;
+  text: 'BLOB' | '취소';
+  type: 'submit' | 'reset' | 'button' | undefined;
+  color: 'button-colord-contain' | 'button-colord-outlined' | 'button-gray-contain' | 'button-gray-outlined';
   onClick?: () => void;
   disabled?: boolean;
-  rest?: any;
 }
 
-const Button: FC<ButtonProps> = ({ text, type, uiType, bgColor, color, onClick, disabled, ...rest }) => {
+export default function Button({ text, type, color, onClick, disabled }: ButtonProps) {
   return (
-    <button typeof={type} {...rest} className={`button ${uiType} ${bgColor}`} onClick={onClick} disabled={disabled}>
-      <p style={{ color: color }}>{text}</p>
+    // TODO: type 에서 에러 처리
+    // eslint-disable-next-line react/button-has-type
+    <button type={type} className={`${styles[color]}`} onClick={onClick} disabled={disabled}>
+      {text}
     </button>
   );
-};
-
-export default Button;
-
-//https://github.com/oevadee/crib-chat/blob/main/frontend/src/components/Button/Button.stories.tsx
+}
