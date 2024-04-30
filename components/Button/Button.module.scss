@@ -1,0 +1,59 @@
+@import '../../_variables';
+
+.button {
+  border-radius: 2rem;
+  border: none;
+  background: $background-input-secondary;
+  transition: background $transition;
+  cursor: pointer;
+  outline: none;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    background: $background-input-secondary / 0.9;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: $color-secondary;
+  }
+}
+
+.longSlim {
+  padding: 0.75rem 3rem;
+}
+
+.shortBulky {
+  padding: 1rem 3rem;
+  letter-spacing: 1px;
+}
+
+.white {
+  background: $background-white;
+
+  &:hover {
+    background: $background-white / 0.9;
+  }
+}
+
+.accent {
+  background: $background-accent;
+
+  &:hover {
+    background: $background-accent / 0.9;
+  }
+}
+
+.transparent {
+  background: transparent;
+  border: $border-secondary;
+}
