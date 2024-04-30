@@ -1,5 +1,7 @@
+@import '/styles/global-styles/color-pallete';
+
 .content {
-  color: var(--BDS-Grayscale-13);
+  color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
   font-size: 1.5rem;
   line-height: 160%; /* 24px */
@@ -14,7 +16,7 @@
   display: flex;
   align-items: flex-start;
   gap: 1.74rem;
-  color: var(--BDS-Grayscale-8);
+  color: $BDS-Grayscale-8;
   font-feature-settings: 'ss10' on;
   font-size: 1.4rem;
   font-style: normal;
@@ -24,6 +26,7 @@
 }
 
 .reply {
+  width: calc(100% - 4rem);
   margin-bottom: 8.8rem;
   display: flex;
   flex-direction: column;
