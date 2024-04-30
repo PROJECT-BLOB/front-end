@@ -11,6 +11,9 @@ import NaverLogo from '@/public/icons/logo-naver.svg';
 import { useUserStore } from '@/stores/userStore';
 import getRedirectUrl from '@apis/oauth/getRedirectUrl';
 import signout from '@apis/user/sign/signout';
+import useModalStore, { ModalName } from '@stores/useModalStore';
+
+import CreateUser from '@components/Modal/CreateUser/CreateUser';
 
 import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
 
@@ -18,6 +21,15 @@ import SigninButton from './_components/SigninButton';
 import styles from './Signin.module.scss';
 
 export default function Signin() {
+  const { toggleModal, name, setCurrentName } = useModalStore();
+
+  function handleOpenModal(name: ModalName) {
+    // 만약 유저가 로그인 버튼 눌러서 oauth인증 마치면 && 유저는 회원가입이 안 된 상태여야함
+    // GET /user/{oauthId}/oauth => state": "COMPLETE" 값 보내줌
+    setCurrentName(name);
+    toggleModal();
+  }
+
   // 로그아웃-이 부분은 무시하셔도 됩니다
   const { signout: logout } = useUserStore();
 
@@ -69,6 +81,11 @@ export default function Signin() {
           <span className={styles.underline}>회원가입 하기</span>
         </Link>
       </p>
+
+      <button type='button' onClick={() => handleOpenModal('createUser')}>
+        회원가입 모달 테스트용
+      </button>
+      {name === 'createUser' && <CreateUser />}
 
       {/* 로그아웃-이 부분은 무시하셔도 됩니다 */}
       <br />

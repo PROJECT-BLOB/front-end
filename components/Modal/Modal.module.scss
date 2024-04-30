@@ -1,3 +1,5 @@
+@import '/styles/global-styles/index';
+
 .overlay {
   position: fixed;
   display: flex;
@@ -13,6 +15,7 @@
   top: 0;
   bottom: 0;
   overflow-y: auto;
+  z-index: $z-index-modal;
 }
 
 .header {
