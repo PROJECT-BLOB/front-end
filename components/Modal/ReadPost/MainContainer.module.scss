@@ -1,0 +1,102 @@
+.delete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--general-beta-08, 0.8rem);
+  margin-bottom: 2.4rem;
+}
+
+.delete-mention {
+  font-feature-settings: 'ss10' on;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142.9%; /* 20.006px */
+  background: var(--BDS-Primary-5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.distance {
+  display: flex;
+  gap: 0.8rem;
+  color: var(--BDS-System-Complete);
+  font-feature-settings: 'ss10' on;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142.9%; /* 20.006px */
+  margin-top: 1.6rem;
+  margin-bottom: 0.8rem;
+}
+
+.city {
+  color: var(--BDS-Grayscale-8);
+  font-feature-settings: 'ss10' on;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 138.5%; /* 18.005px */
+  margin-bottom: 1.2rem;
+}
+
+.category-bookmark-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.title {
+  color: var(--BDS-Grayscale-13);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 144.5%; /* 26.01px */
+  letter-spacing: -0.0004rem;
+  margin-bottom: 0.8rem;
+}
+
+.content {
+  color: var(--BDS-Grayscale-13);
+  font-feature-settings: 'ss10' on;
+  font-size: 1.5rem;
+  line-height: 160%; /* 24px */
+  margin-bottom: 2rem;
+  // 글 줄임설정
+  // display: -webkit-box;
+  // text-overflow: ellipsis;
+  // -webkit-box-orient: vertical;
+  // -webkit-line-clamp: 2;
+}
+
+.time-ago {
+  color: var(--BDS-Grayscale-7);
+  font-feature-settings: 'ss10' on;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142.9%; /* 20.006px */
+  margin-bottom: 0.4rem;
+}
+
+.content-info {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 0.4rem 1.2rem;
+  align-self: stretch;
+  flex-wrap: wrap;
+  color: var(--BDS-Grayscale-7);
+  font-feature-settings: 'ss10' on;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142.9%; /* 20.006px */
+  margin-bottom: 4.8rem;
+}
+
+@media (min-width: 768px) {
+  .main-container {
+    width: 41.8rem;
+    flex-shrink: 0;
+  }
+
+  .comment-form {
+    width: 41.8rem;
+  }
+}
