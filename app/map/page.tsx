@@ -2,7 +2,7 @@
 
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
-import Button from '@components/Button/Button';
+import Button from '@components/Button/BlobButton';
 import ReadPost from '@components/Modal/ReadPost/ReadPost';
 import WritePost from '@components/Modal/WritePost/WritePost';
 
