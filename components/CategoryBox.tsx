@@ -1,5 +1,6 @@
+import { Post } from '@/types/Post';
+
 import styles from './CategoryBox.module.scss';
-import { ReadPostData } from './Modal/ReadPost/ReadPost';
 
 const CATEGORY_COLOR = {
   추천해요: 'pink',
@@ -10,7 +11,7 @@ const CATEGORY_COLOR = {
 };
 
 interface CategoryBoxProps {
-  contentData: ReadPostData;
+  contentData: Post;
 }
 
 export default function CategoryBox({ contentData }: CategoryBoxProps) {

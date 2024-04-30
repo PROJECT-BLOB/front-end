@@ -11,6 +11,8 @@
       "@constants/*": ["./constants/*"],
       "@stores/*": ["./stores/*"],
       "@public/*": ["./public/*"],
+      "@icons/*": ["./public/icons/*"],
+      "@images/*": ["./public/images/*"],
       "@queries/*": ["./queries/*"],
       "@lib/*": ["./lib/*"],
       "@/*": ["./*"]

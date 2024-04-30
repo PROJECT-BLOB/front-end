@@ -1,11 +1,12 @@
+import { Author } from '@/types/Post';
+
 import Comment from './Comment';
 import styles from './CommentBox.module.scss';
-import { AuthorData } from './ReadPost';
 
 export interface CommentData {
   id: number;
   content: string;
-  author: AuthorData;
+  author: Author;
   createdDate: string;
   liked: boolean;
   likeCount: number;

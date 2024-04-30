@@ -11,22 +11,22 @@
   margin-bottom: 1.2rem;
 
   &.pink {
-    background: var(--BDS-Category-recommend_press, #d32a87);
+    background: var(--BDS-Category-recommend_press);
   }
 
   &.yellow {
-    background: var(--BDS-Category-question_press, #e1c512);
+    background: var(--BDS-Category-question_press);
   }
 
   &.red {
-    background: var(--BDS-Category-cation_press, #e14c19);
+    background: var(--BDS-Category-cation_press);
   }
 
   &.blue {
-    background: var(--BDS-Category-tip_press, #11afaf);
+    background: var(--BDS-Category-tip_press);
   }
   
   &.green {
-    background: var(--BDS-Category-help_press, #90c30f);
+    background: var(--BDS-Category-help_press);
   }
 }

@@ -1,0 +1,140 @@
+@import '/styles/global-styles/index';
+
+
+.component {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background: none;
+
+}
+
+.wrapper {
+  display: flex;
+  padding: 1.6rem 1.2rem;
+  justify-content: center;
+  align-items: center;
+  border: none;
+
+  border-radius: 0 0 2.4rem 2.4rem;
+  box-shadow: 0 4px 12px 8px rgba(0, 0, 0, 0.28);
+}
+
+.align-div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 1.6rem;
+  gap: 0.4rem;
+}
+
+.align-header {
+  @include flex-center;
+  gap: 0.8rem;
+}
+
+.title {
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+
+  /* BDS/Label 1/Normal */
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 142%; /* 1.988rem */
+}
+
+.content {
+  display: -webkit-box;
+  width: 16.9rem;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  flex-shrink: 0;
+
+  overflow: hidden;
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+  text-overflow: ellipsis;
+
+  /* BDS/Body 2/Normal */
+  font-size: 1.5rem;
+  font-style: normal;
+  line-height: 146%; /* 2.19rem */
+}
+
+
+.created-at {
+  color: $BDS-Grayscale-7;
+  font-feature-settings: 'ss10' on;
+
+  /* BDS/Caption 1 */
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 133%; /* 1.596rem */
+}
+
+.wrapper.color {
+  &-recommendation {
+    background: $BDS-Category-recommend_hover;
+  }
+
+  &-blame {
+    background: $BDS-Category-cation_hover;
+  }
+
+  &-question {
+    background: $BDS-Category-question_hover;
+  }
+
+  &-help {
+    background: $BDS-Category-help_hover;
+  }
+
+  &-caution {
+    background: $BDS-Category-tip_hover;
+  }
+}
+
+.svg {
+  position: relative;
+  top: -.5rem;
+  z-index: 9999;
+}
+
+.svg.color {
+  &-recommendation {
+    path {
+      fill: $BDS-Category-recommend_hover;
+    }
+  }
+
+  &-blame {
+    path {
+      fill: $BDS-Category-cation_hover;
+    }
+  }
+
+  &-question {
+    path {
+      fill: $BDS-Category-question_hover;
+    }
+  }
+
+  &-help {
+    path {
+      fill: $BDS-Category-help_hover;
+    }
+  }
+
+  &-caution {
+    path {
+      fill: $BDS-Category-tip_hover;
+    }
+  }
+}
+
+
+
+
