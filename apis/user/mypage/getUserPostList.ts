@@ -1,27 +1,5 @@
+import { Post } from '@/types/Post';
 import instance from '@apis/axios';
-
-export interface Post {
-  postId: number;
-  title: string;
-  content: string;
-  category: string;
-  subcategory: string;
-  author: {
-    blobId: string; // blobId를 사용할지 userId를 사용할지...
-    nickname: string;
-    profileUrl: string;
-  };
-  country: string;
-  city: string;
-  lat: number;
-  lng: number;
-  distFromActual: number;
-  views: number;
-  createdDate: string;
-  imageUrl: string[];
-  liked: boolean;
-  bookmarked: boolean;
-}
 
 export type PostSummary = Pick<Post, 'postId' | 'author' | 'title' | 'content'>;
 

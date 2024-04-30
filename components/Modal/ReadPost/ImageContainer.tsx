@@ -1,11 +1,12 @@
 import Image from 'next/image';
 
+import { Post } from '@/types/Post';
+
 import useReadPost from './hooks/useReadPost';
 import styles from './ImageContainer.module.scss';
-import { ReadPostData } from './ReadPost';
 
 interface ImageContainerProps {
-  contentData: ReadPostData;
+  contentData: Post;
 }
 
 export default function ImageContainer({ contentData }: ImageContainerProps) {
