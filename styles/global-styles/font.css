@@ -1,9 +1,0 @@
-@import url('/fonts/pretendard/Pretendard.css');
-@import url('/fonts/montserrat/Montserrat.css');
-@import url('/fonts/inter/inter.css');
-/* 로컬에서 어떻게 가져오는지 모르겠삼 */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap');
-
-* {
-  font-family: 'IBM Plex Sans KR', Pretendard, Montserrat, inter, sans-serif;
-}
