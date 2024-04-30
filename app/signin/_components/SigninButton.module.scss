@@ -1,3 +1,5 @@
+@import '/styles/global-styles/index';
+
 .signin-button {
   position: relative;
   display: inline-flex;
@@ -6,21 +8,25 @@
 
   width: 31.5rem;
   height: 6rem;
+
   border-radius: 5px;
 
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.2);
+
   &.google {
-    background-color: blue;
-    color: var(--BDS-Grayscale-1);
+    border: 1px solid $BDS-Grayscale-6;
+    background-color: $BDS-Grayscale-1;
+    color: $BDS-Grayscale-13;
   }
 
   &.kakao {
     background-color: #fee500;
-    color: var(--BDS-Grayscale-13);
+    color: $BDS-Grayscale-13;
   }
 
   &.naver {
     background-color: #31b15a;
-    color: var(--BDS-Grayscale-1);
+    color: $BDS-Grayscale-1;
   }
 }
 
