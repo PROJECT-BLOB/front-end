@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -12,6 +14,7 @@ import { useUserStore } from '@/stores/userStore';
 import getRedirectUrl from '@apis/oauth/getRedirectUrl';
 import signout from '@apis/user/sign/signout';
 import useModalStore, { ModalName } from '@stores/useModalStore';
+import { useOAuthStore } from '@stores/useOAuthStore';
 
 import CreateUser from '@components/Modal/CreateUser/CreateUser';
 
@@ -21,11 +24,11 @@ import SigninButton from './_components/SigninButton';
 import styles from './Signin.module.scss';
 
 export default function Signin() {
+  const { accessToken } = useOAuthStore();
+
   const { toggleModal, name, setCurrentName } = useModalStore();
 
   function handleOpenModal(name: ModalName) {
-    // 만약 유저가 로그인 버튼 눌러서 oauth인증 마치면 && 유저는 회원가입이 안 된 상태여야함
-    // GET /user/{oauthId}/oauth => state": "COMPLETE" 값 보내줌
     setCurrentName(name);
     toggleModal();
   }
@@ -58,6 +61,23 @@ export default function Signin() {
     // 소셜 로그인 페이지로 이동
     router.push(redirectUrl);
   }
+
+  // accessToken은 있는데 회원가입 안 된 경우 회원가입모달 띄우기
+  useEffect(() => {
+    function handleOpenModal(name: ModalName) {
+      console.log('열려라 모달');
+      setCurrentName(name);
+      toggleModal();
+    }
+
+    // 1. accessToken이 있어야 함(oauth 스토어에 저장)
+    // 2. 회원가입이 안 되어 있어야 함(회원가입상태도 oauth 스토어에 저장)
+    if (accessToken) {
+      // &&!isMember
+      // 모달이 안 열려요...?????!!!
+      handleOpenModal('createUser');
+    }
+  }, [accessToken, setCurrentName, toggleModal]);
 
   return (
     <main className={styles.signin}>
