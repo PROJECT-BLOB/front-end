@@ -1,59 +1,123 @@
-@import '../../_variables';
+@import '/styles/global-styles/color-pallete';
 
-.button {
-  border-radius: 2rem;
-  border: none;
-  background: $background-input-secondary;
-  transition: background $transition;
-  cursor: pointer;
-  outline: none;
+.button-colord-contain {
+  color: $BDS-Grayscale-1;
+  text-align: center;
 
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
+  /* BDS/Body 2/Normal */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 146%; /* 1.36875rem */
 
+  width: 4.375rem;
+  height: 2.375rem;
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 1.5rem;
+  border: 1.6px solid $BDS-Primary-3;
+  background: $BDS-Primary-3;
   &:hover {
-    background: $background-input-secondary / 0.9;
+    border: 1.6px solid $BDS-Primary-5;
+    background: $BDS-Primary-5;
   }
-
   &:active {
-    transform: translateY(1px);
-  }
-
-  p {
-    font-size: 1rem;
-    font-weight: 600;
-    color: $color-secondary;
+    border: 1.6px solid $BDS-Primary-7;
+    background: $BDS-Primary-7;
   }
 }
+// 글자에 gradient 적용해야함
+.button-colord-outlined {
+  text-align: center;
+  font-feature-settings: 'ss10' on;
 
-.longSlim {
-  padding: 0.75rem 3rem;
-}
+  /* BDS/Body 2/Normal */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 146%; /* 1.36875rem */
 
-.shortBulky {
-  padding: 1rem 3rem;
-  letter-spacing: 1px;
-}
+  background: var(--BDS-Primary-5, linear-gradient(90deg, #ff9456 0%, #fe81c4 100%));
+  background-clip: text;
+  -webkit-background-clip: text;
 
-.white {
-  background: $background-white;
+  width: 4.375rem;
+  height: 2.375rem;
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 1.5rem;
+  border: 1.6px solid $BDS-Primary-5;
+  background: $BDS-Grayscale-1;
 
   &:hover {
-    background: $background-white / 0.9;
+    border: 1.6px solid $BDS-Primary-3;
+    background: $BDS-Primary-1;
+  }
+  &:active {
+    border: 1.6px solid $BDS-Primary-5;
+    background: $BDS-Primary-3;
   }
 }
 
-.accent {
-  background: $background-accent;
+.button-gray-contain {
+  color: $BDS-Grayscale-13;
+  text-align: center;
 
-  &:hover {
-    background: $background-accent / 0.9;
+  /* BDS/Body 2/Normal */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 146%; /* 1.36875rem */
+
+  width: 4.375rem;
+  height: 2.375rem;
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 1.5rem;
+  background: $BDS-Grayscale-4;
+  border: 1.6px solid $BDS-Grayscale-4;
+  color: $BDS-Grayscale-13;
+  &:disabled {
+    color: $BDS-Grayscale-6;
   }
 }
 
-.transparent {
-  background: transparent;
-  border: $border-secondary;
+.button-gray-outlined {
+  color: $BDS-Grayscale-6;
+  text-align: center;
+  font-feature-settings: 'ss10' on;
+
+  /* BDS/Body 2/Normal */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 0.9375rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 146%; /* 1.36875rem */
+
+  width: 4.375rem;
+  height: 2.375rem;
+  display: inline-flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 1.5rem;
+  background: $BDS-Grayscale-1;
+  border: 1.6px solid $BDS-Grayscale-6;
+  color: $BDS-Grayscale-13;
+  &:disabled {
+    color: $BDS-Grayscale-6;
+  }
 }
