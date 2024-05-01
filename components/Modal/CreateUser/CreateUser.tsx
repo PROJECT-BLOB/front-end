@@ -8,13 +8,20 @@ import useCreateUserForm from '@/app/map/_hooks/useCreateUserForm';
 import Input from '@/components/Input/Input';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
+// import { useUserStore } from '@stores/userStore';
+import { useOAuthStore } from '@stores/useOAuthStore';
 
 import styles from './CreateUser.module.scss';
 import Modal from '../Modal';
 
+// import createUser from '@apis/user/sign/createUser';
+
 // const cx = classNames.bind(styles);
 
 export default function CreateUser() {
+  const { oauthId } = useOAuthStore();
+  console.log(oauthId); // null이 담겨오네요...............
+
   const { toggleModal } = useModalStore();
   const { handleSubmit, onSubmit, cancelForm } = useCreateUserForm(toggleModal);
 
@@ -34,6 +41,17 @@ export default function CreateUser() {
         [name]: value,
       };
     });
+  };
+
+  const handleSubmitUserForm = async () => {
+    // TODO: 유저 정보 백엔드에 전송
+    // oauthId가 null임.....
+    // const { data, status } = await createUser({ oauthId: oauthId, ...userFormData });
+    // status===200이면 회원가입 성공, 로그인 처리
+    // if(status===200){
+    //   const { signin } = useUserStore();
+    //   signin();
+    // }
   };
 
   // 스타일링 해야됨
@@ -74,7 +92,9 @@ export default function CreateUser() {
           <button type='button' onClick={cancelForm}>
             취소
           </button>
-          <button type='submit'>회원가입</button>
+          <button type='submit' onClick={handleSubmitUserForm}>
+            회원가입
+          </button>
         </footer>
         {/* </Modal.Footer> */}
       </form>
