@@ -19,13 +19,17 @@ export default function WritePost() {
     <Modal>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Modal.Header>
-          <CloseHeader />
+          <div className={styles.postHeader}>
+            <CloseHeader />
+          </div>
         </Modal.Header>
         <Modal.Body>
-          <div>카테고리</div>
-          <TitleInput />
-          <ContentInput />
-          <ImageUploader setValue={setValue} />
+          <div className={styles.postBody}>
+            <div>카테고리</div>
+            <TitleInput />
+            <ContentInput />
+            <ImageUploader setValue={setValue} />
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <div className={styles.postFooter}>

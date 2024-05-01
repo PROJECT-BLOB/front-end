@@ -57,9 +57,11 @@ export default function ReadPost() {
   return (
     <Modal>
       <Modal.Header>
-        <button type='button' onClick={toggleModal} className={styles['close-button']}>
-          <Image src={closeButton} alt='close-button' />
-        </button>
+        <div className={styles.readHeader}>
+          <button type='button' onClick={toggleModal} className={styles['close-button']}>
+            <Image src={closeButton} alt='close-button' />
+          </button>
+        </div>
       </Modal.Header>
 
       <Modal.Body>

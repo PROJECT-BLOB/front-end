@@ -1,3 +1,5 @@
+@import '/styles/global-styles/color-pallete';
+
 .overlay {
   position: fixed;
   display: flex;
@@ -7,22 +9,22 @@
   background: rgba(0, 0, 0, 0.5);
 }
 
-.modal {
-  position: absolute;
-  width: 90%;
-  top: 0;
-  bottom: 0;
-  overflow-y: auto;
-}
+// .modal {
+//   position: absolute;
+//   width: 90%;
+//   top: 0;
+//   bottom: 0;
+//   overflow-y: auto;
+// }
 
-.header {
-  display: flex;
-  justify-content: right;
-}
+// .header {
+//   display: flex;
+//   justify-content: right;
+// }
 
 .body {
   position: relative;
-  background-color: var(--BDS-Grayscale-1);
+  background-color: $BDS-Grayscale-1;
   padding: 2rem 2.4rem;
 }
 

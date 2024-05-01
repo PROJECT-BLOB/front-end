@@ -6,6 +6,11 @@
   height: 4.8rem;
   background-color: var(--BDS-Grayscale-1, #fff);
 }
+// 헤더 영역 스타일이 read, write 모두에 적용되어서 분리했습니다
+.readHeader {
+  display: flex;
+  justify-content: right;
+}
 
 @media (min-width: 768px) {
   .main {
