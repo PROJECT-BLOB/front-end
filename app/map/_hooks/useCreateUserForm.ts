@@ -23,15 +23,9 @@ export default function useCreateUserForm(toggleModal: () => void) {
   async function onSubmit(userData: ContentField) {
     const { id, nickname } = userData;
     // 회원가입 요청
+
     const { data, status } = await createUser({ oauthId, id, nickname });
     console.log('data', data);
-    // data: {
-    //     "email": "string",
-    //     "blobId": "string",
-    //     "nickName": "string",
-    //     "profileUrl": "string",
-    //     "state": "COMPLETE"
-    //   }
 
     if (status === 200) {
       console.log('회원가입 성공');
