@@ -36,7 +36,7 @@ export default function CreateUser() {
     });
   };
 
-  // 스타일링 해야됨
+  // TODO: id, nickname 유효성 검사 추가
   return (
     <Modal>
       <form className={styles.form} onSubmit={handleSubmit(() => onSubmit(userFormData))}>
