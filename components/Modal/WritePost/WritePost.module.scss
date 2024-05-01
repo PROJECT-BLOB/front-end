@@ -1,48 +1,8 @@
-.modal {
-  position: absolute;
-  inset: 0;
-  background-color: var(--BDS-Grayscale-1);
-  color: var(--BDS-Grayscale-14);
-  display: flex;
-  width: 24.6875rem;
-  padding: 2rem 1.75rem 2rem 2.25rem;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 3rem;
-}
-
-.postHeader {
-  background-color: var(--BDS-Grayscale-1);
-  color: var(--BDS-Grayscale-14);
-  display: flex;
-  width: 20.6875rem;
-  justify-content: center;
-  align-items: center;
-  gap: 3.75rem;
-}
+@import '/styles/global-styles/color-pallete';
 
 .title {
   display: inline-block;
   color: #000;
-}
-
-.cancelButton {
-  display: flex;
-  width: 7rem;
-  padding: 0.8rem 1.6rem;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 2.4rem;
-  border: 1.6px solid var(--BDS-Grayscale-6);
-  background: var(--BDS-Grayscale-1);
-  color: var(--BDS-Grayscale-13);
-  text-align: center;
-  cursor: pointer;
-
-  font-size: 1.5rem;
-  font-style: normal;
-  font-weight: 400;
 }
 
 .postFooter {
@@ -51,32 +11,10 @@
   gap: 0.625rem;
   padding: 0 0 0 200px;
 }
-//버튼 위치 조정 필요
-.submitButton {
-  display: flex;
-  width: 7rem;
-  padding: 0.8rem 1.6rem;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 2.4rem;
-  border: 1.6px solid var(--BDS-Primary-5);
-  background: var(--BDS-Primary-5);
-  text-align: center;
-  cursor: pointer;
-
-  font-size: 1.5rem;
-  font-style: normal;
-  font-weight: 400;
-}
-
-.footer {
-  display: flex;
-  gap: 1rem;
-}
 
 .input {
   background-color: #fff;
   border: solid 0.1px #000;
   color: #000;
 }
+

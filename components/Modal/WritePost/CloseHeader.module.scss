@@ -1,0 +1,10 @@
+@import '/styles/global-styles/color-pallete';
+
+.closeHeader {
+  display: flex;
+  width: 20.6875rem;
+  justify-content: center;
+  align-items: center;
+  gap: 3.75rem;
+  background-color: $BDS-Grayscale-1;
+}
