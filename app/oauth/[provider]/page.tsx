@@ -6,12 +6,14 @@ import { useRouter } from 'next/navigation';
 
 import getOAuthData from '@apis/oauth/getOAuthData';
 import { useOAuthStore } from '@stores/useOAuthStore';
+import { useUserStore } from '@stores/userStore';
 
 interface providerType {
   provider: 'naver' | 'kakao' | 'google';
 }
 
 export default function LoadingSignin({ params }: { params: providerType }) {
+  const { signin } = useUserStore();
   const router = useRouter();
   // const code = new URL(window.location.href).searchParams.get('code');
   const code = typeof window !== 'undefined' ? new URL(window.location.href).searchParams.get('code') : null;
@@ -34,9 +36,9 @@ export default function LoadingSignin({ params }: { params: providerType }) {
     }
 
     setOAuthData();
-
+    signin();
     router.push('/signin');
-  }, [code, params.provider, router]);
+  }, [code, params.provider, signin, router]);
 
   return <h1>{`This is OAUTH - ${params.provider} test page`}</h1>;
 }

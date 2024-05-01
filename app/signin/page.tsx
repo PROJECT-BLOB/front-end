@@ -22,12 +22,10 @@ import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
 
 import SigninButton from './_components/SigninButton';
 import styles from './Signin.module.scss';
-// import { getAccessToken } from '@apis/axios';
 
 export default function Signin() {
   const { accessToken, state } = useOAuthStore();
   const { isSignin } = useUserStore();
-
   const { toggleModal, name, setCurrentName } = useModalStore();
 
   function handleOpenModal(name: ModalName) {
@@ -64,31 +62,22 @@ export default function Signin() {
     router.push(redirectUrl);
   }
 
-  // accessToken은 있는데 회원가입 안 된 경우 회원가입모달 띄우기
+  // 회원가입 안 된 유저에게 회원가입 모달을 띄워줌
   useEffect(() => {
     function handleOpenModal(name: ModalName) {
       setCurrentName(name);
       toggleModal();
     }
 
-    // const accessToken = getAccessToken();
-
-    // 1. accessToken이 있어야 함(oauth 스토어에 저장)
-    // 2. 회원가입이 안 되어 있어야 함(회원가입상태도 oauth 스토어에 저장)
     if (accessToken && state === 'INCOMPLETE') {
       handleOpenModal('createUser');
     }
   }, [accessToken, state, setCurrentName, toggleModal]);
 
   useEffect(() => {
-    // 로그인 상태일 경우 map으로 리다이렉트
-    if (isSignin) router.push('/map');
-
-    // 로그인 테스트용
-    // const token = getAccessToken();
-
-    // if (token) router.push('/map');
-  }, [isSignin, router]);
+    // 회원가입 된 유저는 map으로 리다이렉트
+    if (isSignin && state === 'COMPLETE') router.push('/map');
+  }, [isSignin, router, state]);
 
   return (
     <main className={styles.signin}>

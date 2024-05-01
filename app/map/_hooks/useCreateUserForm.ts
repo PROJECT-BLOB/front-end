@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import createUser from '@apis/user/sign/createUser';
 import { useOAuthStore } from '@stores/useOAuthStore';
+// import { useUserStore } from '@stores/userStore';
 
 export interface ContentField {
   id: string;
@@ -29,7 +30,8 @@ export default function useCreateUserForm(toggleModal: () => void) {
 
     if (status === 200) {
       console.log('회원가입 성공');
-      // 성공 시, 맵으로 이동
+      // 성공 시, 로그인 처리하고 맵으로 이동
+
       router.push('/map');
 
       return;
