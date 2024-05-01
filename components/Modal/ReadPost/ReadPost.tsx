@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Post } from '@/types/Post';
 import getPost from '@apis/post/getPost';
 import closeButton from '@public/icons/x.svg';
+import useModalStore from '@stores/useModalStore';
 
 import useReadPost from './hooks/useReadPost';
 import ImageContainer from './ImageContainer';
@@ -18,7 +19,9 @@ export default function ReadPost() {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await getPost(1);
+      const { postId } = useModalStore();
+      // 마커 및 게시글 클릭에 따라 modal에 postId 바꿔서 적용
+      const { data } = await getPost(postId ?? 3);
       setPost(data);
     };
 

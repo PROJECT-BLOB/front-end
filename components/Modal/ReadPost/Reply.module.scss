@@ -1,4 +1,10 @@
 @import '/styles/global-styles/color-pallete';
+.content-like-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
 
 .content {
   color: $BDS-Grayscale-13;

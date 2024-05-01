@@ -1,3 +1,6 @@
+import deleteComment from '@apis/post/deleteComment';
+import deletePost from '@apis/post/deletePost';
+
 import styles from './Kebab.module.scss';
 
 enum CONTENT {
@@ -5,12 +8,16 @@ enum CONTENT {
   notUser = '신고하기',
 }
 
-export default function Kebab({ isUser }: { isUser: boolean }) {
-  //  삭제 시 로직, 신고하기 시 로직 필요
+export default function Kebab({ isUser, commentId, postId }: { isUser: boolean; commentId?: number; postId?: number }) {
+  // 신고하기 추가해야댐
+  // 로직 추가 필요
+  function handleDeleteClick() {
+    commentId ? deleteComment(commentId) : postId && deletePost(postId);
+  }
 
   return (
     <div className={styles['kebab-container']}>
-      <button type='button' className='kebab-content' onClick={() => {}}>
+      <button type='button' className='kebab-content' onClick={handleDeleteClick}>
         {isUser ? CONTENT.user : CONTENT.notUser}
       </button>
     </div>
