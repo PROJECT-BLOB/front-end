@@ -27,7 +27,7 @@ export default function LoadingSignin({ params }: { params: providerType }) {
     async function setOAuthToken() {
       const { data } = await getAccessToken(params.provider, code);
       const { accessToken, refreshToken } = data;
-
+      console.log(data.oauthId);
       storeOAuthToken(accessToken, refreshToken);
     }
 

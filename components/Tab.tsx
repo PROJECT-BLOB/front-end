@@ -7,9 +7,5 @@ interface TabProps {
 }
 
 export default function Tab({ children, focused }: PropsWithChildren<TabProps>) {
-  return (
-    <>
-      <span className={`${styles.tab} ${focused && styles.focused}`}>{children}</span>{' '}
-    </>
-  );
+  return <span className={`${styles.tab} ${focused && styles.focused}`}>{children}</span>;
 }

@@ -1,18 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { Comment } from '@/types/Post';
+import getReplyList from '@apis/post/getReplyList';
 
 import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
 
 import styles from './Comment.module.scss';
-import { CommentData } from './CommentBox';
 import ProfileContainer from './ProfileContainer';
 import ReplyBox from './ReplyBox';
 
 interface CommentProps {
-  comment: CommentData;
+  comment: Comment;
 }
 
-export default function Comment({ comment }: CommentProps) {
+export default function CommentContainer({ comment }: CommentProps) {
   const [isViewReplyClicked, setIsViewReplyClicked] = useState(false);
+  const [replyList, setReplyList] = useState<Comment[]>();
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await getReplyList(comment.commentId);
+      setReplyList(data.content);
+    };
+
+    fetch();
+  }, []);
 
   return (
     <>
@@ -24,10 +36,10 @@ export default function Comment({ comment }: CommentProps) {
         <button type='button'>댓글달기</button>
       </div>
       <button type='button' onClick={() => setIsViewReplyClicked(!isViewReplyClicked)}>
-        답글 {comment.reply.length}개 보기
+        답글 {replyList ? replyList.length : 0}개 보기
       </button>
 
-      {isViewReplyClicked && <ReplyBox comment={comment} />}
+      {isViewReplyClicked && replyList && <ReplyBox replyList={replyList} />}
     </>
   );
 }
