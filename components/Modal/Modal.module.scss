@@ -8,7 +8,6 @@
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
 }
-
 // .modal {
 //   position: absolute;
 //   width: 90%;
@@ -28,9 +27,3 @@
   padding: 2rem 2.4rem;
 }
 
-// 961px 부터 화면 width의 70%가 모달폭
-@media (min-width: 961px) {
-  .modal {
-    width: 70%;
-  }
-}

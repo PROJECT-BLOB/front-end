@@ -12,6 +12,21 @@
   justify-content: right;
 }
 
+.readModal {
+  position: absolute;
+  width: 90%;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+// 961px 부터 화면 width의 70%가 모달폭
+@media (min-width: 961px) {
+  .readModal {
+    width: 70%;
+  }
+}
+
 @media (min-width: 768px) {
   .main {
     display: flex;
