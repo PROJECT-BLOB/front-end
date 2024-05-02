@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/nextjs';
+import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -16,6 +17,36 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  staticDirs: ['..\\public'],
+  staticDirs: ['../public'],
+  webpackFinal: async (config) => {
+    if (!config.module || !config.module.rules) {
+      return config;
+    }
+
+    config.module.rules = [
+      ...config.module.rules.map((rule) => {
+        if (!rule || rule === '...') {
+          return rule;
+        }
+
+        if (rule.test && /svg/.test(String(rule.test))) {
+          return { ...rule, exclude: /\.svg$/i };
+        }
+        return rule;
+      }),
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
+      {
+        test: /\.scss$/,
+        use: ['sass-loader'],
+        include: path.resolve(__dirname, '../'),
+      },
+    ];
+
+    return config;
+  },
 };
+
 export default config;
