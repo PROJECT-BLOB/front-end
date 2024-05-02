@@ -23,7 +23,7 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
   const [isViewReplyClicked, setIsViewReplyClicked] = useState(false);
   const [replyList, setReplyList] = useState<Comment[]>();
 
-  function handleLikeClick() {
+  function handleClickLike() {
     postCommentLike(comment.commentId);
   }
 
@@ -41,7 +41,7 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
       <ProfileContainer author={comment.author} canDelete={comment.canDelete} commentId={comment.commentId} />
       <div className={styles['content-like-wrapper']}>
         <p className={styles.content}>{comment.content}</p>
-        <button type='button' onClick={handleLikeClick}>
+        <button type='button' onClick={handleClickLike}>
           <Image src={comment.liked ? filledRedHeart : vacantHeart} alt='heart' width={12} height={12} />
         </button>
       </div>

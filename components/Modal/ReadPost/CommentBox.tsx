@@ -13,12 +13,12 @@ export default function CommentBox({ postId }: { postId: number }) {
   const [commentInput, setCommentInput] = useState('');
   const [replyInformation, setReplyInformation] = useState({ isReply: false, targetCommentId: 0 });
 
-  function handleCommentSubmit(e: FormEvent<HTMLFormElement>) {
+  function handleSubmitComment(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     // 답글인지 아닌지에 따라 api 호출 다르게 해줌
     replyInformation.isReply
-      ? createReply(replyInformation.targetCommentId, { content: commentInput })
+      ? createReply({ commentId: replyInformation.targetCommentId, body: { content: commentInput } })
       : createComment(postId, { content: commentInput });
   }
 
@@ -39,7 +39,7 @@ export default function CommentBox({ postId }: { postId: number }) {
         ))}
       </div>
 
-      <form className={styles['comment-form']} onSubmit={handleCommentSubmit}>
+      <form className={styles['comment-form']} onSubmit={handleSubmitComment}>
         <div>
           {replyInformation.isReply && replyInformation.targetCommentId}
           <input

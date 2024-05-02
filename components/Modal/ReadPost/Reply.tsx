@@ -15,7 +15,7 @@ interface ReplyProps {
 }
 
 export default function Reply({ reply }: ReplyProps) {
-  function handleLikeClick() {
+  function handleClickLike() {
     postCommentLike(reply.commentId);
   }
 
@@ -24,7 +24,7 @@ export default function Reply({ reply }: ReplyProps) {
       <ProfileContainer author={reply.author} canDelete={reply.canDelete} commentId={reply.commentId} />
       <div className={styles['content-like-wrapper']}>
         <p className={styles.content}>{reply.content}</p>
-        <button type='button' onClick={handleLikeClick}>
+        <button type='button' onClick={handleClickLike}>
           <Image src={reply.liked ? filledRedHeart : vacantHeart} alt='heart' width={12} height={12} />
         </button>
       </div>
