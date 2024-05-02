@@ -18,7 +18,7 @@ import { useOAuthStore } from '@stores/useOAuthStore';
 
 import CreateUser from '@components/Modal/CreateUser/CreateUser';
 
-import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
+// import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
 
 import SigninButton from './_components/SigninButton';
 import styles from './Signin.module.scss';
@@ -65,7 +65,7 @@ export default function Signin() {
     // 수정 버전
     async function redirectUserToMap() {
       if (isSignin && state === 'COMPLETE') {
-        useRedirectSigninUserTo('/map');
+        router.push('/map');
       }
     }
 

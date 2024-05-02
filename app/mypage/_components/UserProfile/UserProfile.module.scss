@@ -1,40 +1,27 @@
 @import '/styles/global-styles/index';
 
-.containter {
-  display: flex;
-  width: 90rem;
+.container {
+  @include flex-center;
+
+  width: 100%;
   padding: 5rem 0rem;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   gap: 1.1875rem;
 }
 
 .user {
+  &-detail,
+  &-nickname-section {
+    @include flex-center;
+  }
+
   &-detail {
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 1rem;
   }
+
   &-nickname-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 0.5rem;
-  }
-
-  &-nickname {
-    color: $BDS-Grayscale-13;
-
-    /* BDS/Headline 1 */
-    font-family: 'IBM Plex Sans KR';
-    font-size: 1.125rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 144%; /* 1.62rem */
-    letter-spacing: -0.00025rem;
   }
 
   &-count-section {
@@ -45,24 +32,8 @@
 }
 
 .liked-count {
-  font-feature-settings: 'ss10' on;
-
-  /* BDS/Headline 2 */
-  font-family: 'IBM Plex Sans KR';
-  font-size: 1.0625rem;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 141%; /* 1.49813rem */
-
-  background: var(--BDS-Primary-5, linear-gradient(90deg, #ff9456 0%, #fe81c4 100%));
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
   &-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flex-center;
     gap: 0.125rem;
   }
   &-icon {
@@ -75,38 +46,57 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  &-title {
-    color: var(--BDS-Grayscale-13, #000);
-    font-feature-settings: 'ss10' on;
+}
 
-    /* BDS/Body 1/Normal */
-    font-family: 'IBM Plex Sans KR';
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 150%; /* 1.5rem */
+@mixin font {
+  font-feature-settings: 'ss10' on;
+  font-family: 'IBM Plex Sans KR';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.text {
+  &-black {
+    @include font;
+    color: $BDS-Grayscale-13;
   }
 
-  &-number {
-    color: var(--BDS-Grayscale-13, #000);
+  &-colored {
+    @include font;
+    font-size: 1.0625rem;
+    line-height: 141%;
 
-    /* BDS/Body 1/Highlight */
-    font-family: 'IBM Plex Sans KR';
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 150%; /* 1.5rem */
+    background: $BDS-Primary-5;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
-.bio {
-  color: $BDS-Grayscale-13;
-  font-feature-settings: 'ss10' on;
+.large {
+  font-size: 1.125rem;
+  line-height: 144%; /* 1.62rem */
+  letter-spacing: -0.00025rem;
+}
 
-  /* BDS/Body 2/Reading */
-  font-family: 'IBM Plex Sans KR';
+.middle {
+  font-size: 1rem;
+  line-height: 150%; /* 1.5rem */
+}
+
+.small {
   font-size: 0.9375rem;
-  font-style: normal;
-  font-weight: 400;
   line-height: 160%; /* 1.5rem */
+}
+
+.x-small {
+  font-size: 0.875rem;
+  line-height: 142%; /* 1.2425rem */
+}
+
+.weight-500 {
+  font-weight: 500;
+}
+.weight-600 {
+  font-weight: 600;
 }

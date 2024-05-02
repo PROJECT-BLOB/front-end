@@ -1,9 +1,10 @@
+@import '/styles/global-styles/index';
+
 .post-container {
-  display: flex;
-  width: 75.5rem;
+  @include flex-column-start;
+
+  width: 100%;
   padding: 2rem;
-  flex-direction: column;
-  align-items: flex-start;
   gap: 1.5rem;
 }
 
@@ -16,14 +17,14 @@
 .main {
   display: flex;
   align-items: flex-start;
+  width: 100%;
+  justify-content: space-between;
+
   gap: 11.25rem;
 
   &-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    @include flex-column-start;
     gap: 0.75rem;
-
     max-width: 52.1875rem;
   }
 }
@@ -36,13 +37,11 @@
 
   border-radius: 0rem 2.5rem 2.5rem 0rem;
   background: #c4c4c4;
+  overflow: hidden;
 }
 
-// 중복 되는 부분 제거
 .footer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  @include flex-column-start;
   gap: 1rem;
 }
 
@@ -53,9 +52,7 @@
 }
 
 .icon-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
   gap: 0.3125rem;
 }
 
@@ -64,37 +61,39 @@
   height: 1.25rem;
 }
 
-// 수정 필요
 .text {
-  font-family: 'IBM Plex Sans KR';
   font-feature-settings: 'ss10' on;
+  font-family: 'IBM Plex Sans KR';
   font-style: normal;
-  &-gray {
-    color: $BDS-Grayscale-7;
+  font-weight: 400;
+}
 
-    font-size: 0.875rem;
-    font-weight: 600;
-    line-height: 142%; /* 1.2425rem */
-  }
+.gray {
+  color: $BDS-Grayscale-7;
 
-  &-black {
-    color: $BDS-Grayscale-13;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 142%; /* 1.2425rem */
+}
 
-    font-family: 'IBM Plex Sans';
-    font-size: 0.75rem;
-    font-weight: 400;
-    line-height: 133%; /* 0.9975rem */
+.black {
+  color: $BDS-Grayscale-13;
+}
 
-    &-title {
-      font-size: 1.125rem;
-      font-weight: 600;
-      line-height: 144%;
-      letter-spacing: -0.00025rem;
-    }
+.large {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 144%;
+  letter-spacing: -0.00025rem;
+}
 
-    &-content {
-      font-size: 0.9375rem;
-      line-height: 160%; /* 1.5rem */
-    }
-  }
+.middle {
+  font-size: 0.9375rem;
+  line-height: 160%; /* 1.5rem */
+}
+
+.small {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 133%; /* 0.9975rem */
 }
