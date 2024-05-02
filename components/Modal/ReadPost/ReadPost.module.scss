@@ -1,10 +1,13 @@
+@import '/styles/global-styles/color-pallete';
+@import '/styles/global-styles/media-breakpoint';
+
 .close-button {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 4.8rem;
   height: 4.8rem;
-  background-color: var(--BDS-Grayscale-1, #fff);
+  background-color: $BDS-Grayscale-1;
 }
 // 헤더 영역 스타일이 read, write 모두에 적용되어서 분리했습니다
 .readHeader {
@@ -27,7 +30,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@include desktop {
   .main {
     display: flex;
     flex-direction: row;

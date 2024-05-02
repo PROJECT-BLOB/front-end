@@ -1,3 +1,6 @@
+@import '/styles/global-styles/color-pallete';
+@import '/styles/global-styles/media-breakpoint';
+
 .image-container {
   display: flex;
   justify-content: center;
@@ -18,7 +21,7 @@
   height: 100%;
   background-color: inherit;
   border: none;
-  color: var(--BDS-Grayscale-8);
+  color: $BDS-Grayscale-8;
 }
 
 .next-btn {
@@ -28,7 +31,7 @@
   height: 100%;
   background-color: inherit;
   border: none;
-  color: var(--BDS-Grayscale-8);
+  color: $BDS-Grayscale-8;
 }
 
 .index-wrapper {
@@ -47,7 +50,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@include desktop {
   .previous-btn {
     display: block;
     font-size: 10rem;
