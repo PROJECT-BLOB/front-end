@@ -10,6 +10,8 @@ import { useDetailQueries } from '@queries/useUserQueries';
 
 import UserProfile from './_components/UserProfile/UserProfile';
 import styles from './myPage.module.scss';
+import PostList from './_components/Post/PostList';
+import { Post } from '@types/Post';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +19,7 @@ export default function myPage() {
   // TODO: 쿼리에서 유저 정보 가져오기
 
   const [userData, setUserData] = useState<UserDetail | null>(null);
+  const [postsData, setPostsData] = useState<Post[] | null>(null);
   const router = useRouter();
 
   const { data } = useDetailQueries('0502'); // 임시로 아이디 넣음
@@ -43,12 +46,12 @@ export default function myPage() {
     <>
       <header>HEADER-나중에 들어감</header>
       {/* {userData && <div>{userData.blobId}</div>} */}
-      <section className={cx('user-profile')}>
+      <section>
         <UserProfile userData={userData} />
       </section>
       <section className={cx('tabs')}>탭 들어감</section>
       <section className={cx('post-list')}>
-        {/* <PostList /> */}
+        <PostList postList={postList} />
         postlist 들어감
       </section>
     </>

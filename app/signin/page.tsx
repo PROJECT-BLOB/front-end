@@ -76,6 +76,8 @@ export default function Signin() {
 
   useEffect(() => {
     // 회원가입 된 유저는 map으로 리다이렉트
+    console.log(isSignin, state); // TODO: 로그인 후 다시 접근하면 리다이렉트가 안됨....;;수정해야될듯
+
     if (isSignin && state === 'COMPLETE') router.push('/map');
   }, [isSignin, router, state]);
 

@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 // TODO: 타입 정의
 export default function UserProfile({ userData }: any) {
   return (
-    <>
+    <div className={cx('container')}>
       <Avatar size='large' imageSource={userData?.profileUrl} />
       <div className={cx('user-detail')}>
         <p className={cx('user-nickname-section')}>
@@ -33,6 +33,7 @@ export default function UserProfile({ userData }: any) {
           </span>
         </p>
       </div>
-    </>
+      <p className={cx('bio')}>바이오</p>
+    </div>
   );
 }
