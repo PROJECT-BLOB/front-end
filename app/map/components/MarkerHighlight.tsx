@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react';
 
-import PolygonIcon from '@icons/polygon-1.svg?component';
 import classNames from 'classnames/bind';
 
 import { MarkerType } from '@/app/map/components/Marker';
+import PolygonIcon from '@icons/polygon-1.svg?component';
 
 import styles from './MarkerHighlight.module.scss';
 
