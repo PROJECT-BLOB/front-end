@@ -6,6 +6,26 @@
   height: 4.8rem;
   background-color: var(--BDS-Grayscale-1, #fff);
 }
+// 헤더 영역 스타일이 read, write 모두에 적용되어서 분리했습니다
+.readHeader {
+  display: flex;
+  justify-content: right;
+}
+
+.readModal {
+  position: absolute;
+  width: 90%;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+}
+
+// 961px 부터 화면 width의 70%가 모달폭
+@media (min-width: 961px) {
+  .readModal {
+    width: 70%;
+  }
+}
 
 @media (min-width: 768px) {
   .main {
