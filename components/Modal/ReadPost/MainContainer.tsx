@@ -32,12 +32,14 @@ export default function MainContainer({ contentData }: MainContentProps) {
 
   return (
     <section className={styles['main-container']}>
-      <div className={styles['delete-container']}>
-        <button type='button' onClick={handleLikeClick}>
-          <Image src={contentData.liked ? filledRedHeart : vacantHeart} alt='좋아요 아이콘' width={24} height={24} />
-        </button>
-        <span className={styles['delete-mention']}>이 글은 21시간 38분 31초 이후 삭제됩니다.</span>
-        {/* 맵에서 사라지는거 받아야 함 */}
+      <div className={styles['like-delete-bookmark-container']}>
+        <div className={styles['like-delete-wrapper']}>
+          <button type='button' onClick={handleLikeClick}>
+            <Image src={contentData.liked ? filledRedHeart : vacantHeart} alt='좋아요 아이콘' width={24} height={24} />
+          </button>
+          <span className={styles['delete-mention']}>이 글은 21시간 38분 31초 이후 삭제됩니다.</span>
+          {/* 맵에서 사라지는거 받아야 함 */}
+        </div>
         <button type='button' onClick={handleBookmarkClick}>
           <Image src={contentData.bookmarked ? filledBookmark : bookmark} alt='북마크 아이콘' />
         </button>
