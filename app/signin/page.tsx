@@ -11,8 +11,8 @@ import GoogleLogo from '@/public/icons/logo-google.svg';
 import KakaoLogo from '@/public/icons/logo-kakao.svg';
 import NaverLogo from '@/public/icons/logo-naver.svg';
 import { useUserStore } from '@/stores/userStore';
+import { getAccessToken } from '@apis/axios';
 import getRedirectUrl from '@apis/oauth/getRedirectUrl';
-import signout from '@apis/user/sign/signout';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
 
@@ -24,34 +24,18 @@ import SigninButton from './_components/SigninButton';
 import styles from './Signin.module.scss';
 
 export default function Signin() {
-  const { accessToken, state } = useOAuthStore();
+  const { state } = useOAuthStore();
+  const accessToken = getAccessToken();
   const { isSignin } = useUserStore();
+
   const { toggleModal, name, setCurrentName } = useModalStore();
+
+  const router = useRouter();
 
   function handleOpenModal(name: ModalName) {
     setCurrentName(name);
     toggleModal();
   }
-
-  // 로그아웃-이 부분은 무시하셔도 됩니다
-  const { signout: logout } = useUserStore();
-
-  const router = useRouter();
-
-  const userId: number = 1214; // TODO: (임시값) 서버상태에서 가져오도록 변경
-
-  async function handleClickSignout() {
-    const response = await signout(userId);
-
-    if (response) {
-      // reponse 결과가 ok면 유저의 전역상태를 false로 변경합니다.
-      logout();
-      // 랜딩페이지로 이동합니다.
-      useRedirectSigninUserTo('/');
-    }
-    // 에러핸들링
-  }
-  // 로그아웃-이 부분은 무시하셔도 됩니다
 
   // 소셜 로그인
   async function handleClickSignin(type: string) {
@@ -78,7 +62,14 @@ export default function Signin() {
     // 회원가입 된 유저는 map으로 리다이렉트
     console.log(isSignin, state); // TODO: 로그인 후 다시 접근하면 리다이렉트가 안됨....;;수정해야될듯
 
-    if (isSignin && state === 'COMPLETE') router.push('/map');
+    // 수정 버전
+    async function redirectUserToMap() {
+      if (isSignin && state === 'COMPLETE') {
+        useRedirectSigninUserTo('/map');
+      }
+    }
+
+    redirectUserToMap();
   }, [isSignin, router, state]);
 
   return (
@@ -108,14 +99,6 @@ export default function Signin() {
         회원가입 모달 테스트용
       </button>
       {name === 'createUser' && <CreateUser />}
-
-      {/* 로그아웃-이 부분은 무시하셔도 됩니다 */}
-      <br />
-      <br />
-      <button type='button' onClick={handleClickSignout}>
-        로그아웃
-      </button>
-      {/* 로그아웃-이 부분은 무시하셔도 됩니다 */}
     </main>
   );
 }
