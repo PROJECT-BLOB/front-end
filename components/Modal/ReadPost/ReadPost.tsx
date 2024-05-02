@@ -10,7 +10,6 @@ import useReadPost from './hooks/useReadPost';
 import ImageContainer from './ImageContainer';
 import MainContainer from './MainContainer';
 import styles from './ReadPost.module.scss';
-import Modal from '../Modal';
 
 export default function ReadPost() {
   const { toggleModal } = useReadPost();
@@ -27,26 +26,21 @@ export default function ReadPost() {
   }, []);
 
   return (
-    <Modal>
-      <div className={styles.readModal}>
-        <Modal.Header>
-          <div className={styles.readHeader}>
-            <button type='button' onClick={toggleModal} className={styles['close-button']}>
-              <Image src={closeButton} alt='close-button' />
-            </button>
-          </div>
-        </Modal.Header>
+    <div className={styles['read-modal']}>
+      <div className={styles['read-header']}>
+        <button type='button' onClick={toggleModal} className={styles['close-button']}>
+          <Image src={closeButton} alt='close-button' />
+        </button>
+      </div>
 
-      <Modal.Body>
-        <section className={styles.main}>
-          {post && (
-            <>
-              <ImageContainer contentData={post} />
-              <MainContainer contentData={post} />
-            </>
-          )}
-        </section>
-      </Modal.Body>
-    </Modal>
+      <section className={styles.main}>
+        {post && (
+          <>
+            <ImageContainer contentData={post} />
+            <MainContainer contentData={post} />
+          </>
+        )}
+      </section>
+    </div>
   );
 }
