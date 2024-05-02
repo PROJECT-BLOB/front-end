@@ -14,6 +14,9 @@ export default function Map() {
     toggleModal();
   }
 
+  // 여러곳에서 뜰 수도 있음
+  // 모달 여러개일 시 namelist
+
   return (
     <>
       <h2>Map 페이지</h2>

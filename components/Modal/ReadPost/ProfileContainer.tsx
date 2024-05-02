@@ -10,11 +10,13 @@ import useReadPost from './hooks/useReadPost';
 import styles from './ProfileContainer.module.scss';
 
 interface ProfileContainerProps {
+  postId?: number;
+  commentId?: number;
   author: Author;
   canDelete: boolean;
 }
 
-export default function ProfileContainer({ author, canDelete }: ProfileContainerProps) {
+export default function ProfileContainer({ postId, commentId, author, canDelete }: ProfileContainerProps) {
   const { isKebabClicked, toggleKebab } = useReadPost();
 
   return (
@@ -35,7 +37,7 @@ export default function ProfileContainer({ author, canDelete }: ProfileContainer
         <button type='button' onClick={toggleKebab}>
           <Image src={dotsHorizontal} alt='kebab-icon' />
         </button>
-        {isKebabClicked && <Kebab isUser={canDelete} />}
+        {isKebabClicked && <Kebab isUser={canDelete} postId={postId} commentId={commentId} />}
       </button>
     </section>
   );

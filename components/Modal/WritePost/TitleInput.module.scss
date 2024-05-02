@@ -1,0 +1,11 @@
+@import '/styles/global-styles/color-pallete';
+
+.force {
+  color: $BDS-System-Error;
+}
+
+.input {
+  background-color: #fff;
+  border: solid 0.1px #000;
+  color: #000;
+}

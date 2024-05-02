@@ -18,7 +18,7 @@ interface MarkerProps {
   opacity?: 25 | 50 | 75 | 100;
 }
 
-const SelectedIcon = (markerType: MarkerType) => {
+function SelectedIcon(markerType: MarkerType) {
   switch (markerType) {
     case 'recommendation':
       return <ThumbsUpIcon className={cx('svg', 'thin')} />;
@@ -33,7 +33,7 @@ const SelectedIcon = (markerType: MarkerType) => {
     default:
       return <SignalIcon className={cx('svg')} />;
   }
-};
+}
 
 export default function Marker({ markerType = 'recommendation', opacity = 100 }: MarkerProps) {
   return (

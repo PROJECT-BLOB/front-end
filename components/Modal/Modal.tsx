@@ -29,7 +29,7 @@ function ModalBody({ children }: React.PropsWithChildren) {
 }
 
 function ModalFooter({ children }: React.PropsWithChildren) {
-  return <div>{children}</div>;
+  return <div className={styles.footer}>{children}</div>;
 }
 
 Modal.Header = ModalHeader;

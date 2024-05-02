@@ -1,12 +1,13 @@
 import instance, { BASE_URL } from '@apis/axios';
 
 interface OAuthToken {
+  state: string;
   oauthId: string;
   accessToken: string;
   refreshToken: string;
 }
 
-export default async function getAccessToken(
+export default async function getOAuthData(
   providerType: 'naver' | 'kakao' | 'google',
   code: string | null,
 ): Promise<{ data: OAuthToken; status: number }> {
