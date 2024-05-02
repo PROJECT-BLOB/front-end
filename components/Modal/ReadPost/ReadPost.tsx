@@ -19,7 +19,7 @@ export default function ReadPost() {
   useEffect(() => {
     const fetch = async () => {
       // 마커 및 게시글 클릭에 따라 modal에 postId 바꿔서 적용
-      const { data } = await getPost(3);
+      const { data } = await getPost(1);
       setPost(data);
     };
 
