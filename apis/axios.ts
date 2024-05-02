@@ -4,7 +4,7 @@ import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from 'axios';
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const isServer = typeof window === 'undefined';
 const ACCESS_TOKEN = 'accessToken';
-const GET_REFRESH_URL = 'notYet';
+const GET_REFRESH_URL = '/oauth/refresh';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -49,8 +49,7 @@ instance.interceptors.response.use(
     const originalRequest = error.config; // error.config에 담겨있는 원래 리퀘스트를 가져온다.
 
     if (error.response?.status === 401 && !originalRequest._retry) {
-      // 401코드는 임시로 지정 -> 백엔드에서 에러코드 확인 필요합니다.
-      // 만약 토큰 만료로 추정되는 경우에
+      // 토큰 만료: 401
 
       // 토큰 발급 요청 시 데이터가 필요없을 경우에 undefined..추후 수정될 수 있음.
       await instance.post(GET_REFRESH_URL, undefined, { _retry: true } as AxiosRequestConfig<undefined>); // 토큰 재발급 하고
@@ -66,7 +65,7 @@ instance.interceptors.response.use(
 
 export default instance;
 
-const getAccessToken = (): string | null => {
+export const getAccessToken = (): string | null => {
   // TODO: 로그인 연결되면 쿠키에서 토큰을 가져오도록 수정
   const accessToken = getCookie(ACCESS_TOKEN);
 
