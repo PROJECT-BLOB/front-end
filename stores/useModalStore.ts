@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export type ModalName = 'write' | 'read';
+export type ModalName = 'write' | 'read' | 'createUser';
 
 interface ModalStore {
   postId: number;
