@@ -1,3 +1,4 @@
+import AutoComplete from '@/app/maptest/AutoComplete';
 import useModalStore from '@stores/useModalStore';
 
 import ImageUploader from '@components/ImageUploader';
@@ -28,6 +29,8 @@ export default function WritePost() {
             <div>카테고리</div>
             <TitleInput />
             <ContentInput />
+            {/* 나중에 merge되면 도시검색으로 변경 */}
+            <AutoComplete />
             <ImageUploader setValue={setValue} />
           </div>
         </Modal.Body>
