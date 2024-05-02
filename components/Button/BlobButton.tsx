@@ -4,7 +4,7 @@ import styles from './BlobButton.module.scss';
 
 export interface ButtonProps {
   text: 'BLOB' | '취소';
-  type: 'submit' | 'reset' | 'button' | undefined;
+  type: 'submit' | 'button';
   color: 'button-colord-contain' | 'button-colord-outlined' | 'button-gray-contain' | 'button-gray-outlined';
   onClick?: () => void;
   disabled?: boolean;
