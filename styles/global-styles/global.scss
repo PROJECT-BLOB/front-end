@@ -3,7 +3,6 @@
 //theme.css는 이후 지워집니다. 모듈변수 임포트로 바꿔주세요.
 @import 'index';
 
-
 :root {
   /* 1rem = 10px */
   font-size: 62.5%;
@@ -98,9 +97,9 @@ body {
   z-index: $z-index-root; //TODO: 변수로바꾸기
 }
 
-#modal {
+#modal-layer {
   position: fixed;
-  z-index: var(--modal-z-index);
+  z-index: $z-index-modal;
 }
 
 .sr-only {

@@ -3,14 +3,14 @@ import styles from './Input.module.scss';
 interface InputProps {
   labelName: string;
   id: string;
-  validation: any;
+  // validation: any;
   name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  register: any; // register 함수 전달 - 에러남,,,,사용법 공부 필요
+  // register: any; // register 함수 전달 - 에러남,,,,사용법 공부 필요
 }
 
-export default function Input({ labelName, id, validation, name, value, onChange, register }: InputProps) {
+export default function Input({ labelName, id, name, value, onChange }: InputProps) {
   return (
     <div className={styles['input-box']}>
       <div className={styles.label}>

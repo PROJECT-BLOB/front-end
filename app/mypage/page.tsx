@@ -19,8 +19,8 @@ export default function myPage() {
   const [userData, setUserData] = useState<UserDetail | null>(null);
   const router = useRouter();
 
-  const { data, isLoading, isError, error } = useDetailQueries('0502'); // 임시로 아이디 넣음
-
+  const { data } = useDetailQueries('0502'); // 임시로 아이디 넣음
+  // isLoading, isError, error - 린트에러 때문에 지움
   useEffect(() => {
     if (data) {
       // 데이터가 있을 때만 상태를 업데이트함
