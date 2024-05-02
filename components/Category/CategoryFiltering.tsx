@@ -43,9 +43,22 @@ export default function CategoryFiltering({
   title = '추천',
 }: CategoryFilteringProps) {
   const [isClicked, setIsClicked] = useState(false);
+  const [isArrowClicked, setIsArrowClicked] = useState(false);
 
   const handleClickCategory = () => {
     setIsClicked(!isClicked);
+  };
+
+  const handleClickArrow = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation(); // 버튼의 클릭 이벤트가 발생하지 않도록 함
+
+    if (!isArrowClicked) {
+      setIsClicked(true);
+    }
+
+    if (isClicked) {
+      setIsArrowClicked(!isArrowClicked);
+    }
   };
 
   return (
@@ -57,7 +70,11 @@ export default function CategoryFiltering({
       <div className={cx('svg-box')}>{SelectedIcon(categoryFilteringType)}</div>
       <span className={cx('title', { [`button-clicked-color-${categoryFilteringType}`]: isClicked })}>{title}</span>
       <ChevronRightIcon
-        className={cx('chevron-right-icon', { [`button-clicked-color-${categoryFilteringType}`]: isClicked })}
+        onClick={handleClickArrow}
+        className={cx('chevron-right-icon', {
+          rotate: isClicked && isArrowClicked,
+          [`button-clicked-color-${categoryFilteringType}`]: isClicked,
+        })}
       />
     </button>
   );
