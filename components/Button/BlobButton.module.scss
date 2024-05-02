@@ -19,11 +19,11 @@
   align-items: center;
   gap: 0.625rem;
   border-radius: 1.5rem;
-  border: 1.6px solid $BDS-Primary-3;
-  background: $BDS-Primary-3;
+  border: 1.6px solid $BDS-Primary-5;
+  background: $BDS-Primary-5;
   &:hover {
-    border: 1.6px solid $BDS-Primary-5;
-    background: $BDS-Primary-5;
+    border: 1.6px solid $BDS-Primary-3;
+    background: $BDS-Primary-3;
   }
   &:active {
     border: 1.6px solid $BDS-Primary-7;
