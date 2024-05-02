@@ -6,7 +6,7 @@ type Option = {
   value: string;
 };
 
-const AutoComplete = () => {
+const AutoCompleteCity = () => {
   const [value, setValue] = useState<Option | null>(null);
   const [geolocation, setGeolocation] = useState<google.maps.LatLng | null>(null);
   const googleMapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
@@ -37,6 +37,9 @@ const AutoComplete = () => {
           },
         }}
         apiKey={googleMapApiKey}
+        autocompletionRequest={{
+          types: ['(cities)'], // 도시 수준 검색으로 제한
+        }}
       />
       {geolocation && (
         <p>
@@ -47,4 +50,4 @@ const AutoComplete = () => {
   );
 };
 
-export default AutoComplete;
+export default AutoCompleteCity;

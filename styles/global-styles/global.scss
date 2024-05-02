@@ -98,9 +98,9 @@ body {
   z-index: $z-index-root; //TODO: 변수로바꾸기
 }
 
-#modal {
+#modal-layer {
   position: fixed;
-  z-index: var(--modal-z-index);
+  z-index: $z-index-modal;
 }
 
 .sr-only {
@@ -121,3 +121,4 @@ body {
   background-clip: text;
   color: transparent;
 }
+
