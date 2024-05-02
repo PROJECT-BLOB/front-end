@@ -13,6 +13,7 @@ const AutoCompleteCity = () => {
 
   const handleSelect = async (address: Option) => {
     setValue(address);
+    console.log(address);
 
     try {
       const results = await geocodeByAddress(address.label); // label을 주소로 사용
