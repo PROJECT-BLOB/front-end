@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { MarkerType } from '@/app/map/components/Marker';
+import { MarkerType } from '@/app/map/_components/Marker';
 import PolygonIcon from '@icons/polygon-1.svg?component';
 
 import styles from './MarkerHighlight.module.scss';
@@ -27,7 +27,7 @@ export default function MarkerHighlight({
         <div className={cx('align-div')}>
           <header className={cx('align-header')}>
             <h2 className={cx('title')}>{title}</h2>
-            <div className={cx('created-at')}>{createdAt}</div>
+            <p className={cx('created-at')}>{createdAt}</p>
           </header>
           <p className={cx('content')}>{children}</p>
         </div>
