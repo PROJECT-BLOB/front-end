@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { Story, Meta } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 
-import Button, { ButtonProps } from '.';
+import Button, { ButtonProps } from '@/components/Button/BlobButton';
+// import Button, { ButtonProps } from '.';
 
 export default {
   title: 'components/Button',
@@ -26,16 +27,16 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<ButtonProps> = (args) => <Button {...args} />;
+const Template: StoryFn<ButtonProps> = (args) => <Button {...args} />;
 
 export const LongSlim = Template.bind({});
 LongSlim.args = {
-  uiType: 'longSlim',
-  text: 'Long text in my button',
+  type: 'button',
+  text: 'BLOB',
 };
 
 export const ShortBulky = Template.bind({});
 ShortBulky.args = {
-  uiType: 'shortBulky',
-  text: 'Short Text',
+  type: 'button',
+  text: '취소',
 };
