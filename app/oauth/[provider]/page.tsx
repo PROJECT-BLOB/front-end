@@ -4,38 +4,41 @@ import { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import getAccessToken from '@apis/oauth/getAccessToken';
-import { useTokenStore } from '@stores/useTokenStore';
+import getOAuthData from '@apis/oauth/getOAuthData';
+import { useOAuthStore } from '@stores/useOAuthStore';
+import { useUserStore } from '@stores/userStore';
 
 interface providerType {
   provider: 'naver' | 'kakao' | 'google';
 }
 
 export default function LoadingSignin({ params }: { params: providerType }) {
+  const { signin } = useUserStore();
   const router = useRouter();
   // const code = new URL(window.location.href).searchParams.get('code');
   const code = typeof window !== 'undefined' ? new URL(window.location.href).searchParams.get('code') : null;
 
-  function storeOAuthToken(accessToken: string, refreshToken: string) {
+  function storeOAuth(oauthId: string, accessToken: string, refreshToken: string, state: string) {
     document.cookie = `accessToken=${accessToken}; path=/`;
     document.cookie = `refreshToken=${refreshToken}; path=/`;
 
-    useTokenStore.setState({ accessToken, refreshToken });
+    useOAuthStore.setState({ oauthId, accessToken, refreshToken, state });
   }
 
   useEffect(() => {
-    async function setOAuthToken() {
-      const { data } = await getAccessToken(params.provider, code);
-      const { accessToken, refreshToken } = data;
+    async function setOAuthData() {
+      const { data } = await getOAuthData(params.provider, code);
 
-      storeOAuthToken(accessToken, refreshToken);
+      const { oauthId, accessToken, refreshToken, state } = data;
+
+      storeOAuth(oauthId, accessToken, refreshToken, state);
+      console.log('data', data);
     }
 
-    setOAuthToken();
-
-    // 토큰 저장 후 로그인 페이지로 이동
+    setOAuthData();
+    signin();
     router.push('/signin');
-  }, [code, params.provider, router]);
+  }, [code, params.provider, signin, router]);
 
   return <h1>{`This is OAUTH - ${params.provider} test page`}</h1>;
 }

@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -11,6 +13,10 @@ import NaverLogo from '@/public/icons/logo-naver.svg';
 import { useUserStore } from '@/stores/userStore';
 import getRedirectUrl from '@apis/oauth/getRedirectUrl';
 import signout from '@apis/user/sign/signout';
+import useModalStore, { ModalName } from '@stores/useModalStore';
+import { useOAuthStore } from '@stores/useOAuthStore';
+
+import CreateUser from '@components/Modal/CreateUser/CreateUser';
 
 import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
 
@@ -18,6 +24,15 @@ import SigninButton from './_components/SigninButton';
 import styles from './Signin.module.scss';
 
 export default function Signin() {
+  const { accessToken, state } = useOAuthStore();
+  const { isSignin } = useUserStore();
+  const { toggleModal, name, setCurrentName } = useModalStore();
+
+  function handleOpenModal(name: ModalName) {
+    setCurrentName(name);
+    toggleModal();
+  }
+
   // 로그아웃-이 부분은 무시하셔도 됩니다
   const { signout: logout } = useUserStore();
 
@@ -47,6 +62,23 @@ export default function Signin() {
     router.push(redirectUrl);
   }
 
+  // 회원가입 안 된 유저에게 회원가입 모달을 띄워줌
+  useEffect(() => {
+    function handleOpenModal(name: ModalName) {
+      setCurrentName(name);
+      toggleModal();
+    }
+
+    if (accessToken && state === 'INCOMPLETE') {
+      handleOpenModal('createUser');
+    }
+  }, [accessToken, state, setCurrentName, toggleModal]);
+
+  useEffect(() => {
+    // 회원가입 된 유저는 map으로 리다이렉트
+    if (isSignin && state === 'COMPLETE') router.push('/map');
+  }, [isSignin, router, state]);
+
   return (
     <main className={styles.signin}>
       <Image className={styles.logo} src={BlobLogo} alt='Blob 로고' />
@@ -69,6 +101,11 @@ export default function Signin() {
           <span className={styles.underline}>회원가입 하기</span>
         </Link>
       </p>
+
+      <button type='button' onClick={() => handleOpenModal('createUser')}>
+        회원가입 모달 테스트용
+      </button>
+      {name === 'createUser' && <CreateUser />}
 
       {/* 로그아웃-이 부분은 무시하셔도 됩니다 */}
       <br />
