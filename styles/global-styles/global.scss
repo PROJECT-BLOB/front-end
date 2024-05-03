@@ -3,10 +3,10 @@
 //theme.css는 이후 지워집니다. 모듈변수 임포트로 바꿔주세요.
 @import 'index';
 
-
 :root {
   /* 1rem = 10px */
   font-size: 62.5%;
+  scrollbar-width: thin;
 
   /*  Primary color */
   --BDS-Primary-1: linear-gradient(90deg, #fff2ea 0%, #fff0f8 100%);
@@ -121,4 +121,3 @@ body {
   background-clip: text;
   color: transparent;
 }
-
