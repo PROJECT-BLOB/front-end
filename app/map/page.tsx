@@ -3,11 +3,10 @@
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import Button from '@components/Button/BlobButton';
-import ReadPost from '@components/Modal/ReadPost/ReadPost';
-import WritePost from '@components/Modal/WritePost/WritePost';
+import Modal from '@components/Modal/Modal';
 
 export default function Map() {
-  const { toggleModal, name, setCurrentName } = useModalStore();
+  const { toggleModal, setCurrentName } = useModalStore();
 
   function handleClickModal(name: ModalName) {
     setCurrentName(name);
@@ -32,7 +31,7 @@ export default function Map() {
       <Button text='BLOB' type='button' color='button-gray-contain' onClick={() => handleClickModal('write')} />
       <Button text='취소' type='button' color='button-gray-outlined' onClick={() => handleClickModal('write')} />
 
-      {name === 'write' ? <WritePost /> : <ReadPost />}
+      <Modal />
     </>
   );
 }

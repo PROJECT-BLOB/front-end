@@ -7,15 +7,12 @@
  * mobile first develop: default mobile
  * */
 
-$breakpoint-tablet: 430px;
+$breakpoint-tablet: 768px;
 $breakpoint-pc: 1280px;
-
 //글쓰기 모달
 
-
-
 @mixin tablet {
-  @media (min-width: #{$breakpoint-tablet}) and (max-width: #{$breakpoint-pc - 1px}) {
+  @media (min-width: #{$breakpoint-tablet}){
     @content;
   }
 }

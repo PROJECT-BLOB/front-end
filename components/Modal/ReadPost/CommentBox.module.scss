@@ -59,7 +59,7 @@
   line-height: 138.5%; /* 18.005px */
 }
 
-@include desktop {
+@include tablet {
   .comment-form {
     width: 41.8rem;
   }

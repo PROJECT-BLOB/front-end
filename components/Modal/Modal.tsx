@@ -4,34 +4,27 @@ import useModalStore from '@stores/useModalStore';
 
 import Portal from '@components/Portal';
 
+import CreateUser from './CreateUser/CreateUser';
 import styles from './Modal.module.scss';
+import ReadPost from './ReadPost/ReadPost';
+import WritePost from './WritePost/WritePost';
 
-export default function Modal({ children }: React.PropsWithChildren) {
-  const { isOpen } = useModalStore();
+const ModalList = {
+  '': '',
+  read: <ReadPost />,
+  write: <WritePost />,
+  createUser: <CreateUser />,
+};
+
+export default function Modal() {
+  const { isOpen, name } = useModalStore();
 
   return (
     isOpen && (
       <Portal>
-        <div className={styles.overlay}>
-          <div className={styles.modal}>{children}</div>
-        </div>
+        <div className={styles['back-drop']} />
+        <div className={styles['modal-container']}>{ModalList[name]}</div>
       </Portal>
     )
   );
 }
-
-function ModalHeader({ children }: React.PropsWithChildren) {
-  return <div className={styles.header}>{children}</div>;
-}
-
-function ModalBody({ children }: React.PropsWithChildren) {
-  return <div className={styles.body}>{children}</div>;
-}
-
-function ModalFooter({ children }: React.PropsWithChildren) {
-  return <div className={styles.footer}>{children}</div>;
-}
-
-Modal.Header = ModalHeader;
-Modal.Body = ModalBody;
-Modal.Footer = ModalFooter;

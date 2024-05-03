@@ -1,12 +1,18 @@
 @import '/styles/global-styles/color-pallete';
 @import '/styles/global-styles/media-breakpoint';
 
-.delete-container {
+.like-delete-bookmark-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.4rem;
+}
+
+.like-delete-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.8rem;
-  margin-bottom: 2.4rem;
 }
 
 .delete-mention {
@@ -93,7 +99,7 @@
   margin-bottom: 4.8rem;
 }
 
-@include desktop {
+@include tablet {
   .main-container {
     width: 41.8rem;
     flex-shrink: 0;
