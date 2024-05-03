@@ -1,7 +1,12 @@
+import { ReactNode } from 'react';
+
+import GlobalNavigationBar from '@components/GlobalNavigationBar/GlobalNavigationBar';
+
 import WrapperProvider from '@utils/WrapperProvider';
 
+import styles from './RootLayout.module.scss';
+
 import type { Metadata } from 'next';
-import '../styles/global-styles/global.scss';
 
 export const metadata: Metadata = {
   title: '여행자들을 위한 실시간 정보, BLOB',
@@ -11,13 +16,16 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang='ko'>
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className={styles.main}>
         <div id='modal-layer' />
-        <WrapperProvider>{children}</WrapperProvider>
+        <GlobalNavigationBar />
+        <div id='root'>
+          <WrapperProvider>{children}</WrapperProvider>
+        </div>
       </body>
     </html>
   );
