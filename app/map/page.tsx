@@ -3,7 +3,7 @@
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import Button from '@components/Button/BlobButton';
-import Modal from '@components/Modal/Modal';
+import Modal from '@components/Modal/ModalContainer';
 
 export default function Map() {
   const { toggleModal, setCurrentName } = useModalStore();

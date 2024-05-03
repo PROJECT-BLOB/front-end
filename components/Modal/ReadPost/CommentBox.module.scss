@@ -29,6 +29,15 @@
   margin-bottom: 2rem;
 }
 
+.target-nickname {
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+  background-color: inherit;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 146.7%; /* 22.005px */
+  outline: none;
+}
 .comment-input {
   color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
@@ -38,7 +47,7 @@
   line-height: 146.7%; /* 22.005px */
   outline: none;
   &::placeholder {
-    color: $BDS-Grayscale-13;
+    color: $BDS-Grayscale-6;
   }
 }
 

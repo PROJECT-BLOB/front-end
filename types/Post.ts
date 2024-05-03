@@ -1,9 +1,11 @@
-export type Category = '추천해요' | '도와주세요' | '궁금해요' | '조심하세요' | '비추천해요';
+export type Category = 'RECOMMENDED' | 'NOT_RECOMMENDED' | 'HELP' | 'QUESTION' | 'WARNING';
 
 export interface Author {
+  userId: number;
   blobId: string;
   nickname: string;
   profileUrl: string;
+  likedCount: number;
 }
 
 export interface Post {

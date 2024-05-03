@@ -10,7 +10,6 @@ import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
 import styles from './CreateUser.module.scss';
-import Modal from '../Modal';
 
 // const cx = classNames.bind(styles);
 
@@ -38,46 +37,44 @@ export default function CreateUser() {
 
   // TODO: id, nickname 유효성 검사 추가
   return (
-    <Modal>
-      <form className={styles.form} onSubmit={handleSubmit(() => onSubmit(userFormData))}>
-        {/* <Modal.Header> */}
-        <header className={styles.header}>
-          <span>회원가입</span>
-          <span className={styles.close}>
-            <Image src={CloseButton} fill alt='닫기' onClick={cancelForm} />
-          </span>
-        </header>
-        {/* </Modal.Header> */}
-        {/* <Modal.Body> */}
-        <main className={styles.input}>
-          <Input
-            labelName='아이디'
-            id='id'
-            name='id'
-            value={userFormData.id}
-            onChange={handleChangeInput}
-            // register={register}
-          />
-          <Input
-            labelName='닉네임'
-            id='nickname'
-            name='nickname'
-            value={userFormData.nickname}
-            onChange={handleChangeInput}
-            // register={register}
-          />
-        </main>
+    <form className={styles.form} onSubmit={handleSubmit(() => onSubmit(userFormData))}>
+      {/* <Modal.Header> */}
+      <header className={styles.header}>
+        <span>회원가입</span>
+        <span className={styles.close}>
+          <Image src={CloseButton} fill alt='닫기' onClick={cancelForm} />
+        </span>
+      </header>
+      {/* </Modal.Header> */}
+      {/* <Modal.Body> */}
+      <main className={styles.input}>
+        <Input
+          labelName='아이디'
+          id='id'
+          name='id'
+          value={userFormData.id}
+          onChange={handleChangeInput}
+          // register={register}
+        />
+        <Input
+          labelName='닉네임'
+          id='nickname'
+          name='nickname'
+          value={userFormData.nickname}
+          onChange={handleChangeInput}
+          // register={register}
+        />
+      </main>
 
-        {/* </Modal.Body> */}
-        {/* <Modal.Footer> */}
-        <footer className={styles.buttons}>
-          <button type='button' onClick={cancelForm}>
-            취소
-          </button>
-          <button type='submit'>회원가입</button>
-        </footer>
-        {/* </Modal.Footer> */}
-      </form>
-    </Modal>
+      {/* </Modal.Body> */}
+      {/* <Modal.Footer> */}
+      <footer className={styles.buttons}>
+        <button type='button' onClick={cancelForm}>
+          취소
+        </button>
+        <button type='submit'>회원가입</button>
+      </footer>
+      {/* </Modal.Footer> */}
+    </form>
   );
 }

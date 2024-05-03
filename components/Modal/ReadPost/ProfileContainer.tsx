@@ -12,11 +12,12 @@ import styles from './ProfileContainer.module.scss';
 interface ProfileContainerProps {
   postId?: number;
   commentId?: number;
+  replyId?: number;
   author: Author;
   canDelete: boolean;
 }
 
-export default function ProfileContainer({ postId, commentId, author, canDelete }: ProfileContainerProps) {
+export default function ProfileContainer({ postId, commentId, author, canDelete, replyId }: ProfileContainerProps) {
   const { isKebabClicked, toggleKebab } = useReadPost();
 
   return (
@@ -28,8 +29,7 @@ export default function ProfileContainer({ postId, commentId, author, canDelete 
         <b className={styles['profile-nickname']}>{author.nickname}</b>
         <div className={styles['like-container']}>
           <Image src={checkHeart} alt='좋아요 아이콘' />
-          <b className={styles['like-count']}>30</b>
-          {/* 하트 몇개받았는지 프로필에 받아와야함 */}
+          <b className={styles['like-count']}>Lv. {author.likedCount}</b>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ export default function ProfileContainer({ postId, commentId, author, canDelete 
         <button type='button' onClick={toggleKebab}>
           <Image src={dotsHorizontal} alt='kebab-icon' />
         </button>
-        {isKebabClicked && <Kebab isUser={canDelete} postId={postId} commentId={commentId} />}
+        {isKebabClicked && <Kebab isUser={canDelete} postId={postId} commentId={commentId} replyId={replyId} />}
       </button>
     </section>
   );

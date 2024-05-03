@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react';
-
 import Image from 'next/image';
 
-import { Post } from '@/types/Post';
-import getPost from '@apis/post/getPost';
 import closeButton from '@public/icons/x.svg';
+import { useFetchTargetPost } from '@queries/usePostQueries';
 
 import useReadPost from './hooks/useReadPost';
 import ImageContainer from './ImageContainer';
@@ -13,17 +10,8 @@ import styles from './ReadPost.module.scss';
 
 export default function ReadPost() {
   const { toggleModal } = useReadPost();
-  const [post, setPost] = useState<Post>();
 
-  useEffect(() => {
-    const fetch = async () => {
-      // 마커 및 게시글 클릭에 따라 modal에 postId 바꿔서 적용
-      const { data } = await getPost(1);
-      setPost(data);
-    };
-
-    fetch();
-  }, []);
+  const { data: post } = useFetchTargetPost(4);
 
   return (
     <div className={styles['read-modal']}>
@@ -34,10 +22,10 @@ export default function ReadPost() {
       </div>
 
       <section className={styles.main}>
-        {post && (
+        {post?.data && (
           <>
-            <ImageContainer contentData={post} />
-            <MainContainer contentData={post} />
+            <ImageContainer contentData={post.data} />
+            <MainContainer contentData={post.data} />
           </>
         )}
       </section>
