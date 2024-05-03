@@ -6,7 +6,7 @@ import nextButton from '@/public/icons/next-button.svg';
 import previousButton from '@/public/icons/previous-button.svg';
 import { Post } from '@/types/Post';
 
-import useReadPost from './hooks/useReadPost';
+import useImageControl from './hooks/useImageControl';
 import styles from './ImageContainer.module.scss';
 
 interface ImageContainerProps {
@@ -14,7 +14,7 @@ interface ImageContainerProps {
 }
 
 export default function ImageContainer({ contentData }: ImageContainerProps) {
-  const { handleTouchStart, handleTouchEnd, currentImageIndex, handlePrevImage, handleNextImage } = useReadPost(
+  const { handleTouchStart, handleTouchEnd, currentImageIndex, handlePrevImage, handleNextImage } = useImageControl(
     contentData.imageUrl,
   );
 

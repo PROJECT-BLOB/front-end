@@ -9,10 +9,10 @@ import getCommentList from '@apis/post/getCommentList';
 import getPost from '@apis/post/getPost';
 import getReplyList from '@apis/post/getReplyList';
 import postBookmark from '@apis/post/postBookmark';
-import postCommentLike from '@apis/post/postCommentLike';
+import updateCommentLike from '@apis/post/updateCommentLike';
 import updatePostLike from '@apis/post/updatePostLike';
 
-export const posts = createQueryKeys('posts', {
+const posts = createQueryKeys('posts', {
   detail: (postId: number) => ['readPost', postId],
   comment: (postId: number) => ['readComment', postId],
   reply: (commentId: number) => ['readReply', commentId],
@@ -77,7 +77,7 @@ export function useUpdateCommentLike(postId: number) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: postCommentLike,
+    mutationFn: updateCommentLike,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: posts.comment(postId).queryKey });
     },
@@ -88,7 +88,7 @@ export function useUpdateReplyLike(commentId: number) {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: postCommentLike,
+    mutationFn: updateCommentLike,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: posts.reply(commentId).queryKey });
     },

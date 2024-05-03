@@ -6,7 +6,7 @@ import dotsHorizontal from '@public/icons/dots-horizontal.svg';
 
 import Kebab from '@components/Kebab';
 
-import useReadPost from './hooks/useReadPost';
+import useKebabState from './hooks/useKebabState';
 import styles from './ProfileContainer.module.scss';
 
 interface ProfileContainerProps {
@@ -18,7 +18,7 @@ interface ProfileContainerProps {
 }
 
 export default function ProfileContainer({ postId, commentId, author, canDelete, replyId }: ProfileContainerProps) {
-  const { isKebabClicked, toggleKebab } = useReadPost();
+  const { isKebabClicked, toggleKebab } = useKebabState();
 
   return (
     <section className={styles['profile-kebab-wrapper']}>
@@ -37,7 +37,9 @@ export default function ProfileContainer({ postId, commentId, author, canDelete,
         <button type='button' onClick={toggleKebab}>
           <Image src={dotsHorizontal} alt='kebab-icon' />
         </button>
-        {isKebabClicked && <Kebab isUser={canDelete} postId={postId} commentId={commentId} replyId={replyId} />}
+        {isKebabClicked && (
+          <Kebab toggleKebab={toggleKebab} isUser={canDelete} postId={postId} commentId={commentId} replyId={replyId} />
+        )}
       </button>
     </section>
   );
