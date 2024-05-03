@@ -1,0 +1,15 @@
+.profile-image {
+  position: relative;
+  border-radius: 12.5rem; // 적용 안되는거 같음..흠..
+  //   background: url(<path-to-image>) lightgray 50% / cover no-repeat;
+}
+
+.small {
+  width: 2.5625rem;
+  height: 2.5625rem;
+}
+
+.large {
+  width: 12.5rem;
+  height: 12.5rem;
+}

@@ -1,0 +1,90 @@
+@import '/styles/global-styles/index';
+
+.user {
+  &-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  &-nickname-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &-nickname {
+    color: $BDS-Grayscale-13;
+
+    /* BDS/Headline 1 */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 144%; /* 1.62rem */
+    letter-spacing: -0.00025rem;
+  }
+
+  &-count-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+.liked-count {
+  font-feature-settings: 'ss10' on;
+
+  /* BDS/Headline 2 */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 1.0625rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 141%; /* 1.49813rem */
+
+  background: var(--BDS-Primary-5, linear-gradient(90deg, #ff9456 0%, #fe81c4 100%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.125rem;
+  }
+  &-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  &-title {
+    color: var(--BDS-Grayscale-13, #000);
+    font-feature-settings: 'ss10' on;
+
+    /* BDS/Body 1/Normal */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 1.5rem */
+  }
+
+  &-number {
+    color: var(--BDS-Grayscale-13, #000);
+
+    /* BDS/Body 1/Highlight */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%; /* 1.5rem */
+  }
+}
