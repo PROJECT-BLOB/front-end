@@ -16,9 +16,8 @@
   gap: 1.2rem;
   flex: 1 0 0;
   padding: 2rem 2rem 2rem 1.6rem;
-  justify-content: space-between;
   align-items: center;
-  align-self: stretch;
+  justify-content: space-between;
   border: 2.4px solid;
   border-image: $BDS-Primary-3;
   border-right: none;
@@ -38,6 +37,7 @@
   line-height: 146.7%; /* 22.005px */
   outline: none;
 }
+
 .comment-input {
   color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;

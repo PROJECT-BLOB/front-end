@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Comment } from '@/types/Post';
 import filledRedHeart from '@public/icons/filled-red-heart.svg';
 import vacantHeart from '@public/icons/heart.svg';
-import { useUpdateCommentLike } from '@queries/usePostQueries';
+import { useUpdateReplyLike } from '@queries/usePostQueries';
 
 import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
 
@@ -16,7 +16,7 @@ interface ReplyProps {
 }
 
 export default function Reply({ reply, commentId }: ReplyProps) {
-  const { mutate: updateCommentLike } = useUpdateCommentLike(commentId);
+  const { mutate: updateCommentLike } = useUpdateReplyLike(commentId);
 
   function handleClickLike() {
     updateCommentLike(reply.commentId);
