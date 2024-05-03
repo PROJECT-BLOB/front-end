@@ -6,14 +6,14 @@ import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
 import { UserDetail } from '@/types/User';
+import { getUserIdFromCookie } from '@apis/axios';
 import { useDetailQueries } from '@queries/useUserQueries';
-import { useOAuthStore } from '@stores/useOAuthStore';
 import { Post } from 'types/Post';
 
 import PostList from './_components/Post/PostList';
 import UserProfile from './_components/UserProfile/UserProfile';
 import styles from './myPage.module.scss';
-import { getUserIdFromCookie } from '@apis/axios';
+import Tab from '@components/Tab';
 
 const cx = classNames.bind(styles);
 
@@ -112,7 +112,11 @@ export default function myPage() {
       <section>
         <UserProfile userData={userData} />
       </section>
-      <section className={cx('tabs')}>탭 들어감</section>
+      <section className={cx('tabs')}>
+        <Tab focused>내가 쓴 글</Tab>
+        <Tab focused={false}>저장한 글</Tab>
+        <Tab focused={false}>댓글 단 글</Tab>
+      </section>
       <section className={cx('post-list')}>
         <PostList postList={mockContent} />
       </section>
