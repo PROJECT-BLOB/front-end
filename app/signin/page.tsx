@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,15 +10,14 @@ import BlobLogo from '@/public/icons/logo-BLOB.svg';
 import GoogleLogo from '@/public/icons/logo-google.svg';
 import KakaoLogo from '@/public/icons/logo-kakao.svg';
 import NaverLogo from '@/public/icons/logo-naver.svg';
-import { useUserStore } from '@/stores/userStore';
-import { getAccessToken } from '@apis/axios';
+import { getAccessToken, getUserIdFromCookie } from '@apis/axios';
 import getRedirectUrl from '@apis/oauth/getRedirectUrl';
+import { useDetailQueries } from '@queries/useUserQueries';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
+import { UserDetail } from 'types/User';
 
 import CreateUser from '@components/Modal/CreateUser/CreateUser';
-
-// import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
 
 import SigninButton from './_components/SigninButton';
 import styles from './Signin.module.scss';
@@ -26,7 +25,10 @@ import styles from './Signin.module.scss';
 export default function Signin() {
   const { state } = useOAuthStore();
   const accessToken = getAccessToken();
-  const { isSignin } = useUserStore();
+
+  const userId = Number(getUserIdFromCookie());
+  const { data } = useDetailQueries(userId);
+  const [userData, setUserData] = useState<UserDetail | null>(null);
 
   const { toggleModal, name, setCurrentName } = useModalStore();
 
@@ -60,17 +62,16 @@ export default function Signin() {
 
   useEffect(() => {
     // 회원가입 된 유저는 map으로 리다이렉트
-    console.log(isSignin, state); // TODO: 로그인 후 다시 접근하면 리다이렉트가 안됨....;;수정해야될듯
 
-    // 수정 버전
-    async function redirectUserToMap() {
-      if (isSignin && state === 'COMPLETE') {
-        router.push('/map');
-      }
+    if (data) {
+      setUserData(data?.data);
     }
 
-    redirectUserToMap();
-  }, [isSignin, router, state]);
+    // 만약 유저 상태가 state === 'COMPLETE'면 map으로 리다이렉트
+    if (accessToken && userData?.state === 'COMPLETE') {
+      router.push('/map');
+    }
+  }, [accessToken, router, data, userData?.state]);
 
   return (
     <main className={styles.signin}>

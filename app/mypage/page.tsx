@@ -7,11 +7,13 @@ import { useRouter } from 'next/navigation';
 
 import { UserDetail } from '@/types/User';
 import { useDetailQueries } from '@queries/useUserQueries';
+import { useOAuthStore } from '@stores/useOAuthStore';
 import { Post } from 'types/Post';
 
 import PostList from './_components/Post/PostList';
 import UserProfile from './_components/UserProfile/UserProfile';
 import styles from './myPage.module.scss';
+import { getUserIdFromCookie } from '@apis/axios';
 
 const cx = classNames.bind(styles);
 
@@ -78,13 +80,13 @@ const mockContent: Post[] = [
 
 export default function myPage() {
   // TODO: 쿼리에서 유저 정보 가져오기
-
+  const userId = Number(getUserIdFromCookie());
   const [userData, setUserData] = useState<UserDetail | null>(null);
   // TODO: useQuery로 posts 가져옴
   // const [postsData, setPostsData] = useState<Post[] | null>(null);
   const router = useRouter();
 
-  const { data } = useDetailQueries('0503'); // 임시로 아이디 넣음
+  const { data } = useDetailQueries(userId);
   // isLoading, isError, error - 린트에러 때문에 지움
   useEffect(() => {
     if (data) {
@@ -96,13 +98,13 @@ export default function myPage() {
   useEffect(() => {
     if (!userData) return;
 
-    const blobId = userData?.blobId;
+    // console.log('userData', userData);
 
     // TODO: 로그인 안 되어있으면 로그인 페이지로 이동-임시, 수정필요
-    if (!blobId) {
+    if (userData?.state === 'INCOMPLETE') {
       router.push('/signin');
     }
-  }, [userData, router]);
+  }, [userData, router, userId]);
 
   return (
     <>

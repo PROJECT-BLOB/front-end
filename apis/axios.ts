@@ -88,3 +88,13 @@ const getCookie = (name: string) => {
 
   return matches ? decodeURIComponent(matches[1]) : undefined;
 };
+
+export function getUserIdFromCookie() {
+  if (isServer) {
+    return null; // 서버 환경에서는 토큰을 가져올 수 없음
+  }
+
+  const match = document.cookie.match(/(?:^|; )userId=([^;]*)/);
+
+  return match ? decodeURIComponent(match[1]) : null;
+}
