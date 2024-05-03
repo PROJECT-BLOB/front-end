@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/nextjs';
+import path from 'path';
 
 const config: StorybookConfig = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
@@ -37,9 +38,15 @@ const config: StorybookConfig = {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       },
+      {
+        test: /\.scss$/,
+        use: ['sass-loader'],
+        include: path.resolve(__dirname, '../'),
+      },
     ];
 
     return config;
   },
 };
+
 export default config;

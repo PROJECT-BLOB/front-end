@@ -37,16 +37,17 @@ export default function ReadPost() {
           </div>
         </Modal.Header>
 
-      <Modal.Body>
-        <section className={styles.main}>
-          {post && (
-            <>
-              <ImageContainer contentData={post} />
-              <MainContainer contentData={post} />
-            </>
-          )}
-        </section>
-      </Modal.Body>
+        <Modal.Body>
+          <section className={styles.main}>
+            {post && (
+              <>
+                <ImageContainer contentData={post} />
+                <MainContainer contentData={post} />
+              </>
+            )}
+          </section>
+        </Modal.Body>
+      </div>
     </Modal>
   );
 }
