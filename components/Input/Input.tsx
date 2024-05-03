@@ -3,6 +3,7 @@ import styles from './Input.module.scss';
 interface InputProps {
   labelName: string;
   id: string;
+  // validation: any;
   name: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -27,7 +28,7 @@ export default function Input({ labelName, id, name, value, onChange }: InputPro
         value={value}
         onChange={onChange}
         placeholder={`${labelName}을 입력해주세요`}
-        // {...register(id)} // register 함수 사용
+        // {...register(id, validation)} // register 함수 사용
       />
       {/* <span className={styles.error}>{error}</span> */}
     </div>
