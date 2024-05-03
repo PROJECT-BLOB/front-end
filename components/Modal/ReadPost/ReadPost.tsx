@@ -2,16 +2,15 @@ import Image from 'next/image';
 
 import closeButton from '@public/icons/x.svg';
 import { useFetchTargetPost } from '@queries/usePostQueries';
+import useModalStore from '@stores/useModalStore';
 
-import useReadPost from './hooks/useReadPost';
 import ImageContainer from './ImageContainer';
 import MainContainer from './MainContainer';
 import styles from './ReadPost.module.scss';
 
 export default function ReadPost() {
-  const { toggleModal } = useReadPost();
-
-  const { data: post } = useFetchTargetPost(4);
+  const { toggleModal } = useModalStore();
+  const { data: post } = useFetchTargetPost(5);
 
   return (
     <div className={styles['read-modal']}>
@@ -30,6 +29,5 @@ export default function ReadPost() {
         )}
       </section>
     </div>
-
   );
 }
