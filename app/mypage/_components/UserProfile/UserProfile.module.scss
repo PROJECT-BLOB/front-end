@@ -4,17 +4,17 @@
   @include flex-center;
 
   width: 100%;
-  padding: 2.5rem 0rem;
+  padding: 8rem 0rem;
 
   flex-direction: column;
-  gap: 1.1875rem;
+  gap: 1.9rem;
 
   @include tablet {
-    padding: 3.75rem 0rem;
+    padding: 6rem 0rem;
   }
 
   @include desktop {
-    padding: 5rem 0rem;
+    padding: 4rem 0rem;
   }
 }
 
@@ -26,35 +26,35 @@
 
   &-detail {
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.6rem;
   }
 
   &-nickname-section {
-    gap: 0.5rem;
+    gap: 0.8rem;
   }
 
   &-count-section {
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 1.2rem;
   }
 }
 
 .liked-count {
   &-wrapper {
     @include flex-center;
-    gap: 0.125rem;
+    gap: 0.2rem;
   }
   &-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }
 
 .count {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
 }
 
 @mixin font {
@@ -72,7 +72,7 @@
 
   &-colored {
     @include font;
-    font-size: 1.0625rem;
+    font-size: 1.7rem;
     line-height: 141%;
 
     background: $BDS-Primary-5;
@@ -83,24 +83,24 @@
 }
 
 .large {
-  font-size: 1.125rem;
-  line-height: 144%; /* 1.62rem */
-  letter-spacing: -0.00025rem;
+  font-size: 1.8rem;
+  line-height: 144%;
+  letter-spacing: -0.0004rem;
 }
 
 .middle {
-  font-size: 1rem;
-  line-height: 150%; /* 1.5rem */
+  font-size: 1.6rem;
+  line-height: 150%;
 }
 
 .small {
-  font-size: 0.9375rem;
-  line-height: 160%; /* 1.5rem */
+  font-size: 1.5rem;
+  line-height: 160%;
 }
 
 .x-small {
-  font-size: 0.875rem;
-  line-height: 142%; /* 1.2425rem */
+  font-size: 1.4rem;
+  line-height: 142%;
 }
 
 .weight-500 {
@@ -111,11 +111,11 @@
 }
 
 .bio-width {
-  width: 16.75rem;
+  width: 80%;
   text-align: center;
 
   @include tablet {
-    width: 22.75rem;
+    width: 50%;
   }
 
   @include desktop {
@@ -125,10 +125,10 @@
 
 .button {
   @include flex-row-end;
-  padding: 0.5rem 0.75rem;
+  padding: 0.8rem 1.2rem;
   align-items: flex-start;
-  gap: 0.625rem;
+  gap: 1rem;
 
-  border-radius: 1.5rem;
+  border-radius: 2.4rem;
   border: 1px solid $BDS-Grayscale-13;
 }

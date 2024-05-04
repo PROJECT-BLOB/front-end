@@ -1,21 +1,18 @@
 @import '/styles/global-styles/index';
 
 .wrappper {
-  @include tablet-and-desktop {
-    width: 100%;
-    padding: 0rem 1.23425rem 0rem 1.25rem;
-  }
+  width: 100%;
 }
 
 .tabs {
-  width: 100%;
+  // width: 100%;
 
   @include flex-row-center;
   align-items: flex-start;
-  gap: 1rem;
+  gap: 1.6rem;
 }
 .post-list {
   display: flex;
   justify-content: center;
-  padding: 0 2.28rem;
+  // padding: 0 2.28rem;
 }

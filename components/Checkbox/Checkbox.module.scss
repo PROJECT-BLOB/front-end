@@ -15,28 +15,11 @@
   align-items: center;
   gap: 0.8rem;
   cursor: pointer;
-
-  @include tablet {
-    font-size: 1.6rem;
-  }
-  @include desktop {
-    font-size: 1.7rem;
-    gap: 1.2rem;
-  }
 }
 
 .showCheckbox {
   width: 1.6rem;
   height: 1.6rem;
-
-  @include tablet {
-    width: 2rem;
-    height: 2rem;
-  }
-  @include desktop {
-    width: 2.4rem;
-    height: 2.4rem;
-  }
 
   // default
   background: url('/icons/checkbox-unselected.svg') no-repeat;
@@ -47,15 +30,6 @@
   display: none;
   width: 1.6rem;
   height: 1.6rem;
-
-  @include tablet {
-    width: 2rem;
-    height: 2rem;
-  }
-  @include desktop {
-    width: 2.4rem;
-    height: 2.4rem;
-  }
 
   &:active + .showCheckbox {
     background: url('/icons/checkbox-indeterminated.svg') no-repeat;
