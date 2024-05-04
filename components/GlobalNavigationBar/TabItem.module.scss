@@ -1,0 +1,51 @@
+@import "/styles/global-styles/color-pallete", "/styles/global-styles/media-breakpoint";
+
+.align {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+
+  a {
+    text-decoration: none;
+    color: #000;
+
+    color: $BDS-Grayscale-6;
+    font-family: Outfit; /* 폰트 확인 필요 */
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 136.4%; /* 2.1824rem */
+
+
+    &.selected {
+      color: $BDS-Grayscale-13;
+      font-family: Outfit;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 136.4%; /* 2.1824rem */
+    }
+  }
+}
+
+@include tablet {
+  .align {
+    a {
+      font-size: 2.4rem;
+      &.selected {
+        font-size: 2.4rem;
+      }
+    }
+  }
+}
+
+@include desktop {
+  .align {
+    a {
+      font-size: 2.8rem;
+      &.selected {
+        font-size: 2.8rem;
+      }
+    }
+  }
+}
+

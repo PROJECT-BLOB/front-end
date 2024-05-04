@@ -1,0 +1,17 @@
+@import "/styles/global-styles/index";
+
+.align-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  padding: 1.2rem 0;
+
+  @include tablet-and-desktop {
+    position: absolute;
+    top: 2.5rem;
+  }
+
+  @include desktop {
+    top: 4rem;
+  }
+}

@@ -42,6 +42,5 @@ export default function ReadPost() {
         )}
       </section>
     </div>
-
   );
 }
