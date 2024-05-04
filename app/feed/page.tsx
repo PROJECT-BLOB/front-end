@@ -1,38 +1,29 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
-
+import { Post } from '@/types/Post';
+import { POSTS_PAGE_LIMIT } from '@constants/pageValues';
 import useInfiniteQueries from '@queries/useInfiniteQueries';
 
 import styles from './Feed.module.scss';
 
-interface User {
-  id: number;
-  username: string;
-  name: string;
-  createdAt: number;
-  updatedAt: number;
-}
-
-interface PostProps {
-  id: number;
-  content: string;
-  user: User;
-  createdAt: number;
-  updatedAt: number;
-}
+// TODO: 이 부분은 추후에 수정이 필요합니다. 어떻게 데이터를 보낼 지 생각해보기..
+const BODY = {
+  country: '대한민국',
+  city: '서울',
+  sortBy: 'string',
+  page: 0,
+  size: POSTS_PAGE_LIMIT,
+  categories: 'QUESTION',
+  startDate: '2024-05-04',
+  endDate: '2024-05-04',
+  hasImage: true,
+  hasLocation: true,
+  minLikes: 0,
+  keyword: '',
+};
 
 export default function Feed() {
-  const { postsData, isPending, isError, fetchNextPage, isFetchingNextPage } = useInfiniteQueries('feedPage');
-
-  const { ref, inView } = useInView();
-
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [inView, fetchNextPage]);
+  const { data, isPending, isError, isFetchingNextPage, ref } = useInfiniteQueries(BODY, 'feed');
 
   if (isPending) {
     // TODO 스켈레톤 UI 추가
@@ -43,25 +34,22 @@ export default function Feed() {
     return <div>데이터 불러오는 중, 에러 발생</div>;
   }
 
-  const postsPages = postsData?.pages ?? [];
+  const postsPages = data?.pages ?? [];
 
   return (
     <>
       <h1 className={styles.title}>피드 페이지</h1>
 
-      {postsPages.map((postPage) => postPage.results.map((post: PostProps) => <Post key={post.id} post={post} />))}
+      {postsPages.map((postsPage) =>
+        postsPage.data.content.map((post: Post) => (
+          <div key={post.postId}>
+            <div className={styles.title}>{post.postId}</div>
+          </div>
+        )),
+      )}
 
       {/* TODO 로딩 인디케이터 추가 */}
       {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
     </>
-  );
-}
-
-function Post({ post }: { post: PostProps }) {
-  return (
-    // 코드잇 api 데이터 임시로 넣어놨습니다.
-    <li className={styles.post}>
-      {post.user.name}: {post.content}
-    </li>
   );
 }
