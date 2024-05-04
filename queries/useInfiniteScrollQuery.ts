@@ -9,6 +9,7 @@ interface QueryBody {
   [key: string]: unknown;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ApiFunction<T extends QueryBody> = (body: T) => Promise<any>;
 
 export default function useInfiniteScrollQuery<T extends QueryBody>(
