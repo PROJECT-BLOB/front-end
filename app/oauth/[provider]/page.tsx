@@ -13,33 +13,48 @@ interface providerType {
 }
 
 export default function LoadingSignin({ params }: { params: providerType }) {
-  const { signin } = useUserStore();
+  const { setUserId } = useUserStore();
   const router = useRouter();
   // const code = new URL(window.location.href).searchParams.get('code');
   const code = typeof window !== 'undefined' ? new URL(window.location.href).searchParams.get('code') : null;
 
-  function storeOAuth(userId: number, accessToken: string, refreshToken: string, state: string) {
-    document.cookie = `accessToken=${accessToken}; path=/`;
-    document.cookie = `refreshToken=${refreshToken}; path=/`;
-    document.cookie = `userId=${userId}; path=/`;
-
-    useOAuthStore.setState({ userId, accessToken, refreshToken, state });
-  }
-
   useEffect(() => {
+    function storeOAuth(userId: number, accessToken: string, refreshToken: string, state: string) {
+      document.cookie = `accessToken=${accessToken}; path=/`;
+      document.cookie = `refreshToken=${refreshToken}; path=/`;
+
+      useOAuthStore.setState({ userId, accessToken, refreshToken, state });
+
+      setUserId(userId);
+    }
+
     async function setOAuthData() {
       const { data } = await getOAuthData(params.provider, code);
-
       const { userId, accessToken, refreshToken, state } = data;
 
       storeOAuth(userId, accessToken, refreshToken, state);
+
       console.log('data', data);
+
+      return state;
     }
 
-    setOAuthData();
-    signin();
-    router.push('/signin');
-  }, [code, params.provider, signin, router]);
+    async function redirectBasedOnState() {
+      const state = await setOAuthData();
 
-  return <h1>{`This is OAUTH - ${params.provider} test page`}</h1>;
+      if (state === 'COMPLETE') {
+        router.push('/map');
+      } else if (state === 'INCOMPLETE') {
+        router.push('/signin');
+      }
+    }
+
+    redirectBasedOnState();
+  }, [code, params.provider, router, setUserId]);
+
+  return (
+    <>
+      <h1>{`This is OAUTH - ${params.provider} test page`}</h1>
+    </>
+  );
 }

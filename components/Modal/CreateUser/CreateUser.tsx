@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-// import classNames from 'classnames/bind';
-
+import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import useCreateUserForm from '@/app/map/_hooks/useCreateUserForm';
@@ -9,10 +8,12 @@ import Input from '@/components/Input/Input';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
+import BlobButton from '@components/Button/BlobButton';
+
 import styles from './CreateUser.module.scss';
 import Modal from '../Modal';
 
-// const cx = classNames.bind(styles);
+const cx = classNames.bind(styles);
 
 export default function CreateUser() {
   const { toggleModal } = useModalStore();
@@ -39,44 +40,34 @@ export default function CreateUser() {
   // TODO: id, nickname 유효성 검사 추가
   return (
     <Modal>
-      <form className={styles.form} onSubmit={handleSubmit(() => onSubmit(userFormData))}>
-        {/* <Modal.Header> */}
-        <header className={styles.header}>
+      <form className={cx('form')} onSubmit={handleSubmit(() => onSubmit(userFormData))}>
+        <header className={cx('header')}>
           <span>회원가입</span>
-          <span className={styles.close}>
+          <span className={cx('close')}>
             <Image src={CloseButton} fill alt='닫기' onClick={cancelForm} />
           </span>
         </header>
-        {/* </Modal.Header> */}
-        {/* <Modal.Body> */}
-        <main className={styles.input}>
-          <Input
-            labelName='아이디'
-            id='id'
-            name='id'
-            value={userFormData.id}
-            onChange={handleChangeInput}
-            // register={register}
-          />
+
+        <main className={cx('input')}>
+          <Input labelName='아이디' id='id' name='id' value={userFormData.id} onChange={handleChangeInput} />
           <Input
             labelName='닉네임'
             id='nickname'
             name='nickname'
             value={userFormData.nickname}
             onChange={handleChangeInput}
-            // register={register}
           />
         </main>
 
-        {/* </Modal.Body> */}
-        {/* <Modal.Footer> */}
-        <footer className={styles.buttons}>
-          <button type='button' onClick={cancelForm}>
+        <footer className={cx('buttons')}>
+          {/* <button type='button' onClick={cancelForm}>
             취소
-          </button>
+          </button> */}
+          {/* <button type='submit'>회원가입</button> */}
+          <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
+          {/* <BlobButton text='회원가입' type='submit' color='button-colord-contain' /> */}
           <button type='submit'>회원가입</button>
         </footer>
-        {/* </Modal.Footer> */}
       </form>
     </Modal>
   );

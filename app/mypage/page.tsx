@@ -6,14 +6,15 @@ import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
 import { UserDetail } from '@/types/User';
-import { getUserIdFromCookie } from '@apis/axios';
 import { useDetailQueries } from '@queries/useUserQueries';
+import { useUserStore } from '@stores/userStore';
 import { Post } from 'types/Post';
+
+import Tab from '@components/Tab';
 
 import PostList from './_components/Post/PostList';
 import UserProfile from './_components/UserProfile/UserProfile';
 import styles from './myPage.module.scss';
-import Tab from '@components/Tab';
 
 const cx = classNames.bind(styles);
 
@@ -48,7 +49,7 @@ const mockContent: Post[] = [
     canDelete: true,
   },
   {
-    postId: 0,
+    postId: 1,
     title: '도쿄타워 화장실',
     content: '화장실 어디있나요 알려주세요 ㅜㅜ',
     category: '도와주세요',
@@ -80,7 +81,8 @@ const mockContent: Post[] = [
 
 export default function myPage() {
   // TODO: 쿼리에서 유저 정보 가져오기
-  const userId = Number(getUserIdFromCookie());
+  const { userId } = useUserStore();
+
   const [userData, setUserData] = useState<UserDetail | null>(null);
   // TODO: useQuery로 posts 가져옴
   // const [postsData, setPostsData] = useState<Post[] | null>(null);
@@ -98,13 +100,11 @@ export default function myPage() {
   useEffect(() => {
     if (!userData) return;
 
-    // console.log('userData', userData);
-
     // TODO: 로그인 안 되어있으면 로그인 페이지로 이동-임시, 수정필요
     if (userData?.state === 'INCOMPLETE') {
       router.push('/signin');
     }
-  }, [userData, router, userId]);
+  }, [userData, router]);
 
   return (
     <>

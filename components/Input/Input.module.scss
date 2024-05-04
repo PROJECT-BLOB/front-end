@@ -1,10 +1,10 @@
 @import '/styles/global-styles/index';
 
 .input-box {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
+
   gap: 1.2rem;
-  margin-bottom: 3.2rem; //나중에 뺄 수도 있음
+  margin-bottom: 3.2rem;
 }
 
 .label {
@@ -47,6 +47,8 @@
   line-height: 146%; /* 21.9px */
 
   &:focus {
-    outline: none;
+    // outline: none;
+
+    border-bottom: $BDS-Primary-3;
   }
 }

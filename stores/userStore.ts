@@ -1,10 +1,13 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 interface UserStore {
+  userId: number;
   isSignin: boolean;
 
   signin: () => void;
   signout: () => void;
+  setUserId: (newUserId: number) => void;
 
   lastLocation: Location;
 }
@@ -16,9 +19,18 @@ interface Location {
   lng: number;
 }
 
-export const useUserStore = create<UserStore>((set) => ({
-  isSignin: false,
-  lastLocation: { lat: 0, lng: 0 },
-  signin: () => set(() => ({ isSignin: true })),
-  signout: () => set(() => ({ isSignin: false })),
-}));
+export const useUserStore = create(
+  persist<UserStore>(
+    (set) => ({
+      userId: 0,
+      isSignin: false,
+      lastLocation: { lat: 0, lng: 0 },
+      setUserId: (newUserId: number) => set({ userId: newUserId }),
+      signin: () => set(() => ({ isSignin: true })),
+      signout: () => set(() => ({ isSignin: false })),
+    }),
+    {
+      name: 'userStorage',
+    },
+  ),
+);

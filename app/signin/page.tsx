@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,12 +10,10 @@ import BlobLogo from '@/public/icons/logo-BLOB.svg';
 import GoogleLogo from '@/public/icons/logo-google.svg';
 import KakaoLogo from '@/public/icons/logo-kakao.svg';
 import NaverLogo from '@/public/icons/logo-naver.svg';
-import { getAccessToken, getUserIdFromCookie } from '@apis/axios';
+import { getAccessToken } from '@apis/axios';
 import getRedirectUrl from '@apis/oauth/getRedirectUrl';
-import { useDetailQueries } from '@queries/useUserQueries';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
-import { UserDetail } from 'types/User';
 
 import CreateUser from '@components/Modal/CreateUser/CreateUser';
 
@@ -26,13 +24,9 @@ export default function Signin() {
   const { state } = useOAuthStore();
   const accessToken = getAccessToken();
 
-  const userId = Number(getUserIdFromCookie());
-  const { data } = useDetailQueries(userId);
-  const [userData, setUserData] = useState<UserDetail | null>(null);
+  const router = useRouter();
 
   const { toggleModal, name, setCurrentName } = useModalStore();
-
-  const router = useRouter();
 
   function handleOpenModal(name: ModalName) {
     setCurrentName(name);
@@ -48,7 +42,6 @@ export default function Signin() {
     router.push(redirectUrl);
   }
 
-  // 회원가입 안 된 유저에게 회원가입 모달을 띄워줌
   useEffect(() => {
     function handleOpenModal(name: ModalName) {
       setCurrentName(name);
@@ -61,17 +54,12 @@ export default function Signin() {
   }, [accessToken, state, setCurrentName, toggleModal]);
 
   useEffect(() => {
-    // 회원가입 된 유저는 map으로 리다이렉트
-
-    if (data) {
-      setUserData(data?.data);
+    // 토큰 있으면 맵으로 리다이렉트
+    if (accessToken) {
+      // 테스트를 위해 잠시 주석처리...
+      // router.push('map');
     }
-
-    // 만약 유저 상태가 state === 'COMPLETE'면 map으로 리다이렉트
-    if (accessToken && userData?.state === 'COMPLETE') {
-      router.push('/map');
-    }
-  }, [accessToken, router, data, userData?.state]);
+  }, [accessToken, router]);
 
   return (
     <main className={styles.signin}>
