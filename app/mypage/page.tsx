@@ -80,11 +80,11 @@ const mockContent: Post[] = [
 ];
 
 export default function myPage() {
-  // TODO: 쿼리에서 유저 정보 가져오기
+  // TODO: 유저 정보 가져오기
   const { userId } = useUserStore();
 
   const [userData, setUserData] = useState<UserDetail | null>(null);
-  // TODO: useQuery로 posts 가져옴
+  // TODO: posts 가져오기
   // const [postsData, setPostsData] = useState<Post[] | null>(null);
   const router = useRouter();
 
@@ -107,8 +107,7 @@ export default function myPage() {
   }, [userData, router]);
 
   return (
-    <>
-      <header>HEADER-나중에 들어감</header>
+    <div className={cx('wrappper')}>
       <section>
         <UserProfile userData={userData} />
       </section>
@@ -120,6 +119,6 @@ export default function myPage() {
       <section className={cx('post-list')}>
         <PostList postList={mockContent} />
       </section>
-    </>
+    </div>
   );
 }

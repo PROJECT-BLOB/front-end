@@ -13,7 +13,7 @@ export default function PostItem({ post }: { post: Post }) {
   return (
     <div className={cx('post-container')}>
       <header className={cx('header')}>
-        <span>map()으로 카테고리 들어감</span>
+        <span>태그 일단 보류함</span>
         <span>beloved</span>
       </header>
       <main className={cx('main')}>
