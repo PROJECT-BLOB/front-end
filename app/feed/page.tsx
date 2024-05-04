@@ -1,8 +1,9 @@
 'use client';
 
 import { Post } from '@/types/Post';
+import getFeed from '@apis/post/getFeed';
 import { POSTS_PAGE_LIMIT } from '@constants/pageValues';
-import useInfiniteQueries from '@queries/useInfiniteQueries';
+import useInfiniteScrollQuery from '@queries/useInfiniteScrollQuery';
 
 import styles from './Feed.module.scss';
 
@@ -23,7 +24,7 @@ const BODY = {
 };
 
 export default function Feed() {
-  const { data, isPending, isError, isFetchingNextPage, ref } = useInfiniteQueries(BODY, 'feed');
+  const { data, isPending, isError, isFetchingNextPage, ref } = useInfiniteScrollQuery(getFeed, BODY, ['comment']);
 
   if (isPending) {
     // TODO 스켈레톤 UI 추가

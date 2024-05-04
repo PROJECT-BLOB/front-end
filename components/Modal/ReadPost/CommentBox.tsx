@@ -3,20 +3,22 @@ import { FormEvent, useState } from 'react';
 import { Comment } from '@/types/Post';
 import createComment from '@apis/post/createComment';
 import createReply from '@apis/post/creatReply';
+import getCommentList from '@apis/post/getCommentList';
 import { COMMENTS_PAGE_LIMIT } from '@constants/pageValues';
-import useInfiniteQueries from '@queries/useInfiniteQueries';
+import useInfiniteScrollQuery from '@queries/useInfiniteScrollQuery';
 
 import CommentContainer from './Comment';
 import styles from './CommentBox.module.scss';
 
 export default function CommentBox({ postId }: { postId: number }) {
-  const { data, isPending, isError, isFetchingNextPage, ref } = useInfiniteQueries(
+  const { data, isPending, isError, isFetchingNextPage, ref } = useInfiniteScrollQuery(
+    getCommentList,
     {
       postId,
       page: 0,
       size: COMMENTS_PAGE_LIMIT,
     },
-    'comment',
+    ['comment'],
   );
 
   const [commentInput, setCommentInput] = useState('');
@@ -50,8 +52,8 @@ export default function CommentBox({ postId }: { postId: number }) {
             <CommentContainer key={comment.commentId} comment={comment} setReplyInformation={setReplyInformation} />
           )),
         )}
-
         {/* // TODO 로딩 인디케이터 추가 */}
+        {/* // <div ref={ref} />가 화면에 보일 때 fetchNextPage 호출 */}
         {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
       </div>
 
