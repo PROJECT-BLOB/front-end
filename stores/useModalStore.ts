@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 
-export type ModalName = 'write' | 'read' | 'createUser' | 'updateProfile';
+export type ModalName = '' | 'write' | 'read' | 'createUser' | 'updateProfile';
 
 interface ModalStore {
   postId: number;
   isOpen: boolean;
-  name: string;
+  name: ModalName;
   setPostId: (postId: number) => void;
   toggleModal: () => void;
   setCurrentName: (modalName: ModalName) => void;

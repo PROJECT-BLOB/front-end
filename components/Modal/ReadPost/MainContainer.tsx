@@ -1,10 +1,13 @@
 import Image from 'next/image';
 
 import { Post } from '@/types/Post';
+import postBookmark from '@apis/post/postBookmark';
+import postPostLike from '@apis/post/postPostLike';
 import bookmark from '@public/icons/bookmark.svg';
-import checkHeart from '@public/icons/check-heart-pink.svg';
 import verifiedIcon from '@public/icons/check-verified-blue.svg';
 import filledBookmark from '@public/icons/filled-bookmark.svg';
+import filledRedHeart from '@public/icons/filled-red-heart.svg';
+import vacantHeart from '@public/icons/heart.svg';
 
 import CategoryBox from '@components/CategoryBox';
 
@@ -19,15 +22,30 @@ interface MainContentProps {
 }
 
 export default function MainContainer({ contentData }: MainContentProps) {
+  function handleBookmarkClick() {
+    postBookmark(contentData.postId);
+  }
+
+  function handleLikeClick() {
+    postPostLike(contentData.postId);
+  }
+
   return (
     <section className={styles['main-container']}>
-      <div className={styles['delete-container']}>
-        <Image src={checkHeart} alt='좋아요 아이콘' width={24} height={24} />
-        <span className={styles['delete-mention']}>이 글은 21시간 38분 31초 이후 삭제됩니다.</span>
-        {/* 맵에서 사라지는거 받아야 함 */}
+      <div className={styles['like-delete-bookmark-container']}>
+        <div className={styles['like-delete-wrapper']}>
+          <button type='button' onClick={handleLikeClick}>
+            <Image src={contentData.liked ? filledRedHeart : vacantHeart} alt='좋아요 아이콘' width={24} height={24} />
+          </button>
+          <span className={styles['delete-mention']}>이 글은 21시간 38분 31초 이후 삭제됩니다.</span>
+          {/* 맵에서 사라지는거 받아야 함 */}
+        </div>
+        <button type='button' onClick={handleBookmarkClick}>
+          <Image src={contentData.bookmarked ? filledBookmark : bookmark} alt='북마크 아이콘' />
+        </button>
       </div>
 
-      <ProfileContainer author={contentData.author} canDelete={contentData.canDelete} />
+      <ProfileContainer author={contentData.author} canDelete={contentData.canDelete} postId={contentData.postId} />
 
       <div className={styles.distance}>
         <Image src={verifiedIcon} alt='인증마크' width={20} height={20} />
@@ -41,9 +59,6 @@ export default function MainContainer({ contentData }: MainContentProps) {
       <div className={styles['category-bookmark-wrapper']}>
         <CategoryBox contentData={contentData} />
         {/* 북마크 누르는 이벤트 연결해줘야 함 */}
-        <button type='button' onClick={() => {}}>
-          <Image src={contentData.bookmarked ? filledBookmark : bookmark} alt='북마크 아이콘' />
-        </button>
       </div>
 
       <h3 className={styles.title}>{contentData.title}</h3>
@@ -56,7 +71,7 @@ export default function MainContainer({ contentData }: MainContentProps) {
         <p>댓글 {contentData.commentCount}개</p>
       </div>
 
-      <CommentBox />
+      <CommentBox postId={contentData.postId} />
     </section>
   );
 }

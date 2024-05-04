@@ -1,5 +1,14 @@
+@import '/styles/global-styles/color-pallete';
+
+.content-like-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .content {
-  color: var(--BDS-Grayscale-13);
+  color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
   font-size: 1.5rem;
   line-height: 160%; /* 24px */
@@ -14,21 +23,11 @@
   display: flex;
   align-items: flex-start;
   gap: 1.74rem;
-  color: var(--BDS-Grayscale-8);
+  color: $BDS-Grayscale-8;
   font-feature-settings: 'ss10' on;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
   margin-bottom: -0.8rem;
-}
-
-.reply {
-  margin-bottom: 8.8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-  align-items: start;
-  margin-left: 4rem;
-  margin-bottom: 0;
 }

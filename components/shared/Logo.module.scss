@@ -1,0 +1,19 @@
+@import '/styles/global-styles/media-breakpoint';
+
+.logo {
+  display: flex;
+  width: 7.7rem;
+  height: 2.2rem;
+
+  @include tablet {
+    width: 9.5252rem;
+    height: 2.733rem;
+  }
+
+  @include desktop {
+    width: 12.7715rem;
+    height: 3.6635rem;
+  }
+
+
+}

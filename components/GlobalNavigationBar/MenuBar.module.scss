@@ -1,0 +1,16 @@
+@import "/styles/global-styles/index";
+
+
+.align {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 1.6rem;
+
+  padding-right: 2rem;
+
+  @include desktop {
+    padding-right: 4rem;
+  }
+}

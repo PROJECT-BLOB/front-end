@@ -27,3 +27,14 @@ export interface Post {
   commentCount: number;
   canDelete: boolean;
 }
+
+export interface Comment {
+  commentId: number;
+  postId: number;
+  content: string;
+  author: Author;
+  createdDate: string;
+  liked: boolean;
+  likeCount: number;
+  canDelete: boolean;
+}

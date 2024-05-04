@@ -1,6 +1,9 @@
+@import '/styles/global-styles/color-pallete';
+
+
 .kebab-container {
   position: absolute;
-  background-color: var(--BDS-Grayscale-3);
+  background-color: $BDS-Grayscale-3;
   right: 1rem;
   padding: 1rem;
 }
