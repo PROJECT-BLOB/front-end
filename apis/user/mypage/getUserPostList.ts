@@ -1,12 +1,13 @@
 import { Post } from '@/types/Post';
 import instance from '@apis/axios';
 
-interface PostList {
+export interface PostList {
   content: Array<Post>;
   count: number;
   currentPage: number;
   hasMore: boolean;
 }
+
 interface PostListProps {
   userId: number;
   page: number;

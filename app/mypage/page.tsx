@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import { UserDetail } from '@/types/User';
 import { useDetailQueries } from '@queries/useUserQueries';
 import { useUserStore } from '@stores/userStore';
-import { Post } from 'types/Post';
 
 import Tab from '@components/Tab';
 
@@ -18,78 +17,12 @@ import styles from './myPage.module.scss';
 
 const cx = classNames.bind(styles);
 
-const mockContent: Post[] = [
-  {
-    postId: 0,
-    title: '도쿄타워 화장실',
-    content: '화장실 어디있나요 알려주세요 ㅜㅜ',
-    category: 'HELP',
-    subcategory: '화장실',
-    author: {
-      userId: 1,
-      blobId: 'tokyo',
-      nickname: 'tokyo',
-      likedCount: 0,
-      profileUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
-    },
-    country: '일본',
-    city: '도쿄',
-    lat: 0,
-    lng: 0,
-    distFromActual: 0,
-    views: 0,
-    createdDate: '2024-04-24T12:59:24',
-    imageUrl: [
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
-      'https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg',
-    ],
-    liked: true,
-    bookmarked: true,
-    likeCount: 3,
-    commentCount: 2,
-    canDelete: true,
-  },
-  {
-    postId: 1,
-    title: '도쿄타워 화장실',
-    content: '화장실 어디있나요 알려주세요 ㅜㅜ',
-    category: 'HELP',
-    subcategory: '화장실',
-    author: {
-      userId: 2,
-      blobId: 'tokyo',
-      nickname: 'tokyo',
-      likedCount: 0,
-      profileUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
-    },
-    country: '일본',
-    city: '도쿄',
-    lat: 0,
-    lng: 0,
-    distFromActual: 0,
-    views: 0,
-    createdDate: '2024-04-24T12:59:24',
-    imageUrl: [
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
-      'https://health.chosun.com/site/data/img_dir/2023/07/17/2023071701753_0.jpg',
-    ],
-    liked: true,
-    bookmarked: true,
-    likeCount: 3,
-    commentCount: 2,
-    canDelete: true,
-  },
-];
-
 export default function myPage() {
   // TODO: 유저 정보 가져오기
   const { userId, isSignin } = useUserStore();
 
   const [userData, setUserData] = useState<UserDetail | null>(null);
-  // TODO: posts 가져오기
-  // const [postsData, setPostsData] = useState<Post[] | null>(null);
+
   const router = useRouter();
 
   const { data, isLoading, isError, error } = useDetailQueries(userId);
