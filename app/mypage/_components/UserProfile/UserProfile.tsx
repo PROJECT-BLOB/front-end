@@ -8,13 +8,12 @@ import { UserDetail } from 'types/User';
 import Avatar from '@components/Avatar/Avatar';
 
 import styles from './UserProfile.module.scss';
-import UpdateProfileModal from '../UpdateProfileModal/UpdateProfileModal';
 
 const cx = classNames.bind(styles);
 
 // TODO: 타입 정의
 export default function UserProfile({ userData }: { userData: UserDetail | null }) {
-  const { toggleModal, name, setCurrentName } = useModalStore();
+  const { toggleModal, setCurrentName } = useModalStore();
 
   function handleClickOpenModal(name: ModalName) {
     setCurrentName(name);
@@ -51,8 +50,6 @@ export default function UserProfile({ userData }: { userData: UserDetail | null 
         </p>
       </div>
       <p className={cx('text-black', 'small', 'bio-width')}>{userData?.bio}</p>
-
-      {name === 'updateProfile' && <UpdateProfileModal />}
     </div>
   );
 }

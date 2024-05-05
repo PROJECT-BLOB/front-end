@@ -2,6 +2,7 @@
 
 import React from 'react';
 
+import UpdateProfileModal from '@/app/mypage/_components/UpdateProfileModal/UpdateProfileModal';
 import useModalStore from '@stores/useModalStore';
 
 import Portal from '@components/Portal';
@@ -15,6 +16,7 @@ const ModalList = {
   read: <ReadPost />,
   write: <WritePost />,
   createUser: <CreateUser />,
+  updateProfile: <UpdateProfileModal />,
 };
 
 export default function ModalContainer() {
