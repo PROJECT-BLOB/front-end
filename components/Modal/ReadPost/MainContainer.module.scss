@@ -15,15 +15,18 @@
   gap: 0.8rem;
 }
 
+.like-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .delete-mention {
+  color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
   font-size: 1.4rem;
   font-weight: 600;
-  line-height: 142.9%; /* 20.006px */
-  background: $BDS-Primary-5;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  line-height: 142%; /* 19.88px */
 }
 
 .distance {
@@ -45,12 +48,6 @@
   font-weight: 500;
   line-height: 138.5%; /* 18.005px */
   margin-bottom: 1.2rem;
-}
-
-.category-bookmark-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
 }
 
 .title {
@@ -103,6 +100,9 @@
   .main-container {
     width: 41.8rem;
     flex-shrink: 0;
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .comment-form {

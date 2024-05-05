@@ -3,11 +3,11 @@ import { Post } from '@/types/Post';
 import styles from './CategoryBox.module.scss';
 
 enum CATEGORY_COLOR {
-  추천해요 = 'pink',
-  도와주세요 = 'green',
-  궁금해요 = 'blue',
-  조심하세요 = 'yellow',
-  비추천해요 = 'red',
+  RECOMMENDED = 'pink',
+  NOT_RECOMMENDED = 'red',
+  HELP = 'green',
+  QUESTION = 'blue',
+  WARNING = 'yellow',
 }
 
 interface CategoryBoxProps {

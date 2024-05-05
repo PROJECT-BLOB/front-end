@@ -1,10 +1,9 @@
 @import '/styles/global-styles/color-pallete';
 
 .category {
-  display: flex;
+  display: inline-block;
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
-  background: $BDS-Category-tip_press;
   color: $BDS-Grayscale-1;
   font-feature-settings: 'ss10' on;
   font-size: 1.3rem;

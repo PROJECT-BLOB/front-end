@@ -48,6 +48,7 @@ export default function CreateUser() {
 
       <main className={cx('input')}>
         <Input labelName='아이디' id='id' name='id' value={userFormData.id} onChange={handleChangeInput} />
+
         <Input
           labelName='닉네임'
           id='nickname'
@@ -58,10 +59,6 @@ export default function CreateUser() {
       </main>
 
       <footer className={cx('buttons')}>
-        {/* <button type='button' onClick={cancelForm}>
-            취소
-          </button> */}
-        {/* <button type='submit'>회원가입</button> */}
         <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
         {/* <BlobButton text='회원가입' type='submit' color='button-colord-contain' /> */}
         <button type='submit'>회원가입</button>
