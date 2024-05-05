@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 
 import { ValidatorType } from '@utils/registerOptions';
 
-import styles from './Input.module.scss';
+import styles from './SignInput.module.scss';
 // import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 const cx = classNames.bind(styles);
@@ -36,6 +36,8 @@ export default function SignInput({
   validator,
   ...rest
 }: InputProps) {
+  console.log('errors', errors);
+  // const hasError = errors && errors[name];
   const errorText = errors && errors[name] ? 'error-text' : '';
   const errorInput = errors && errors[name] ? 'error-input' : '';
 
@@ -51,6 +53,7 @@ export default function SignInput({
         <div className={cx('input-box')}>
           <input
             className={cx('input-field', errorInput)}
+            // className={cx('input-field', hasError && 'error-input')}
             type='text'
             {...(register && register(name, validator))}
             id={id}

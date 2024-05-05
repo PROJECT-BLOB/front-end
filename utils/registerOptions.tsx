@@ -1,4 +1,4 @@
-import checkBlobId from '@apis/user/sign/checkBlobId';
+// import checkBlobId from '@apis/user/sign/checkBlobId';
 
 // 영문 대소문자+숫자
 const BLOBID_REGEX = /^[a-zA-Z0-9]*$/;
@@ -15,14 +15,14 @@ export interface ValidatorType {
   validate?: (value: string) => Promise<string>;
 }
 
-// 아이디 중복 체크
-const checkIdExists = async (blobId: string) => {
-  const { status } = await checkBlobId(blobId);
+// TODO: api 만들어지면 연결
+// const checkIdExists = async (blobId: string) => {
+//   const { status } = await checkBlobId(blobId);
 
-  if (status === 200) return '사용 가능한 아이디입니다.';
+//   if (status === 200) return '사용 가능한 아이디입니다.';
 
-  return '중복된 아이디입니다.';
-};
+//   return '중복된 아이디입니다.';
+// };
 
 export const blobIdValidator: ValidatorType = {
   required: '아이디를 입력해 주세요.',
@@ -30,8 +30,8 @@ export const blobIdValidator: ValidatorType = {
     value: BLOBID_REGEX,
     message: '영문 대소문자와 숫자만 입력할 수 있습니다.',
   },
-  // TODO: 아이디 중복 체크 연결
-  validate: async (id: string) => await checkIdExists(id),
+  // TODO: 아이디 중복 체크
+  // validate: async (id: string) => await checkIdExists(id),
 };
 
 export const nicknameValidator: ValidatorType = {

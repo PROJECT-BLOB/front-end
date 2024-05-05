@@ -16,7 +16,7 @@ import styles from './RegisterModal.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function CreateUser() {
+export default function RegisterModal() {
   const { toggleModal } = useModalStore();
   const { errors, register, handleSubmit, onSubmit, cancelForm } = useCreateUserForm(toggleModal);
 
