@@ -15,7 +15,7 @@ import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
 import { useUserStore } from '@stores/userStore';
 
-import Modal from '@components/Modal/ModalContainer';
+import ModalContainer from '@components/Modal/ModalContainer';
 
 import SigninButton from './_components/SigninButton';
 import styles from './Signin.module.scss';
@@ -90,7 +90,7 @@ export default function Signin() {
         회원가입 모달 테스트용
       </button>
 
-      <Modal />
+      <ModalContainer />
     </main>
   );
 }

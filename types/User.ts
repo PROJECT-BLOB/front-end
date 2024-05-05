@@ -8,6 +8,7 @@ export interface UserDetail {
   state: 'COMPLETE' | 'INCOMPLETE';
   postCount: 0;
   likedCount: 0;
+  commentCount: 0;
   isPrivate: boolean;
   coordinate: {
     lat: 0;
