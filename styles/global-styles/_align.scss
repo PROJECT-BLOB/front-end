@@ -16,6 +16,12 @@
   align-items: center;
 }
 
+@mixin flex-column-start {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 @mixin flex-column-end {
   display: flex;
   flex-direction: column;
@@ -38,5 +44,3 @@
   flex-direction: row;
   justify-content: flex-end;
 }
-
-

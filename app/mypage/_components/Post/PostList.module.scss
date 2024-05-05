@@ -1,0 +1,14 @@
+@import '/styles/global-styles/index';
+
+.container {
+  width: 100%;
+
+  //TODO: 원래 디자인은 이건데 태블릿도 모바일처럼 좌우 패딩만 남겨두고 커지는게 낫지 않나..??
+  @include tablet {
+    max-width: 72.8rem;
+  }
+
+  @include desktop {
+    max-width: 120.8rem;
+  }
+}

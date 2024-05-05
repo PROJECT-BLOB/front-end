@@ -12,33 +12,51 @@ interface providerType {
   provider: 'naver' | 'kakao' | 'google';
 }
 
-export default function LoadingSignin({ params }: { params: providerType }) {
-  const { signin } = useUserStore();
+export default function AwaitSignin({ params }: { params: providerType }) {
+  const { signin, signout, setUserId } = useUserStore();
+  const { setOAuth } = useOAuthStore();
+
   const router = useRouter();
-  // const code = new URL(window.location.href).searchParams.get('code');
   const code = typeof window !== 'undefined' ? new URL(window.location.href).searchParams.get('code') : null;
 
-  function storeOAuth(oauthId: string, accessToken: string, refreshToken: string, state: string) {
-    document.cookie = `accessToken=${accessToken}; path=/`;
-    document.cookie = `refreshToken=${refreshToken}; path=/`;
-
-    useOAuthStore.setState({ oauthId, accessToken, refreshToken, state });
-  }
-
   useEffect(() => {
-    async function setOAuthData() {
-      const { data } = await getOAuthData(params.provider, code);
+    function storeOAuth(userId: number, accessToken: string, refreshToken: string, state: string) {
+      document.cookie = `accessToken=${accessToken}; path=/`;
+      document.cookie = `refreshToken=${refreshToken}; path=/`;
+      setOAuth(userId, accessToken, refreshToken, state);
 
-      const { oauthId, accessToken, refreshToken, state } = data;
-
-      storeOAuth(oauthId, accessToken, refreshToken, state);
-      console.log('data', data);
+      setUserId(userId);
     }
 
-    setOAuthData();
-    signin();
-    router.push('/signin');
-  }, [code, params.provider, signin, router]);
+    async function setOAuthData() {
+      const { data } = await getOAuthData(params.provider, code);
+      const { userId, accessToken, refreshToken, state } = data;
 
-  return <h1>{`This is OAUTH - ${params.provider} test page`}</h1>;
+      storeOAuth(userId, accessToken, refreshToken, state);
+
+      return state;
+    }
+
+    async function redirectBasedOnState() {
+      const state = await setOAuthData();
+      console.log(state);
+
+      if (state === 'COMPLETE') {
+        signin();
+        router.push('/map');
+      } else if (state === 'INCOMPLETE') {
+        // TODO: 로그아웃 기능이 아직 없어서 임시로 넣어둠-나중에 지울 것
+        signout();
+        router.push('/signin');
+      }
+    }
+
+    redirectBasedOnState();
+  }, [code, params.provider, router, setUserId, signin, signout, setOAuth]);
+
+  return (
+    <>
+      <h1>{`This is OAUTH - ${params.provider} test page`}</h1>
+    </>
+  );
 }
