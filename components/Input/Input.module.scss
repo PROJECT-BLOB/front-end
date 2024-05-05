@@ -47,8 +47,8 @@
   line-height: 146%; /* 21.9px */
 
   &:focus {
-    // outline: none;
+    outline: none;
 
-    border-bottom: $BDS-Primary-3;
+    border-color: $BDS-Primary-3;
   }
 }

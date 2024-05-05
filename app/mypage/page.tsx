@@ -23,11 +23,13 @@ const mockContent: Post[] = [
     postId: 0,
     title: '도쿄타워 화장실',
     content: '화장실 어디있나요 알려주세요 ㅜㅜ',
-    category: '도와주세요',
+    category: 'HELP',
     subcategory: '화장실',
     author: {
+      userId: 1,
       blobId: 'tokyo',
       nickname: 'tokyo',
+      likedCount: 0,
       profileUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
     },
@@ -52,11 +54,13 @@ const mockContent: Post[] = [
     postId: 1,
     title: '도쿄타워 화장실',
     content: '화장실 어디있나요 알려주세요 ㅜㅜ',
-    category: '도와주세요',
+    category: 'HELP',
     subcategory: '화장실',
     author: {
+      userId: 2,
       blobId: 'tokyo',
       nickname: 'tokyo',
+      likedCount: 0,
       profileUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
     },
