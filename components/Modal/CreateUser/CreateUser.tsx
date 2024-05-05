@@ -47,14 +47,26 @@ export default function CreateUser() {
       </header>
 
       <main className={cx('input')}>
-        <Input labelName='아이디' id='id' name='id' value={userFormData.id} onChange={handleChangeInput} />
+        <Input
+          required
+          labelName='아이디'
+          id='id'
+          name='id'
+          value={userFormData.id}
+          maxLength={20}
+          onChange={handleChangeInput}
+          placeholder='아이디를 입력해주세요'
+        />
 
         <Input
+          required
           labelName='닉네임'
           id='nickname'
           name='nickname'
           value={userFormData.nickname}
+          maxLength={10}
           onChange={handleChangeInput}
+          placeholder='닉네임을 입력해주세요'
         />
       </main>
 
