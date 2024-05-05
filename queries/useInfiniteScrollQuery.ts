@@ -7,6 +7,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 export default function useInfiniteScrollQuery(queryOptions: {
   queryKey: readonly (string | number)[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   queryFn: (page: number) => Promise<any>;
 }) {
   const { queryKey, queryFn } = queryOptions;
