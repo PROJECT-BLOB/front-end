@@ -1,7 +1,5 @@
 'use client';
 
-import { POSTS_PAGE_LIMIT } from '@constants/pageValues';
-
 import styles from './Feed.module.scss';
 
 // TODO: 이 부분은 추후에 수정이 필요합니다. 어떻게 데이터를 보낼 지 생각해보기..
