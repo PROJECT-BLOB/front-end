@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import postReportComment from '@apis/post/postReportComment';
 import postReportPost from '@apis/post/postReportPost';
 import { useDeleteComment, useDeletePost } from '@queries/usePostQueries';
@@ -28,6 +29,7 @@ export default function Kebab({ toggleKebab, isUser, commentId, postId, replyId 
   async function handleClickReport() {
     if (commentId === undefined && replyId === undefined && postId) {
       const { data } = await postReportPost(postId);
+
       alert(data);
     }
 
