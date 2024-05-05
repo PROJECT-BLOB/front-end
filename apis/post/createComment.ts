@@ -1,6 +1,6 @@
 import instance from '@apis/axios';
 
-export interface PostComment {
+interface PostComment {
   postId: number;
   body: { content: string };
 }
