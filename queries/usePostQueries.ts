@@ -11,6 +11,9 @@ import getReplyList from '@apis/post/getReplyList';
 import postBookmark from '@apis/post/postBookmark';
 import updateCommentLike from '@apis/post/updateCommentLike';
 import updatePostLike from '@apis/post/updatePostLike';
+import { COMMENTS_PAGE_LIMIT } from '@constants/pageValues';
+
+import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 
 const posts = createQueryKeys('posts', {
   detail: (postId: number) => ['readPost', postId],
@@ -24,7 +27,10 @@ export function useFetchTargetPost(postId: number) {
 }
 
 export function useFetchTargetPostComment(postId: number) {
-  return useQuery({ queryKey: posts.comment(postId).queryKey, queryFn: () => getCommentList(postId) });
+  return useInfiniteScrollQuery({
+    queryKey: posts.comment(postId).queryKey,
+    queryFn: (page: number) => getCommentList({ postId, page, size: COMMENTS_PAGE_LIMIT }),
+  });
 }
 
 export function useFetchTargetCommentReply(commentId: number) {

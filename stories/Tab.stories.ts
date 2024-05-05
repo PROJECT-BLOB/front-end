@@ -1,3 +1,4 @@
+/* eslint-disable storybook/prefer-pascal-case */
 import Tab from '../components/Tab';
 
 export default { title: 'Tab', component: Tab };

@@ -6,9 +6,9 @@ import checkBlobId from '@apis/user/sign/checkBlobId';
 
 export const users = createQueryKeys('users', {
   // all: null, // master-key 사용 관련해서는 추가 확인 필요.
-  detail: (blobId: string) => ({
-    queryKey: [blobId],
-    queryFn: () => getUserDetail(blobId),
+  detail: (userId: number) => ({
+    queryKey: [userId],
+    queryFn: () => getUserDetail(userId),
   }),
   checkId: (input: string) => ({
     queryKey: [input],
