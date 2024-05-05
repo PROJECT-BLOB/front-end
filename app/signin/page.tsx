@@ -16,8 +16,6 @@ import signout from '@apis/user/sign/signout';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
 
-import Modal from '@components/Modal/ModalContainer';
-
 import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
 
 import SigninButton from './_components/SigninButton';
@@ -105,7 +103,6 @@ export default function Signin() {
       <button type='button' onClick={() => handleOpenModal('createUser')}>
         회원가입 모달 테스트용
       </button>
-      <Modal />
       {/* 로그아웃-이 부분은 무시하셔도 됩니다 */}
       <br />
       <br />

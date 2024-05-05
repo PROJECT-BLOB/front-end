@@ -2,8 +2,6 @@
 
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
-import ModalContainer from '@components/Modal/ModalContainer';
-
 export default function Map() {
   const { toggleModal, setCurrentName } = useModalStore();
 
@@ -22,7 +20,6 @@ export default function Map() {
       <button type='button' onClick={() => handleClickModal('read')}>
         읽기
       </button>
-      <ModalContainer />
     </>
   );
 }

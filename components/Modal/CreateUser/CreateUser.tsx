@@ -38,15 +38,12 @@ export default function CreateUser() {
   // TODO: id, nickname 유효성 검사 추가
   return (
     <form className={styles.form} onSubmit={handleSubmit(() => onSubmit(userFormData))}>
-      {/* <Modal.Header> */}
       <header className={styles.header}>
         <span>회원가입</span>
         <span className={styles.close}>
           <Image src={CloseButton} fill alt='닫기' onClick={cancelForm} />
         </span>
       </header>
-      {/* </Modal.Header> */}
-      {/* <Modal.Body> */}
       <main className={styles.input}>
         <Input
           labelName='아이디'
@@ -66,15 +63,12 @@ export default function CreateUser() {
         />
       </main>
 
-      {/* </Modal.Body> */}
-      {/* <Modal.Footer> */}
       <footer className={styles.buttons}>
         <button type='button' onClick={cancelForm}>
           취소
         </button>
         <button type='submit'>회원가입</button>
       </footer>
-      {/* </Modal.Footer> */}
     </form>
   );
 }
