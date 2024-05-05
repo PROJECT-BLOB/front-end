@@ -1,10 +1,10 @@
 import React from 'react';
 
+import RegisterModal from '@/app/signin/_components/RegisterModal/RegisterModal';
 import useModalStore from '@stores/useModalStore';
 
 import Portal from '@components/Portal';
 
-import CreateUser from './CreateUser/CreateUser';
 import styles from './ModalContainer.module.scss';
 import ReadPost from './ReadPost/ReadPost';
 import WritePost from './WritePost/WritePost';
@@ -12,7 +12,8 @@ import WritePost from './WritePost/WritePost';
 const ModalList = {
   read: <ReadPost />,
   write: <WritePost />,
-  createUser: <CreateUser />,
+  // createUser: <CreateUser />,
+  createUser: <RegisterModal />,
 };
 
 export default function ModalContainer() {

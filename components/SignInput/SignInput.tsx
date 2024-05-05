@@ -1,7 +1,9 @@
-// import { useFormContext } from 'react-hook-form';
 import classNames from 'classnames/bind';
 
+import { ValidatorType } from '@utils/registerOptions';
+
 import styles from './Input.module.scss';
+// import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 const cx = classNames.bind(styles);
 
@@ -9,15 +11,18 @@ interface InputProps {
   required?: boolean;
   labelName: string;
   id: string;
-  // validation: any;
   name: string;
   value: string;
   maxLength: number;
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  // register?: UseFormRegister<FieldValues>;
+  register?: any;
+  errors?: any;
+  validator?: ValidatorType;
 }
 
-export default function Input({
+export default function SignInput({
   required,
   labelName,
   id,
@@ -26,12 +31,13 @@ export default function Input({
   maxLength,
   placeholder,
   onChange,
+  register,
+  errors,
+  validator,
   ...rest
 }: InputProps) {
-  // const {
-  // register,
-  //   formState: { errors },
-  // } = useFormContext();
+  const errorText = errors && errors[name] ? 'error-text' : '';
+  const errorInput = errors && errors[name] ? 'error-input' : '';
 
   return (
     <div className={cx('input', 'text-default')}>
@@ -44,10 +50,9 @@ export default function Input({
       <div className={cx('input-and-check')}>
         <div className={cx('input-box')}>
           <input
-            className={cx('input-field')}
+            className={cx('input-field', errorInput)}
             type='text'
-            // {...register(id)}
-            // {...register(id, validation)}
+            {...(register && register(name, validator))}
             id={id}
             name={name}
             value={value}
@@ -61,12 +66,7 @@ export default function Input({
           </span>
         </div>
         <p className={cx('double-check')}>
-          {/* <span className={styles.message}>{errors.root?.message}</span> */}
-
-          <span className={cx('message')}>중복된 아이디입니다.</span>
-          <button type='button' className={cx('double-check-button')}>
-            중복체크
-          </button>
+          <span className={cx('message', errorText)}>{errors[name]?.message || ''}</span>
         </p>
       </div>
     </div>

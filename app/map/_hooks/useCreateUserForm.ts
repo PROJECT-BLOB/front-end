@@ -14,7 +14,13 @@ export interface ContentField {
 
 export default function useCreateUserForm(toggleModal: () => void) {
   const router = useRouter();
-  const { register, handleSubmit, reset } = useForm<ContentField>();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ContentField>({ mode: 'onBlur' });
   const { signin } = useUserStore();
 
   function cancelForm() {
@@ -42,5 +48,5 @@ export default function useCreateUserForm(toggleModal: () => void) {
     toggleModal();
   }
 
-  return { register, handleSubmit, onSubmit, cancelForm };
+  return { register, handleSubmit, onSubmit, cancelForm, errors };
 }

@@ -38,7 +38,9 @@
 
 .input-field {
   display: flex;
-  width: 21.6rem;
+  // width: 21.6rem;
+  width: 33.1rem;
+
   padding: 1.2rem 2rem 1.2rem 1.6rem;
   justify-content: center;
   align-items: center;
@@ -110,9 +112,13 @@
   line-height: 133%; /* 15.96px */
 }
 
-.error {
+.error-text {
   color: $BDS-System-Error;
+}
+.error-input {
+  border-color: $BDS-System-Error;
 }
 .success {
   color: $BDS-System-Success;
+  border-color: $BDS-System-Success;
 }
