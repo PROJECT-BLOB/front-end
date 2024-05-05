@@ -81,7 +81,7 @@ body {
   max-width: $max-width;
   min-height: 100vh;
   height: fit-content;
-  overflow-x: auto;
+  // overflow-x: auto; 스크롤 두개 생겨서 주석처리함
 }
 
 ::-webkit-scrollbar:horizontal {
@@ -95,6 +95,7 @@ body {
 }
 
 #root {
+  width: 100%;
   position: relative;
   z-index: $z-index-root; //TODO: 변수로바꾸기
 }

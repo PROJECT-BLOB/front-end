@@ -14,7 +14,7 @@ export default function PostList({ userId }: { userId: number }) {
 
   if (isPending) {
     // TODO 스켈레톤 UI 추가
-    return <div className={styles.loading}>loading...</div>;
+    return <div>loading...</div>;
   }
 
   if (isError) {
@@ -31,7 +31,7 @@ export default function PostList({ userId }: { userId: number }) {
       )}
       {/*  TODO 로딩 인디케이터 추가 */}
 
-      {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
+      {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref}>더 가져오기..</div>}
     </div>
   );
 }
