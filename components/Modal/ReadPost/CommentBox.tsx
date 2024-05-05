@@ -1,36 +1,38 @@
 import { FormEvent, useState } from 'react';
 
 import { Comment } from '@/types/Post';
-import createComment from '@apis/post/createComment';
-import createReply from '@apis/post/creatReply';
-import getCommentList from '@apis/post/getCommentList';
-import { COMMENTS_PAGE_LIMIT } from '@constants/pageValues';
-import useInfiniteScrollQuery from '@queries/useInfiniteScrollQuery';
+import { useCreateComment, useCreateReply, useFetchTargetPostComment } from '@queries/usePostQueries';
 
 import CommentContainer from './Comment';
 import styles from './CommentBox.module.scss';
 
 export default function CommentBox({ postId }: { postId: number }) {
-  const { data, isPending, isError, isFetchingNextPage, ref } = useInfiniteScrollQuery(
-    getCommentList,
-    {
-      postId,
-      page: 0,
-      size: COMMENTS_PAGE_LIMIT,
-    },
-    ['comment'],
-  );
-
   const [commentInput, setCommentInput] = useState('');
-  const [replyInformation, setReplyInformation] = useState({ isReply: false, targetCommentId: 0 });
 
-  function handleCommentSubmit(e: FormEvent<HTMLFormElement>) {
+  const [replyInformation, setReplyInformation] = useState({
+    isReply: false,
+    targetCommentId: 0,
+    targetCommentNickname: '',
+  });
+
+  // 댓글 조회
+  const { data, isPending, isError, isFetchingNextPage, ref } = useFetchTargetPostComment(postId);
+
+  // 댓글 추가 후 댓글 조회 초기화
+  const { mutateAsync: createCommentMutate } = useCreateComment(postId);
+
+  // 답글 추가 후 답글 조회 초기화
+  const { mutateAsync: createReplyMutate } = useCreateReply(replyInformation.targetCommentId);
+
+  async function handleSubmitComment(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-
     // 답글인지 아닌지에 따라 api 호출 다르게 해줌
     replyInformation.isReply
-      ? createReply(replyInformation.targetCommentId, { content: commentInput })
-      : createComment(postId, { content: commentInput });
+      ? await createReplyMutate({ commentId: replyInformation.targetCommentId, body: { content: commentInput } })
+      : await createCommentMutate({ postId, body: { content: commentInput } });
+    // 댓글 입력창 초기화
+    setCommentInput('');
+    setReplyInformation({ isReply: false, targetCommentId: 0, targetCommentNickname: '' });
   }
 
   if (isPending) {
@@ -45,7 +47,7 @@ export default function CommentBox({ postId }: { postId: number }) {
   const commentsPages = data?.pages ?? [];
 
   return (
-    <>
+    <div>
       <div className={styles['comment-box']}>
         {commentsPages.map((commentsPage) =>
           commentsPage.data.content.map((comment: Comment) => (
@@ -57,9 +59,11 @@ export default function CommentBox({ postId }: { postId: number }) {
         {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
       </div>
 
-      <form className={styles['comment-form']} onSubmit={handleCommentSubmit}>
+      <form className={styles['comment-form']} onSubmit={handleSubmitComment}>
         <div>
-          {replyInformation.isReply && replyInformation.targetCommentId}
+          {replyInformation.isReply && (
+            <span className={styles['target-nickname']}>@{replyInformation.targetCommentNickname}</span>
+          )}
           <input
             type='text'
             className={styles['comment-input']}
@@ -72,6 +76,6 @@ export default function CommentBox({ postId }: { postId: number }) {
           게시
         </button>
       </form>
-    </>
+    </div>
   );
 }

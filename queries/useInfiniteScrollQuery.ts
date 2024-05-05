@@ -5,25 +5,17 @@ import { useInView } from 'react-intersection-observer';
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-interface QueryBody {
-  [key: string]: unknown;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type ApiFunction<T extends QueryBody> = (body: T) => Promise<any>;
-
-export default function useInfiniteScrollQuery<T extends QueryBody>(
-  apiFunction: ApiFunction<T>,
-  body: T,
-  queryKey: string[],
-) {
-  const queryFn = ({ pageParam = 0 }) => apiFunction({ ...body, page: pageParam });
+export default function useInfiniteScrollQuery(queryOptions: {
+  queryKey: readonly (string | number)[];
+  queryFn: (page: number) => Promise<any>;
+}) {
+  const { queryKey, queryFn } = queryOptions;
 
   const { ref, inView } = useInView();
 
   const { data, isPending, isError, fetchNextPage, isFetchingNextPage } = useInfiniteQuery({
     queryKey,
-    queryFn,
+    queryFn: ({ pageParam = 0 }) => queryFn(pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam: number) =>
       lastPage.data.hasMore ? lastPageParam + 1 : undefined,
