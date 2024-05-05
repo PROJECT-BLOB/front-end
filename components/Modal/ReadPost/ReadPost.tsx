@@ -10,7 +10,7 @@ import styles from './ReadPost.module.scss';
 
 export default function ReadPost() {
   const { toggleModal } = useModalStore();
-  const { data: post } = useFetchTargetPost(5);
+  const { data: post } = useFetchTargetPost(11);
 
   return (
     <div className={styles['read-modal']}>
