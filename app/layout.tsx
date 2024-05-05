@@ -5,6 +5,7 @@ import GlobalNavigationBar from '@components/GlobalNavigationBar/GlobalNavigatio
 import WrapperProvider from '@utils/WrapperProvider';
 
 import styles from './RootLayout.module.scss';
+import '@styles/global-styles/global.scss';
 
 import type { Metadata } from 'next';
 

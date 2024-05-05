@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
 import createUser from '@apis/user/sign/createUser';
+import { useUserStore } from '@stores/userStore';
 // import { useOAuthStore } from '@stores/useOAuthStore';
 // import { useUserStore } from '@stores/userStore';
 
@@ -14,7 +15,7 @@ export interface ContentField {
 export default function useCreateUserForm(toggleModal: () => void) {
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<ContentField>();
-  // const { userId } = useOAuthStore();
+  const { signin } = useUserStore();
 
   function cancelForm() {
     reset();
@@ -30,9 +31,10 @@ export default function useCreateUserForm(toggleModal: () => void) {
 
     if (status === 200) {
       console.log('회원가입 성공');
-      // 성공 시, 로그인 처리하고 맵으로 이동
-
-      router.push('/map');
+      // TODO: 일단 마이페이지로 이동시킴. 나중에 맵으로 이동하는 것으로 변경예정
+      signin();
+      router.push('/mypage');
+      // router.push('/map');
 
       return;
     }

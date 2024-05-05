@@ -23,11 +23,15 @@ export const useUserStore = create(
   persist<UserStore>(
     (set) => ({
       userId: 0,
-      isSignin: false,
+      isSignin: typeof window !== 'undefined' ? localStorage.getItem('isSignin') === 'true' : false, // 초기 로딩 때 로컬스토리지에서 값을 읽어오도록 함
       lastLocation: { lat: 0, lng: 0 },
       setUserId: (newUserId: number) => set({ userId: newUserId }),
-      signin: () => set(() => ({ isSignin: true })),
-      signout: () => set(() => ({ isSignin: false })),
+      signin: () => {
+        set(() => ({ isSignin: true }));
+      },
+      signout: () => {
+        set(() => ({ isSignin: false }));
+      },
     }),
     {
       name: 'userStorage',

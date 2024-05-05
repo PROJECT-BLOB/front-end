@@ -81,30 +81,33 @@ const mockContent: Post[] = [
 
 export default function myPage() {
   // TODO: 유저 정보 가져오기
-  const { userId } = useUserStore();
+  const { userId, isSignin } = useUserStore();
 
   const [userData, setUserData] = useState<UserDetail | null>(null);
   // TODO: posts 가져오기
   // const [postsData, setPostsData] = useState<Post[] | null>(null);
   const router = useRouter();
 
-  const { data } = useDetailQueries(userId);
-  // isLoading, isError, error - 린트에러 때문에 지움
+  const { data, isLoading, isError, error } = useDetailQueries(userId);
+
   useEffect(() => {
     if (data) {
       // 데이터가 있을 때만 상태를 업데이트함
-      setUserData(data?.data);
+      setUserData(data.data);
     }
   }, [data]);
 
   useEffect(() => {
-    if (!userData) return;
+    // if (!userData) return;
 
-    // TODO: 로그인 안 되어있으면 로그인 페이지로 이동-임시, 수정필요
-    if (userData?.state === 'INCOMPLETE') {
+    if (!isSignin) {
       router.push('/signin');
     }
-  }, [userData, router]);
+  }, [isSignin, router]);
+
+  if (isLoading) return <div>로딩중...</div>;
+
+  if (isError) return <div>에러 발생: {error.toString()}</div>;
 
   return (
     <div className={cx('wrappper')}>

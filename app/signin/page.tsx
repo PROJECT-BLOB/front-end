@@ -10,23 +10,21 @@ import BlobLogo from '@/public/icons/logo-BLOB.svg';
 import GoogleLogo from '@/public/icons/logo-google.svg';
 import KakaoLogo from '@/public/icons/logo-kakao.svg';
 import NaverLogo from '@/public/icons/logo-naver.svg';
-import { getAccessToken } from '@apis/axios';
 import getRedirectUrl from '@apis/oauth/getRedirectUrl';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
-
-import CreateUser from '@components/Modal/CreateUser/CreateUser';
+import { useUserStore } from '@stores/userStore';
 
 import SigninButton from './_components/SigninButton';
 import styles from './Signin.module.scss';
 
 export default function Signin() {
-  const { state } = useOAuthStore();
-  const accessToken = getAccessToken();
+  const { accessToken, state } = useOAuthStore();
+  const { isSignin } = useUserStore();
 
   const router = useRouter();
 
-  const { toggleModal, name, setCurrentName } = useModalStore();
+  const { toggleModal, setCurrentName } = useModalStore();
 
   function handleOpenModal(name: ModalName) {
     setCurrentName(name);
@@ -49,17 +47,19 @@ export default function Signin() {
     }
 
     if (accessToken && state === 'INCOMPLETE') {
+      console.log('accessToken:', accessToken);
+      console.log('state:', state);
       handleOpenModal('createUser');
     }
   }, [accessToken, state, setCurrentName, toggleModal]);
 
   useEffect(() => {
-    // 토큰 있으면 맵으로 리다이렉트
-    if (accessToken) {
+    if (isSignin) {
       // 테스트를 위해 잠시 주석처리...
+      console.log('로그인된 유저입니다. 맵으로 이동...');
       // router.push('map');
     }
-  }, [accessToken, router]);
+  }, [isSignin, router]);
 
   return (
     <main className={styles.signin}>
@@ -87,7 +87,7 @@ export default function Signin() {
       <button type='button' onClick={() => handleOpenModal('createUser')}>
         회원가입 모달 테스트용
       </button>
-      {name === 'createUser' && <CreateUser />}
+      {/* {name === 'createUser' && <CreateUser />} */}
     </main>
   );
 }
