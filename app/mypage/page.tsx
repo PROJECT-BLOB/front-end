@@ -124,7 +124,8 @@ export default function myPage() {
         <Tab focused={false}>댓글 단 글</Tab>
       </section>
       <section className={cx('post-list')}>
-        <PostList postList={mockContent} />
+        {/* //TODO: 임시 */}
+        <PostList userId={2} />
       </section>
     </div>
   );
