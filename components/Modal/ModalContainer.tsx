@@ -22,7 +22,9 @@ export default function ModalContainer() {
     isOpen && (
       <Portal>
         <div className={styles['back-drop']} />
-        <div className={styles['modal-container']}>{ModalList[name]}</div>
+        {/* <div className={styles['modal-container']}>{ModalList[name]}</div> */}
+        {/* 예진-빌드하면 에러 나서 임의로 수정했습니다ㅠㅠ */}
+        <div className={styles['modal-container']}>{ModalList[name as keyof typeof ModalList]}</div>
       </Portal>
     )
   );
