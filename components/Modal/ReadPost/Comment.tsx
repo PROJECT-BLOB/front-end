@@ -59,13 +59,22 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
               targetCommentNickname: comment.author.nickname,
             });
           }}
+          className={styles['create-reply']}
         >
-          댓글달기
+          답글달기
         </button>
       </div>
-      <button type='button' onClick={() => setIsViewReplyClicked(!isViewReplyClicked)}>
-        답글 {replyList ? replyList?.data.content.length : 0}개 보기
-      </button>
+      {replyList?.data.content.length ? (
+        <button
+          type='button'
+          onClick={() => setIsViewReplyClicked(!isViewReplyClicked)}
+          className={styles['see-reply']}
+        >
+          답글 보기 ({replyList?.data.content.length}개)
+        </button>
+      ) : (
+        ''
+      )}
 
       {isViewReplyClicked &&
         replyList?.data.content &&

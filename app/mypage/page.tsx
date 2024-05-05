@@ -33,6 +33,7 @@ const mockContent: Post[] = [
       profileUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
     },
+    expiresAt: '2024-05-05T14:46:19',
     country: '일본',
     city: '도쿄',
     lat: 0,
@@ -64,6 +65,7 @@ const mockContent: Post[] = [
       profileUrl:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
     },
+    expiresAt: '2024-05-05T14:46:19',
     country: '일본',
     city: '도쿄',
     lat: 0,
