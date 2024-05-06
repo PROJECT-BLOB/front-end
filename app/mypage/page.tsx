@@ -6,10 +6,10 @@ import classNames from 'classnames/bind';
 import { useRouter } from 'next/navigation';
 
 import { useUserStore } from '@stores/userStore';
-
-import Tab from '@components/Tab';
+import { useTabStore } from '@stores/useTabStore';
 
 import PostList from './_components/Post/PostList';
+import TabList from './_components/Tab/TabList';
 import UserProfile from './_components/UserProfile/UserProfile';
 import styles from './myPage.module.scss';
 
@@ -18,7 +18,7 @@ const cx = classNames.bind(styles);
 export default function myPage() {
   // TODO: 유저 정보 가져오기
   const { userId, isSignin } = useUserStore();
-
+  const { selectedTab } = useTabStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -33,12 +33,10 @@ export default function myPage() {
         <UserProfile userId={userId} />
       </section>
       <section className={cx('tabs')}>
-        <Tab focused>내가 쓴 글</Tab>
-        <Tab focused={false}>저장한 글</Tab>
-        <Tab focused={false}>댓글 단 글</Tab>
+        <TabList />
       </section>
       <section className={cx('post-list')}>
-        <PostList userId={userId} />
+        <PostList userId={userId} selectedTab={selectedTab} />
       </section>
     </div>
   );

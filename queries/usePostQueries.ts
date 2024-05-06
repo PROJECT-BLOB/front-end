@@ -11,6 +11,8 @@ import getReplyList from '@apis/post/getReplyList';
 import postBookmark from '@apis/post/postBookmark';
 import updateCommentLike from '@apis/post/updateCommentLike';
 import updatePostLike from '@apis/post/updatePostLike';
+import getUserBookmarkList from '@apis/user/mypage/getUserBookmarkList';
+import getUserCommentList from '@apis/user/mypage/getUserCommentList';
 import getUserPostList from '@apis/user/mypage/getUserPostList';
 import { COMMENTS_PAGE_LIMIT, POSTS_PAGE_LIMIT } from '@constants/pageValues';
 
@@ -28,6 +30,20 @@ export function useFetchPostList(userId: number) {
   return useInfiniteScrollQuery({
     queryKey: posts.all(userId).queryKey,
     queryFn: (page: number) => getUserPostList({ userId, page, size: POSTS_PAGE_LIMIT }),
+  });
+}
+
+export function useFetchBookmarkList(userId: number) {
+  return useInfiniteScrollQuery({
+    queryKey: posts.all(userId).queryKey,
+    queryFn: (page: number) => getUserBookmarkList({ userId, page, size: POSTS_PAGE_LIMIT }),
+  });
+}
+
+export function useFetchCommentList(userId: number) {
+  return useInfiniteScrollQuery({
+    queryKey: posts.comment(userId).queryKey,
+    queryFn: (page: number) => getUserCommentList({ userId, page, size: POSTS_PAGE_LIMIT }),
   });
 }
 

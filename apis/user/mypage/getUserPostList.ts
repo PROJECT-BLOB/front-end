@@ -8,7 +8,7 @@ export interface PostList {
   hasMore: boolean;
 }
 
-interface PostListProps {
+export interface PostListProps {
   userId: number;
   page: number;
   size: number;

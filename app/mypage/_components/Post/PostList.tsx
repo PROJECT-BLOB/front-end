@@ -1,16 +1,31 @@
 import classNames from 'classnames/bind';
 
 import { Post } from '@/types/Post';
-import { useFetchPostList } from '@queries/usePostQueries';
+import { useFetchBookmarkList, useFetchCommentList, useFetchPostList } from '@queries/usePostQueries';
 
 import PostItem from './PostItem';
 import styles from './PostList.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function PostList({ userId }: { userId: number }) {
-  // 글목록 조회
-  const { data, isPending, isError, isFetchingNextPage, ref } = useFetchPostList(userId);
+export default function PostList({ userId, selectedTab }: { userId: number; selectedTab: string }) {
+  // console.log('selectedTab', selectedTab);
+  let fetchDataFunction;
+  switch (selectedTab) {
+    case '내가 쓴 글':
+      fetchDataFunction = useFetchPostList;
+      break;
+    case '저장한 글':
+      fetchDataFunction = useFetchBookmarkList;
+      break;
+    case '댓글 단 글':
+      fetchDataFunction = useFetchCommentList;
+      break;
+    default:
+      fetchDataFunction = useFetchPostList; // 기본값으로 내가 쓴 글을 가져오도록 설정
+  }
+
+  const { data, isPending, isError, isFetchingNextPage, ref } = fetchDataFunction(userId);
 
   if (isPending) {
     // TODO 스켈레톤 UI 추가
