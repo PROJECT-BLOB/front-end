@@ -2,8 +2,9 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import HeartIcon from '@public/icons/check-heart.svg';
+import { useDetailQueries } from '@queries/useUserQueries';
 import useModalStore, { ModalName } from '@stores/useModalStore';
-import { UserDetail } from 'types/User';
+import { UserDetail } from '@types/User';
 
 import Avatar from '@components/Avatar/Avatar';
 
@@ -12,13 +13,23 @@ import styles from './UserProfile.module.scss';
 const cx = classNames.bind(styles);
 
 // TODO: 타입 정의
-export default function UserProfile({ userData }: { userData: UserDetail | null }) {
-  const { toggleModal, setCurrentName } = useModalStore();
+export default function UserProfile({ userId }: { userId: number }) {
+  const { toggleModal, name, setCurrentName } = useModalStore();
 
   function handleClickOpenModal(name: ModalName) {
     setCurrentName(name);
     toggleModal();
   }
+
+  const { data, isLoading, isError, error } = useDetailQueries(userId);
+
+  if (isLoading) return <div>로딩중...</div>;
+
+  if (isError) return <div>에러 발생: {error.toString()}</div>;
+
+  const userData: UserDetail | undefined = data?.data;
+
+  console.log('userData', userData);
 
   return (
     <div className={cx('container')}>

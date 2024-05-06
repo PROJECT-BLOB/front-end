@@ -4,19 +4,21 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import useCreateUserForm from '@/app/map/_hooks/useCreateUserForm';
-import Input from '@/components/Input/Input';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
 import BlobButton from '@components/Button/BlobButton';
+import SignInput from '@components/SignInput/SignInput';
 
-import styles from './CreateUser.module.scss';
+import { blobIdValidator, nicknameValidator } from '@utils/registerOptions';
+
+import styles from './RegisterModal.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function CreateUser() {
+export default function RegisterModal() {
   const { toggleModal } = useModalStore();
-  const { handleSubmit, onSubmit, cancelForm } = useCreateUserForm(toggleModal);
+  const { errors, register, handleSubmit, onSubmit, cancelForm } = useCreateUserForm(toggleModal);
 
   const [userFormData, setUserFormData] = useState({
     id: '',
@@ -36,7 +38,6 @@ export default function CreateUser() {
     });
   };
 
-  // TODO: id, nickname 유효성 검사 추가
   return (
     <form className={cx('form')} onSubmit={handleSubmit(() => onSubmit(userFormData))}>
       <header className={cx('header')}>
@@ -47,14 +48,32 @@ export default function CreateUser() {
       </header>
 
       <main className={cx('input')}>
-        <Input labelName='아이디' id='id' name='id' value={userFormData.id} onChange={handleChangeInput} />
+        <SignInput
+          required
+          register={register}
+          labelName='아이디'
+          id='id'
+          name='id'
+          value={userFormData.id}
+          maxLength={20}
+          onChange={handleChangeInput}
+          placeholder='아이디를 입력해주세요'
+          errors={errors}
+          validator={blobIdValidator}
+        />
 
-        <Input
+        <SignInput
+          required
+          register={register}
           labelName='닉네임'
           id='nickname'
           name='nickname'
           value={userFormData.nickname}
+          maxLength={10}
           onChange={handleChangeInput}
+          placeholder='닉네임을 입력해주세요'
+          errors={errors}
+          validator={nicknameValidator}
         />
       </main>
 
