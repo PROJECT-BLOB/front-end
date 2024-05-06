@@ -5,6 +5,8 @@ import HeartIcon from '@/public/icons/heart.svg';
 import CommentIcon from '@/public/icons/message-circle-02.svg';
 import { Post } from '@/types/Post';
 
+import CategoryBox from '@components/CategoryBox';
+
 import styles from './PostItem.module.scss';
 
 const cx = classNames.bind(styles);
@@ -13,8 +15,8 @@ export default function PostItem({ post }: { post: Post }) {
   return (
     <div className={cx('post-container')}>
       <header className={cx('header')}>
-        <span>태그 일단 보류함</span>
-        <span>beloved</span>
+        <CategoryBox contentData={post} />
+        <span>beloved 태그 보류</span>
       </header>
       <main className={cx('main')}>
         <p className={cx('main-text')}>

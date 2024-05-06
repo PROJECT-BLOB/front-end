@@ -17,7 +17,7 @@ import { useUserStore } from '@stores/userStore';
 
 import ModalContainer from '@components/Modal/ModalContainer';
 
-import SigninButton from './_components/SigninButton';
+import SigninButton from './_components/SigninButton/SigninButton';
 import styles from './Signin.module.scss';
 
 export default function Signin() {

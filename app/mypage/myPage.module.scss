@@ -2,15 +2,11 @@
 
 .wrappper {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.tabs {
-  // width: 100%;
-
-  @include flex-row-center;
-  align-items: flex-start;
-  gap: 1.6rem;
-}
 .post-list {
   display: flex;
   justify-content: center;

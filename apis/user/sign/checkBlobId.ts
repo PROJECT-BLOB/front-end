@@ -4,7 +4,7 @@ import instance from '@apis/axios';
 
 // TODO: dto의 타입 확인.
 export default async function checkBlobId(blobId: string) {
-  const result = await instance.get(`/user/checkBlobId/${blobId}`);
+  const { data, status } = await instance.get(`/user/checkBlobId/${blobId}`);
 
-  return result.data;
+  return { data, status };
 }
