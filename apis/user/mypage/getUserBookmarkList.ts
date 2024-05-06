@@ -7,6 +7,7 @@ export default async function getUserBookmarkList(body: PostListProps): Promise<
   const { data, status } = await instance.get<PostList>(`/user/${body.userId}/bookmark`, {
     params: { page: body.page, size: body.size },
   });
+  console.log('북마크글 가져옵니다');
 
   return { data, status };
 }

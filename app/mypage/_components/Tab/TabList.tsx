@@ -20,14 +20,15 @@ export default function TabList() {
   const { selectedTab, setSelectedTab } = useTabStore();
 
   const handleClickTab = (value: string) => {
-    setSelectedTab(value);
-    console.log('clicked: ', value);
+    const selectedTabLabel = MYPAGE_TABS.find((tab) => tab.value === value)?.label || ''; // 해당 value에 대응하는 label 찾기
+    setSelectedTab(selectedTabLabel);
+    console.log('clicked: ', selectedTabLabel);
   };
 
   return (
     <div className={cx('tabs')}>
       {MYPAGE_TABS.map((tab) => (
-        <TabItem key={tab.label} value={tab.value} isFocused={selectedTab === tab.value} onClick={handleClickTab} />
+        <TabItem key={tab.label} value={tab.value} isFocused={selectedTab === tab.label} onClick={handleClickTab} />
       ))}
     </div>
   );

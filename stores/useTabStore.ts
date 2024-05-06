@@ -6,6 +6,6 @@ interface TabStore {
 }
 
 export const useTabStore = create<TabStore>((set) => ({
-  selectedTab: '내가 쓴 글',
+  selectedTab: 'MyPosts',
   setSelectedTab: (selectedTab) => set({ selectedTab }),
 }));

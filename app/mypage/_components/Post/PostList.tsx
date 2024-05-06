@@ -9,23 +9,32 @@ import CommentItem from '../Comment/CommentItem';
 
 const cx = classNames.bind(styles);
 
+// TODO: 화면이 안 바뀌는 버그 수정 필요..
 export default function PostList({ userId, selectedTab }: { userId: number; selectedTab: string }) {
-  // console.log('selectedTab', selectedTab);
+  console.log('selectedTab', selectedTab);
   let fetchDataFunction;
   switch (selectedTab) {
-    case '내가 쓴 글':
+    case 'MyPosts':
       fetchDataFunction = useFetchPostList;
+      console.log('1. 탭 이름 저장: MyPosts');
       break;
-    case '저장한 글':
+    case 'Bookmarks':
       fetchDataFunction = useFetchBookmarkList;
+      console.log('1. 탭 이름 저장: Bookmarks');
       break;
-    case '댓글 단 글':
+    case 'MyComments':
       fetchDataFunction = useFetchCommentList;
+      console.log('1. 탭 이름 저장: MyComments');
       break;
     default:
       fetchDataFunction = useFetchPostList; // 기본값으로 내가 쓴 글을 가져오도록 설정
+      break;
   }
 
+  console.log('현재 가져올 데이터:', fetchDataFunction);
+
+  // TODO: 여기서 fetchDataFunction이 제대로 안 들어감!!!!!!!!!!!!!!!!!!!왜그럴까
+  // 순서가 문제인듯... 데이터가 가져오기 전에  data를 저장해서... async await 이 필요할듯?
   const { data, isPending, isError, isFetchingNextPage, ref } = fetchDataFunction(userId);
 
   if (isPending) {
@@ -38,7 +47,7 @@ export default function PostList({ userId, selectedTab }: { userId: number; sele
   }
 
   const postsPages = data?.pages ?? [];
-  console.log('data', postsPages);
+  console.log('2. 탭에 맞는 데이터 가져옴', postsPages);
 
   return (
     <div className={cx('container')}>
