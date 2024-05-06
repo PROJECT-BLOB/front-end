@@ -15,7 +15,7 @@ import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
 import { useUserStore } from '@stores/userStore';
 
-import SigninButton from './_components/SigninButton';
+import SigninButton from './_components/SigninButton/SigninButton';
 import styles from './Signin.module.scss';
 
 export default function Signin() {
@@ -49,7 +49,7 @@ export default function Signin() {
     if (accessToken && state === 'INCOMPLETE') {
       console.log('accessToken:', accessToken);
       console.log('state:', state);
-      handleOpenModal('createUser');
+      handleOpenModal('registerUser');
     }
   }, [accessToken, state, setCurrentName, toggleModal]);
 
@@ -84,7 +84,7 @@ export default function Signin() {
       </p>
       <button type='button' onClick={() => handleOpenModal('createUser')}>
         회원가입 모달 테스트용
-      </button>{' '}
+      </button>
     </main>
   );
 }
