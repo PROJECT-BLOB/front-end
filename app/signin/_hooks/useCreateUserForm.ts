@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { Errors } from '@/types/Errors';
 import createUser from '@apis/user/sign/createUser';
+import useModalStore from '@stores/useModalStore';
 import { useUserStore } from '@stores/userStore';
 
 export interface ContentField {
@@ -11,8 +12,9 @@ export interface ContentField {
   nickname: string;
 }
 
-export default function useCreateUserForm(toggleModal: () => void) {
+export default function useCreateUserForm() {
   const router = useRouter();
+  const { toggleModal } = useModalStore();
 
   const {
     register,

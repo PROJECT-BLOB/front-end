@@ -1,6 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
 
-import { ContentField } from '@/app/map/_hooks/useCreateUserForm';
+import { ContentField } from '@/app/signin/_hooks/useCreateUserForm';
 
 import { ValidatorType } from '@utils/registerOptions';
 

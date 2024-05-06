@@ -3,9 +3,8 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import useCreateUserForm from '@/app/map/_hooks/useCreateUserForm';
+import useCreateUserForm from '@/app/signin/_hooks/useCreateUserForm';
 import CloseButton from '@/public/icons/x-close.svg';
-import useModalStore from '@stores/useModalStore';
 
 import BlobButton from '@components/Button/BlobButton';
 
@@ -17,8 +16,7 @@ import SignInput from '../SignInput/SignInput';
 const cx = classNames.bind(styles);
 
 export default function RegisterModal() {
-  const { toggleModal } = useModalStore();
-  const { errors, register, handleSubmit, onSubmit, cancelForm } = useCreateUserForm(toggleModal);
+  const { errors, register, handleSubmit, onSubmit, cancelForm } = useCreateUserForm();
 
   const [userFormData, setUserFormData] = useState({
     id: '',

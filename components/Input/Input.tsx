@@ -25,7 +25,7 @@ export default function Input({
   ...rest
 }: ExtendedInputProps) {
   return (
-    <div className={cx('input', 'text-default')}>
+    <div className={cx('input')}>
       <div className={cx('label')}>
         <label className={cx('label-name')} htmlFor={id}>
           {labelName}

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import { Post, Comment } from '@/types/Post';
+import { Comment, Post } from '@/types/Post';
 import { useFetchBookmarkList, useFetchCommentList, useFetchPostList } from '@queries/usePostQueries';
 
 import PostItem from './PostItem';
