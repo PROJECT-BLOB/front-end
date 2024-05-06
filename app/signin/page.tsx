@@ -82,7 +82,7 @@ export default function Signin() {
           <span className={styles.underline}>회원가입 하기</span>
         </Link>
       </p>
-      <button type='button' onClick={() => handleOpenModal('createUser')}>
+      <button type='button' onClick={() => handleOpenModal('registerUser')}>
         회원가입 모달 테스트용
       </button>
     </main>
