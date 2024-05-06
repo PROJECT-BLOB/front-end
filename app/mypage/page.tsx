@@ -16,7 +16,6 @@ import styles from './myPage.module.scss';
 const cx = classNames.bind(styles);
 
 export default function myPage() {
-  // TODO: 유저 정보 가져오기
   const { userId, isSignin } = useUserStore();
   const { selectedTab } = useTabStore();
   const router = useRouter();

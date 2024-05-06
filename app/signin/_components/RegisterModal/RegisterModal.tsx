@@ -8,11 +8,11 @@ import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
 import BlobButton from '@components/Button/BlobButton';
-import SignInput from '@components/SignInput/SignInput';
 
 import { blobIdValidator, nicknameValidator } from '@utils/registerOptions';
 
 import styles from './RegisterModal.module.scss';
+import SignInput from '../SignInput/SignInput';
 
 const cx = classNames.bind(styles);
 
@@ -79,8 +79,7 @@ export default function RegisterModal() {
 
       <footer className={cx('buttons')}>
         <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
-        {/* <BlobButton text='회원가입' type='submit' color='button-colord-contain' /> */}
-        <button type='submit'>회원가입</button>
+        <BlobButton text='회원가입' type='submit' color='button-colord-contain' />
       </footer>
     </form>
   );
