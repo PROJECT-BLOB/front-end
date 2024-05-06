@@ -1,10 +1,11 @@
 import classNames from 'classnames/bind';
 
-import { Post } from '@/types/Post';
+import { Post, Comment } from '@/types/Post';
 import { useFetchBookmarkList, useFetchCommentList, useFetchPostList } from '@queries/usePostQueries';
 
 import PostItem from './PostItem';
 import styles from './PostList.module.scss';
+import CommentItem from '../Comment/CommentItem';
 
 const cx = classNames.bind(styles);
 
@@ -41,9 +42,15 @@ export default function PostList({ userId, selectedTab }: { userId: number; sele
 
   return (
     <div className={cx('container')}>
-      {postsPages.map((postsPage) =>
-        postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
-      )}
+      {fetchDataFunction === useFetchCommentList
+        ? postsPages.map((postsPage) =>
+            // TODO: post-title, category 정보도 같이 보내야 함
+            postsPage.data.content.map((post: Comment) => <CommentItem key={post.commentId} post={post} />),
+          )
+        : postsPages.map((postsPage) =>
+            postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
+          )}
+
       {/*  TODO 로딩 인디케이터 추가 */}
 
       {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref}>더 가져오기..</div>}
