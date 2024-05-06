@@ -58,7 +58,7 @@ export default function Input({
           {...rest}
         />
         <span className={cx('max-length')}>
-          ({value.replace(/<br\s*\/?>/gm, '\n').length}/{maxLength})
+          {value.length > 0 && `${value.replace(/<br\s*\/?>/gm, '\n').length}/${maxLength}`}
         </span>
       </div>
     </div>
