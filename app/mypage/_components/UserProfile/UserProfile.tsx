@@ -1,21 +1,19 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
+import { UserDetail } from '@/types/User';
 import HeartIcon from '@public/icons/check-heart.svg';
 import { useDetailQueries } from '@queries/useUserQueries';
 import useModalStore, { ModalName } from '@stores/useModalStore';
-import { UserDetail } from '@types/User';
 
 import Avatar from '@components/Avatar/Avatar';
 
 import styles from './UserProfile.module.scss';
-import UpdateProfileModal from '../UpdateProfileModal/UpdateProfileModal';
 
 const cx = classNames.bind(styles);
 
 export default function UserProfile({ userId }: { userId: number }) {
-  const { toggleModal, name, setCurrentName } = useModalStore();
-
+  const { toggleModal, setCurrentName } = useModalStore();
   function handleClickOpenModal(name: ModalName) {
     setCurrentName(name);
     toggleModal();
@@ -61,8 +59,6 @@ export default function UserProfile({ userId }: { userId: number }) {
         </p>
       </div>
       <p className={cx('text-black', 'small', 'bio-width')}>{userData?.bio}</p>
-
-      {name === 'updateProfile' && <UpdateProfileModal />}
     </div>
   );
 }
