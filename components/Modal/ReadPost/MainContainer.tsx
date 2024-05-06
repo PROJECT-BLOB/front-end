@@ -64,7 +64,7 @@ export default function MainContainer({ contentData }: MainContentProps) {
         {contentData.country} {contentData.city}
       </p>
 
-      <CategoryBox contentData={contentData} />
+      <CategoryBox category={contentData.category} subcategory={contentData.subcategory} />
 
       <h3 className={styles.title}>{contentData.title}</h3>
       <p className={styles.content}>{contentData.content}</p>

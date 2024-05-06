@@ -43,18 +43,16 @@ export default function Kebab({ toggleKebab, isUser, commentId, postId, replyId 
     <>
       <div className={styles['back-drop']} />
       <div className={styles['kebab-container']}>
-        <>
-          <button
-            type='button'
-            className={styles['kebab-content']}
-            onClick={isUser ? handleClickDelete : handleClickReport}
-          >
-            {isUser ? '삭제하기' : '신고하기'}
-          </button>
-          <button type='button' className={styles['kebab-cancel']} onClick={toggleKebab}>
-            취소하기
-          </button>
-        </>
+        <button
+          type='button'
+          className={styles['kebab-content']}
+          onClick={isUser ? handleClickDelete : handleClickReport}
+        >
+          {isUser ? '삭제하기' : '신고하기'}
+        </button>
+        <button type='button' className={styles['kebab-cancel']} onClick={toggleKebab}>
+          취소하기
+        </button>
       </div>
     </>
   );

@@ -13,7 +13,8 @@ export default function PostItem({ post }: { post: Comment }) {
     <div className={cx('post-container')}>
       <header className={cx('header')}>
         {/* // TODO: 해당 post category도 담겨있어야 함 */}
-        <CategoryBox contentData={post} />
+        {/* // TODO: 임시 */}
+        <CategoryBox category={'HELP'} subcategory='asd' />
         <span>beloved 태그 보류</span>
       </header>
       <main className={cx('main')}>
