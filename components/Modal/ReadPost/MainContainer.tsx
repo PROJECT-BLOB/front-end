@@ -47,7 +47,6 @@ export default function MainContainer({ contentData }: MainContentProps) {
             이 글은
             {calculateTimeWhenItWillDisappear(contentData.expiresAt)}이후에 사라집니다.
           </span>
-          {/* 맵에서 사라지는거 받아야 함 */}
         </div>
         <button type='button' onClick={handleClickBookmark}>
           <Image src={contentData.bookmarked ? filledBookmark : bookmark} alt='북마크 아이콘' width={24} height={24} />

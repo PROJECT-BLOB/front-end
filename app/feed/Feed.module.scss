@@ -1,13 +1,39 @@
-// TODO 무한 스크롤 확인용으로 폰트사이즈 크게 했습니다. 퍼블리싱 할 때 수정해주세요.
-.title {
-  font-size: 30rem;
+@import '/styles/global-styles/index';
+
+.feed {
+  width: 100%;
+  padding-bottom: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  @include tablet {
+    max-width: 72.8rem;
+  }
+
+  @include desktop {
+    max-width: 120.8rem;
+  }
 }
 
-.post {
-  padding: 6rem;
-  font-size: 10rem;
+.order-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  color: var(--BDS-Grayscale-7, var(--BDS-Grayscale-7, #8c8c8c));
+  font-feature-settings: 'ss10' on;
+
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142%; /* 19.88px */
 }
 
-.loading {
-  font-size: 3rem;
+.search-mention {
+  color: var(--BDS-Grayscale-13, #000);
+
+  /* BDS/Heading 1 */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 136%; /* 29.92px */
 }
