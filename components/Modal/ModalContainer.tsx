@@ -1,21 +1,20 @@
 'use client';
 
-import React from 'react';
-
 import UpdateProfileModal from '@/app/mypage/_components/UpdateProfileModal/UpdateProfileModal';
-import useModalStore from '@stores/useModalStore';
+import RegisterModal from '@/app/signin/_components/RegisterModal/RegisterModal';
+import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import Portal from '@components/Portal';
 
-import CreateUser from './CreateUser/CreateUser';
 import styles from './ModalContainer.module.scss';
 import ReadPost from './ReadPost/ReadPost';
 import WritePost from './WritePost/WritePost';
 
-const ModalList = {
+// key 타입은 ModalName의 값, 값은 JSX.Element
+const ModalList: { [key in ModalName]: JSX.Element } = {
   read: <ReadPost />,
   write: <WritePost />,
-  createUser: <CreateUser />,
+  registerUser: <RegisterModal />,
   updateProfile: <UpdateProfileModal />,
 };
 
