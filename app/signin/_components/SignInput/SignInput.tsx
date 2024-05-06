@@ -1,28 +1,12 @@
 import classNames from 'classnames/bind';
 
+import { InputProps } from '@/types/Input';
+
 import Input from '@components/Input/Input';
 
-import { ValidatorType } from '@utils/registerOptions';
-
 import styles from './SignInput.module.scss';
-// import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 const cx = classNames.bind(styles);
-
-interface InputProps {
-  required?: boolean;
-  labelName: string;
-  id: string;
-  name: string;
-  value: string;
-  maxLength: number;
-  placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  // register?: UseFormRegister<FieldValues>;
-  register?: any;
-  errors?: any;
-  validator?: ValidatorType;
-}
 
 export default function SignInput({
   required,
@@ -41,6 +25,8 @@ export default function SignInput({
   const errorText = errors && errors[name] ? 'error-text' : '';
   const errorInput = errors && errors[name] ? 'error-input' : '';
 
+  const errorMessage = errors?.[name]?.message ?? '';
+
   return (
     <div className={cx('input-and-check')}>
       <Input
@@ -56,7 +42,7 @@ export default function SignInput({
         validator={validator}
         borderColor={errorInput}
       />
-      <span className={cx('message', errorText)}>{errors[name]?.message || ''}</span>
+      <span className={cx('message', errorText)}>{errorMessage}</span>
     </div>
   );
 }

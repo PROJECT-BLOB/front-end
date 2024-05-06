@@ -1,24 +1,12 @@
 import classNames from 'classnames/bind';
 
-import { ValidatorType } from '@utils/registerOptions';
+import { InputProps } from '@/types/Input';
 
 import styles from './Input.module.scss';
-// import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 const cx = classNames.bind(styles);
 
-interface InputProps {
-  required?: boolean;
-  labelName: string;
-  id: string;
-  name: string;
-  value: string;
-  maxLength?: number;
-  placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  // register?: UseFormRegister<FieldValues>;
-  register?: any;
-  validator?: ValidatorType;
+export interface ExtendedInputProps extends InputProps {
   borderColor?: string;
 }
 
@@ -35,7 +23,7 @@ export default function Input({
   validator,
   borderColor,
   ...rest
-}: InputProps) {
+}: ExtendedInputProps) {
   return (
     <div className={cx('input', 'text-default')}>
       <div className={cx('label')}>
@@ -48,7 +36,7 @@ export default function Input({
         <input
           className={cx('input-field', borderColor)}
           type='text'
-          {...(register && register(name, validator))}
+          {...(register && register(name as 'id' | 'nickname', validator))}
           id={id}
           name={name}
           value={value}

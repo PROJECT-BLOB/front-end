@@ -2,10 +2,9 @@ import { useForm } from 'react-hook-form';
 
 import { useRouter } from 'next/navigation';
 
+import { Errors } from '@/types/Errors';
 import createUser from '@apis/user/sign/createUser';
 import { useUserStore } from '@stores/userStore';
-// import { useOAuthStore } from '@stores/useOAuthStore';
-// import { useUserStore } from '@stores/userStore';
 
 export interface ContentField {
   id: string;
@@ -48,5 +47,5 @@ export default function useCreateUserForm(toggleModal: () => void) {
     toggleModal();
   }
 
-  return { register, handleSubmit, onSubmit, cancelForm, errors };
+  return { register, handleSubmit, onSubmit, cancelForm, errors: errors as Errors };
 }
