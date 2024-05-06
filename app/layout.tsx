@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import GlobalNavigationBar from '@components/GlobalNavigationBar/GlobalNavigationBar';
+import ModalContainer from '@components/Modal/ModalContainer';
 
 import WrapperProvider from '@utils/WrapperProvider';
 
@@ -22,11 +23,11 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body suppressHydrationWarning className={styles.main}>
-        <div id='modal-layer' />
-        <GlobalNavigationBar />
-        <div id='root'>
-          <WrapperProvider>{children}</WrapperProvider>
-        </div>
+        <WrapperProvider>
+          <ModalContainer />
+          <GlobalNavigationBar />
+          {children}
+        </WrapperProvider>
       </body>
     </html>
   );

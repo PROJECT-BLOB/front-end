@@ -15,8 +15,6 @@ import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
 import { useUserStore } from '@stores/userStore';
 
-import ModalContainer from '@components/Modal/ModalContainer';
-
 import SigninButton from './_components/SigninButton/SigninButton';
 import styles from './Signin.module.scss';
 
@@ -51,7 +49,7 @@ export default function Signin() {
     if (accessToken && state === 'INCOMPLETE') {
       console.log('accessToken:', accessToken);
       console.log('state:', state);
-      handleOpenModal('createUser');
+      handleOpenModal('registerUser');
     }
   }, [accessToken, state, setCurrentName, toggleModal]);
 
@@ -78,19 +76,15 @@ export default function Signin() {
           네이버 로그인
         </SigninButton>
       </section>
-
       <p className={`${styles['title-gray']} ${styles.content}`}>
         <span>아직 BLOB 회원이 아니세요?</span>
         <Link href='/signin'>
           <span className={styles.underline}>회원가입 하기</span>
         </Link>
       </p>
-
-      <button type='button' onClick={() => handleOpenModal('createUser')}>
+      <button type='button' onClick={() => handleOpenModal('registerUser')}>
         회원가입 모달 테스트용
       </button>
-
-      <ModalContainer />
     </main>
   );
 }
