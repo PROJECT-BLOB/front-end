@@ -9,7 +9,7 @@ import { useFetchTargetCommentReply, useUpdateCommentLike } from '@queries/usePo
 
 import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
 
-import styles from './Comment.module.scss';
+import styles from './CommentContainer.module.scss';
 import ProfileContainer from './ProfileContainer';
 import Reply from './Reply';
 

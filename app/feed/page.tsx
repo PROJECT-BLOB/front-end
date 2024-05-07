@@ -23,15 +23,19 @@ const ORDERS = [
 ];
 
 export default function Feed() {
+  // TO DO: 기본 값 설정
   const [filteredData, setFilteredData] = useState({
+    // country, city 맵에서 받아와야 함
     country: '대한민국',
     city: '서울',
     sortBy: 'recent',
     categories: '',
-    startDate: '2024-05-03',
-    endDate: '2024-05-08',
+    startDate: '',
+    endDate: '',
+    // false로 하면 전체 true로 하면 이미지 있는것만
     hasImage: false,
-    hasLocation: true,
+    // 이것도 이미지와 마찬가지
+    hasLocation: false,
     minLikes: 0,
     keyword: '',
   });
@@ -56,6 +60,7 @@ export default function Feed() {
     setFilteredData(() => ({ ...filteredData, keyword: searchInput }));
   }
 
+  // 카테고리 x 표시 누르면 삭제된값 적용
   function handleClickDeleteCategory(index: number) {
     if (categoryList) {
       const newArray = [...categoryList.slice(0, index), ...categoryList.slice(index + 1, categoryList.length)];
@@ -92,7 +97,7 @@ export default function Feed() {
     <main className={styles.feed}>
       <section className={styles['search-country-and-filtering-container']}>
         <div>
-          <span className={styles['search-mention']}>실시간 #부에노스아이레스</span>
+          <span className={styles['search-mention']}>실시간 #{`${filteredData.city} ${filteredData.country}`}</span>
         </div>
         <div className={styles['filtering-container']}>
           <div className={styles['filtering-button-wrapper']}>

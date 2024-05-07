@@ -4,12 +4,12 @@ export default function useImageControl(imageList: string[] = []) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [touchStartX, setTouchStartX] = useState(0);
 
-  function handlePrevImage() {
-    setCurrentImageIndex((prevIndex) => (prevIndex === 0 ? imageList.length - 1 : prevIndex - 1));
+  function handlePreviousImage() {
+    setCurrentImageIndex((previousIndex) => (previousIndex === 0 ? imageList.length - 1 : previousIndex - 1));
   }
 
   function handleNextImage() {
-    setCurrentImageIndex((prevIndex) => (prevIndex === imageList.length - 1 ? 0 : prevIndex + 1));
+    setCurrentImageIndex((previousIndex) => (previousIndex === imageList.length - 1 ? 0 : previousIndex + 1));
   }
 
   const handleTouchStart: TouchEventHandler<HTMLDivElement> = (event) => {
@@ -29,7 +29,7 @@ export default function useImageControl(imageList: string[] = []) {
       const threshold = window.innerWidth / 2;
 
       if (deltaX > threshold) {
-        handlePrevImage();
+        handlePreviousImage();
       } else if (deltaX < -threshold) {
         handleNextImage();
       }
@@ -40,7 +40,7 @@ export default function useImageControl(imageList: string[] = []) {
     currentImageIndex,
     handleTouchStart,
     handleTouchEnd,
-    handlePrevImage,
+    handlePreviousImage,
     handleNextImage,
   };
 }

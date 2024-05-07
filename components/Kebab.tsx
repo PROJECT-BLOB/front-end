@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
-import postReportComment from '@apis/post/postReportComment';
-import postReportPost from '@apis/post/postReportPost';
+import updateCommentReport from '@apis/post/updateCommentReport';
+import updatePostReport from '@apis/post/updatePostReport';
 import { useDeleteComment, useDeletePost } from '@queries/usePostQueries';
 
 import styles from './Kebab.module.scss';
@@ -28,13 +28,13 @@ export default function Kebab({ toggleKebab, isUser, commentId, postId, replyId 
 
   async function handleClickReport() {
     if (commentId === undefined && replyId === undefined && postId) {
-      const { data } = await postReportPost(postId);
+      const { data } = await updatePostReport(postId);
 
       alert(data);
     }
 
     if ((postId && commentId) || (commentId && replyId)) {
-      const { data } = await postReportComment(commentId);
+      const { data } = await updateCommentReport(commentId);
       alert(data);
     }
   }
