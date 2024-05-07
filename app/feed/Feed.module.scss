@@ -1,6 +1,9 @@
 @import '/styles/global-styles/index';
 
 .feed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
   padding-bottom: 5rem;
   padding-left: 2rem;
@@ -15,16 +18,21 @@
   }
 }
 
-.order-container {
+.search-country-and-filtering-container {
   display: flex;
-  justify-content: flex-end;
-  gap: 1.2rem;
-  color: var(--BDS-Grayscale-7, var(--BDS-Grayscale-7, #8c8c8c));
-  font-feature-settings: 'ss10' on;
+  width: 100%;
+  padding: 2.8rem 0 4rem 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+  @include tablet {
+    padding: 40px 0px 60px 0px;
+    gap: 2.4rem;
+  }
 
-  font-size: 1.4rem;
-  font-weight: 600;
-  line-height: 142%; /* 19.88px */
+  @include desktop {
+    padding: 60px 0px 80px 0px;
+  }
 }
 
 .search-mention {
@@ -36,4 +44,135 @@
   font-style: normal;
   font-weight: 600;
   line-height: 136%; /* 29.92px */
+  @include tablet {
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  @include desktop {
+    font-size: 36px;
+  }
+}
+
+.filtering-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.filtering-button-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.filtering-mention {
+  color: var(--BDS-Grayscale-13, #000);
+  text-align: center;
+  font-feature-settings: 'ss10' on;
+
+  /* BDS/Label 1/Normal */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 142%; /* 19.88px */
+  @include tablet {
+    font-size: 18px;
+  }
+
+  @include desktop {
+    font-size: 20px;
+  }
+}
+
+.setting-icon {
+  @include tablet {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.search-and-order-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  @include tablet {
+    flex-direction: row;
+    justify-content: right;
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  padding: 12px 20px 12px 16px;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  border-bottom: 1.6px solid var(--BDS-Grayscale-6, #bfbfbf);
+  background: var(--BDS-Grayscale-1, #fff);
+
+  @include desktop {
+    min-width: 420px;
+  flex: 0 0 0;
+
+  }
+}
+
+.input {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  flex: 1 0 0;
+  overflow: hidden;
+  ::placeholder {
+    color: var(--BDS-Grayscale-6, var(--BDS-Grayscale-6, #bfbfbf));
+  }
+  font-feature-settings: 'ss10' on;
+  text-overflow: ellipsis;
+
+  /* BDS/Body 2/Normal */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 146%; /* 21.9px */
+  outline: none;
+  border: none;
+}
+
+.order-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142%; /* 19.88px */
+
+  .order {
+    color: $BDS-Grayscale-7;
+    font-feature-settings: 'ss10' on;
+
+    /* BDS/Label 1/Normal */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
+  }
+
+  .selected {
+    color: var(--BDS-Grayscale-13, #000);
+    font-feature-settings: 'ss10' on;
+
+    /* BDS/Label 1/Normal */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
+  }
 }

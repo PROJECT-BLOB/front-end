@@ -14,7 +14,7 @@ export default function useInfiniteScrollQuery(queryOptions: {
 
   const { ref, inView } = useInView();
 
-  const { data, isPending, isError, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({
+  const { isLoading, data, isPending, isError, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({
     queryKey,
     queryFn: ({ pageParam }) => queryFn(pageParam),
     initialPageParam: 0,
@@ -28,5 +28,5 @@ export default function useInfiniteScrollQuery(queryOptions: {
     }
   }, [inView, fetchNextPage]);
 
-  return { data, isPending, isError, isFetchingNextPage, ref, refetch };
+  return { data, isPending, isError, isFetchingNextPage, ref, refetch, isLoading };
 }

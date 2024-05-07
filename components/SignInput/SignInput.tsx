@@ -12,11 +12,8 @@ interface InputProps {
   labelName: string;
   id: string;
   name: string;
-  value: string;
   maxLength: number;
   placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  // register?: UseFormRegister<FieldValues>;
   register?: any;
   errors?: any;
   validator?: ValidatorType;
@@ -27,10 +24,8 @@ export default function SignInput({
   labelName,
   id,
   name,
-  value,
   maxLength,
   placeholder,
-  onChange,
   register,
   errors,
   validator,
@@ -58,15 +53,10 @@ export default function SignInput({
             {...(register && register(name, validator))}
             id={id}
             name={name}
-            value={value}
             maxLength={maxLength}
-            onChange={onChange}
             placeholder={placeholder}
             {...rest}
           />
-          <span className={cx('max-length')}>
-            ({value.replace(/<br\s*\/?>/gm, '\n').length}/{maxLength})
-          </span>
         </div>
         <p className={cx('double-check')}>
           <span className={cx('message', errorText)}>{errors[name]?.message || ''}</span>
