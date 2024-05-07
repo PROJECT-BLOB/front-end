@@ -28,7 +28,7 @@ const checkIdExists = async (blobId: string) => {
   const { data: isDuplicated, status } = await checkBlobId(blobId);
   console.log('isDuplicated: ', isDuplicated);
 
-  if (status === 200 && isDuplicated) return '중복된 아이디입니다.';
+  if (status === 200 && isDuplicated) return '중복된 아이디 입니다.';
 };
 
 export const blobIdValidator: ValidatorType = {

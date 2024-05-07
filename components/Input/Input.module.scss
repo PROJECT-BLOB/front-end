@@ -108,13 +108,9 @@
   line-height: 133%; /* 15.96px */
 }
 
-.error-text {
-  color: $BDS-System-Error;
-}
 .error-input {
   border-color: $BDS-System-Error;
 }
-.success {
-  color: $BDS-System-Success;
+.success-input {
   border-color: $BDS-System-Success;
 }
