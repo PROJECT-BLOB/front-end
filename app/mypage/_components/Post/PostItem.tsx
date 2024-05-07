@@ -4,6 +4,7 @@ import Image from 'next/image';
 import HeartIcon from '@/public/icons/heart.svg';
 import CommentIcon from '@/public/icons/message-circle-02.svg';
 import { Post } from '@/types/Post';
+import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import CategoryBox from '@components/CategoryBox';
 
@@ -12,8 +13,16 @@ import styles from './PostItem.module.scss';
 const cx = classNames.bind(styles);
 
 export default function PostItem({ post }: { post: Post }) {
+  const { toggleModal, setCurrentName } = useModalStore();
+
+  function handleOpenModal(name: ModalName) {
+    setCurrentName(name);
+    toggleModal();
+  }
+
   return (
-    <div className={cx('post-container')}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div className={cx('post-container')} onClick={() => handleOpenModal('read')}>
       <header className={cx('header')}>
         <CategoryBox contentData={post} />
         <span>beloved 태그 보류</span>
