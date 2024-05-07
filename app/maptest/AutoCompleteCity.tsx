@@ -28,17 +28,22 @@ const AutoCompleteCity = () => {
       <GooglePlacesAutocomplete
         selectProps={{
           styles: {
-            input: (provided) => ({
+            control: (provided, state) => ({
               ...provided,
-              color: 'red',
+              width: '100%', // 입력란의 너비를 100%로 지정
+              border: state.isFocused ? '2px solid red' : '1px solid #ccc', // 포커스 시 또는 일반 상태일 때의 테두리 스타일 변경
             }),
-            option: (provided) => ({
+            option: (provided, state) => ({
               ...provided,
-              color: 'red',
+              backgroundColor: state.isFocused ? 'red' : 'white', // 제안 목록의 배경색을 포커스 시 또는 일반 상태에 따라 변경
+              color: state.isFocused ? 'white' : 'black', // 제안 목록의 텍스트 색상을 포커스 시 또는 일반 상태에 따라 변경
+              '&:hover': {
+                backgroundColor: 'lightgrey', // 호버 시 배경색 변경
+              },
             }),
             singleValue: (provided) => ({
               ...provided,
-              color: 'red',
+              color: 'red', // 선택된 값의 텍스트 색상 변경
             }),
           },
           value,
