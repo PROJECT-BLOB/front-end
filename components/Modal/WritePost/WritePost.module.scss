@@ -21,11 +21,11 @@
 
 .postBody {
   display: flex;
-  width: 24.6875rem;
   padding: 2rem 1.75rem 2rem 2.25rem;
   flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
+  background-color: $BDS-Grayscale-1;
 }
 
 .input {
