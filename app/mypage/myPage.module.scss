@@ -1,0 +1,14 @@
+@import '/styles/global-styles/index';
+
+.wrappper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.post-list {
+  display: flex;
+  justify-content: center;
+  // padding: 0 2.28rem;
+}

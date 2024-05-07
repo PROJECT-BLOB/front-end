@@ -1,0 +1,143 @@
+@import '/styles/global-styles/index';
+
+.post-container {
+  @include flex-column-start;
+
+  // width: 100%;
+  padding: 3.2rem;
+  gap: 1rem;
+  border-bottom: 1px solid $BDS-Grayscale-6;
+
+  @include tablet {
+    gap: 1rem;
+  }
+
+  @include desktop {
+    // max-width: 1208px;
+    gap: 2.4rem;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+.main {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  justify-content: space-between;
+
+  gap: 1.2rem; // TODO: 이 부분 수정
+
+  @include tablet {
+    gap: 10rem;
+  }
+
+  @include desktop {
+    gap: 18rem;
+  }
+
+  &-text {
+    @include flex-column-start;
+    gap: 0.75rem;
+    // max-width: 52.1875rem;
+
+    gap: 3.2rem;
+
+    @include tablet {
+      gap: 3.2rem;
+      // max-width: 429px;
+    }
+
+    @include desktop {
+      gap: 1.2rem;
+    }
+  }
+}
+
+// TODO: object-fit이 안 먹는거 같다....
+.photo {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  flex-shrink: 0;
+
+  border-radius: 2.4rem;
+  // background: #c4c4c4;
+  overflow: hidden;
+  object-fit: cover;
+
+  @include tablet-and-desktop {
+    width: 15rem;
+    height: 15rem;
+  }
+}
+
+.footer {
+  @include flex-column-start;
+
+  gap: 1.6rem;
+
+  @include tablet {
+    margin-top: 0.8rem;
+  }
+  @include desktop {
+    margin-top: 1.2rem;
+  }
+}
+
+.footer-content-gap {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+}
+
+.icon-box {
+  @include flex-center;
+  gap: 0.5rem;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.text {
+  font-feature-settings: 'ss10' on;
+  font-family: 'IBM Plex Sans KR';
+  font-style: normal;
+  font-weight: 400;
+}
+
+.gray {
+  color: $BDS-Grayscale-7;
+
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142%;
+}
+
+.black {
+  color: $BDS-Grayscale-13;
+}
+
+.large {
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 144%;
+  letter-spacing: -0.00025rem;
+}
+
+.middle {
+  font-size: 1.6rem;
+  line-height: 160%;
+}
+
+.small {
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 133%;
+}

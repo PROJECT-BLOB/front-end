@@ -3,10 +3,10 @@
 //theme.css는 이후 지워집니다. 모듈변수 임포트로 바꿔주세요.
 @import 'index';
 
-
 :root {
   /* 1rem = 10px */
   font-size: 62.5%;
+  scrollbar-width: thin;
 
   /*  Primary color */
   --BDS-Primary-1: linear-gradient(90deg, #fff2ea 0%, #fff0f8 100%);
@@ -78,9 +78,10 @@
 
 html,
 body {
+  max-width: $max-width;
   min-height: 100vh;
   height: fit-content;
-  overflow-x: auto;
+  // overflow-x: auto; 스크롤 두개 생겨서 주석처리함
 }
 
 ::-webkit-scrollbar:horizontal {
@@ -94,6 +95,7 @@ body {
 }
 
 #root {
+  width: 100%;
   position: relative;
   z-index: $z-index-root; //TODO: 변수로바꾸기
 }
@@ -121,4 +123,3 @@ body {
   background-clip: text;
   color: transparent;
 }
-

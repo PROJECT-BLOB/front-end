@@ -2,11 +2,8 @@
 
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
-import ReadPost from '@components/Modal/ReadPost/ReadPost';
-import WritePost from '@components/Modal/WritePost/WritePost';
-
 export default function Map() {
-  const { toggleModal, name, setCurrentName } = useModalStore();
+  const { toggleModal, setCurrentName } = useModalStore();
 
   function handleClickModal(name: ModalName) {
     setCurrentName(name);
@@ -23,8 +20,6 @@ export default function Map() {
       <button type='button' onClick={() => handleClickModal('read')}>
         읽기
       </button>
-
-      {name === 'write' ? <WritePost /> : <ReadPost />}
     </>
   );
 }

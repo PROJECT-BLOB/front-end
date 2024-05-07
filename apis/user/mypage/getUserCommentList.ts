@@ -1,16 +1,26 @@
+import { Comment } from '@/types/Post';
 import instance from '@apis/axios';
 
-interface Comment {
-  commentId: number;
-  postId: number;
-  responseTo: number; // 대댓글인 경우 부모 댓글의 commentId
-  authorId: number;
-  authorNickname: string;
-  createdAt: string;
+export interface CommentList {
+  content: Array<Comment>;
+  count: number;
+  currentPage: number;
+  hasMore: boolean;
+  remaining: number;
 }
 
-export default async function getUserCommentList(userId: number): Promise<{ data: Comment[]; status: number }> {
-  const { data, status } = await instance.get<Comment[]>(`/users/${userId}/comments`);
+export interface CommentListProps {
+  userId: number;
+  page: number;
+  size: number;
+}
+
+export default async function getUserCommentList(
+  body: CommentListProps,
+): Promise<{ data: CommentList; status: number }> {
+  const { data, status } = await instance.get<CommentList>(`/user/${body.userId}/comment`, {
+    params: { page: body.page, size: body.size },
+  });
 
   return { data, status };
 }

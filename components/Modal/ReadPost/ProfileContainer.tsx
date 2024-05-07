@@ -6,16 +6,19 @@ import dotsHorizontal from '@public/icons/dots-horizontal.svg';
 
 import Kebab from '@components/Kebab';
 
-import useReadPost from './hooks/useReadPost';
+import useKebabState from './hooks/useKebabState';
 import styles from './ProfileContainer.module.scss';
 
 interface ProfileContainerProps {
+  postId?: number;
+  commentId?: number;
+  replyId?: number;
   author: Author;
   canDelete: boolean;
 }
 
-export default function ProfileContainer({ author, canDelete }: ProfileContainerProps) {
-  const { isKebabClicked, toggleKebab } = useReadPost();
+export default function ProfileContainer({ postId, commentId, author, canDelete, replyId }: ProfileContainerProps) {
+  const { isKebabClicked, toggleKebab } = useKebabState();
 
   return (
     <section className={styles['profile-kebab-wrapper']}>
@@ -26,8 +29,7 @@ export default function ProfileContainer({ author, canDelete }: ProfileContainer
         <b className={styles['profile-nickname']}>{author.nickname}</b>
         <div className={styles['like-container']}>
           <Image src={checkHeart} alt='좋아요 아이콘' />
-          <b className={styles['like-count']}>30</b>
-          {/* 하트 몇개받았는지 프로필에 받아와야함 */}
+          <b className={styles['like-count']}>Lv. {author.likedCount}</b>
         </div>
       </div>
 
@@ -35,7 +37,9 @@ export default function ProfileContainer({ author, canDelete }: ProfileContainer
         <button type='button' onClick={toggleKebab}>
           <Image src={dotsHorizontal} alt='kebab-icon' />
         </button>
-        {isKebabClicked && <Kebab isUser={canDelete} />}
+        {isKebabClicked && (
+          <Kebab toggleKebab={toggleKebab} isUser={canDelete} postId={postId} commentId={commentId} replyId={replyId} />
+        )}
       </button>
     </section>
   );

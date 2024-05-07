@@ -1,9 +1,10 @@
+@import '/styles/global-styles/color-pallete';
+
 .category {
-  display: flex;
+  display: inline-block;
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
-  background: var(--BDS-Category-tip_press);
-  color: var(--BDS-Grayscale-1);
+  color: $BDS-Grayscale-1;
   font-feature-settings: 'ss10' on;
   font-size: 1.3rem;
   font-weight: 500;
@@ -11,22 +12,22 @@
   margin-bottom: 1.2rem;
 
   &.pink {
-    background: var(--BDS-Category-recommend_press);
+    background: $BDS-Category-recommend_press;
   }
 
   &.yellow {
-    background: var(--BDS-Category-question_press);
+    background: $BDS-Category-question_press;
   }
 
   &.red {
-    background: var(--BDS-Category-cation_press);
+    background: $BDS-Category-cation_press;
   }
 
   &.blue {
-    background: var(--BDS-Category-tip_press);
+    background: $BDS-Category-tip_press;
   }
-  
+
   &.green {
-    background: var(--BDS-Category-help_press);
+    background: $BDS-Category-help_press;
   }
 }

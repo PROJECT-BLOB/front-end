@@ -1,3 +1,6 @@
+@import '/styles/global-styles/color-pallete';
+@import '/styles/global-styles/media-breakpoint';
+
 .image-container {
   display: flex;
   justify-content: center;
@@ -14,27 +17,30 @@
 .previous-btn {
   display: none;
   position: absolute;
-  left: 0;
+  left: 2.4rem;
   height: 100%;
   background-color: inherit;
   border: none;
-  color: var(--BDS-Grayscale-8);
+  color: $BDS-Grayscale-8;
 }
 
 .next-btn {
   display: none;
   position: absolute;
-  right: 0;
+  right: 2.4rem;
   height: 100%;
   background-color: inherit;
   border: none;
-  color: var(--BDS-Grayscale-8);
+  color: $BDS-Grayscale-8;
 }
 
 .index-wrapper {
   margin-top: 1rem;
   position: absolute;
-  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  bottom: 2.4rem;
 
   .index {
     font-size: 1.5rem;
@@ -47,7 +53,7 @@
   }
 }
 
-@media (min-width: 768px) {
+@include tablet {
   .previous-btn {
     display: block;
     font-size: 10rem;

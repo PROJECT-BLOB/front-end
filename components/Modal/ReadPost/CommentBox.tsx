@@ -1,67 +1,81 @@
-import { Author } from '@/types/Post';
+import { FormEvent, useState } from 'react';
 
-import Comment from './Comment';
+import { Comment } from '@/types/Post';
+import { useCreateComment, useCreateReply, useFetchTargetPostComment } from '@queries/usePostQueries';
+
+import CommentContainer from './Comment';
 import styles from './CommentBox.module.scss';
 
-export interface CommentData {
-  id: number;
-  content: string;
-  author: Author;
-  createdDate: string;
-  liked: boolean;
-  likeCount: number;
-  canDelete: boolean;
-  reply: string[];
-}
+export default function CommentBox({ postId }: { postId: number }) {
+  const [commentInput, setCommentInput] = useState('');
 
-const CommentList: CommentData[] = [
-  {
-    id: 0,
-    content: '지하1층에 있어요',
-    author: {
-      blobId: '1111',
-      nickname: '세계여행자',
-      profileUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
-    },
-    createdDate: '2024-04-24T12:59:24',
-    liked: true,
-    likeCount: 1,
-    canDelete: true,
-    reply: ['1111', '11111'],
-  },
-  {
-    id: 1,
-    content: '나도 급하다',
-    author: {
-      blobId: '2222',
-      nickname: '방랑',
-      profileUrl:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxtklqiExudT8_ZGBlYXOE612HhAUrNru8cIft_vmORg&s',
-    },
-    createdDate: '2024-04-24T12:59:24',
-    liked: false,
-    likeCount: 2,
-    canDelete: false,
-    reply: ['qwer', 'wertwert'],
-  },
-];
+  const [replyInformation, setReplyInformation] = useState({
+    isReply: false,
+    targetCommentId: 0,
+    targetCommentNickname: '',
+  });
 
-export default function CommentBox() {
+  // 댓글 조회
+  const { data, isPending, isError, isFetchingNextPage, ref } = useFetchTargetPostComment(postId);
+
+  // 댓글 추가 후 댓글 조회 초기화
+  const { mutateAsync: createCommentMutate } = useCreateComment(postId);
+
+  // 답글 추가 후 답글 조회 초기화
+  const { mutateAsync: createReplyMutate } = useCreateReply(replyInformation.targetCommentId);
+
+  async function handleSubmitComment(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    // 답글인지 아닌지에 따라 api 호출 다르게 해줌
+    replyInformation.isReply
+      ? await createReplyMutate({ commentId: replyInformation.targetCommentId, body: { content: commentInput } })
+      : await createCommentMutate({ postId, body: { content: commentInput } });
+    // 댓글 입력창 초기화
+    setCommentInput('');
+    setReplyInformation({ isReply: false, targetCommentId: 0, targetCommentNickname: '' });
+  }
+
+  if (isPending) {
+    // TODO 스켈레톤 UI 추가
+    return <div className={styles.loading}>loading...</div>;
+  }
+
+  if (isError) {
+    return <div>데이터 불러오는 중, 에러 발생</div>;
+  }
+
+  const commentsPages = data?.pages ?? [];
+
   return (
-    <>
+    <div>
       <div className={styles['comment-box']}>
-        {CommentList.map((comment) => (
-          <Comment key={comment.id} comment={comment} />
-        ))}
+        {commentsPages.map((commentsPage) =>
+          commentsPage.data.content.map((comment: Comment) => (
+            <CommentContainer key={comment.commentId} comment={comment} setReplyInformation={setReplyInformation} />
+          )),
+        )}
+        {/* // TODO 로딩 인디케이터 추가 */}
+        {/* // <div ref={ref} />가 화면에 보일 때 fetchNextPage 호출 */}
+        {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
       </div>
 
-      <form className={styles['comment-form']}>
-        <input type='text' className={styles['comment-input']} placeholder='댓글 남기기' />
+      <form className={styles['comment-form']} onSubmit={handleSubmitComment}>
+        <div>
+          {replyInformation.isReply && (
+            <span className={styles['target-nickname']}>@{replyInformation.targetCommentNickname}</span>
+          )}
+          <input
+            type='text'
+            className={styles['comment-input']}
+            placeholder='댓글 남기기'
+            onChange={(e) => setCommentInput(e.target.value)}
+            value={commentInput}
+          />
+        </div>
         <button type='submit' className={styles['comment-submit-button']}>
           게시
         </button>
       </form>
-    </>
+    </div>
   );
 }

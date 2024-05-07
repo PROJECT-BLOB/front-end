@@ -10,48 +10,26 @@ import BlobLogo from '@/public/icons/logo-BLOB.svg';
 import GoogleLogo from '@/public/icons/logo-google.svg';
 import KakaoLogo from '@/public/icons/logo-kakao.svg';
 import NaverLogo from '@/public/icons/logo-naver.svg';
-import { useUserStore } from '@/stores/userStore';
 import getRedirectUrl from '@apis/oauth/getRedirectUrl';
-import signout from '@apis/user/sign/signout';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
+import { useUserStore } from '@stores/userStore';
 
-import CreateUser from '@components/Modal/CreateUser/CreateUser';
-
-import useRedirectSigninUserTo from '@hooks/useRedirectSigninUser';
-
-import SigninButton from './_components/SigninButton';
+import SigninButton from './_components/SigninButton/SigninButton';
 import styles from './Signin.module.scss';
 
 export default function Signin() {
   const { accessToken, state } = useOAuthStore();
   const { isSignin } = useUserStore();
-  const { toggleModal, name, setCurrentName } = useModalStore();
+
+  const router = useRouter();
+
+  const { toggleModal, setCurrentName } = useModalStore();
 
   function handleOpenModal(name: ModalName) {
     setCurrentName(name);
     toggleModal();
   }
-
-  // 로그아웃-이 부분은 무시하셔도 됩니다
-  const { signout: logout } = useUserStore();
-
-  const router = useRouter();
-
-  const userId: number = 1214; // TODO: (임시값) 서버상태에서 가져오도록 변경
-
-  async function handleClickSignout() {
-    const response = await signout(userId);
-
-    if (response) {
-      // reponse 결과가 ok면 유저의 전역상태를 false로 변경합니다.
-      logout();
-      // 랜딩페이지로 이동합니다.
-      useRedirectSigninUserTo('/');
-    }
-    // 에러핸들링
-  }
-  // 로그아웃-이 부분은 무시하셔도 됩니다
 
   // 소셜 로그인
   async function handleClickSignin(type: string) {
@@ -62,7 +40,6 @@ export default function Signin() {
     router.push(redirectUrl);
   }
 
-  // 회원가입 안 된 유저에게 회원가입 모달을 띄워줌
   useEffect(() => {
     function handleOpenModal(name: ModalName) {
       setCurrentName(name);
@@ -70,14 +47,19 @@ export default function Signin() {
     }
 
     if (accessToken && state === 'INCOMPLETE') {
-      handleOpenModal('createUser');
+      console.log('accessToken:', accessToken);
+      console.log('state:', state);
+      handleOpenModal('registerUser');
     }
   }, [accessToken, state, setCurrentName, toggleModal]);
 
   useEffect(() => {
-    // 회원가입 된 유저는 map으로 리다이렉트
-    if (isSignin && state === 'COMPLETE') router.push('/map');
-  }, [isSignin, router, state]);
+    if (isSignin) {
+      // 테스트를 위해 잠시 주석처리...
+      console.log('로그인된 유저입니다. 맵으로 이동...');
+      // router.push('map');
+    }
+  }, [isSignin, router]);
 
   return (
     <main className={styles.signin}>
@@ -94,26 +76,15 @@ export default function Signin() {
           네이버 로그인
         </SigninButton>
       </section>
-
       <p className={`${styles['title-gray']} ${styles.content}`}>
         <span>아직 BLOB 회원이 아니세요?</span>
         <Link href='/signin'>
           <span className={styles.underline}>회원가입 하기</span>
         </Link>
       </p>
-
-      <button type='button' onClick={() => handleOpenModal('createUser')}>
+      <button type='button' onClick={() => handleOpenModal('registerUser')}>
         회원가입 모달 테스트용
       </button>
-      {name === 'createUser' && <CreateUser />}
-
-      {/* 로그아웃-이 부분은 무시하셔도 됩니다 */}
-      <br />
-      <br />
-      <button type='button' onClick={handleClickSignout}>
-        로그아웃
-      </button>
-      {/* 로그아웃-이 부분은 무시하셔도 됩니다 */}
     </main>
   );
 }

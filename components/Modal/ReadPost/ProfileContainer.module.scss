@@ -1,3 +1,6 @@
+@import '/styles/global-styles/color-pallete';
+@import '/styles/global-styles/media-breakpoint';
+
 .profile-kebab-wrapper {
   display: flex;
   justify-content: space-between;
@@ -7,6 +10,7 @@
 }
 
 .kebab-wrapper {
+  position: relative;
   background-color: inherit;
   border: none;
 }
@@ -14,7 +18,7 @@
 .profile-container {
   display: flex;
   align-items: center;
-  gap: var(--general-beta-08, 0.8rem);
+  gap: 0.8rem;
 }
 
 .profile-image-wrapper {
@@ -26,7 +30,7 @@
 }
 
 .profile-nickname {
-  color: var(--BDS-Grayscale-13);
+  color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
   font-size: 1.4rem;
   font-weight: 600;
@@ -43,7 +47,7 @@
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
-  background: var(--BDS-Primary-5);
+  background: $BDS-Primary-5;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

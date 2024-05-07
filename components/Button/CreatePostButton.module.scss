@@ -1,0 +1,29 @@
+@import '/styles/global-styles/index';
+
+.background {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ellipse {
+  width: 4.5rem;
+  height: 4.5rem;
+  filter: drop-shadow(0px 2px 8px rgba(0, 0, 0, 0.25));
+
+  @include tablet-and-desktop {
+    width: 9rem;
+    height: 9rem;
+  }
+}
+
+.plus {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+
+  @include tablet-and-desktop {
+    width:3.0rem;
+    height: 3.0rem;
+  }
+}

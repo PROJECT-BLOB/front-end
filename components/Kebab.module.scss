@@ -1,10 +1,51 @@
+@import '/styles/global-styles/color-pallete';
+@import '/styles/global-styles/z-index';
+
+.back-drop {
+  position: fixed;
+  inset: 0;
+  z-index: $z-index-modal;
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .kebab-container {
-  position: absolute;
-  background-color: var(--BDS-Grayscale-3);
-  right: 1rem;
-  padding: 1rem;
+  display: flex;
+  width: 20rem;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  background: $BDS-Grayscale-1;
+  position: fixed;
+  z-index: $z-index-modal;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $BDS-Grayscale-3;
 }
 
 .kebab-content {
-  color: #000;
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+  align-self: stretch;
+  border-bottom: 1px solid $BDS-Grayscale-6;
+  color: $BDS-System-Error;
+  border-radius: 12px 12px 0 0;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.kebab-cancel {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: $BDS-Grayscale-13;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 150%;
 }
