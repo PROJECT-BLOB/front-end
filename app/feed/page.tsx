@@ -93,6 +93,8 @@ export default function Feed() {
     return <div>데이터 불러오는 중, 에러 발생</div>;
   }
 
+  console.log(data);
+
   return (
     <main className={styles.feed}>
       <section className={styles['search-country-and-filtering-container']}>
@@ -144,12 +146,11 @@ export default function Feed() {
           ))}
         </div>
       </section>
-      <section>
-        {data?.pages[0].data.count
-          ? data?.pages.map((page) => <PostList key={page.data.content[0].postId} postList={page.data.content} />)
-          : '검색 결과가 없습니다'}
-        {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
-      </section>
+      {data?.pages[0].data.count ? (
+        <PostList postsData={data} isFetchingNextPage={isFetchingNextPage} scrollRef={ref} />
+      ) : (
+        '검색 결과가 없습니다'
+      )}
     </main>
   );
 }
