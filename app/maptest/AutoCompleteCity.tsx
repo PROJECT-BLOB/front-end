@@ -30,7 +30,7 @@ const AutoCompleteCity = () => {
           styles: {
             control: (provided, state) => ({
               ...provided,
-              width: '100%', // 입력란의 너비를 100%로 지정
+              width: '20.6875rem;', // 입력란의 너비를 100%로 지정
               border: state.isFocused ? '2px solid red' : '1px solid #ccc', // 포커스 시 또는 일반 상태일 때의 테두리 스타일 변경
             }),
             option: (provided, state) => ({
