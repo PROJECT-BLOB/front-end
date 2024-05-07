@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
@@ -16,28 +14,10 @@ import SignInput from '../SignInput/SignInput';
 const cx = classNames.bind(styles);
 
 export default function RegisterModal() {
-  const { errors, register, handleSubmit, onSubmit, cancelForm } = useCreateUserForm();
-
-  const [userFormData, setUserFormData] = useState({
-    id: '',
-    nickname: '',
-  });
-
-  console.log(userFormData);
-
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserFormData((prevValues: { id: string; nickname: string }) => {
-      const { name, value } = e.target;
-
-      return {
-        ...prevValues,
-        [name]: value,
-      };
-    });
-  };
+  const { errors, register, handleSubmit, onSubmit, cancelForm, getValues } = useCreateUserForm();
 
   return (
-    <form className={cx('form')} onSubmit={handleSubmit(() => onSubmit(userFormData))}>
+    <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
       <header className={cx('header')}>
         <span>회원가입</span>
         <span className={cx('close')}>
@@ -52,9 +32,8 @@ export default function RegisterModal() {
           labelName='아이디'
           id='id'
           name='id'
-          value={userFormData.id}
+          getValues={getValues}
           maxLength={20}
-          onChange={handleChangeInput}
           placeholder='아이디를 입력해주세요'
           errors={errors}
           validator={blobIdValidator}
@@ -66,9 +45,8 @@ export default function RegisterModal() {
           labelName='닉네임'
           id='nickname'
           name='nickname'
-          value={userFormData.nickname}
+          getValues={getValues}
           maxLength={10}
-          onChange={handleChangeInput}
           placeholder='닉네임을 입력해주세요'
           errors={errors}
           validator={nicknameValidator}

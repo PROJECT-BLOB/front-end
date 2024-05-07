@@ -11,10 +11,11 @@ export interface InputProps {
   labelName: string;
   id: string;
   name: string;
-  value: string;
+  value?: string;
+  getValues: (id: string) => string;
   maxLength?: number;
   placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   register?: UseFormRegister<ContentField>;
   errors?: Errors;
   validator?: ValidatorType;

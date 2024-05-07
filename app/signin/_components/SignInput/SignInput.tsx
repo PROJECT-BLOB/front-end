@@ -13,10 +13,9 @@ export default function SignInput({
   labelName,
   id,
   name,
-  value,
+  getValues,
   maxLength,
   placeholder,
-  onChange,
   register,
   errors,
   validator,
@@ -34,10 +33,9 @@ export default function SignInput({
         labelName={labelName}
         id={id}
         name={name}
-        value={value}
+        getValues={getValues}
         maxLength={maxLength}
         placeholder={placeholder}
-        onChange={onChange}
         register={register}
         validator={validator}
         borderColor={errorInput}

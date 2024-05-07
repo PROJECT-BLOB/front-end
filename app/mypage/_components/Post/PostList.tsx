@@ -53,7 +53,7 @@ export default function PostList({ userId, selectedTab }: { userId: number; sele
 
       {/*  TODO 로딩 인디케이터 추가 */}
 
-      {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref}>더 가져오기..</div>}
+      {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}
     </div>
   );
 }

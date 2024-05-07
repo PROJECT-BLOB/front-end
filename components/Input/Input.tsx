@@ -16,6 +16,7 @@ export default function Input({
   id,
   name,
   value,
+  getValues,
   maxLength,
   placeholder,
   onChange,
@@ -24,6 +25,8 @@ export default function Input({
   borderColor,
   ...rest
 }: ExtendedInputProps) {
+  const inputValue = getValues(id) ?? '';
+
   return (
     <div className={cx('input')}>
       <div className={cx('label')}>
@@ -45,9 +48,7 @@ export default function Input({
           placeholder={placeholder}
           {...rest}
         />
-        <span className={cx('max-length')}>
-          {value.length > 0 && `${value.replace(/<br\s*\/?>/gm, '\n').length}/${maxLength}`}
-        </span>
+        <span className={cx('max-length')}>{inputValue.length > 0 && `${inputValue.length}/${maxLength}`}</span>
       </div>
     </div>
   );
