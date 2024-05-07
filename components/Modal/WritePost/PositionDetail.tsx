@@ -17,6 +17,7 @@ export default function PositionDetail() {
       </div>
       <Checkbox value='someValue' checkedItemHandler={handleCheckboxChange} />
       {isChecked && <input type='text' />}
+      {/* 미니맵 등 컴포넌트를 추가할 예정입니다 */}
     </>
   );
 }

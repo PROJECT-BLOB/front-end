@@ -27,6 +27,20 @@ const AutoCompleteCity = () => {
     <div>
       <GooglePlacesAutocomplete
         selectProps={{
+          styles: {
+            input: (provided) => ({
+              ...provided,
+              color: 'red',
+            }),
+            option: (provided) => ({
+              ...provided,
+              color: 'red',
+            }),
+            singleValue: (provided) => ({
+              ...provided,
+              color: 'red',
+            }),
+          },
           value,
           onChange: (newValue) => {
             setValue(newValue ? newValue.value : null);

@@ -1,18 +1,23 @@
 import { useState } from 'react';
 
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+
 import AutoCompleteCity from '@/app/maptest/AutoCompleteCity';
+import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
 // import CategoryFiltering from '@components/Category/CategoryFiltering';
 import ImageUploader from '@components/ImageUploader';
 
-import CloseHeader from './CloseHeader';
 import ContentInput from './ContentInput';
 import PositionDetail from './PositionDetail';
 import TitleInput from './TitleInput';
 import styles from './WritePost.module.scss';
 import useCreateForm from '../../../app/map/_hooks/useCreateForm';
 import BlobButton from '../../Button/BlobButton';
+
+const cx = classNames.bind(styles);
 
 export default function WritePost() {
   const { toggleModal } = useModalStore();
@@ -26,12 +31,18 @@ export default function WritePost() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.postHeader}>
-        <CloseHeader />
-      </div>
-      <div className={styles.postBody}>
-        <p>카테고리</p>
+    <form onSubmit={handleSubmit(onSubmit)} className={cx('form')}>
+      <header className={cx('close-header')}>
+        <span>글쓰기</span>
+        <span className={cx('close-button')}>
+          <Image src={CloseButton} fill alt='닫기' onClick={toggleModal} />
+        </span>
+      </header>
+      <div className={cx('post-body')}>
+        <p className={cx('category-title')}>
+          카테고리<span className={cx('force')}> * </span>
+        </p>
+
         {/* <CategoryFiltering categoryFilteringType='recommendation' title='추천' />
         <CategoryFiltering categoryFilteringType='blame' title='비추천' />
         <CategoryFiltering categoryFilteringType='question' title='질문' />
@@ -39,8 +50,9 @@ export default function WritePost() {
         <CategoryFiltering categoryFilteringType='help' title='도움' /> */}
         <TitleInput onChange={handleTitleInputChange} />
         <ContentInput />
-        <PositionDetail />
+        <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
         <AutoCompleteCity />
+        <PositionDetail />
         <ImageUploader setValue={setValue} />
       </div>
       <div className={styles.postFooter}>
