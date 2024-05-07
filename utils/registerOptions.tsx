@@ -38,11 +38,6 @@ export const blobIdValidator: ValidatorType = {
     message: '영문 대소문자와 숫자만 입력할 수 있습니다.',
   },
   minLength: { value: 2, message: '아이디는 2자 이상이어야 합니다.' },
-  maxLength: {
-    value: 10,
-    message: 'This input exceed maxLength.',
-  },
-  // TODO: 아이디 중복 체크
   validate: async (id: string) => await checkIdExists(id),
 };
 

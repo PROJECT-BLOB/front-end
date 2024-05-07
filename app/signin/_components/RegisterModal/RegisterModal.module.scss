@@ -3,11 +3,17 @@
 .form {
   @include flex-column;
   align-items: flex-start;
-  width: 39.5rem;
+  width: 100%;
+  // width: 39.5rem;
+
   padding: 3.2rem 2.8rem 3.2rem 3.6rem;
   background: $BDS-Grayscale-1;
 
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.5);
+
+  @include tablet-and-desktop {
+    width: 39.5rem;
+  }
 }
 
 .header {
@@ -34,6 +40,7 @@
 
 .input {
   @include flex-column-start;
+  width: 100%;
   gap: 3.2rem;
 }
 

@@ -20,4 +20,5 @@ export interface InputProps {
   register?: UseFormRegister<ContentField>;
   errors?: Errors;
   validator?: ValidatorType;
+  rows?: number;
 }
