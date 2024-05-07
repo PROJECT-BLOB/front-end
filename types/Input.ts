@@ -12,7 +12,8 @@ export interface InputProps {
   id: string;
   name: string;
   value?: string;
-  getValues: (id: string) => string;
+  getValues?: (name: string) => string;
+  watch?: (name: string) => string;
   maxLength?: number;
   placeholder: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

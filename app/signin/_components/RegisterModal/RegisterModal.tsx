@@ -14,7 +14,7 @@ import SignInput from '../SignInput/SignInput';
 const cx = classNames.bind(styles);
 
 export default function RegisterModal() {
-  const { errors, register, handleSubmit, onSubmit, cancelForm, getValues } = useCreateUserForm();
+  const { errors, register, handleSubmit, onSubmit, cancelForm, watch } = useCreateUserForm();
 
   return (
     <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
@@ -32,7 +32,7 @@ export default function RegisterModal() {
           labelName='아이디'
           id='id'
           name='id'
-          getValues={getValues}
+          watch={watch}
           maxLength={20}
           placeholder='아이디를 입력해주세요'
           errors={errors}
@@ -45,7 +45,7 @@ export default function RegisterModal() {
           labelName='닉네임'
           id='nickname'
           name='nickname'
-          getValues={getValues}
+          watch={watch}
           maxLength={10}
           placeholder='닉네임을 입력해주세요'
           errors={errors}

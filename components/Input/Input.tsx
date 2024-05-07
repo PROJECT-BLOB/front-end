@@ -15,17 +15,15 @@ export default function Input({
   labelName,
   id,
   name,
-  value,
-  getValues,
+  watch,
   maxLength,
   placeholder,
-  onChange,
   register,
   validator,
   borderColor,
   ...rest
 }: ExtendedInputProps) {
-  const inputValue = getValues(id) ?? '';
+  const inputValue = (watch && watch(id)) ?? '';
 
   return (
     <div className={cx('input')}>
@@ -42,9 +40,7 @@ export default function Input({
           {...(register && register(name as 'id' | 'nickname', validator))}
           id={id}
           name={name}
-          value={value}
           maxLength={maxLength}
-          onChange={onChange}
           placeholder={placeholder}
           {...rest}
         />

@@ -13,7 +13,7 @@ export default function SignInput({
   labelName,
   id,
   name,
-  getValues,
+  watch,
   maxLength,
   placeholder,
   register,
@@ -33,7 +33,7 @@ export default function SignInput({
         labelName={labelName}
         id={id}
         name={name}
-        getValues={getValues}
+        watch={watch}
         maxLength={maxLength}
         placeholder={placeholder}
         register={register}

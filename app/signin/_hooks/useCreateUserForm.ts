@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useRouter } from 'next/navigation';
@@ -16,13 +17,11 @@ export default function useCreateUserForm() {
   const router = useRouter();
   const { toggleModal } = useModalStore();
 
-  // TODO: value를 state로 관리하지 않으니 입력한 글자 길이를 표시할 때 문제가 있음..
-  // getValues를 사용하면 focus out 될 때만 글자 길이가 업데이트 됨 ㅜㅜ 그래서 mode를 onChange로 해야하나 고민중ㅜㅜ
   const {
     register,
     handleSubmit,
     reset,
-    getValues,
+    watch,
     formState: { errors },
   } = useForm<ContentField>({ mode: 'onBlur' });
   const { signin } = useUserStore();
@@ -52,5 +51,11 @@ export default function useCreateUserForm() {
     toggleModal();
   }
 
-  return { register, handleSubmit, onSubmit, cancelForm, getValues, errors: errors as Errors };
+  useEffect(() => {
+    const subscirbe = watch((data, { name }) => console.log(data, name));
+
+    return () => subscirbe.unsubscribe();
+  }, [watch]);
+
+  return { register, handleSubmit, onSubmit, cancelForm, watch, errors: errors as Errors };
 }
