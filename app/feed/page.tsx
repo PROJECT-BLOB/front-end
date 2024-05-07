@@ -93,8 +93,6 @@ export default function Feed() {
     return <div>데이터 불러오는 중, 에러 발생</div>;
   }
 
-  console.log(data);
-
   return (
     <main className={styles.feed}>
       <section className={styles['search-country-and-filtering-container']}>
