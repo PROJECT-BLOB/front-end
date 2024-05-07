@@ -6,7 +6,11 @@ type Option = {
   value: string;
 };
 
-const AutoCompleteCity = () => {
+interface AutoCompleteCityProps {
+  onSelectCity: (cityName: string) => void; // 선택된 도시 이름을 부모 컴포넌트로 전달하기 위한 콜백 함수
+}
+
+const AutoCompleteCity = ({ onSelectCity }: AutoCompleteCityProps) => {
   const [value, setValue] = useState<Option | null>(null);
   const [geolocation, setGeolocation] = useState<google.maps.LatLng | null>(null);
   const googleMapApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
@@ -18,6 +22,7 @@ const AutoCompleteCity = () => {
     try {
       const results = await geocodeByAddress(address.label); // label을 주소로 사용
       setGeolocation(results[0].geometry.location);
+      onSelectCity(address.label); // 선택된 도시 이름을 부모 컴포넌트로 전달
     } catch (error) {
       console.error('Error fetching geolocation:', error);
     }
@@ -31,19 +36,19 @@ const AutoCompleteCity = () => {
             control: (provided, state) => ({
               ...provided,
               width: '20.6875rem;', // 입력란의 너비를 100%로 지정
-              border: state.isFocused ? '2px solid red' : '1px solid #ccc', // 포커스 시 또는 일반 상태일 때의 테두리 스타일 변경
+              border: state.isFocused ? '1px solid red' : '1px solid #ccc', // 포커스 시 또는 일반 상태일 때의 테두리 스타일 변경
             }),
             option: (provided, state) => ({
               ...provided,
               backgroundColor: state.isFocused ? 'red' : 'white', // 제안 목록의 배경색을 포커스 시 또는 일반 상태에 따라 변경
-              color: state.isFocused ? 'white' : 'black', // 제안 목록의 텍스트 색상을 포커스 시 또는 일반 상태에 따라 변경
+              color: 'black',
               '&:hover': {
-                backgroundColor: 'lightgrey', // 호버 시 배경색 변경
+                backgroundColor: 'linear-gradient(90deg, #FFF2EA 0%, #FFF0F8 100%)', // 호버 시 배경색 변경
               },
             }),
             singleValue: (provided) => ({
               ...provided,
-              color: 'red', // 선택된 값의 텍스트 색상 변경
+              color: 'black', // 선택된 값의 텍스트 색상 변경
             }),
           },
           value,
