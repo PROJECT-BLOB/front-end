@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -27,7 +27,7 @@ export default function Feed() {
     country: '대한민국',
     city: '서울',
     sortBy: 'recent',
-    categories: 'QUESTION:WEATHER,RECOMMENDED',
+    categories: '',
     startDate: '2024-05-03',
     endDate: '2024-05-08',
     hasImage: false,
@@ -35,6 +35,8 @@ export default function Feed() {
     minLikes: 0,
     keyword: '',
   });
+
+  const [categoryList, setCategoryList] = useState<string[][]>(stringCategoryListToArray(filteredData.categories));
 
   const [searchInput, setSearchInput] = useState('');
 
@@ -47,16 +49,34 @@ export default function Feed() {
 
   function handleClickOrder(order: string) {
     setFilteredData(() => ({ ...filteredData, sortBy: order }));
-    // setFilteredDataData((previous) => ({ ...previous, sortBy: order }));
   }
 
-  function handleClickSearch(e) {
+  function handleSubmitKeywordSearch(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setFilteredData(() => ({ ...filteredData, keyword: searchInput }));
   }
 
+  function handleClickDeleteCategory(index: number) {
+    if (categoryList) {
+      const newArray = [...categoryList.slice(0, index), ...categoryList.slice(index + 1, categoryList.length)];
+      setCategoryList(newArray);
+      setFilteredData({ ...filteredData, categories: arrayCategoryListToArray(newArray) });
+    }
+  }
+
+  // 카테고리 리스트를 2차원 배열로 변환
+  function stringCategoryListToArray(stringCategory: string) {
+    return stringCategory.split(',').map((category) => category.split(':'));
+  }
+
+  // 2차원 배열을 카테고리 리스트로 변환
+  function arrayCategoryListToArray(arrayCategory: string[][]) {
+    return arrayCategory.map((category) => category.join(':')).join(',');
+  }
+
   useEffect(() => {
     refetch();
+    // 필터값 바뀌면 데이터 다시 불러옴
   }, [filteredData, refetch]);
 
   if (isPending) {
@@ -79,15 +99,23 @@ export default function Feed() {
             <span className={styles['filtering-mention']}>필터링</span>
             <Image className={styles['setting-icon']} src={settingIcon} alt='세팅아이콘' />
           </div>
-          <CategoryBox category='HELP' subcategory='wow' isFeed />
-          <CategoryBox category='NOT_RECOMMENDED' subcategory='wow' isFeed />
-          <CategoryBox category='QUESTION' subcategory='wow' isFeed />
-          <CategoryBox category='RECOMMENDED' subcategory='wow' isFeed />
-          <CategoryBox category='WARNING' subcategory='wow' isFeed />
+
+          {/* 타입 찾아야됨 */}
+          {categoryList.length
+            ? categoryList?.map((category: any, index) => (
+                <CategoryBox
+                  key={category}
+                  category={category[0]}
+                  subcategory={category[1]}
+                  handleClickDelete={() => handleClickDeleteCategory(index)}
+                  isFeed
+                />
+              ))
+            : ''}
         </div>
       </section>
       <section className={styles['search-and-order-container']}>
-        <form className={styles['input-wrapper']} onSubmit={handleClickSearch}>
+        <form className={styles['input-wrapper']} onSubmit={handleSubmitKeywordSearch}>
           <input
             placeholder='서울에서 검색하기'
             className={styles.input}

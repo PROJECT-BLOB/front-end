@@ -25,15 +25,20 @@ interface CategoryBoxProps {
   category: Category;
   subcategory: string;
   isFeed?: boolean;
+  handleClickDelete?: () => void;
 }
 
-export default function CategoryBox({ category, subcategory, isFeed }: CategoryBoxProps) {
+export default function CategoryBox({ category, subcategory, isFeed, handleClickDelete }: CategoryBoxProps) {
   const color = CATEGORY_COLOR[category];
 
   return (
     <div className={`${styles.category} ${styles[color]}`}>
       <p>{`${subcategory} ${MAIN_CATEGORY[category]}`}</p>
-      {isFeed && <Image src={deleteIcon} alt='x' />}
+      {isFeed && (
+        <button type='button' onClick={handleClickDelete}>
+          <Image src={deleteIcon} alt='x' />
+        </button>
+      )}
     </div>
   );
 }
