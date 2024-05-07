@@ -30,6 +30,10 @@ export default function WritePost() {
     setTitleInputValue(event.target.value);
   };
 
+  const onSelectCity = (city: string) => {
+    console.log(`Selected city: ${city}`);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cx('form')}>
       <header className={cx('close-header')}>
@@ -51,7 +55,7 @@ export default function WritePost() {
         <TitleInput onChange={handleTitleInputChange} />
         <ContentInput />
         <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
-        <AutoCompleteCity />
+        <AutoCompleteCity onSelectCity={onSelectCity} />
         <PositionDetail />
         <ImageUploader setValue={setValue} />
       </div>
