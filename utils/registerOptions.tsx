@@ -1,4 +1,4 @@
-// import checkBlobId from '@apis/user/sign/checkBlobId';
+import checkBlobId from '@apis/user/sign/checkBlobId';
 
 // 영문 대소문자+숫자
 const BLOBID_REGEX = /^[a-zA-Z0-9]*$/;
@@ -12,17 +12,24 @@ export interface ValidatorType {
     value: RegExp;
     message: string;
   };
-  validate?: (value: string) => Promise<string>;
+  minLength?: {
+    value: number;
+    message: string;
+  };
+  maxLength?: {
+    value: number;
+    message: string;
+  };
+  validate?: (value: string) => Promise<string | undefined>;
 }
 
 // TODO: api 만들어지면 연결
-// const checkIdExists = async (blobId: string) => {
-//   const { status } = await checkBlobId(blobId);
+const checkIdExists = async (blobId: string) => {
+  const { data: isDuplicated, status } = await checkBlobId(blobId);
+  console.log('isDuplicated: ', isDuplicated);
 
-//   if (status === 200) return '사용 가능한 아이디입니다.';
-
-//   return '중복된 아이디입니다.';
-// };
+  if (status === 200 && isDuplicated) return '중복된 아이디 입니다.';
+};
 
 export const blobIdValidator: ValidatorType = {
   required: '아이디를 입력해 주세요.',
@@ -30,8 +37,13 @@ export const blobIdValidator: ValidatorType = {
     value: BLOBID_REGEX,
     message: '영문 대소문자와 숫자만 입력할 수 있습니다.',
   },
+  minLength: { value: 2, message: '아이디는 2자 이상이어야 합니다.' },
+  maxLength: {
+    value: 10,
+    message: 'This input exceed maxLength.',
+  },
   // TODO: 아이디 중복 체크
-  // validate: async (id: string) => await checkIdExists(id),
+  validate: async (id: string) => await checkIdExists(id),
 };
 
 export const nicknameValidator: ValidatorType = {

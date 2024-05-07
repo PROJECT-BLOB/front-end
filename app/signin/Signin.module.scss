@@ -1,42 +1,37 @@
+@import '@styles/global-styles/index';
+
 .signin {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   align-items: center;
   padding: 8rem 3rem;
 }
 
-.logo {
-  width: 23.6rem;
-  height: 10.8rem;
-
-  margin-bottom: 12rem;
-}
+// .logo {
+//   width: 23.6rem;
+//   height: 10.8rem;
+//   margin-bottom: 12rem;
+// }
 
 .title {
-  color: var(--BDS-Grayscale-13);
+  color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
 
-  /* BDS/Label 1/Normal */
-  font-family: 'IBM Plex Sans KR';
   font-size: 1.4rem;
-  font-style: normal;
   font-weight: 600;
-  line-height: 142.9%; /* 20.006px */
+  line-height: 142.9%;
 
-  // tablet
-  @media screen and (min-width: 768px) {
+  @include tablet {
     font-size: 1.7rem;
   }
 
-  // PC
-  @media screen and (min-width: 1440px) {
+  @include desktop {
     font-size: 1.8rem;
   }
 }
 
 .title-gray {
   @extend .title;
-  color: var(--BDS-Grayscale-8);
+  color: $BDS-Grayscale-8;
   font-size: 1.4rem;
 
   .underline {
@@ -45,8 +40,7 @@
 }
 
 .buttons {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   gap: 2rem;
   margin-top: 2.4rem;
   margin-bottom: 4rem;

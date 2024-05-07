@@ -7,6 +7,7 @@
   padding: 3.2rem;
   gap: 1rem;
   border-bottom: 1px solid $BDS-Grayscale-6;
+  font-feature-settings: 'ss10' on;
 
   @include tablet {
     gap: 1rem;
@@ -106,14 +107,7 @@
   height: 2rem;
 }
 
-.text {
-  font-feature-settings: 'ss10' on;
-  font-family: 'IBM Plex Sans KR';
-  font-style: normal;
-  font-weight: 400;
-}
-
-.gray {
+.text-gray {
   color: $BDS-Grayscale-7;
 
   font-size: 1.4rem;
@@ -121,7 +115,7 @@
   line-height: 142%;
 }
 
-.black {
+.text-black {
   color: $BDS-Grayscale-13;
 }
 
@@ -139,6 +133,5 @@
 
 .small {
   font-size: 1.2rem;
-  font-weight: 400;
   line-height: 133%;
 }

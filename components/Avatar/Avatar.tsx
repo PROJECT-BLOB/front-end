@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 interface AvatarProps {
   size: 'small' | 'medium' | 'large';
-  imageSource: string | StaticImport; // TODO undefined 나중에 지울것
+  imageSource: string | StaticImport;
 }
 
 export default function Avatar({ size, imageSource }: AvatarProps) {

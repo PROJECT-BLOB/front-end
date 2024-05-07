@@ -1,22 +1,20 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import useCreateUserForm from '@/app/map/_hooks/useCreateUserForm';
+import useCreateUserForm from '@/app/signin/_hooks/useCreateUserForm';
 import CloseButton from '@/public/icons/x-close.svg';
-import useModalStore from '@stores/useModalStore';
 
 import BlobButton from '@components/Button/BlobButton';
-import SignInput from '@components/SignInput/SignInput';
 
 import { blobIdValidator, nicknameValidator } from '@utils/registerOptions';
 
 import styles from './RegisterModal.module.scss';
+import SignInput from '../SignInput/SignInput';
 
 const cx = classNames.bind(styles);
 
 export default function RegisterModal() {
-  const { toggleModal } = useModalStore();
-  const { errors, register, handleSubmit, onSubmit, cancelForm } = useCreateUserForm(toggleModal);
+  const { errors, register, handleSubmit, onSubmit, cancelForm, watch } = useCreateUserForm();
 
   return (
     <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
@@ -34,6 +32,7 @@ export default function RegisterModal() {
           labelName='아이디'
           id='id'
           name='id'
+          watch={watch}
           maxLength={20}
           placeholder='아이디를 입력해주세요'
           errors={errors}
@@ -46,6 +45,7 @@ export default function RegisterModal() {
           labelName='닉네임'
           id='nickname'
           name='nickname'
+          watch={watch}
           maxLength={10}
           placeholder='닉네임을 입력해주세요'
           errors={errors}
@@ -55,8 +55,7 @@ export default function RegisterModal() {
 
       <footer className={cx('buttons')}>
         <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
-        {/* <BlobButton text='회원가입' type='submit' color='button-colord-contain' /> */}
-        <button type='submit'>회원가입</button>
+        <BlobButton text='회원가입' type='submit' color='button-colord-contain' />
       </footer>
     </form>
   );
