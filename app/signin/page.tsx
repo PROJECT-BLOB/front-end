@@ -2,11 +2,9 @@
 
 import { useEffect } from 'react';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-import BlobLogo from '@/public/icons/logo-BLOB.svg';
 import GoogleLogo from '@/public/icons/logo-google.svg';
 import KakaoLogo from '@/public/icons/logo-kakao.svg';
 import NaverLogo from '@/public/icons/logo-naver.svg';
@@ -15,8 +13,16 @@ import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useOAuthStore } from '@stores/useOAuthStore';
 import { useUserStore } from '@stores/userStore';
 
+import Logo from '@components/shared/Logo';
+
 import SigninButton from './_components/SigninButton/SigninButton';
 import styles from './Signin.module.scss';
+
+const OAUTH_PROVIDER = [
+  { id: 'GOOGLE', value: 'google', iconSource: GoogleLogo, text: '구글 로그인' },
+  { id: 'KAKAO', value: 'kakao', iconSource: KakaoLogo, text: '카카오 로그인' },
+  { id: 'NAVER', value: 'naver', iconSource: NaverLogo, text: '네이버 로그인' },
+];
 
 export default function Signin() {
   const { accessToken, state } = useOAuthStore();
@@ -47,8 +53,6 @@ export default function Signin() {
     }
 
     if (accessToken && state === 'INCOMPLETE') {
-      console.log('accessToken:', accessToken);
-      console.log('state:', state);
       handleOpenModal('registerUser');
     }
   }, [accessToken, state, setCurrentName, toggleModal]);
@@ -63,18 +67,20 @@ export default function Signin() {
 
   return (
     <main className={styles.signin}>
-      <Image className={styles.logo} src={BlobLogo} alt='Blob 로고' />
+      {/* TODO: 로고크기 나중에 수정 */}
+      <Logo />
       <h1 className={styles.title}>SNS로 간편하게 로그인하기</h1>
       <section className={styles.buttons}>
-        <SigninButton providerName='google' iconSource={GoogleLogo} onClick={() => handleClickSignin('google')}>
-          구글 로그인
-        </SigninButton>
-        <SigninButton providerName='kakao' iconSource={KakaoLogo} onClick={() => handleClickSignin('kakao')}>
-          카카오 로그인
-        </SigninButton>
-        <SigninButton providerName='naver' iconSource={NaverLogo} onClick={() => handleClickSignin('naver')}>
-          네이버 로그인
-        </SigninButton>
+        {OAUTH_PROVIDER.map((provider) => (
+          <SigninButton
+            key={provider.id}
+            providerName={provider.value}
+            iconSource={provider.iconSource}
+            onClick={() => handleClickSignin(provider.value)}
+          >
+            {provider.text}
+          </SigninButton>
+        ))}
       </section>
       <p className={`${styles['title-gray']} ${styles.content}`}>
         <span>아직 BLOB 회원이 아니세요?</span>

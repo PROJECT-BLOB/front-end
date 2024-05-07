@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './BlobButton.module.scss';
 
 export interface ButtonProps {
-  text: 'BLOB' | '취소';
+  text: 'BLOB' | '취소' | '회원가입';
   type: 'submit' | 'button';
   color: 'button-colord-contain' | 'button-colord-outlined' | 'button-gray-contain' | 'button-gray-outlined';
   onClick?: () => void;

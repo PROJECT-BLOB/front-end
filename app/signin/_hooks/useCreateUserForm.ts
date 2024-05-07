@@ -1,24 +1,27 @@
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useRouter } from 'next/navigation';
 
+import { Errors } from '@/types/Errors';
 import createUser from '@apis/user/sign/createUser';
+import useModalStore from '@stores/useModalStore';
 import { useUserStore } from '@stores/userStore';
-// import { useOAuthStore } from '@stores/useOAuthStore';
-// import { useUserStore } from '@stores/userStore';
 
 export interface ContentField {
   id: string;
   nickname: string;
 }
 
-export default function useCreateUserForm(toggleModal: () => void) {
+export default function useCreateUserForm() {
   const router = useRouter();
+  const { toggleModal } = useModalStore();
 
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors },
   } = useForm<ContentField>({ mode: 'onBlur' });
   const { signin } = useUserStore();
@@ -48,5 +51,11 @@ export default function useCreateUserForm(toggleModal: () => void) {
     toggleModal();
   }
 
-  return { register, handleSubmit, onSubmit, cancelForm, errors };
+  useEffect(() => {
+    const subscirbe = watch((data, { name }) => console.log(data, name));
+
+    return () => subscirbe.unsubscribe();
+  }, [watch]);
+
+  return { register, handleSubmit, onSubmit, cancelForm, watch, errors: errors as Errors };
 }
