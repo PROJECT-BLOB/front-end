@@ -41,11 +41,11 @@ const AutoCompleteCity = () => {
           types: ['(cities)'], // 도시 수준 검색으로 제한
         }}
       />
-      {/* {geolocation && ( */}
-      {/*  <p> */}
-      {/*    Latitude: {geolocation.lat()}, Longitude: {geolocation.lng()} */}
-      {/*  </p> */}
-      {/* )} */}
+      {geolocation && (
+        <p>
+          Latitude: {geolocation.lat()}, Longitude: {geolocation.lng()}
+        </p>
+      )}
     </div>
   );
 };
