@@ -16,10 +16,10 @@ export default function Markers() {
 
   return (
     <>
-      {locations.map((location, index) => (
+      {locations.map((location) => (
         <AdvancedMarker
           // animation={google.maps.Animation.BOUNCE}
-          key={index}
+          key={`${location.lat}_${location.lng}`}
           title={location.name}
           position={{ lat: location.lat, lng: location.lng }}
           onClick={() => console.log('MarkerClicked')}

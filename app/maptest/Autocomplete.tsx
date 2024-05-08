@@ -107,7 +107,13 @@ export default function Autocomplete({ onPlaceSelect, setCurrentPosition }: Auto
         <ul className='custom-list'>
           {predictionResults.map(({ place_id, description }) => {
             return (
-              <li key={place_id} className='custom-list-item' onClick={() => handleSuggestionClick(place_id)}>
+              //   eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+              <li
+                key={place_id}
+                className='custom-list-item'
+                onClick={() => handleSuggestionClick(place_id)}
+                onKeyDown={() => handleSuggestionClick(place_id)}
+              >
                 {description}
               </li>
             );
