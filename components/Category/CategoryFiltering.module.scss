@@ -10,7 +10,7 @@
 
   border-radius: 24px;
   border: 1px solid transparent;
-  background: var(--BDS-Grayscale-1);
+  background: $BDS-Grayscale-1;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.12);
 
   &.button-clicked-color {
@@ -42,7 +42,7 @@
 }
 
 .title {
-  color: var(--BDS-Grayscale-13);
+  color: $BDS-Grayscale-13;
   text-align: center;
   font-feature-settings: 'ss10' on;
   font-family: 'IBM Plex Sans KR';

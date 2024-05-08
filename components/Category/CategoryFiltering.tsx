@@ -2,25 +2,24 @@ import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import AtomIcon from '@public/icons/atom-02.svg';
-import ChevronRightIcon from '@public/icons/chevron-right.svg';
-import MagicWandIcon from '@public/icons/magic-wand-02-2.svg';
-import SignalIcon from '@public/icons/signal-02-2.svg';
-import ThumbsDownIcon from '@public/icons/thumbs-down-orange.svg';
-import ThumbsUpIcon from '@public/icons/thumbs-up-red.svg';
+import { MarkerType } from '@/app/map/_components/Marker';
+import AtomIcon from '@icons/atom-02.svg';
+import ChevronRightIcon from '@icons/chevron-right.svg';
+import MagicWandIcon from '@icons/magic-wand-02-2.svg';
+import SignalIcon from '@icons/signal-02-2.svg';
+import ThumbsDownIcon from '@icons/thumbs-down-orange.svg';
+import ThumbsUpIcon from '@icons/thumbs-up-red.svg';
 
 import styles from './CategoryFiltering.module.scss';
 
 const cx = classNames.bind(styles);
 
-type CategoryFilteringType = 'recommendation' | 'blame' | 'question' | 'caution' | 'help';
-
 export interface CategoryFilteringProps {
-  categoryFilteringType: CategoryFilteringType;
+  categoryFilteringType: MarkerType;
   title: string;
 }
 
-function SelectedIcon(categoryFilteringType: CategoryFilteringType) {
+function selectedIcon(categoryFilteringType: MarkerType) {
   const iconClass = cx('svg');
   switch (categoryFilteringType) {
     case 'recommendation':
@@ -42,21 +41,20 @@ export default function CategoryFiltering({
   categoryFilteringType = 'recommendation',
   title = '추천',
 }: CategoryFilteringProps) {
-  const [isClicked, setIsClicked] = useState(false);
+  const [isCategoryClicked, setIsCategoryClicked] = useState(false);
   const [isArrowClicked, setIsArrowClicked] = useState(false);
 
   const handleClickCategory = () => {
-    setIsClicked(!isClicked);
+    setIsCategoryClicked(!isCategoryClicked);
+    setIsArrowClicked(true);
   };
 
   const handleClickArrow = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation(); // 버튼의 클릭 이벤트가 발생하지 않도록 함
 
-    if (!isArrowClicked) {
-      setIsClicked(true);
-    }
-
-    if (isClicked) {
+    if (!isCategoryClicked) {
+      setIsCategoryClicked(!isCategoryClicked);
+    } else {
       setIsArrowClicked(!isArrowClicked);
     }
   };
@@ -65,15 +63,17 @@ export default function CategoryFiltering({
     <button
       type='button'
       onClick={handleClickCategory}
-      className={cx('background', { [`button-clicked-color-${categoryFilteringType}`]: isClicked })}
+      className={cx('background', { [`button-clicked-color-${categoryFilteringType}`]: isCategoryClicked })}
     >
-      <div className={cx('svg-box')}>{SelectedIcon(categoryFilteringType)}</div>
-      <span className={cx('title', { [`button-clicked-color-${categoryFilteringType}`]: isClicked })}>{title}</span>
+      <div className={cx('svg-box')}>{selectedIcon(categoryFilteringType)}</div>
+      <span className={cx('title', { [`button-clicked-color-${categoryFilteringType}`]: isCategoryClicked })}>
+        {title}
+      </span>
       <ChevronRightIcon
         onClick={handleClickArrow}
         className={cx('chevron-right-icon', {
-          rotate: isClicked && isArrowClicked,
-          [`button-clicked-color-${categoryFilteringType}`]: isClicked,
+          rotate: isCategoryClicked && isArrowClicked,
+          [`button-clicked-color-${categoryFilteringType}`]: isCategoryClicked,
         })}
       />
     </button>
