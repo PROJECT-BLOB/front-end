@@ -71,7 +71,7 @@ export default function myPage() {
           isCommentList={selectedTab === 'MyComments'}
           postsData={data}
           isFetchingNextPage={isFetchingNextPage}
-          ref={ref}
+          scrollRef={ref}
         />
       </section>
     </div>
