@@ -9,8 +9,8 @@ import MainContainer from './MainContainer';
 import styles from './ReadPost.module.scss';
 
 export default function ReadPost() {
-  const { toggleModal } = useModalStore();
-  const { data: post } = useFetchTargetPost(1);
+  const { toggleModal, postId } = useModalStore();
+  const { data: post } = useFetchTargetPost(postId);
 
   return (
     <div className={styles['read-modal']}>

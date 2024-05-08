@@ -6,6 +6,7 @@ import createReply from '@apis/post/creatReply';
 import deleteComment from '@apis/post/deleteComment';
 import deletePost from '@apis/post/deletePost';
 import getCommentList from '@apis/post/getCommentList';
+import getFeed from '@apis/post/getFeed';
 import getPost from '@apis/post/getPost';
 import getReplyList from '@apis/post/getReplyList';
 import postBookmark from '@apis/post/updateBookmark';
@@ -46,6 +47,13 @@ export function useFetchCommentList(userId: number) {
   return useInfiniteScrollQuery({
     queryKey: posts.commentList(userId).queryKey,
     queryFn: (page: number) => getUserCommentList({ userId, page, size: POSTS_PAGE_LIMIT }),
+  });
+}
+
+export function useFetchFeedList(filteredData: any) {
+  return useInfiniteScrollQuery({
+    queryKey: ['feedPost'],
+    queryFn: (page: number) => getFeed({ ...filteredData, page, size: 5 }),
   });
 }
 
