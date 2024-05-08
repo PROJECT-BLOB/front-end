@@ -13,7 +13,7 @@ export default function MapTest() {
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
   const [currentPosition, setCurrentPosition] = useState<google.maps.LatLngLiteral | null>(initialPosition);
   const [previousPosition, setPreviousPosition] = useState<google.maps.LatLngLiteral | null>(initialPosition);
-  const [selectedPlace, setSelectedPlace] = useState<google.maps.places.PlaceResult | null>(null);
+  const [, setSelectedPlace] = useState<google.maps.places.PlaceResult | null>(null);
 
   return (
     <>
