@@ -1,3 +1,5 @@
+import { FieldValues } from 'react-hook-form';
+
 import classNames from 'classnames/bind';
 
 import { InputProps } from '@/types/Input';
@@ -19,7 +21,7 @@ export default function SignInput({
   register,
   errors,
   validator,
-}: InputProps) {
+}: InputProps<FieldValues>) {
   console.log('errors', errors);
   const errorText = errors && errors[name] ? 'error-text' : '';
   const errorInput = errors && errors[name] ? 'error-input' : '';

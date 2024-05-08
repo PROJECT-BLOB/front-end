@@ -1,11 +1,8 @@
-import { ChangeEvent, useState } from 'react';
-
 import { Switch } from 'antd';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import SignInput from '@/app/signin/_components/SignInput/SignInput';
-import useCreateUserForm from '@/app/signin/_hooks/useCreateUserForm';
 import { UserDetail } from '@/types/User';
 import CloseButton from '@icons/x-close.svg';
 import { useDetailQueries } from '@queries/useUserQueries';
@@ -19,6 +16,7 @@ import TextArea from '@components/Input/TextArea';
 import { nicknameValidator } from '@utils/registerOptions';
 
 import styles from './UpdateProfileModal.module.scss';
+import useUpdateUserForm from '../../_hooks/useUpdateUserForm';
 
 const cx = classNames.bind(styles);
 
@@ -35,19 +33,17 @@ export default function UpdateProfileModal() {
 
   const userData: UserDetail | undefined = data?.data;
 
-  console.log('userData', userData);
-  // TODO: useUpdateUserForm 만들기
-  const { errors, register, handleSubmit, onSubmit, cancelForm, watch } = useCreateUserForm();
+  console.log('가져온 userData', userData);
 
-  const onChange = (checked: boolean) => {
-    console.log(`switch to ${checked}`);
+  const initialData = {
+    profileUrl: userData?.profileUrl || '',
+    nickName: userData?.nickName || '',
+    bio: userData?.bio || '',
+    isPrivate: userData?.isPrivate || false,
   };
 
-  const [value, setValue] = useState('');
-
-  const handleChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value);
-  };
+  const { errors, register, handleSubmit, onSubmit, cancelForm, watch, isPrivate, onChangeToggle } =
+    useUpdateUserForm(initialData);
 
   return (
     <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
@@ -68,29 +64,28 @@ export default function UpdateProfileModal() {
             required
             register={register}
             labelName='닉네임'
-            id='nickname'
-            name='nickname'
+            id='nickName'
+            name='nickName'
             watch={watch}
             maxLength={10}
             placeholder='닉네임을 입력해주세요'
             errors={errors}
             validator={nicknameValidator}
-            // defaultValue={userData?.nickName || ''}
           />
           <TextArea
             labelName='자기소개'
             id='bio'
             name='bio'
+            watch={watch}
             maxLength={50}
-            rows={2} // textarea로 사용하려면 rows 속성 필수추가 해야됨
-            value={value}
-            onChange={handleChangeTextArea}
+            rows={2}
+            register={register}
             placeholder='한줄로 본인을 소개해보세요.'
           />
           <div className={cx('control-visibility')}>
             <p className={cx('toggle-box')}>
               <span>내프로필 공개하기</span>
-              <Switch defaultChecked onChange={onChange} />
+              <Switch checked={isPrivate} onChange={onChangeToggle} />
             </p>
             <span>동의하시면 프로필이 다른사람들에게 공개됩니다.</span>
           </div>

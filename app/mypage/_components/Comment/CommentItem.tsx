@@ -4,8 +4,7 @@ import { Comment } from '@/types/Post';
 import { useFetchTargetPost } from '@queries/usePostQueries';
 
 import CategoryBox from '@components/CategoryBox';
-
-import styles from '../Post/PostItem.module.scss';
+import styles from '@components/Post/PostItem.module.scss';
 
 const cx = classNames.bind(styles);
 

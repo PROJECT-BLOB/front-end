@@ -10,13 +10,15 @@ export default function TextArea({
   labelName,
   id,
   name,
-  value,
-  onChange,
+  watch,
+  register,
   maxLength,
   placeholder,
   rows,
   ...rest
 }: TextAreaProps) {
+  const inputValue = (watch && watch(id)) ?? '';
+
   return (
     <div className={cx('input')}>
       <div className={cx('label')}>
@@ -30,14 +32,13 @@ export default function TextArea({
             className={cx('input-field', 'textarea')}
             id={id}
             name={name}
-            value={value}
             maxLength={maxLength}
             placeholder={placeholder}
             rows={rows}
-            onChange={onChange}
+            {...(register && register(name as 'bio'))}
             {...rest}
           />
-          {value && <span className={cx('max-length')}>{`${value.length}/${maxLength}`}</span>}
+          <span className={cx('max-length')}>{inputValue.length > 0 && `${inputValue.length}/${maxLength}`}</span>
         </>
       </div>
     </div>

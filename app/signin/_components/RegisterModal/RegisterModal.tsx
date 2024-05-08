@@ -43,8 +43,8 @@ export default function RegisterModal() {
           required
           register={register}
           labelName='닉네임'
-          id='nickname'
-          name='nickname'
+          id='nickName'
+          name='nickName'
           watch={watch}
           maxLength={10}
           placeholder='닉네임을 입력해주세요'

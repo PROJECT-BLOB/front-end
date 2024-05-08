@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 
 import { useRouter } from 'next/navigation';
 
@@ -7,11 +7,6 @@ import { Errors } from '@/types/Errors';
 import createUser from '@apis/user/sign/createUser';
 import useModalStore from '@stores/useModalStore';
 import { useUserStore } from '@stores/userStore';
-
-export interface ContentField {
-  id: string;
-  nickname: string;
-}
 
 export default function useCreateUserForm() {
   const router = useRouter();
@@ -23,7 +18,7 @@ export default function useCreateUserForm() {
     reset,
     watch,
     formState: { errors },
-  } = useForm<ContentField>({ mode: 'onBlur' });
+  } = useForm<FieldValues>({ mode: 'onBlur' });
   const { signin } = useUserStore();
 
   function cancelForm() {
@@ -31,11 +26,11 @@ export default function useCreateUserForm() {
     toggleModal();
   }
 
-  async function onSubmit(userData: ContentField) {
-    const { id, nickname } = userData;
+  async function onSubmit(userData: FieldValues) {
+    const { id, nickName } = userData;
     // 회원가입 요청
 
-    const { data, status } = await createUser({ id, nickname });
+    const { data, status } = await createUser({ id, nickName });
     console.log('data', data);
 
     if (status === 200) {
