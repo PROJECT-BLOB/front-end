@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { MarkerType } from '@/app/map/_components/Marker';
 import AtomIcon from '@icons/atom-02.svg';
 import ChevronRightIcon from '@icons/chevron-right.svg';
 import MagicWandIcon from '@icons/magic-wand-02-2.svg';
@@ -14,23 +13,28 @@ import styles from './CategoryFiltering.module.scss';
 
 const cx = classNames.bind(styles);
 
+export type Category = '추천' | '비추천' | '질문' | '주의' | '도움요청';
+
+export type FilteringType = 'map' | 'writing' | 'feed';
+
 export interface CategoryFilteringProps {
-  categoryFilteringType: MarkerType;
-  title: string;
+  category: Category;
+  filteringType: FilteringType;
+  subcategory: ReactNode;
 }
 
-function selectedIcon(categoryFilteringType: MarkerType) {
+function selectedIcon(category: Category) {
   const iconClass = cx('svg');
-  switch (categoryFilteringType) {
-    case 'recommendation':
+  switch (category) {
+    case '추천':
       return <ThumbsUpIcon className={iconClass} />;
-    case 'blame':
+    case '비추천':
       return <ThumbsDownIcon className={iconClass} />;
-    case 'question':
+    case '질문':
       return <AtomIcon className={iconClass} />;
-    case 'caution':
+    case '주의':
       return <SignalIcon className={iconClass} />;
-    case 'help':
+    case '도움요청':
       return <MagicWandIcon className={iconClass} />;
     default:
       return <ThumbsUpIcon className={iconClass} />;
@@ -38,8 +42,9 @@ function selectedIcon(categoryFilteringType: MarkerType) {
 }
 
 export default function CategoryFiltering({
-  categoryFilteringType = 'recommendation',
-  title = '추천',
+  category = '추천',
+  filteringType = 'writing',
+  subcategory,
 }: CategoryFilteringProps) {
   const [isCategoryClicked, setIsCategoryClicked] = useState(false);
   const [isArrowClicked, setIsArrowClicked] = useState(false);
@@ -63,19 +68,34 @@ export default function CategoryFiltering({
     <button
       type='button'
       onClick={handleClickCategory}
-      className={cx('background', { [`button-clicked-color-${categoryFilteringType}`]: isCategoryClicked })}
+      className={cx(
+        'background',
+        { [`button-clicked-color-${category}`]: isCategoryClicked },
+        `filtering-type-${filteringType}`,
+      )}
     >
-      <div className={cx('svg-box')}>{selectedIcon(categoryFilteringType)}</div>
-      <span className={cx('title', { [`button-clicked-color-${categoryFilteringType}`]: isCategoryClicked })}>
-        {title}
+      <div className={cx('svg-box')}>{selectedIcon(category)}</div>
+      <span
+        className={cx(
+          'title',
+          { [`button-clicked-color-${category}`]: isCategoryClicked },
+          `filtering-type-${filteringType}`,
+        )}
+      >
+        {category}
       </span>
       <ChevronRightIcon
         onClick={handleClickArrow}
-        className={cx('chevron-right-icon', {
-          rotate: isCategoryClicked && isArrowClicked,
-          [`button-clicked-color-${categoryFilteringType}`]: isCategoryClicked,
-        })}
+        className={cx(
+          'chevron-right-icon',
+          {
+            rotate: isCategoryClicked && isArrowClicked,
+            [`button-clicked-color-${category}`]: isCategoryClicked,
+          },
+          `filtering-type-${filteringType}`,
+        )}
       />
+      <div>{subcategory}</div>
     </button>
   );
 }
