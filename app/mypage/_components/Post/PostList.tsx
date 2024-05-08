@@ -58,8 +58,7 @@ export default function PostList({ userId, selectedTab, filteredData }: GetPostL
     <div className={cx('container')}>
       {fetchDataFunction === useFetchCommentList
         ? postsPages.map((postsPage) =>
-            // TODO: post-title, category 정보도 같이 보내야 함
-            postsPage.data.content.map((post: Comment) => <CommentItem key={post.commentId} post={post} />),
+            postsPage.data.content.map((comment: Comment) => <CommentItem key={comment.commentId} comment={comment} />),
           )
         : postsPages.map((postsPage) =>
             postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
