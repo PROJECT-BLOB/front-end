@@ -6,10 +6,14 @@ import Image from 'next/image';
 
 import SignInput from '@/app/signin/_components/SignInput/SignInput';
 import useCreateUserForm from '@/app/signin/_hooks/useCreateUserForm';
+import { UserDetail } from '@/types/User';
 import CloseButton from '@icons/x-close.svg';
+import { useDetailQueries } from '@queries/useUserQueries';
+import { useUserStore } from '@stores/userStore';
 
 import Avatar from '@components/Avatar/Avatar';
 import BlobButton from '@components/Button/BlobButton';
+import MonoButton from '@components/Button/MonoButton';
 import Input from '@components/Input/Input';
 
 import { nicknameValidator } from '@utils/registerOptions';
@@ -19,7 +23,20 @@ import styles from './UpdateProfileModal.module.scss';
 const cx = classNames.bind(styles);
 
 export default function UpdateProfileModal() {
-  // useUpdateUserForm 만들기
+  const { userId } = useUserStore();
+  // TODO: 유저디테일 페이지에서 모달로 props로 내려줄 수는 없을까나...
+  // 프사, 닉네임, 바이오는 계속 바뀌는 값이 아닌데 모달에서 api를 다시 호출하는게 굳이..? 싶음
+
+  const { data, isLoading, isError, error } = useDetailQueries(userId);
+
+  if (isLoading) return <div>유저 데이터 로딩중...</div>;
+
+  if (isError) return <div>에러 발생: {error.toString()}</div>;
+
+  const userData: UserDetail | undefined = data?.data;
+
+  console.log('userData', userData);
+  // TODO: useUpdateUserForm 만들기
   const { errors, register, handleSubmit, onSubmit, cancelForm, watch } = useCreateUserForm();
 
   const onChange = (checked: boolean) => {
@@ -43,9 +60,8 @@ export default function UpdateProfileModal() {
 
       <main>
         <section className={cx('profile-image')}>
-          {/* <Avatar size='medium' imageSource={userData?.profileUrl || ''} /> */}
-          {/* 이미지 수정/프로필 수정 공용 버튼컴포넌트 만들기 */}
-          <button type='button'>이미지 수정</button>
+          <Avatar size='medium' imageSource={userData?.profileUrl || ''} />
+          <MonoButton text='이미지 수정' type='button' />
         </section>
         <section className={cx('update-informations')}>
           <SignInput
@@ -59,6 +75,7 @@ export default function UpdateProfileModal() {
             placeholder='닉네임을 입력해주세요'
             errors={errors}
             validator={nicknameValidator}
+            // defaultValue={userData?.nickName || ''}
           />
           <Input
             labelName='자기소개'
@@ -75,13 +92,13 @@ export default function UpdateProfileModal() {
               <span>내프로필 공개하기</span>
               <Switch defaultChecked onChange={onChange} />
             </p>
-            <span>동의하시면 내 프로필이 다른사람들에게 공개됩니다.</span>
+            <span>동의하시면 프로필이 다른사람들에게 공개됩니다.</span>
           </div>
         </section>
       </main>
       <footer className={cx('buttons')}>
         <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
-        <BlobButton text='회원가입' type='submit' color='button-colord-contain' />
+        <BlobButton text='BLOB' type='submit' color='button-colord-contain' />
       </footer>
     </form>
   );
