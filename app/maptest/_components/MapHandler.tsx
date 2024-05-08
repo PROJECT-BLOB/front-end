@@ -9,22 +9,26 @@ interface MapHandlerProps {
   setPreviousPosition: (position: google.maps.LatLngLiteral) => void;
 }
 
-export default function MapHandler({ currentPosition, previousPosition, setPreviousPosition }: MapHandlerProps) {
+export default function AutocompleteHandler({
+  currentPosition,
+  previousPosition,
+  setPreviousPosition,
+}: MapHandlerProps) {
   const map = useMap();
 
   useEffect(() => {
     if (!map || !currentPosition || !previousPosition) return;
 
-    const PADDING_ZOOM_OUT = 1000;
-    const PADDING_ZOOM_IN = 300;
+    const PADDING_ZOOM_OUT = 800;
+    const PADDING_ZOOM_IN = 400;
 
     // 지도에 보여줄 영역을 계산.
     function getBound(position: google.maps.LatLngLiteral) {
       return {
-        east: position.lng + 0.5,
-        west: position.lng - 0.5,
-        north: position.lat + 0.2,
-        south: position.lat - 0.2,
+        east: position.lng + 0.01,
+        west: position.lng - 0.01,
+        north: position.lat + 0.01,
+        south: position.lat - 0.01,
       };
     }
 
@@ -49,14 +53,14 @@ export default function MapHandler({ currentPosition, previousPosition, setPrevi
     setTimeout(() => {
       map.fitBounds(CURRENT_BOUND, getPadding(PADDING_ZOOM_OUT));
       setPreviousPosition(currentPosition);
-    }, 1000);
+    }, 500);
 
     // 현재 위치에서 zoom-in
     setTimeout(() => {
       console.log('fitZoom');
       map.fitBounds(CURRENT_BOUND, getPadding(PADDING_ZOOM_IN));
       setPreviousPosition(currentPosition);
-    }, 2000);
+    }, 1500);
   }, [currentPosition, map]);
 
   return null;
