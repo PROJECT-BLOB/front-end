@@ -14,31 +14,34 @@ interface PostListProps {
   postsData: any;
   isCommentList?: boolean;
   isFetchingNextPage: boolean;
+  scrollRef: any;
 }
 
-const ForwardedPostList = React.forwardRef<HTMLDivElement, PostListProps>(function PostListForwarded(
-  { postsData, isCommentList, isFetchingNextPage }: PostListProps,
-  ref,
-) {
-  const postsPages = postsData?.pages ?? [];
-
+// const ForwardedPostList = React.forwardRef<HTMLDivElement, PostListProps>(function PostListForwarded(
+//   { postsData, isCommentList = false, isFetchingNextPage }: PostListProps,
+//   ref,
+// ) {
+export default function PostList({ postsData, isCommentList, isFetchingNextPage, scrollRef }: PostListProps) {
   return (
     <div className={cx('container')}>
-      {isCommentList
-        ? postsPages.map((postsPage: any) =>
-            // TODO: post-title, category 정보도 같이 보내야 함
-            postsPage.data.content.map((post: Comment) => <CommentItem key={post.commentId} post={post} />),
-          )
-        : postsPages.map((postsPage: any) =>
-            postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
-          )}
+      {
+        isCommentList
+          ? postsData.pages?.map((postsPage: any) =>
+              // TODO: post-title, category 정보도 같이 보내야 함
+              postsPage.data.content.map((post: Comment) => <CommentItem key={post.commentId} post={post} />),
+            )
+          : postsData.pages?.map((postsPage: any) =>
+              postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
+            )
+        // postsData?.map((post: any) => <PostItem key={post.postId} post={post} />)
+      }
       {/* //TODO: 무한스크롤이 또 안되는 현상 발생..ㅠㅠ 제 pc에서만 이상한거 같기도 하고 모르겠네요ㅠ */}
-      {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref}>dd</div>}
+      {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={scrollRef} />}
     </div>
   );
-});
+}
 
-export default ForwardedPostList;
+// export default ForwardedPostList;
 
 // postlist 안에서 데이터 불러오는 버전
 // import classNames from 'classnames/bind';

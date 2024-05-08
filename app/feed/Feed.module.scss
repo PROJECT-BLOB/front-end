@@ -1,13 +1,162 @@
-// TODO 무한 스크롤 확인용으로 폰트사이즈 크게 했습니다. 퍼블리싱 할 때 수정해주세요.
-.title {
-  font-size: 30rem;
+@import '/styles/global-styles/index';
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  @include tablet {
+    max-width: 72.8rem;
+  }
+
+  @include desktop {
+    max-width: 120.8rem;
+  }
 }
 
-.post {
-  padding: 6rem;
-  font-size: 10rem;
+.search-country-and-filtering-container {
+  display: flex;
+  width: 100%;
+  padding: 2.8rem 0 4rem 0;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+
+  @include tablet {
+    padding: 4rem 0rem 6rem 0rem;
+    gap: 2.4rem;
+  }
+
+  @include desktop {
+    padding: 6rem 0rem 8rem 0rem;
+  }
 }
 
-.loading {
-  font-size: 3rem;
+.search-mention {
+  color: $BDS-Grayscale-13;
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 136%; /* 29.92px */
+
+  @include tablet {
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+
+  @include desktop {
+    font-size: 3.6rem;
+  }
+}
+
+.filtering-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.filtering-button-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.filtering-mention {
+  color: $BDS-Grayscale-13;
+  text-align: center;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142%; /* 19.88px */
+
+  @include tablet {
+    font-size: 1.8rem;
+  }
+
+  @include desktop {
+    font-size: 2rem;
+  }
+}
+
+.setting-icon {
+  @include tablet {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+
+.search-and-order-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+
+  @include tablet {
+    flex-direction: row;
+    justify-content: right;
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  padding: 1.2rem 2rem 1.2rem 1.6rem;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  border-bottom: 1.6px solid $BDS-Grayscale-6;
+  background: $BDS-Grayscale-1;
+
+  @include desktop {
+    min-width: 42rem;
+    flex: 0 0 0;
+  }
+}
+
+.input {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  flex: 1 0 0;
+  overflow: hidden;
+  ::placeholder {
+    color: $BDS-Grayscale-6;
+  }
+  font-feature-settings: 'ss10' on;
+  text-overflow: ellipsis;
+
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 146%; /* 21.9px */
+  outline: none;
+  border: none;
+}
+
+.order-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.2rem;
+  font-feature-settings: 'ss10' on;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142%; /* 19.88px */
+
+  .order {
+    color: $BDS-Grayscale-7;
+    font-feature-settings: 'ss10' on;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
+  }
+
+  .selected {
+    color: $BDS-Grayscale-13;
+    font-feature-settings: 'ss10' on;
+
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
+  }
 }

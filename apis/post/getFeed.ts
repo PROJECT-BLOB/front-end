@@ -1,6 +1,6 @@
 import instance from '@apis/axios';
 
-export interface GetFeed {
+export interface GetFeedProps {
   country: string;
   city: string;
   sortBy: string;
@@ -15,7 +15,7 @@ export interface GetFeed {
   keyword: string;
 }
 
-export default async function getFeed(body: GetFeed) {
+export default async function getFeed(body: GetFeedProps) {
   const { data, status } = await instance.get('/post/feed', {
     params: body,
   });
