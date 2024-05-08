@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { MarkerF } from '@react-google-maps/api';
+import { AdvancedMarker } from '@vis.gl/react-google-maps';
 
+import Marker from '@/app/map/_components/Marker';
 import trees from '@/app/maptest/_mock/trees';
 
 export default function Markers() {
@@ -14,17 +15,18 @@ export default function Markers() {
   const locations = trees;
 
   return (
-    <div>
+    <>
       {locations.map((location, index) => (
-        <MarkerF
-          animation={google.maps.Animation.BOUNCE}
-          // eslint-disable-next-line react/no-array-index-key
+        <AdvancedMarker
+          // animation={google.maps.Animation.BOUNCE}
           key={index}
           title={location.name}
           position={{ lat: location.lat, lng: location.lng }}
           onClick={() => console.log('MarkerClicked')}
-        />
+        >
+          <Marker />
+        </AdvancedMarker>
       ))}
-    </div>
+    </>
   );
 }
