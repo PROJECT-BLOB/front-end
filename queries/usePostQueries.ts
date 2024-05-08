@@ -6,6 +6,7 @@ import createReply from '@apis/post/creatReply';
 import deleteComment from '@apis/post/deleteComment';
 import deletePost from '@apis/post/deletePost';
 import getCommentList from '@apis/post/getCommentList';
+import getFeed from '@apis/post/getFeed';
 import getPost from '@apis/post/getPost';
 import getReplyList from '@apis/post/getReplyList';
 import postBookmark from '@apis/post/postBookmark';
@@ -23,6 +24,7 @@ const posts = createQueryKeys('posts', {
   detail: (postId: number) => ['readPost', postId],
   bookmark: (userId: number) => ['bookmarkList', userId],
   commentList: (userId: number) => ['readCommentList', userId],
+  feedList: () => ['feedPost'],
   comment: (postId: number) => ['readComment', postId],
   reply: (commentId: number) => ['readReply', commentId],
 });
@@ -46,6 +48,13 @@ export function useFetchCommentList(userId: number) {
   return useInfiniteScrollQuery({
     queryKey: posts.commentList(userId).queryKey,
     queryFn: (page: number) => getUserCommentList({ userId, page, size: POSTS_PAGE_LIMIT }),
+  });
+}
+
+export function useFetchFeedList(filteredData: any) {
+  return useInfiniteScrollQuery({
+    queryKey: posts.feedList().queryKey,
+    queryFn: (page: number) => getFeed({ ...filteredData, page, size: 5 }),
   });
 }
 

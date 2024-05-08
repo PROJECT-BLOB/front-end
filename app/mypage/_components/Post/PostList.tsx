@@ -2,7 +2,7 @@
 import classNames from 'classnames/bind';
 
 import { Comment, Post } from '@/types/Post';
-import { useFetchBookmarkList, useFetchCommentList, useFetchPostList } from '@queries/usePostQueries';
+import { useFetchBookmarkList, useFetchCommentList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
 
 import PostItem from './PostItem';
 import styles from './PostList.module.scss';
@@ -30,9 +30,9 @@ export default function PostList({ userId, selectedTab, filteredData }: GetPostL
       fetchDataFunction = useFetchCommentList;
       break;
     // @queries/usePostQueries에 feedData 가져오는 쿼리 추가해서 아래 주석 제거하고 사용하시면 될 것 같습니다!!(이름은 임시로 지어둠)
-    // case 'Feed':
-    // fetchDataFunction=useFetchFeedList;
-    // break;
+    case 'Feed':
+      fetchDataFunction = useFetchFeedList;
+      break;
     default:
       fetchDataFunction = useFetchPostList; // 기본값으로 내가 쓴 글을 가져오도록 설정함
       break;
