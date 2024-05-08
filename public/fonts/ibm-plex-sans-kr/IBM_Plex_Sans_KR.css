@@ -62,7 +62,7 @@
   font-family: 'IBM Plex Sans KR';
   font-weight: 700;
   font-display: swap;
-  src: local('IBMPlexSansKR-SemiBold');
+  src: local('IBMPlexSansKR-SemiBold'),
 url(./woff2/IBMPlexSansKR-SemiBold.woff2) format('woff2'),
 url(./woff/IBMPlexSansKR-SemiBold.woff) format('woff');
 }

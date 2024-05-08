@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Status, Wrapper } from '@googlemaps/react-wrapper';
 
-import Map from '@/app/maptest/Map';
+import Map from '@/app/maptest/_deprecated/Map';
 
 export default function LiveMapGoogleAdvanced() {
   const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
