@@ -1,12 +1,12 @@
 // postlist 안에서 데이터 불러오는 버전
 import classNames from 'classnames/bind';
 
+import CommentItem from '@/app/mypage/_components/Comment/CommentItem';
 import { Comment, Post } from '@/types/Post';
 import { useFetchBookmarkList, useFetchCommentList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
 
 import PostItem from './PostItem';
 import styles from './PostList.module.scss';
-import CommentItem from '../Comment/CommentItem';
 
 const cx = classNames.bind(styles);
 
