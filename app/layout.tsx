@@ -5,8 +5,8 @@ import ModalContainer from '@components/Modal/ModalContainer';
 
 import WrapperProvider from '@utils/WrapperProvider';
 
-import styles from './RootLayout.module.scss';
 import '@styles/global-styles/global.scss';
+import styles from './RootLayout.module.scss';
 
 import type { Metadata } from 'next';
 

@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 export type MarkerType = 'recommendation' | 'blame' | 'question' | 'caution' | 'help';
 
 interface MarkerProps {
-  markerType: MarkerType;
+  markerType?: MarkerType;
   // TODO: opacity는 향후 도메인 로직으로 교체하여 시간에따라 변경될 수 있게 한다.
   opacity?: 25 | 50 | 75 | 100;
 }

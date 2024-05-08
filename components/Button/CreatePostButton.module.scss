@@ -4,6 +4,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
+  border: none;
+
 }
 
 .ellipse {
@@ -15,6 +18,9 @@
     width: 9rem;
     height: 9rem;
   }
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .plus {
@@ -25,5 +31,8 @@
   @include tablet-and-desktop {
     width:3.0rem;
     height: 3.0rem;
+  }
+  &:hover {
+    cursor: pointer;
   }
 }
