@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
 import { ContentField } from '@/app/signin/_hooks/useCreateUserForm';
@@ -21,4 +22,15 @@ export interface InputProps {
   errors?: Errors;
   validator?: ValidatorType;
   rows?: number;
+}
+
+export interface TextAreaProps {
+  labelName: string;
+  id: string;
+  name: string;
+  value: string;
+  maxLength?: number;
+  placeholder: string;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void; // 변경
+  rows: number;
 }

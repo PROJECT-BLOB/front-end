@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import { Switch } from 'antd';
 import classNames from 'classnames/bind';
@@ -14,7 +14,7 @@ import { useUserStore } from '@stores/userStore';
 import Avatar from '@components/Avatar/Avatar';
 import BlobButton from '@components/Button/BlobButton';
 import MonoButton from '@components/Button/MonoButton';
-import Input from '@components/Input/Input';
+import TextArea from '@components/Input/TextArea';
 
 import { nicknameValidator } from '@utils/registerOptions';
 
@@ -45,7 +45,7 @@ export default function UpdateProfileModal() {
 
   const [value, setValue] = useState('');
 
-  const handleChangeTextArea = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeTextArea = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
@@ -77,7 +77,7 @@ export default function UpdateProfileModal() {
             validator={nicknameValidator}
             // defaultValue={userData?.nickName || ''}
           />
-          <Input
+          <TextArea
             labelName='자기소개'
             id='bio'
             name='bio'
