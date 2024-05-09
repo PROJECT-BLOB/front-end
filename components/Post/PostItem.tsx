@@ -13,10 +13,11 @@ import styles from './PostItem.module.scss';
 const cx = classNames.bind(styles);
 
 export default function PostItem({ post }: { post: Post }) {
-  const { toggleModal, setCurrentName } = useModalStore();
+  const { toggleModal, setCurrentName, setPostId } = useModalStore();
 
   function handleOpenModal(name: ModalName) {
     setCurrentName(name);
+    setPostId(post.postId);
     toggleModal();
   }
 

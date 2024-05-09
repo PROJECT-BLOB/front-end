@@ -6,8 +6,8 @@ import nextButton from '@/public/icons/next-button.svg';
 import previousButton from '@/public/icons/previous-button.svg';
 import { Post } from '@/types/Post';
 
-import useImageControl from './hooks/useImageControl';
 import styles from './ImageContainer.module.scss';
+import useImageControl from '../../hooks/useImageControl';
 
 interface ImageContainerProps {
   contentData: Post;
