@@ -2,12 +2,12 @@ import { ReactNode, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import AtomIcon from '@icons/atom-02.svg';
-import ChevronRightIcon from '@icons/chevron-right.svg';
-import MagicWandIcon from '@icons/magic-wand-02-2.svg';
-import SignalIcon from '@icons/signal-02-2.svg';
-import ThumbsDownIcon from '@icons/thumbs-down-orange.svg';
-import ThumbsUpIcon from '@icons/thumbs-up-red.svg';
+import AtomIcon from '@icons/atom-02.svg?component';
+import ChevronRightIcon from '@icons/chevron-right.svg?component';
+import MagicWandIcon from '@icons/magic-wand-02-2.svg?component';
+import SignalIcon from '@icons/signal-02-2.svg?component';
+import ThumbsDownIcon from '@icons/thumbs-down-orange.svg?component';
+import ThumbsUpIcon from '@icons/thumbs-up-red.svg?component';
 
 import styles from './CategoryFiltering.module.scss';
 
@@ -20,7 +20,7 @@ export type FilteringType = 'map' | 'writing' | 'feed';
 export interface CategoryFilteringProps {
   category: Category;
   filteringType: FilteringType;
-  subcategory: ReactNode;
+  subcategory?: ReactNode;
 }
 
 function selectedIcon(category: Category) {
@@ -54,7 +54,7 @@ export default function CategoryFiltering({
     setIsArrowClicked(true);
   };
 
-  const handleClickArrow = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleClickArrow = (event: React.MouseEvent<SVGSVGElement>) => {
     event.stopPropagation(); // 버튼의 클릭 이벤트가 발생하지 않도록 함
 
     if (!isCategoryClicked) {

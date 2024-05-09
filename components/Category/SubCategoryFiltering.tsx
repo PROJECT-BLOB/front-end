@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import CloseButton from '@icons/x-close.svg';
+import CloseButton from '@icons/x-close.svg?component';
 
 import { Category, FilteringType } from './CategoryFiltering';
 import styles from './SubCategoryFiltering.module.scss';

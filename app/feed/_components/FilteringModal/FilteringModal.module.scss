@@ -53,3 +53,15 @@
   gap: 1.2rem;
   align-self: stretch;
 }
+
+.category-list {
+  display: flex;
+  white-space: nowrap;
+  gap: 1.2rem;
+}
+
+.sub-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
