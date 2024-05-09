@@ -7,13 +7,21 @@
   gap: 3.2rem;
 }
 
-.profile-and-bookmark {
+.profile-and-kebab {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 7px;
   align-self: stretch;
   margin-bottom: 2.4rem;
+}
+
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
+  align-self: stretch;
 }
 
 .title-and-distance {
@@ -71,11 +79,13 @@
   }
 
   .city {
-    color: $BDS-Grayscale-8;
+    color: $BDS-Grayscale-7;
     font-feature-settings: 'ss10' on;
-    font-size: 1.3rem;
-    font-weight: 500;
-    line-height: 138.5%; /* 18.005px */
+
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
   }
 }
 
@@ -92,6 +102,13 @@
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
   margin-bottom: 1.6rem;
+
+  .alert {
+    color: $BDS-Grayscale-7;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
+  }
 }
 
 .comment-line {

@@ -9,6 +9,14 @@
   margin-left: 4rem;
 }
 
+.profile-and-kebab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+  align-self: stretch;
+}
+
 .content-like-wrapper {
   width: 100%;
   display: flex;
@@ -34,10 +42,18 @@
   display: flex;
   align-items: flex-start;
   gap: 1.74rem;
-  color: $BDS-Grayscale-8;
+  color: $BDS-Grayscale-7;
   font-feature-settings: 'ss10' on;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
+
+  .alert {
+    color: $BDS-Grayscale-7;
+    font-feature-settings: 'ss10' on;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
+  }
 }

@@ -39,7 +39,7 @@ export default function Header() {
       </div>
       <div className={styles['like-mention-wrapper']}>
         <button type='button' onClick={handleClickLike} className={styles['like-wrapper']}>
-          <Image src={post?.data.liked ? filledRedHeart : vacantHeart} alt='좋아요 아이콘' width={24} height={24} />
+          <Image src={post?.data.liked ? filledRedHeart : vacantHeart} alt='좋아요 아이콘' width={20} height={20} />
         </button>
         <p className={styles.mention}>좋아요를 눌러서 지도에 더 오래 남겨보세요.</p>
       </div>
