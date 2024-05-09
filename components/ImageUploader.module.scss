@@ -10,4 +10,14 @@
   flex-direction: row;
   align-items: center;
   gap: 0.5rem;
+  display: inline-block;
+  margin-bottom: 10px; // 필요에 따라 조절하세요
+}
+
+.inputFile p {
+  margin-left: 5px; // 아이콘과 텍스트 사이 간격 조절
+}
+
+#inputFile {
+  display: none; // 파일 선택 input 숨기기
 }

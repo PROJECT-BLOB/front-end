@@ -10,10 +10,9 @@ import useModalStore from '@stores/useModalStore';
 
 // import CategoryFiltering from '@components/Category/CategoryFiltering';
 import ImageUploader from '@components/ImageUploader';
+import Input from '@components/Input/Input';
 
-import ContentInput from './ContentInput';
 import PositionDetail from './PositionDetail';
-import TitleInput from './TitleInput';
 import styles from './WritePost.module.scss';
 import BlobButton from '../../Button/BlobButton';
 
@@ -52,8 +51,15 @@ export default function WritePost() {
         <CategoryFiltering categoryFilteringType='question' title='질문' />
         <CategoryFiltering categoryFilteringType='caution' title='주의' />
         <CategoryFiltering categoryFilteringType='help' title='도움' /> */}
-        <TitleInput onChange={handleTitleInputChange} />
-        <ContentInput />
+        <Input
+          labelName='제목'
+          id='title'
+          name='title'
+          placeholder='제목은 필수입니다'
+          maxLength={20}
+          onChange={handleTitleInputChange}
+        />
+        <Input labelName='내용' id='content' name='content' placeholder='내용을 입력하세요' maxLength={20} />
         <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
         {/* <AutoCompleteCity onSelectCity={onSelectCity} /> */}
         <PositionDetail />
