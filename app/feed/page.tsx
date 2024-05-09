@@ -8,6 +8,7 @@ import getFeed from '@apis/post/getFeed';
 import searchIcon from '@public/icons/search-icon-gray.svg';
 import settingIcon from '@public/icons/settings-04.svg';
 import useInfiniteScrollQuery from '@queries/useInfiniteScrollQuery';
+import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import CategoryBox from '@components/CategoryBox';
 
@@ -39,6 +40,7 @@ export default function Feed() {
     minLikes: 0,
     keyword: '',
   });
+  const { toggleModal, setCurrentName } = useModalStore();
 
   const [categoryList, setCategoryList] = useState<string[][]>(stringCategoryListToArray(filteredData.categories));
 
@@ -50,6 +52,11 @@ export default function Feed() {
       return getFeed({ ...filteredData, page, size: 5 });
     },
   });
+
+  function handleClickModal(name: ModalName) {
+    setCurrentName(name);
+    toggleModal();
+  }
 
   function handleClickOrder(order: string) {
     setFilteredData(() => ({ ...filteredData, sortBy: order }));
@@ -101,7 +108,9 @@ export default function Feed() {
         </div>
         <div className={styles['filtering-container']}>
           <div className={styles['filtering-button-wrapper']}>
-            <span className={styles['filtering-mention']}>필터링</span>
+            <button type='button' className={styles['filtering-mention']} onClick={() => handleClickModal('filtering')}>
+              필터링
+            </button>
             <Image className={styles['setting-icon']} src={settingIcon} alt='세팅아이콘' />
           </div>
 
