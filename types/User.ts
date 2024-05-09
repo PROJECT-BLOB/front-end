@@ -2,14 +2,14 @@ export interface UserDetail {
   userId: 0;
   email: string;
   blobId: string;
-  nickName: string;
+  nickname: string;
   bio: string;
   profileUrl: string;
   state: 'COMPLETE' | 'INCOMPLETE';
   postCount: 0;
   likedCount: 0;
   commentCount: 0;
-  isPrivate: boolean;
+  isPublic: boolean;
   coordinate: {
     lat: 0;
     lng: 0;

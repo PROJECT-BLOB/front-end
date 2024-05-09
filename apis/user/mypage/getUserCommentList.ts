@@ -18,7 +18,7 @@ export interface CommentListProps {
 export default async function getUserCommentList(
   body: CommentListProps,
 ): Promise<{ data: CommentList; status: number }> {
-  const { data, status } = await instance.get<CommentList>(`/user/${body.userId}/comment`, {
+  const { data, status } = await instance.get<CommentList>(`/user/${body.userId}/commented`, {
     params: { page: body.page, size: body.size },
   });
 
