@@ -10,8 +10,8 @@ import { useFetchTargetCommentReply, useUpdateCommentLike } from '@queries/usePo
 import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
 
 import styles from './CommentContainer.module.scss';
-import ProfileContainer from './ProfileContainer';
 import Reply from './Reply';
+import ProfileContainer from '../ProfileContainer';
 
 interface CommentProps {
   comment: Comment;
@@ -24,7 +24,7 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
   const [isViewReplyClicked, setIsViewReplyClicked] = useState(false);
 
   // 답글 조회
-  const { data: replyList } = useFetchTargetCommentReply(comment.commentId);
+  const { data: replyList, fetchNextPage } = useFetchTargetCommentReply(comment.commentId);
 
   // 댓글 좋아요 시 답글 조회 초기화
   const { mutate: updateCommentLike } = useUpdateCommentLike(comment.postId);
@@ -34,13 +34,8 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
   }
 
   return (
-    <>
-      <ProfileContainer
-        author={comment.author}
-        canDelete={comment.canDelete}
-        postId={comment.postId}
-        commentId={comment.commentId}
-      />
+    <div className={styles['comment-container']}>
+      <ProfileContainer author={comment.author} />
       <div className={styles['content-like-wrapper']}>
         <p className={styles.content}>{comment.content}</p>
         <button type='button' onClick={handleClickLike}>
@@ -64,23 +59,42 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
           답글달기
         </button>
       </div>
-      {replyList?.data.content.length ? (
+      {replyList?.pages[0].data.count ? (
         <button
           type='button'
           onClick={() => setIsViewReplyClicked(!isViewReplyClicked)}
           className={styles['see-reply']}
         >
-          답글 보기 ({replyList?.data.content.length}개)
+          <div className={styles.line} />
+          답글 보기 ({replyList?.pages[0].data.count}개)
         </button>
       ) : (
         ''
       )}
 
       {isViewReplyClicked &&
-        replyList?.data.content &&
-        replyList?.data.content.map((reply: Comment) => (
-          <Reply key={reply.commentId} reply={reply} commentId={comment.commentId} />
+        replyList?.pages[0].data.count &&
+        replyList?.pages.map((page) =>
+          page.data.content.map((reply: Comment) => (
+            <Reply key={reply.commentId} reply={reply} commentId={comment.commentId} />
+          )),
+        )}
+      {isViewReplyClicked &&
+        (replyList?.pages[replyList.pages.length - 1].data.hasMore ? (
+          <button type='button' onClick={() => fetchNextPage()} className={styles['see-more-reply']}>
+            <div className={styles.line} />
+            답글 ({replyList?.pages[replyList.pages.length - 1].data.remaining})개 더 보기
+          </button>
+        ) : (
+          <button
+            type='button'
+            onClick={() => setIsViewReplyClicked(!isViewReplyClicked)}
+            className={styles['see-more-reply']}
+          >
+            <div className={styles.line} />
+            답글 숨기기
+          </button>
         ))}
-    </>
+    </div>
   );
 }

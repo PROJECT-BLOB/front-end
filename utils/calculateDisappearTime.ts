@@ -1,4 +1,4 @@
-export default function calculateTimeWhenItWillDisappear(expiresAt: string) {
+export default function calculateDisappearTime(expiresAt: string) {
   const now = new Date();
   const expireTime = new Date(expiresAt);
   const secondDiff = (expireTime.getTime() - now.getTime()) / 1000;

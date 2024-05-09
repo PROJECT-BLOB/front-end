@@ -1,0 +1,9 @@
+@import '/styles/global-styles/media-breakpoint';
+
+@include tablet {
+  .main {
+    display: flex;
+    gap: 2.4rem;
+    overflow: hidden;
+  }
+}

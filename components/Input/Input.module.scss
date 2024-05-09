@@ -2,11 +2,9 @@
 
 .input {
   @include flex-column;
-
+  width: 100%;
   gap: 1.2rem;
   font-feature-settings: 'ss10' on;
-
-  // margin-bottom: 3.2rem;
 }
 
 .label {
@@ -34,8 +32,7 @@
 
 .input-field {
   display: flex;
-  // width: 21.6rem;
-  width: 33.1rem;
+  width: 100%;
 
   padding: 1.2rem 2rem 1.2rem 1.6rem;
   justify-content: center;
@@ -58,6 +55,19 @@
     border-image: $BDS-Primary-3;
     border-image-slice: 1;
   }
+
+  @include tablet-and-desktop {
+    width: 33.1rem;
+  }
+}
+
+.textarea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  // height: auto;
+  // vertical-align: middle;
 }
 
 .max-length {

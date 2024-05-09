@@ -1,11 +1,13 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { filteredData } from '@/app/feed/page';
 import createComment from '@apis/post/createComment';
 import createReply from '@apis/post/creatReply';
 import deleteComment from '@apis/post/deleteComment';
 import deletePost from '@apis/post/deletePost';
 import getCommentList from '@apis/post/getCommentList';
+import getFeed from '@apis/post/getFeed';
 import getPost from '@apis/post/getPost';
 import getReplyList from '@apis/post/getReplyList';
 import postBookmark from '@apis/post/updateBookmark';
@@ -23,6 +25,7 @@ const posts = createQueryKeys('posts', {
   detail: (postId: number) => ['readPost', postId],
   bookmark: (userId: number) => ['bookmarkList', userId],
   commentList: (userId: number) => ['readCommentList', userId],
+  feedList: () => ['feedPost'],
   comment: (postId: number) => ['readComment', postId],
   reply: (commentId: number) => ['readReply', commentId],
 });
@@ -49,6 +52,13 @@ export function useFetchCommentList(userId: number) {
   });
 }
 
+export function useFetchFeedList(filteredData: filteredData) {
+  return useInfiniteScrollQuery({
+    queryKey: posts.feedList().queryKey,
+    queryFn: (page: number) => getFeed({ ...filteredData, page, size: 5 }),
+  });
+}
+
 export function useFetchTargetPost(postId: number) {
   return useQuery({ queryKey: posts.detail(postId).queryKey, queryFn: () => getPost(postId) });
 }
@@ -61,7 +71,10 @@ export function useFetchTargetPostComment(postId: number) {
 }
 
 export function useFetchTargetCommentReply(commentId: number) {
-  return useQuery({ queryKey: posts.reply(commentId).queryKey, queryFn: () => getReplyList(commentId) });
+  return useInfiniteScrollQuery({
+    queryKey: posts.reply(commentId).queryKey,
+    queryFn: (page) => getReplyList({ commentId, page, size: COMMENTS_PAGE_LIMIT }),
+  });
 }
 
 // 생성

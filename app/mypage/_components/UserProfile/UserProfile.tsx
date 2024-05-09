@@ -7,6 +7,7 @@ import { useDetailQueries } from '@queries/useUserQueries';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import Avatar from '@components/Avatar/Avatar';
+import MonoButton from '@components/Button/MonoButton';
 
 import styles from './UserProfile.module.scss';
 
@@ -32,16 +33,11 @@ export default function UserProfile({ userId }: { userId: number }) {
   return (
     <div className={cx('container')}>
       <Avatar size='large' imageSource={userData?.profileUrl || ''} />
-      <button
-        className={cx('button', 'text-black', 'x-small', 'weight-600')}
-        type='button'
-        onClick={() => handleClickOpenModal('updateProfile')}
-      >
-        프로필 수정
-      </button>
+      <MonoButton text='프로필 수정' type='button' size='large' onClick={() => handleClickOpenModal('updateProfile')} />
+
       <div className={cx('user-detail')}>
         <p className={cx('user-nickname-section')}>
-          <span className={cx('text-black', 'large', 'weight-600')}>{userData?.nickName}</span>
+          <span className={cx('text-black', 'large', 'weight-600')}>{userData?.nickname}</span>
           <span className={cx('liked-count-wrapper')}>
             <Image className={cx('liked-count-icon')} src={HeartIcon} alt='하트 이미지' />
             <span className={cx('text-colored', 'weight-600')}>Lv.{userData?.likedCount}</span>

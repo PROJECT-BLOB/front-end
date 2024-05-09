@@ -28,5 +28,5 @@ export default function useInfiniteScrollQuery(queryOptions: {
     }
   }, [inView, fetchNextPage]);
 
-  return { data, isPending, isError, isFetchingNextPage, ref, refetch, isLoading };
+  return { data, isPending, isError, isFetchingNextPage, ref, refetch, isLoading, fetchNextPage };
 }

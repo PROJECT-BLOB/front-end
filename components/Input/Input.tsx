@@ -1,3 +1,5 @@
+import { FieldValues } from 'react-hook-form';
+
 import classNames from 'classnames/bind';
 
 import { InputProps } from '@/types/Input';
@@ -6,7 +8,7 @@ import styles from './Input.module.scss';
 
 const cx = classNames.bind(styles);
 
-export interface ExtendedInputProps extends InputProps {
+export interface ExtendedInputProps extends InputProps<FieldValues> {
   borderColor?: string;
 }
 
