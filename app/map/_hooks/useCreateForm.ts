@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form';
 
+import createPost from '@apis/post/createPost';
+
 export interface ContentField {
   title: string;
   content: string;
@@ -14,10 +16,20 @@ export default function useCreateForm(toggleModal: () => void) {
     toggleModal();
   }
 
-  function onSubmit(formData: ContentField) {
-    // formData 처리 해줘야 함
-    // 데이터 post 요청 보내줘야 함
-    console.log(formData);
+  async function onSubmit(formData: ContentField) {
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('title', formData.title);
+      formDataToSend.append('content', formData.content);
+      formData.image.forEach((image, index) => {
+        formDataToSend.append(`image${index}`, image);
+      });
+      await createPost(formDataToSend);
+      console.log('Post created successfully');
+    } catch (error) {
+      console.error('Error creating post:', error);
+    }
+
     toggleModal();
   }
 
