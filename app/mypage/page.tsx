@@ -8,7 +8,8 @@ import { useRouter } from 'next/navigation';
 import { useUserStore } from '@stores/userStore';
 import { useTabStore } from '@stores/useTabStore';
 
-import PostList from './_components/Post/PostList';
+import PostList from '@components/Post/PostList';
+
 import TabList from './_components/Tab/TabList';
 import UserProfile from './_components/UserProfile/UserProfile';
 import styles from './myPage.module.scss';
@@ -35,7 +36,6 @@ export default function myPage() {
         <TabList />
       </section>
       <section className={cx('post-list')}>
-        {/* postlist 안에서 데이터 불러오는 버전 */}
         <PostList userId={userId} selectedTab={selectedTab} />
       </section>
     </div>

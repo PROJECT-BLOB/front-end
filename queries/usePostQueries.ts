@@ -1,6 +1,7 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { filteredData } from '@/app/feed/page';
 import createComment from '@apis/post/createComment';
 import createReply from '@apis/post/creatReply';
 import deleteComment from '@apis/post/deleteComment';
@@ -24,6 +25,7 @@ const posts = createQueryKeys('posts', {
   detail: (postId: number) => ['readPost', postId],
   bookmark: (userId: number) => ['bookmarkList', userId],
   commentList: (userId: number) => ['readCommentList', userId],
+  feedList: () => ['feedPost'],
   comment: (postId: number) => ['readComment', postId],
   reply: (commentId: number) => ['readReply', commentId],
 });
@@ -50,9 +52,9 @@ export function useFetchCommentList(userId: number) {
   });
 }
 
-export function useFetchFeedList(filteredData: any) {
+export function useFetchFeedList(filteredData: filteredData) {
   return useInfiniteScrollQuery({
-    queryKey: ['feedPost'],
+    queryKey: posts.feedList().queryKey,
     queryFn: (page: number) => getFeed({ ...filteredData, page, size: 5 }),
   });
 }

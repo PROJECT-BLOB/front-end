@@ -1,59 +1,49 @@
+// postlist 안에서 데이터 불러오는 버전
 import { useEffect } from 'react';
 
-import { InfiniteData, UseQueryResult } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 
 import { filteredData } from '@/app/feed/page';
+import CommentItem from '@/app/mypage/_components/Comment/CommentItem';
 import { Comment, Post } from '@/types/Post';
 import { useFetchBookmarkList, useFetchCommentList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
 
 import PostItem from './PostItem';
 import styles from './PostList.module.scss';
-import CommentItem from '../Comment/CommentItem';
 
 const cx = classNames.bind(styles);
 
 interface GetPostListProps {
   userId?: number;
   selectedTab?: string;
+  // 타입 수정해주십셔...
   filteredData?: filteredData;
 }
 
-type FetchDataFunctionType = {
-  data: InfiniteData<any, unknown>;
-  isPending: boolean;
-  isError: boolean;
-  isFetchingNextPage: boolean;
-  ref: (node?: Element | null | undefined) => void;
-  refetch: () => Promise<UseQueryResult>;
-};
-
 export default function PostList({ userId, selectedTab, filteredData }: GetPostListProps) {
-  let fetchDataFunction;
+  // 찾아야함
+  let fetchDataFunction: any;
   switch (selectedTab) {
     case 'MyPosts':
-      if (userId) fetchDataFunction = useFetchPostList(userId);
-
+      fetchDataFunction = useFetchPostList;
       break;
     case 'Bookmarks':
-      if (userId) fetchDataFunction = useFetchBookmarkList(userId);
-
+      fetchDataFunction = useFetchBookmarkList;
       break;
     case 'MyComments':
-      if (userId) fetchDataFunction = useFetchCommentList(userId);
-
+      fetchDataFunction = useFetchCommentList;
       break;
     case 'Feed':
-      if (filteredData) fetchDataFunction = useFetchFeedList(filteredData);
-
+      fetchDataFunction = useFetchFeedList;
       break;
     default:
-      if (userId) fetchDataFunction = useFetchPostList(userId); // 기본값으로 내가 쓴 글을 가져오도록 설정함
-
+      fetchDataFunction = useFetchPostList; // 기본값으로 내가 쓴 글을 가져오도록 설정함
       break;
   }
 
-  const { data, isPending, isError, isFetchingNextPage, ref, refetch } = fetchDataFunction as FetchDataFunctionType;
+  const { data, isPending, isError, isFetchingNextPage, ref, refetch } = userId
+    ? fetchDataFunction(userId)
+    : fetchDataFunction(filteredData);
 
   useEffect(() => {
     refetch();
@@ -72,14 +62,16 @@ export default function PostList({ userId, selectedTab, filteredData }: GetPostL
 
   return (
     <div className={cx('container')}>
-      {selectedTab === 'MyComments'
-        ? postsPages.map((postsPage: any) =>
-            // TODO: post-title, category 정보도 같이 보내야 함
-            postsPage.data.content.map((post: Comment) => <CommentItem key={post.commentId} post={post} />),
+      {fetchDataFunction === useFetchCommentList
+        ? postsPages.map((postsPage: { data: { content: Comment[] } }) =>
+            postsPage.data.content.map((comment) => <CommentItem key={comment.commentId} comment={comment} />),
           )
-        : postsPages.map((postsPage: any) =>
+        : postsPages.map((postsPage: { data: { content: Post[] } }) =>
             postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
           )}
+
+      {/*  TODO 로딩 인디케이터 추가 */}
+
       {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}
     </div>
   );

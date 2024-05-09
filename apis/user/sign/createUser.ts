@@ -10,7 +10,7 @@ interface CreateUserProps {
 export default async function createUser({ nickname, id }: CreateUserProps) {
   const { data, status } = await instance.post('/user', {
     blobId: id,
-    nickName: nickname,
+    nickname: nickname,
   });
 
   return { data, status };

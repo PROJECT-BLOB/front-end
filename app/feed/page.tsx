@@ -10,9 +10,9 @@ import settingIcon from '@public/icons/settings-04.svg';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import CategoryBox from '@components/CategoryBox';
+import PostList from '@components/Post/PostList';
 
 import styles from './Feed.module.scss';
-import PostList from '../mypage/_components/Post/PostList';
 
 type Order = 'hot' | 'likes' | 'views' | 'recent';
 const ORDERS = {
