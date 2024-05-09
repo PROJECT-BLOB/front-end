@@ -3,7 +3,7 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import AutoCompleteCity from '@/app/maptest/AutoCompleteCity';
+// import AutoCompleteCity from '@/app/maptest/_deprecated/autoCompleteCity';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
@@ -29,9 +29,9 @@ export default function WritePost() {
     setTitleInputValue(event.target.value);
   };
 
-  const onSelectCity = (city: string) => {
-    console.log(`Selected city: ${city}`);
-  };
+  // const onSelectCity = (city: string) => {
+  //   console.log(`Selected city: ${city}`);
+  // };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cx('form')}>
@@ -61,7 +61,7 @@ export default function WritePost() {
         />
         <Input labelName='내용' id='content' name='content' placeholder='내용을 입력하세요' maxLength={20} />
         <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
-        <AutoCompleteCity onSelectCity={onSelectCity} />
+        {/* <AutoCompleteCity onSelectCity={onSelectCity} /> */}
         <PositionDetail />
         <ImageUploader setValue={setValue} />
       </div>

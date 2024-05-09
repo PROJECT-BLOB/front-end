@@ -1,7 +1,11 @@
 @import '/styles/global-styles/color-pallete';
 
 .category {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
   color: $BDS-Grayscale-1;
@@ -9,7 +13,6 @@
   font-size: 1.3rem;
   font-weight: 500;
   line-height: 138.5%; /* 18.005px */
-  margin-bottom: 1.2rem;
 
   &.pink {
     background: $BDS-Category-recommend_press;

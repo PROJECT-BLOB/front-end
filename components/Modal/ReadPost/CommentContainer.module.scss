@@ -8,15 +8,11 @@
 }
 
 .content {
+  line-height: 160%; /* 24px */
   color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
   font-size: 1.5rem;
   line-height: 160%; /* 24px */
-  // 글 줄임설정
-  // display: -webkit-box;
-  // text-overflow: ellipsis;
-  // -webkit-box-orient: vertical;
-  // -webkit-line-clamp: 2;
 }
 
 .comment-information-container {
@@ -26,8 +22,25 @@
   color: $BDS-Grayscale-8;
   font-feature-settings: 'ss10' on;
   font-size: 1.4rem;
-  font-style: normal;
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
   margin-bottom: -0.8rem;
+}
+
+.create-reply {
+  color: $BDS-Grayscale-8;
+  font-feature-settings: 'ss10' on;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142%; /* 19.88px */
+}
+
+.see-reply {
+  display: flex;
+  align-items: center;
+  color: $BDS-Grayscale-8;
+  font-feature-settings: 'ss10' on;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142%; /* 19.88px */
 }

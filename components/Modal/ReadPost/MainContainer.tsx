@@ -11,6 +11,7 @@ import { useUpdatePostBookmark, useUpdatePostLike } from '@queries/usePostQuerie
 import CategoryBox from '@components/CategoryBox';
 
 import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
+import calculateTimeWhenItWillDisappear from '@utils/calculateTimeWhenItWillDisappear';
 
 import CommentBox from './CommentBox';
 import styles from './MainContainer.module.scss';
@@ -42,8 +43,10 @@ export default function MainContainer({ contentData }: MainContentProps) {
           <button type='button' onClick={handleClickLike} className={styles['like-wrapper']}>
             <Image src={contentData.liked ? filledRedHeart : vacantHeart} alt='좋아요 아이콘' width={24} height={24} />
           </button>
-          <span className={styles['delete-mention']}>이 글은 21시간 38분 31초 이후 삭제됩니다.</span>
-          {/* 맵에서 사라지는거 받아야 함 */}
+          <span className={styles['delete-mention']}>
+            이 글은
+            {calculateTimeWhenItWillDisappear(contentData.expiresAt)}이후에 사라집니다.
+          </span>
         </div>
         <button type='button' onClick={handleClickBookmark}>
           <Image src={contentData.bookmarked ? filledBookmark : bookmark} alt='북마크 아이콘' width={24} height={24} />
@@ -61,7 +64,7 @@ export default function MainContainer({ contentData }: MainContentProps) {
         {contentData.country} {contentData.city}
       </p>
 
-      <CategoryBox contentData={contentData} />
+      <CategoryBox category={contentData.category} subcategory={contentData.subcategory} />
 
       <h3 className={styles.title}>{contentData.title}</h3>
       <p className={styles.content}>{contentData.content}</p>

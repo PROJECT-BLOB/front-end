@@ -14,6 +14,7 @@ const Template: StoryFn<CategoryFilteringProps> = (args: CategoryFilteringProps)
 
 export const Primary = Template.bind({});
 Primary.args = {
-  categoryFilteringType: 'recommendation',
-  title: '추천',
+  category: '추천',
+  filteringType: 'writing',
+  subcategory: '날씨',
 };

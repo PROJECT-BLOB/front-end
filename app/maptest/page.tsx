@@ -1,29 +1,31 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
-import BasicMapAlpha from '@/app/maptest/BasicMapAlpha';
+import { APIProvider } from '@vis.gl/react-google-maps';
 
-import AutoComplete from './AutoComplete';
-// import AutoCompleteCity from './AutoCompleteCity';
-import styles from './MapTest.module.scss';
+import Autocomplete from '@/app/maptest/Autocomplete';
+import BlobMap from '@/app/maptest/BlobMap';
 
 export default function MapTest() {
-  return (
-    <div className={styles.body}>
-      <h2>Map 페이지</h2>
-      {/* <AutoCompleteCity /> */}
-      <AutoComplete />
-      <BasicMapAlpha />
+  const initialPosition = { lat: 43.7209711762384, lng: -79.421240170446 } as google.maps.LatLngLiteral;
 
-      <div className={styles['button-container']}>
-        <button className={styles.button} type='button'>
-          +
-        </button>
-        <button className={styles.button} type='button'>
-          추가하기
-        </button>
-      </div>
-    </div>
+  const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
+  const [currentPosition, setCurrentPosition] = useState<google.maps.LatLngLiteral | null>(initialPosition);
+  const [previousPosition, setPreviousPosition] = useState<google.maps.LatLngLiteral | null>(initialPosition);
+  const [, setSelectedPlace] = useState<google.maps.places.PlaceResult | null>(null);
+
+  return (
+    <>
+      <APIProvider apiKey={GOOGLE_MAP_API_KEY} libraries={['marker']}>
+        <Autocomplete onPlaceSelect={setSelectedPlace} setCurrentPosition={setCurrentPosition} />
+        <BlobMap
+          setPreviousPosition={setPreviousPosition}
+          previousPosition={previousPosition}
+          currentPosition={currentPosition}
+          initialPosition={initialPosition}
+        />
+      </APIProvider>
+    </>
   );
 }

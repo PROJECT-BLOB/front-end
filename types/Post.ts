@@ -22,6 +22,7 @@ export interface Post {
   distFromActual: number;
   views: number;
   createdDate: string;
+  expiresAt: string;
   imageUrl: string[];
   liked: boolean;
   bookmarked: boolean;

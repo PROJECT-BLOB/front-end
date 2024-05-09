@@ -1,13 +1,14 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Comment } from '@/types/Post';
 import { useCreateComment, useCreateReply, useFetchTargetPostComment } from '@queries/usePostQueries';
 
-import CommentContainer from './Comment';
 import styles from './CommentBox.module.scss';
+import CommentContainer from './CommentContainer';
 
 export default function CommentBox({ postId }: { postId: number }) {
-  const [commentInput, setCommentInput] = useState('');
+  const { register, handleSubmit, reset } = useForm<{ comment: string }>();
 
   const [replyInformation, setReplyInformation] = useState({
     isReply: false,
@@ -24,14 +25,15 @@ export default function CommentBox({ postId }: { postId: number }) {
   // 답글 추가 후 답글 조회 초기화
   const { mutateAsync: createReplyMutate } = useCreateReply(replyInformation.targetCommentId);
 
-  async function handleSubmitComment(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  async function handleSubmitComment(formValue: { comment: string }) {
+    const { comment } = formValue;
     // 답글인지 아닌지에 따라 api 호출 다르게 해줌
     replyInformation.isReply
-      ? await createReplyMutate({ commentId: replyInformation.targetCommentId, body: { content: commentInput } })
-      : await createCommentMutate({ postId, body: { content: commentInput } });
+      ? await createReplyMutate({ commentId: replyInformation.targetCommentId, body: { content: comment } })
+      : await createCommentMutate({ postId, body: { content: comment } });
+
     // 댓글 입력창 초기화
-    setCommentInput('');
+    reset();
     setReplyInformation({ isReply: false, targetCommentId: 0, targetCommentNickname: '' });
   }
 
@@ -59,18 +61,12 @@ export default function CommentBox({ postId }: { postId: number }) {
         {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
       </div>
 
-      <form className={styles['comment-form']} onSubmit={handleSubmitComment}>
+      <form className={styles['comment-form']} onSubmit={handleSubmit(handleSubmitComment)}>
         <div>
           {replyInformation.isReply && (
             <span className={styles['target-nickname']}>@{replyInformation.targetCommentNickname}</span>
           )}
-          <input
-            type='text'
-            className={styles['comment-input']}
-            placeholder='댓글 남기기'
-            onChange={(e) => setCommentInput(e.target.value)}
-            value={commentInput}
-          />
+          <input type='text' className={styles['comment-input']} placeholder='댓글 남기기' {...register('comment')} />
         </div>
         <button type='submit' className={styles['comment-submit-button']}>
           게시
