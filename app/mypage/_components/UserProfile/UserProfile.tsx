@@ -37,7 +37,7 @@ export default function UserProfile({ userId }: { userId: number }) {
 
       <div className={cx('user-detail')}>
         <p className={cx('user-nickname-section')}>
-          <span className={cx('text-black', 'large', 'weight-600')}>{userData?.nickName}</span>
+          <span className={cx('text-black', 'large', 'weight-600')}>{userData?.nickname}</span>
           <span className={cx('liked-count-wrapper')}>
             <Image className={cx('liked-count-icon')} src={HeartIcon} alt='하트 이미지' />
             <span className={cx('text-colored', 'weight-600')}>Lv.{userData?.likedCount}</span>

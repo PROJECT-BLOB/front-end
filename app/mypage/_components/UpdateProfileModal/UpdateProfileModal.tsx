@@ -22,8 +22,6 @@ const cx = classNames.bind(styles);
 
 export default function UpdateProfileModal() {
   const { userId } = useUserStore();
-  // TODO: 유저디테일 페이지에서 모달로 props로 내려줄 수는 없을까나...
-  // 프사, 닉네임, 바이오는 계속 바뀌는 값이 아닌데 모달에서 api를 다시 호출하는게 굳이..? 싶음
 
   const { data, isLoading, isError, error } = useDetailQueries(userId);
 
@@ -37,12 +35,12 @@ export default function UpdateProfileModal() {
 
   const initialData = {
     profileUrl: userData?.profileUrl || '',
-    nickName: userData?.nickName || '',
+    nickname: userData?.nickname || '',
     bio: userData?.bio || '',
-    isPrivate: userData?.isPrivate || false,
+    isPublic: userData?.isPublic || false,
   };
 
-  const { errors, register, handleSubmit, onSubmit, cancelForm, watch, isPrivate, onChangeToggle } =
+  const { errors, register, handleSubmit, onSubmit, cancelForm, watch, isPublic, onChangeToggle } =
     useUpdateUserForm(initialData);
 
   return (
@@ -64,8 +62,8 @@ export default function UpdateProfileModal() {
             required
             register={register}
             labelName='닉네임'
-            id='nickName'
-            name='nickName'
+            id='nickname'
+            name='nickname'
             watch={watch}
             maxLength={10}
             placeholder='닉네임을 입력해주세요'
@@ -85,7 +83,7 @@ export default function UpdateProfileModal() {
           <div className={cx('control-visibility')}>
             <p className={cx('toggle-box')}>
               <span>내프로필 공개하기</span>
-              <Switch checked={isPrivate} onChange={onChangeToggle} />
+              <Switch checked={isPublic} onChange={onChangeToggle} />
             </p>
             <span>동의하시면 프로필이 다른사람들에게 공개됩니다.</span>
           </div>

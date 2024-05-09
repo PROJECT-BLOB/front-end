@@ -7,7 +7,7 @@ import useModalStore from '@stores/useModalStore';
 
 export default function useUpdateUserForm(initialData: UpdateUser) {
   const { toggleModal } = useModalStore();
-  const [isPrivate, setIsPrivate] = useState(initialData.isPrivate);
+  const [isPublic, setIsPublic] = useState(initialData.isPublic);
 
   const {
     register,
@@ -26,15 +26,15 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
   }
 
   async function onSubmit(userProfileData: FieldValues) {
-    const { profileUrl, nickName, bio } = userProfileData;
+    const { profileUrl, nickname, bio } = userProfileData;
 
     const formData = {
-      profileUrl,
-      nickName,
+      // profileUrl,
+      nickname,
       bio,
-      isPrivate,
+      isPublic,
     };
-
+    console.log('formData', formData);
     // TODO: 지금 500 에러뜸.. 확인 필요
     const { data, status } = await updateUserProfile(formData);
     console.log('data', data);
@@ -52,7 +52,7 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
   }
 
   const onChangeToggle = (checked: boolean) => {
-    setIsPrivate(checked);
+    setIsPublic(checked);
   };
 
   useEffect(() => {
@@ -61,5 +61,5 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
     return () => subscirbe.unsubscribe();
   }, [watch]);
 
-  return { register, handleSubmit, onSubmit, cancelForm, watch, isPrivate, onChangeToggle, errors: errors as Errors };
+  return { register, handleSubmit, onSubmit, cancelForm, watch, isPublic, onChangeToggle, errors: errors as Errors };
 }
