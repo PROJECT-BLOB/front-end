@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import getOAuthData from '@apis/oauth/getOAuthData';
+import { REDIRECT_URL_SIGN_IN_COMPLETE, REDIRECT_URL_SIGN_IN_INCOMPLETE } from '@constants/redirectUrls';
 import { useOAuthStore } from '@stores/useOAuthStore';
 import { useUserStore } from '@stores/userStore';
 
@@ -43,11 +44,11 @@ export default function AwaitSignin({ params }: { params: providerType }) {
 
       if (state === 'COMPLETE') {
         signin();
-        router.push('/map');
+        router.push(REDIRECT_URL_SIGN_IN_COMPLETE);
       } else if (state === 'INCOMPLETE') {
         // TODO: 로그아웃 기능이 아직 없어서 임시로 넣어둠-나중에 지울 것
         signout();
-        router.push('/signin');
+        router.push(REDIRECT_URL_SIGN_IN_INCOMPLETE);
       }
     }
 

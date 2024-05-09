@@ -12,7 +12,6 @@ import styles from './UserProfile.module.scss';
 
 const cx = classNames.bind(styles);
 
-// TODO: 타입 정의
 export default function UserProfile({ userId }: { userId: number }) {
   const { toggleModal, setCurrentName } = useModalStore();
   function handleClickOpenModal(name: ModalName) {

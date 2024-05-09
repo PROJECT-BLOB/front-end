@@ -2,7 +2,7 @@
 
 .container {
   width: 100%;
-
+  padding: 10rem;
   //TODO: 원래 디자인은 이건데 태블릿도 모바일처럼 좌우 패딩만 남겨두고 커지는게 낫지 않나..??
   @include tablet {
     max-width: 72.8rem;

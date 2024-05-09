@@ -8,7 +8,7 @@ import deletePost from '@apis/post/deletePost';
 import getCommentList from '@apis/post/getCommentList';
 import getPost from '@apis/post/getPost';
 import getReplyList from '@apis/post/getReplyList';
-import postBookmark from '@apis/post/postBookmark';
+import postBookmark from '@apis/post/updateBookmark';
 import updateCommentLike from '@apis/post/updateCommentLike';
 import updatePostLike from '@apis/post/updatePostLike';
 import getUserBookmarkList from '@apis/user/mypage/getUserBookmarkList';
@@ -21,6 +21,8 @@ import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 const posts = createQueryKeys('posts', {
   all: (userId: number) => ['readPostList', userId],
   detail: (postId: number) => ['readPost', postId],
+  bookmark: (userId: number) => ['bookmarkList', userId],
+  commentList: (userId: number) => ['readCommentList', userId],
   comment: (postId: number) => ['readComment', postId],
   reply: (commentId: number) => ['readReply', commentId],
 });
@@ -35,14 +37,14 @@ export function useFetchPostList(userId: number) {
 
 export function useFetchBookmarkList(userId: number) {
   return useInfiniteScrollQuery({
-    queryKey: posts.all(userId).queryKey,
+    queryKey: posts.bookmark(userId).queryKey,
     queryFn: (page: number) => getUserBookmarkList({ userId, page, size: POSTS_PAGE_LIMIT }),
   });
 }
 
 export function useFetchCommentList(userId: number) {
   return useInfiniteScrollQuery({
-    queryKey: posts.comment(userId).queryKey,
+    queryKey: posts.commentList(userId).queryKey,
     queryFn: (page: number) => getUserCommentList({ userId, page, size: POSTS_PAGE_LIMIT }),
   });
 }

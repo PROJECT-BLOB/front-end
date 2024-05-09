@@ -7,6 +7,7 @@
   padding: 3.2rem;
   gap: 1rem;
   border-bottom: 1px solid $BDS-Grayscale-6;
+  font-feature-settings: 'ss10' on;
 
   @include tablet {
     gap: 1rem;
@@ -29,7 +30,7 @@
   align-items: flex-start;
   width: 100%;
   justify-content: space-between;
-
+  flex-wrap: wrap;
   gap: 1.2rem; // TODO: 이 부분 수정
 
   @include tablet {
@@ -60,6 +61,7 @@
 
 // TODO: object-fit이 안 먹는거 같다....
 .photo {
+  display: block;
   position: relative;
   width: 10rem;
   height: 10rem;
@@ -68,7 +70,7 @@
   border-radius: 2.4rem;
   // background: #c4c4c4;
   overflow: hidden;
-  object-fit: cover;
+  object-fit: contain;
 
   @include tablet-and-desktop {
     width: 15rem;
@@ -105,14 +107,7 @@
   height: 2rem;
 }
 
-.text {
-  font-feature-settings: 'ss10' on;
-  font-family: 'IBM Plex Sans KR';
-  font-style: normal;
-  font-weight: 400;
-}
-
-.gray {
+.text-gray {
   color: $BDS-Grayscale-7;
 
   font-size: 1.4rem;
@@ -120,7 +115,7 @@
   line-height: 142%;
 }
 
-.black {
+.text-black {
   color: $BDS-Grayscale-13;
 }
 
@@ -138,6 +133,5 @@
 
 .small {
   font-size: 1.2rem;
-  font-weight: 400;
   line-height: 133%;
 }

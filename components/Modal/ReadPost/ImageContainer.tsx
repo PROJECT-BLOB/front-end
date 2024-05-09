@@ -14,7 +14,7 @@ interface ImageContainerProps {
 }
 
 export default function ImageContainer({ contentData }: ImageContainerProps) {
-  const { handleTouchStart, handleTouchEnd, currentImageIndex, handlePrevImage, handleNextImage } = useImageControl(
+  const { handleTouchStart, handleTouchEnd, currentImageIndex, handlePreviousImage, handleNextImage } = useImageControl(
     contentData.imageUrl,
   );
 
@@ -22,7 +22,7 @@ export default function ImageContainer({ contentData }: ImageContainerProps) {
     <section className={styles['image-container']} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <Image src={contentData.imageUrl[currentImageIndex]} className={styles.image} alt='이미지' fill />
 
-      <button type='button' className={styles['previous-btn']} onClick={handlePrevImage}>
+      <button type='button' className={styles['previous-btn']} onClick={handlePreviousImage}>
         <Image src={previousButton} alt='이전 버튼' />
       </button>
       <button type='button' className={styles['next-btn']} onClick={handleNextImage}>

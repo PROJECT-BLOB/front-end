@@ -20,7 +20,6 @@ export default async function getUserPostList(body: PostListProps): Promise<{ da
   const { data, status } = await instance.get<PostList>(`/user/${body.userId}/post`, {
     params: { page: body.page, size: body.size },
   });
-  console.log('유저 글 모음 가져옵니다.');
 
   return { data, status };
 }

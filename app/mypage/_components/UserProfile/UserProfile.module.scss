@@ -2,12 +2,13 @@
 
 .container {
   @include flex-center;
+  flex-direction: column;
 
   width: 100%;
   padding: 8rem 0rem;
-
-  flex-direction: column;
   gap: 1.9rem;
+
+  font-feature-settings: 'ss10' on;
 
   @include tablet {
     padding: 6rem 0rem;
@@ -57,21 +58,12 @@
   gap: 0.8rem;
 }
 
-@mixin font {
-  font-feature-settings: 'ss10' on;
-  font-family: 'IBM Plex Sans KR';
-  font-style: normal;
-  font-weight: 400;
-}
-
 .text {
   &-black {
-    @include font;
     color: $BDS-Grayscale-13;
   }
 
   &-colored {
-    @include font;
     font-size: 1.7rem;
     line-height: 141%;
 

@@ -1,16 +1,12 @@
 @import '/styles/global-styles/index';
 
-.text-default {
-  font-feature-settings: 'ss10' on;
-  font-family: 'IBM Plex Sans KR';
-  font-style: normal;
-}
-
 .input {
   @include flex-column;
 
   gap: 1.2rem;
-  margin-bottom: 3.2rem;
+  font-feature-settings: 'ss10' on;
+
+  // margin-bottom: 3.2rem;
 }
 
 .label {
@@ -112,13 +108,9 @@
   line-height: 133%; /* 15.96px */
 }
 
-.error-text {
-  color: $BDS-System-Error;
-}
 .error-input {
   border-color: $BDS-System-Error;
 }
-.success {
-  color: $BDS-System-Success;
+.success-input {
   border-color: $BDS-System-Success;
 }

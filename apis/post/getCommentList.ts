@@ -1,14 +1,16 @@
 import instance from '@apis/axios';
 
-export interface GetCommentList {
+export interface GetCommentListProps {
   postId: number;
   page: number;
   size: number;
 }
 
-export default async function getCommentList(body: GetCommentList) {
-  const { data, status } = await instance.get(`/comment/post/${body.postId}`, {
-    params: { page: body.page, size: body.size },
+export default async function getCommentList(body: GetCommentListProps) {
+  const { postId, page, size } = body;
+
+  const { data, status } = await instance.get(`/comment/post/${postId}`, {
+    params: { page, size },
   });
 
   return { data, status };
