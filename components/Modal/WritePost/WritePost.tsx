@@ -31,7 +31,7 @@ export default function WritePost() {
   const [selectedCity, setSelectedCity] = React.useState<{ cityName: string; lat: number; lng: number } | null>(null);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={cx('form')}>
+    <form onSubmit={handleSubmit(onSubmit)} className={cx('form')} encType='multipart/form-data'>
       <header className={cx('close-header')}>
         <span>글쓰기</span>
         <span className={cx('close-button')}>
@@ -54,8 +54,22 @@ export default function WritePost() {
             <SubCategoryFiltering key={subcategory} category='추천' filteringType='feed' title={subcategory} />
           ))}
         </div>
-        <Input labelName='제목' id='title' name='title' placeholder='제목은 필수입니다' maxLength={20} />
-        <Input labelName='내용' id='content' name='content' placeholder='내용을 입력하세요' maxLength={20} />
+        <Input
+          register={register}
+          labelName='제목'
+          id='title'
+          name='title'
+          placeholder='제목은 필수입니다'
+          maxLength={20}
+        />
+        <Input
+          register={register}
+          labelName='내용'
+          id='content'
+          name='content'
+          placeholder='내용을 입력하세요'
+          maxLength={20}
+        />
         <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
         <AutoCompleteCity
           onSelectCity={(cityName: string, lat: number, lng: number) => {
