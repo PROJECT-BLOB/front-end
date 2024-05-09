@@ -1,32 +1,5 @@
-const cspHeader = `
-    upgrade-insecure-requests;
-`
-
-
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/:path*",
-        destination: `${process.env.NEXT_PUBLIC_BASE_URL}/:path*`,
-      },
-    ];
-  },
-//   async headers() {
-//     return [
-//       {
-//         source: '/(.*)',
-//         headers: [
-//           {
-//             key: 'Content-Security-Policy',
-//             value: cspHeader.replace(/\n/g, ''),
-//           },
-//         ],
-//       },
-//     ]
-//   },
   reactStrictMode: false,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
