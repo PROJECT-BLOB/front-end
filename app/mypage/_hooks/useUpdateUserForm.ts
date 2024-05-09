@@ -39,7 +39,7 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
 
   async function onSubmit(userProfileData: FieldValues) {
     const { nickname, bio } = userProfileData;
-    const jsonData = { nickname, bio, isPublic, lat: 12, lng: 12 };
+    const jsonData = { nickname, bio, isPublic };
 
     const formData = new FormData();
     formData.append('data', new Blob([JSON.stringify(jsonData)]));
