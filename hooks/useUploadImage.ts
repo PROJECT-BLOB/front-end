@@ -16,6 +16,7 @@ export default function useUploadImage({ setValue }: UploadImageProps) {
     if (e.target.files) {
       const newImage = Array.from(e.target.files) as File[];
       const currentImageList = [...imageList, URL.createObjectURL(newImage[0])];
+      setValue('image', newImage);
 
       if (imageList.length + newImage.length > 5) {
         // alert('이미지는 5개까지만 업로드 가능합니다.');
