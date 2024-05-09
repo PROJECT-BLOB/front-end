@@ -7,7 +7,7 @@ type Option = {
 };
 
 interface AutoCompleteCityProps {
-  onSelectCity: (cityName: string) => void; // 선택된 도시 이름을 부모 컴포넌트로 전달하기 위한 콜백 함수
+  onSelectCity: (cityName: string, lat: number, lng: number) => void; // 선택된 도시 이름과 위도 경도를 부모 컴포넌트로 전달하기 위한 콜백 함수
 }
 
 const AutoCompleteCity = ({ onSelectCity }: AutoCompleteCityProps) => {
@@ -21,8 +21,11 @@ const AutoCompleteCity = ({ onSelectCity }: AutoCompleteCityProps) => {
 
     try {
       const results = await geocodeByAddress(address.label); // label을 주소로 사용
-      setGeolocation(results[0].geometry.location);
-      onSelectCity(address.label); // 선택된 도시 이름을 부모 컴포넌트로 전달
+      const [firstResult] = results; // 결과 배열의 첫 번째 요소를 가져옴
+      const { geometry } = firstResult; // geometry 속성 추출
+      const { location } = geometry; // location 속성 추출
+      setGeolocation(location);
+      onSelectCity(address.label, location.lat(), location.lng()); // 선택된 도시 이름과 위도 경도를 부모 컴포넌트로 전달
     } catch (error) {
       console.error('Error fetching geolocation:', error);
     }
