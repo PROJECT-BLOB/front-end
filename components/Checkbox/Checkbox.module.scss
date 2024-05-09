@@ -1,0 +1,46 @@
+@import '/styles/global-styles/index';
+
+.label {
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 142.9%;
+
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+.showCheckbox {
+  width: 1.6rem;
+  height: 1.6rem;
+
+  // default
+  background: url('/icons/checkbox-unselected.svg') no-repeat;
+  background-size: contain;
+}
+
+.hiddenCheckbox {
+  display: none;
+  width: 1.6rem;
+  height: 1.6rem;
+
+  &:active + .showCheckbox {
+    background: url('/icons/checkbox-indeterminated.svg') no-repeat;
+    background-size: contain;
+  }
+
+  &:checked + .showCheckbox {
+    background: url('/icons/checkbox-selected.svg') no-repeat;
+    background-size: contain;
+  }
+
+  &:disabled + .showCheckbox {
+    pointer-events: none;
+    background: url('/icons/checkbox-disabled.svg') no-repeat;
+    background-size: contain;
+  }
+}

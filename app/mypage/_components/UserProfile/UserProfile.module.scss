@@ -1,0 +1,126 @@
+@import '/styles/global-styles/index';
+
+.container {
+  @include flex-center;
+  flex-direction: column;
+
+  width: 100%;
+  padding: 8rem 0rem;
+  gap: 1.9rem;
+
+  font-feature-settings: 'ss10' on;
+
+  @include tablet {
+    padding: 6rem 0rem;
+  }
+
+  @include desktop {
+    padding: 4rem 0rem;
+  }
+}
+
+.user {
+  &-detail,
+  &-nickname-section {
+    @include flex-center;
+  }
+
+  &-detail {
+    flex-direction: column;
+    gap: 1.6rem;
+  }
+
+  &-nickname-section {
+    gap: 0.8rem;
+  }
+
+  &-count-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+}
+
+.liked-count {
+  &-wrapper {
+    @include flex-center;
+    gap: 0.2rem;
+  }
+  &-icon {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.text {
+  &-black {
+    color: $BDS-Grayscale-13;
+  }
+
+  &-colored {
+    font-size: 1.7rem;
+    line-height: 141%;
+
+    background: $BDS-Primary-5;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.large {
+  font-size: 1.8rem;
+  line-height: 144%;
+  letter-spacing: -0.0004rem;
+}
+
+.middle {
+  font-size: 1.6rem;
+  line-height: 150%;
+}
+
+.small {
+  font-size: 1.5rem;
+  line-height: 160%;
+}
+
+.x-small {
+  font-size: 1.4rem;
+  line-height: 142%;
+}
+
+.weight-500 {
+  font-weight: 500;
+}
+.weight-600 {
+  font-weight: 600;
+}
+
+.bio-width {
+  width: 80%;
+  text-align: center;
+
+  @include tablet {
+    width: 50%;
+  }
+
+  @include desktop {
+    width: fit-content;
+  }
+}
+
+.button {
+  @include flex-row-end;
+  padding: 0.8rem 1.2rem;
+  align-items: flex-start;
+  gap: 1rem;
+
+  border-radius: 2.4rem;
+  border: 1px solid $BDS-Grayscale-13;
+}

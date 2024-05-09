@@ -1,0 +1,61 @@
+@import '/styles/global-styles/index';
+
+.signin-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 1.6rem 2.6rem;
+
+  width: 31.5rem;
+  height: 6rem;
+
+  border-radius: 5px;
+
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.2);
+
+  &.google {
+    border: 1px solid $BDS-Grayscale-6;
+    background-color: $BDS-Grayscale-1;
+    color: $BDS-Grayscale-13;
+  }
+
+  &.kakao {
+    background-color: #fee500;
+    color: $BDS-Grayscale-13;
+  }
+
+  &.naver {
+    background-color: #31b15a;
+    color: $BDS-Grayscale-1;
+  }
+}
+
+.logo {
+  &.google {
+    width: 2.6rem;
+    height: 2.6rem;
+  }
+
+  &.kakao {
+    width: 26.712px;
+    height: 26px;
+  }
+
+  &.naver {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.text {
+  position: absolute;
+  right: 8.6rem;
+  text-align: center;
+
+  /* Heading/20 */
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2.8rem; /* 140% */
+}

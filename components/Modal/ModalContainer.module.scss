@@ -1,0 +1,25 @@
+@import '/styles/global-styles/index';
+
+.back-drop {
+  position: fixed;
+  display: flex;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+
+  width: 100%;
+
+  @include tablet-and-desktop {
+    width: auto;
+  }
+}

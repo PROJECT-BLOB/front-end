@@ -1,0 +1,86 @@
+@import '/styles/global-styles/index';
+
+.form {
+  @include flex-column-center;
+  width: 100%;
+  padding: 3.2rem 2.8rem 3.2rem 3.6rem;
+  gap: 3.2rem;
+
+  background: $BDS-Grayscale-1;
+
+  @include tablet-and-desktop {
+    width: 39.5rem;
+  }
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.profile-image {
+  @include flex-column-center;
+  gap: 1.6rem;
+}
+
+.update-informations {
+  @include flex-column-items-start;
+  gap: 3.2rem;
+  align-self: stretch;
+}
+
+.control-visibility {
+  @include flex-column-items-start;
+  width: 100%;
+  height: 4.8rem;
+  gap: 0.8rem;
+
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+
+  font-family: 'IBM Plex Sans';
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 133%;
+
+  @include tablet-and-desktop {
+    width: 33.1rem;
+  }
+}
+
+.toggle-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: stretch;
+
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 150%;
+}
+
+.close {
+  position: relative;
+  width: 3.2rem;
+  height: 3.2rem;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-left: auto;
+}

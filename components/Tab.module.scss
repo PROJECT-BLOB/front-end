@@ -1,0 +1,15 @@
+@import '/styles/global-styles/color-pallete';
+
+.tab {
+  color: $BDS-Grayscale-7;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+
+  &.focused {
+    color: $BDS-Grayscale-13;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid $BDS-Grayscale-13;
+  }
+}

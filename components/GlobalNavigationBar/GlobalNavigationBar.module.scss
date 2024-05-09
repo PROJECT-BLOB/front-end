@@ -1,0 +1,53 @@
+@import "/styles/global-styles/index";
+
+.navigation{
+  position: relative;
+  width: 100%;
+  max-width: 126rem;
+}
+
+.align-menu {
+  display: flex;
+  justify-content: space-between;
+
+  min-width: 20rem;
+  max-width: $breakpoint-tablet;
+  width: 100%;
+
+  padding: 2.4rem 0;
+  @include tablet {
+    padding: 4rem 0;
+    max-width: $breakpoint-pc;
+
+  }
+  @include desktop {
+    padding: 4.8rem 0;
+    max-width: $max-width;
+  }
+}
+
+.logo-padding {
+  padding-left: 0;
+  @include tablet {
+    padding-left: 2rem;
+  }
+  @include desktop {
+    padding-left: 4rem;
+  }
+}
+
+.align-tab {
+  @include flex-column;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 20px;
+  min-width: 20rem;
+  width: 100%;
+
+  @include tablet-and-desktop {
+    align-items: center;
+  }
+}
+
+
+

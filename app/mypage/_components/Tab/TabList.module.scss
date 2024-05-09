@@ -1,0 +1,7 @@
+@import '/styles/global-styles/index';
+
+.tabs {
+  @include flex-row-center;
+  align-items: flex-start;
+  gap: 1.6rem;
+}

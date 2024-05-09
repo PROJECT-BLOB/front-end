@@ -1,7 +1,0 @@
-@import url('/fonts/pretendard/Pretendard.css');
-@import url('/fonts/montserrat/Montserrat.css');
-@import url('/fonts/inter/inter.css');
-
-* {
-  font-family: 'Pretendard', sans-serif, 'Montserrat', sans-serif, 'Inter', sans-serif;
-}

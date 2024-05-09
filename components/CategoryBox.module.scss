@@ -1,0 +1,36 @@
+@import '/styles/global-styles/color-pallete';
+
+.category {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  color: $BDS-Grayscale-1;
+  font-feature-settings: 'ss10' on;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 138.5%; /* 18.005px */
+
+  &.pink {
+    background: $BDS-Category-recommend_press;
+  }
+
+  &.yellow {
+    background: $BDS-Category-question_press;
+  }
+
+  &.red {
+    background: $BDS-Category-cation_press;
+  }
+
+  &.blue {
+    background: $BDS-Category-tip_press;
+  }
+
+  &.green {
+    background: $BDS-Category-help_press;
+  }
+}

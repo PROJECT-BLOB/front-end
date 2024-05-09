@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
@@ -7,17 +8,17 @@ const nextConfig = {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
 
     config.module.rules.push(
-        {
-          ...fileLoaderRule,
-          test: /\.svg$/i,
-          resourceQuery: { not: /component/ },
-        },
-        {
-          test: /\.svg$/i,
-          issuer: fileLoaderRule.issuer,
-          resourceQuery: /component/,
-          use: ['@svgr/webpack'],
-        },
+      {
+        ...fileLoaderRule,
+        test: /\.svg$/i,
+        resourceQuery: { not: /component/ },
+      },
+      {
+        test: /\.svg$/i,
+        issuer: fileLoaderRule.issuer,
+        resourceQuery: /component/,
+        use: ['@svgr/webpack'],
+      },
     );
 
     fileLoaderRule.exclude = /\.svg$/i;
@@ -31,6 +32,12 @@ const nextConfig = {
       // 외부 이미지 일단 다 풀어둠.
       {
         protocol: 'https',
+        hostname: '**',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
         hostname: '**',
         port: '',
         pathname: '/**',
