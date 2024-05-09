@@ -69,7 +69,10 @@ export function useFetchTargetPostComment(postId: number) {
 }
 
 export function useFetchTargetCommentReply(commentId: number) {
-  return useQuery({ queryKey: posts.reply(commentId).queryKey, queryFn: () => getReplyList(commentId) });
+  return useInfiniteScrollQuery({
+    queryKey: posts.reply(commentId).queryKey,
+    queryFn: (page) => getReplyList({ commentId, page, size: COMMENTS_PAGE_LIMIT }),
+  });
 }
 
 // 생성
