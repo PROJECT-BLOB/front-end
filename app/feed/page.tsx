@@ -11,9 +11,9 @@ import useInfiniteScrollQuery from '@queries/useInfiniteScrollQuery';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import CategoryBox from '@components/CategoryBox';
+import PostList from '@components/Post/PostList';
 
 import styles from './Feed.module.scss';
-import PostList from '../mypage/_components/Post/PostList';
 
 // type order = 'hot' | 'likes' | 'views' | 'recent';
 const ORDERS = [
