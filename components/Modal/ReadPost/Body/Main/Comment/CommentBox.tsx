@@ -29,18 +29,15 @@ export default function CommentBox({ postId }: { postId: number }) {
   const commentsPages = data?.pages ?? [];
 
   return (
-    <div>
-      <div className={styles['comment-box']}>
-        {commentsPages.map((commentsPage) =>
-          commentsPage.data.content.map((comment: Comment) => (
-            <CommentContainer key={comment.commentId} comment={comment} setReplyInformation={setReplyInformation} />
-          )),
-        )}
-        {/* // TODO 로딩 인디케이터 추가 */}
-        {/* // <div ref={ref} />가 화면에 보일 때 fetchNextPage 호출 */}
-        {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
-      </div>
-
+    <div className={styles['comment-box']}>
+      {commentsPages.map((commentsPage) =>
+        commentsPage.data.content.map((comment: Comment) => (
+          <CommentContainer key={comment.commentId} comment={comment} setReplyInformation={setReplyInformation} />
+        )),
+      )}
+      {/* // TODO 로딩 인디케이터 추가 */}
+      {/* // <div ref={ref} />가 화면에 보일 때 fetchNextPage 호출 */}
+      {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
       <CommentSubmitForm
         replyInformation={replyInformation}
         postId={postId}
