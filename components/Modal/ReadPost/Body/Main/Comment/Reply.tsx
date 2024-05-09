@@ -7,8 +7,8 @@ import { useUpdateReplyLike } from '@queries/usePostQueries';
 
 import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
 
-import ProfileContainer from './ProfileContainer';
 import styles from './Reply.module.scss';
+import ProfileContainer from '../ProfileContainer';
 
 interface ReplyProps {
   commentId: number;
@@ -24,12 +24,7 @@ export default function Reply({ reply, commentId }: ReplyProps) {
 
   return (
     <div key={reply.commentId} className={styles.reply}>
-      <ProfileContainer
-        author={reply.author}
-        canDelete={reply.canDelete}
-        commentId={commentId}
-        replyId={reply.commentId}
-      />
+      <ProfileContainer author={reply.author} />
       <div className={styles['content-like-wrapper']}>
         <p className={styles.content}>{reply.content}</p>
         <button type='button' onClick={handleClickLike}>

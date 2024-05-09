@@ -1,6 +1,9 @@
 // postlist 안에서 데이터 불러오는 버전
+import { useEffect } from 'react';
+
 import classNames from 'classnames/bind';
 
+import { filteredData } from '@/app/feed/page';
 import CommentItem from '@/app/mypage/_components/Comment/CommentItem';
 import { Comment, Post } from '@/types/Post';
 import { useFetchBookmarkList, useFetchCommentList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
@@ -14,11 +17,12 @@ interface GetPostListProps {
   userId?: number;
   selectedTab?: string;
   // 타입 수정해주십셔...
-  filteredData?: any;
+  filteredData?: filteredData;
 }
 
 export default function PostList({ userId, selectedTab, filteredData }: GetPostListProps) {
-  let fetchDataFunction;
+  // 찾아야함
+  let fetchDataFunction: any;
   switch (selectedTab) {
     case 'MyPosts':
       fetchDataFunction = useFetchPostList;
@@ -29,7 +33,6 @@ export default function PostList({ userId, selectedTab, filteredData }: GetPostL
     case 'MyComments':
       fetchDataFunction = useFetchCommentList;
       break;
-    // @queries/usePostQueries에 feedData 가져오는 쿼리 추가해서 아래 주석 제거하고 사용하시면 될 것 같습니다!!(이름은 임시로 지어둠)
     case 'Feed':
       fetchDataFunction = useFetchFeedList;
       break;
@@ -38,9 +41,13 @@ export default function PostList({ userId, selectedTab, filteredData }: GetPostL
       break;
   }
 
-  const { data, isPending, isError, isFetchingNextPage, ref } = userId
+  const { data, isPending, isError, isFetchingNextPage, ref, refetch } = userId
     ? fetchDataFunction(userId)
     : fetchDataFunction(filteredData);
+
+  useEffect(() => {
+    refetch();
+  }, [filteredData, refetch]);
 
   if (isPending) {
     // TODO 스켈레톤 UI 추가
@@ -52,15 +59,14 @@ export default function PostList({ userId, selectedTab, filteredData }: GetPostL
   }
 
   const postsPages = data?.pages ?? [];
-  console.log('데이터', postsPages);
 
   return (
     <div className={cx('container')}>
       {fetchDataFunction === useFetchCommentList
-        ? postsPages.map((postsPage) =>
-            postsPage.data.content.map((comment: Comment) => <CommentItem key={comment.commentId} comment={comment} />),
+        ? postsPages.map((postsPage: { data: { content: Comment[] } }) =>
+            postsPage.data.content.map((comment) => <CommentItem key={comment.commentId} comment={comment} />),
           )
-        : postsPages.map((postsPage) =>
+        : postsPages.map((postsPage: { data: { content: Post[] } }) =>
             postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
           )}
 
