@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ChangeEvent, useEffect, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 
 import { Errors } from '@/types/Errors';
@@ -9,6 +10,17 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
   const { toggleModal } = useModalStore();
   const [isPublic, setIsPublic] = useState(initialData.isPublic);
 
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
+  const handleChangeImage = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+
+    if (file) {
+      setSelectedImage(file);
+    }
+  };
+
+  // TODO: 토글에 작은 버그있음....나중에 고쳐야지
   const {
     register,
     handleSubmit,
@@ -26,20 +38,19 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
   }
 
   async function onSubmit(userProfileData: FieldValues) {
-    const { profileUrl, nickname, bio } = userProfileData;
+    const { nickname, bio } = userProfileData;
+    const jsonData = { nickname, bio, isPublic, lat: 12, lng: 12 };
 
-    const formData = {
-      // profileUrl,
-      nickname,
-      bio,
-      isPublic,
-    };
-    console.log('formData', formData);
-    // TODO: 지금 500 에러뜸.. 확인 필요
+    const formData = new FormData();
+    formData.append('data', new Blob([JSON.stringify(jsonData)]));
+
+    if (selectedImage) {
+      formData.append('file', selectedImage);
+    }
+
     const { data, status } = await updateUserProfile(formData);
     console.log('data', data);
 
-    // 나머지 코드...
     if (status === 200) {
       console.log('프로필 수정 성공');
       // TODO: 모달을 닫기 전에 성공했다고 alert창을 띄우는게 좋지 않을까?
@@ -56,10 +67,22 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
   };
 
   useEffect(() => {
-    const subscirbe = watch((data, { name }) => console.log(data, name));
+    const subscirbe = watch((data, { name }) => console.log(''));
 
     return () => subscirbe.unsubscribe();
   }, [watch]);
 
-  return { register, handleSubmit, onSubmit, cancelForm, watch, isPublic, onChangeToggle, errors: errors as Errors };
+  return {
+    register,
+    handleSubmit,
+    onSubmit,
+    cancelForm,
+    watch,
+    isPublic,
+    onChangeToggle,
+    selectedImage,
+    setSelectedImage,
+    handleChangeImage,
+    errors: errors as Errors,
+  };
 }

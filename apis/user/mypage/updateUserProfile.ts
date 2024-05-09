@@ -4,12 +4,9 @@ import instance from '@apis/axios';
 
 export type UpdateUser = Pick<UserDetail, 'profileUrl' | 'nickname' | 'bio' | 'isPublic'>;
 
-export default async function updateUserProfile({ profileUrl, nickname, bio, isPublic }: UpdateUser) {
-  const { data, status } = await instance.patch<UpdateUser>(`/user`, {
-    // profileUrl: profileUrl,
-    nickname: nickname,
-    bio: bio,
-    isPublic: isPublic,
+export default async function updateUserProfile(formData: any) {
+  const { data, status } = await instance.patch<any>(`/user`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
   });
 
   return { data, status };

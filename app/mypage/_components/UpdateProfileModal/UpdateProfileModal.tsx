@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+
 import { Switch } from 'antd';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -31,8 +34,6 @@ export default function UpdateProfileModal() {
 
   const userData: UserDetail | undefined = data?.data;
 
-  console.log('가져온 userData', userData);
-
   const initialData = {
     profileUrl: userData?.profileUrl || '',
     nickname: userData?.nickname || '',
@@ -40,11 +41,21 @@ export default function UpdateProfileModal() {
     isPublic: userData?.isPublic || false,
   };
 
-  const { errors, register, handleSubmit, onSubmit, cancelForm, watch, isPublic, onChangeToggle } =
-    useUpdateUserForm(initialData);
+  const {
+    errors,
+    register,
+    handleSubmit,
+    onSubmit,
+    cancelForm,
+    watch,
+    isPublic,
+    onChangeToggle,
+    selectedImage,
+    handleChangeImage,
+  } = useUpdateUserForm(initialData);
 
   return (
-    <form className={cx('form')} onSubmit={handleSubmit(onSubmit)}>
+    <form className={cx('form')} onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
       <header className={cx('header')}>
         <span>프로필 수정</span>
         <span className={cx('close')}>
@@ -54,8 +65,20 @@ export default function UpdateProfileModal() {
 
       <main>
         <section className={cx('profile-image')}>
-          <Avatar size='medium' imageSource={userData?.profileUrl || ''} />
-          <MonoButton text='이미지 수정' type='button' />
+          {selectedImage ? (
+            <Avatar size='medium' imageSource={URL.createObjectURL(selectedImage)} />
+          ) : (
+            <Avatar size='medium' imageSource={userData?.profileUrl || ''} />
+          )}
+
+          <input id='profileImageInput' type='file' style={{ display: 'none' }} onChange={handleChangeImage} />
+          {document.getElementById('profileImageInput') && (
+            <MonoButton
+              text='이미지 수정'
+              type='button'
+              onClick={() => document.getElementById('profileImageInput')!.click()}
+            />
+          )}
         </section>
         <section className={cx('update-informations')}>
           <SignInput
