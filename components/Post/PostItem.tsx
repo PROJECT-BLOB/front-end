@@ -24,7 +24,7 @@ export default function PostItem({ post }: { post: Post }) {
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div className={cx('post-container')} onClick={() => handleOpenModal('read')}>
       <header className={cx('header')}>
-        <CategoryBox contentData={post} />
+        <CategoryBox category={post.category} subcategory={post.subcategory} />
         <span>beloved 태그 보류</span>
       </header>
       <main className={cx('main')}>

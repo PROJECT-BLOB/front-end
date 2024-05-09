@@ -21,12 +21,12 @@ export default function CommentItem({ comment }: { comment: Comment }) {
   }
 
   const post = data?.data ?? [];
-  console.log('post데이터', post);
+  // console.log('post데이터', post);
 
   return (
     <div className={cx('post-container')}>
       <header className={cx('header')}>
-        <CategoryBox contentData={post} />
+        <CategoryBox category={post.category} subcategory={post.subcategory} />
         <span>beloved 태그 보류</span>
       </header>
       <main className={cx('main')}>

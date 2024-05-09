@@ -9,7 +9,7 @@ import getCommentList from '@apis/post/getCommentList';
 import getFeed from '@apis/post/getFeed';
 import getPost from '@apis/post/getPost';
 import getReplyList from '@apis/post/getReplyList';
-import postBookmark from '@apis/post/postBookmark';
+import postBookmark from '@apis/post/updateBookmark';
 import updateCommentLike from '@apis/post/updateCommentLike';
 import updatePostLike from '@apis/post/updatePostLike';
 import getUserBookmarkList from '@apis/user/mypage/getUserBookmarkList';
