@@ -1,4 +1,5 @@
 import React from 'react'; // 안하면 오류가 나더라구용..
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -56,7 +57,7 @@ export default function WritePost() {
           </div>
           <PostModalInput
             required
-            register={register} // 왜 이걸 하면 오류가 날까..
+            register={register as unknown as UseFormRegister<FieldValues>} // 왜 이걸 하면 오류가 날까..
             labelName='제목'
             id='title'
             name='title'
@@ -66,7 +67,7 @@ export default function WritePost() {
           />
           <PostModalInput
             required
-            register={register}
+            register={register as unknown as UseFormRegister<FieldValues>}
             labelName='내용'
             id='content'
             name='content'
