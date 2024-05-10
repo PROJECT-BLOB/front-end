@@ -1,12 +1,14 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import HeartIcon from '@/public/icons/heart.svg';
-import CommentIcon from '@/public/icons/message-circle-02.svg';
 import { Post } from '@/types/Post';
+import BelovedIcon from '@icons/check-heart-white.svg';
+import HeartIcon from '@icons/heart.svg';
+import CommentIcon from '@icons/message-circle-02.svg';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import CategoryBox from '@components/CategoryBox';
+import IconTag from '@components/IconTag/IconTag';
 
 import styles from './PostItem.module.scss';
 
@@ -26,7 +28,7 @@ export default function PostItem({ post }: { post: Post }) {
     <div className={cx('post-container')} onClick={() => handleOpenModal('read')}>
       <header className={cx('header')}>
         <CategoryBox category={post.category} subcategory={post.subcategory} />
-        <span>beloved 태그 보류</span>
+        <IconTag IconSource={BelovedIcon}>Beloved</IconTag>
       </header>
       <main className={cx('main')}>
         <p className={cx('main-text')}>
