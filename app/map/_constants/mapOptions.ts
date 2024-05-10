@@ -5,7 +5,7 @@ export const DEFAULT_STYLES = {
   // justifyContent: 'center',
 };
 
-export const MINI_MAP = {
+export const MINI_MAP_STYLES = {
   width: '100%',
   height: '30vh',
   // display: 'flex',
