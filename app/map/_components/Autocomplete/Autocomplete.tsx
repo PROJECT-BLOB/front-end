@@ -3,28 +3,25 @@ import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useMap, useMapsLibrary } from '@vis.gl/react-google-maps';
 
 import './autocomplete.css';
+import { useMapStore } from '@stores/useMapStore';
+import { SearchedCity } from '@types/Map';
 
-interface AutocompleteProps {
-  onPlaceSelect: (place: google.maps.places.PlaceResult | null) => void;
-  setCurrentPosition: (position: google.maps.LatLngLiteral) => void;
-}
-
-export default function Autocomplete({ onPlaceSelect, setCurrentPosition }: AutocompleteProps) {
+export default function Autocomplete() {
   const map = useMap();
   const places = useMapsLibrary('places');
 
   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompleteSessionToken
   const [sessionToken, setSessionToken] = useState<google.maps.places.AutocompleteSessionToken>();
-
   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service
   const [autocompleteService, setAutocompleteService] = useState<google.maps.places.AutocompleteService | null>(null);
-
   // https://developers.google.com/maps/documentation/javascript/reference/places-service
   const [placesService, setPlacesService] = useState<google.maps.places.PlacesService | null>(null);
 
   const [predictionResults, setPredictionResults] = useState<Array<google.maps.places.AutocompletePrediction>>([]);
-
   const [inputValue, setInputValue] = useState<string>('');
+
+  const setLastSearchCity = useMapStore((state) => state.setLastSearchCity);
+  const setLastMapCenter = useMapStore((state) => state.setLastMapCenter);
 
   useEffect(() => {
     if (!places || !map) return;
@@ -53,6 +50,7 @@ export default function Autocomplete({ onPlaceSelect, setCurrentPosition }: Auto
     [autocompleteService, sessionToken],
   );
 
+  // TODO: hook-form 변경
   const onInputChange = useCallback(
     (event: FormEvent<HTMLInputElement>) => {
       const value = (event.target as HTMLInputElement)?.value;
@@ -80,11 +78,20 @@ export default function Autocomplete({ onPlaceSelect, setCurrentPosition }: Auto
         console.log(placeDetails);
         const { location } = placeDetails?.geometry || {};
 
-        if (location) {
-          setCurrentPosition(location.toJSON());
+        if (!location) {
+          return;
         }
 
-        onPlaceSelect(placeDetails);
+        const newSearchedCenter = location.toJSON();
+
+        const newSearchResult: SearchedCity = {
+          city: placeDetails?.vicinity ?? '',
+          location: newSearchedCenter,
+          country:
+            placeDetails?.address_components?.find((component) => component.types.includes('country'))?.long_name ?? '',
+        };
+        setLastSearchCity(newSearchResult);
+        setLastMapCenter(newSearchedCenter);
         setPredictionResults([]);
         setInputValue(placeDetails?.formatted_address ?? '');
         setSessionToken(new places.AutocompleteSessionToken());
@@ -92,7 +99,7 @@ export default function Autocomplete({ onPlaceSelect, setCurrentPosition }: Auto
 
       placesService?.getDetails(detailRequestOptions, detailsRequestCallback);
     },
-    [onPlaceSelect, places, placesService, sessionToken],
+    [places, placesService, sessionToken],
   );
 
   return (

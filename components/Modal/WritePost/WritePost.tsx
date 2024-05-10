@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 // import AutoCompleteCity from '@/app/maptest/_deprecated/autoCompleteCity';
+import useCreateForm from '@/app/map/_hooks/useCreateForm';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
@@ -14,7 +15,6 @@ import ContentInput from './ContentInput';
 import PositionDetail from './PositionDetail';
 import TitleInput from './TitleInput';
 import styles from './WritePost.module.scss';
-import useCreateForm from '../../../app/map/_hooks/useCreateForm';
 import BlobButton from '../../Button/BlobButton';
 
 const cx = classNames.bind(styles);

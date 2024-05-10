@@ -1,7 +1,7 @@
+import useCreateForm from '@/app/map/_hooks/useCreateForm';
 import useModalStore from '@stores/useModalStore';
 
 import styles from './ContentInput.module.scss';
-import useCreateForm from '../../../app/map/_hooks/useCreateForm';
 
 export default function ContentInput() {
   const { toggleModal } = useModalStore();

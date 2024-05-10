@@ -2,8 +2,8 @@ import React from 'react';
 
 import { AdvancedMarker } from '@vis.gl/react-google-maps';
 
-import Marker from '@/app/map/_components/Marker';
-import trees from '@/app/maptest/_mock/trees';
+import Marker from '@/app/map/_components/Marker/Marker';
+import trees from '@/app/map/_mock/trees';
 
 export default function Markers() {
   // 위치 정보를 변수에 저장한다.s

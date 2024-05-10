@@ -1,7 +1,7 @@
+import useCreateForm from '@/app/map/_hooks/useCreateForm';
 import useModalStore from '@stores/useModalStore';
 
 import styles from './TitleInput.module.scss';
-import useCreateForm from '../../../app/map/_hooks/useCreateForm';
 
 export default function TitleInput({ onChange }: { onChange: (event: React.ChangeEvent<HTMLInputElement>) => void }) {
   const { toggleModal } = useModalStore();

@@ -2,12 +2,12 @@ import { UseFormSetValue } from 'react-hook-form';
 
 import Image from 'next/image';
 
+import { ContentField } from '@/app/map/_hooks/useCreateForm';
 import Upload from '@public/icons/upload-01.svg';
 
 import useUploadImage from '@hooks/useUploadImage';
 
 import styles from './ImageUploader.module.scss';
-import { ContentField } from '../app/map/_hooks/useCreateForm';
 
 interface ModalImageProps {
   setValue: UseFormSetValue<ContentField>;
