@@ -56,8 +56,7 @@ export default function WritePost() {
           </div>
           <PostModalInput
             required
-            // register={register}
-            {...register}
+            register={register} // 왜 이걸 하면 오류가 날까..
             labelName='제목'
             id='title'
             name='title'
@@ -67,8 +66,7 @@ export default function WritePost() {
           />
           <PostModalInput
             required
-            // register={register}
-            {...register}
+            register={register}
             labelName='내용'
             id='content'
             name='content'
@@ -86,6 +84,7 @@ export default function WritePost() {
           <PositionDetail />
         </div>
         <div className={cx('body-image')}>
+          <p>사진업로드(최대5장) - 최대 5mb</p>
           <ImageUploader setValue={setValue} />
         </div>
       </div>

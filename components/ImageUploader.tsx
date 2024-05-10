@@ -2,7 +2,6 @@ import { UseFormSetValue } from 'react-hook-form';
 
 import Image from 'next/image';
 
-import Upload from '@public/icons/upload-01.svg';
 import UploadImg from '@public/icons/upload-image.svg';
 
 import useUploadImage from '@hooks/useUploadImage';
@@ -19,16 +18,7 @@ export default function ImageUploader({ setValue }: ModalImageProps) {
 
   return (
     <>
-      {imageList &&
-        imageList.map((image) => (
-          <Image
-            key={image}
-            src={image}
-            alt='이미지'
-            width={78} // 원하는 너비를 설정하세요
-            height={78} // 원하는 높이를 설정하세요
-          />
-        ))}
+      {imageList && imageList.map((image) => <Image key={image} src={image} alt='이미지' width={78} height={78} />)}
       <label htmlFor='inputFile'>
         <div className={styles.inputFile}>
           <Image src={UploadImg} alt='업로드하기' />
