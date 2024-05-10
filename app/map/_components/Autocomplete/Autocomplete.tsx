@@ -3,8 +3,8 @@ import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useMap, useMapsLibrary } from '@vis.gl/react-google-maps';
 
 import './autocomplete.css';
-import { SearchedCity } from '@/types/Map';
 import { useMapStore } from '@stores/useMapStore';
+import { SearchedCity } from '@types/Map';
 
 export default function Autocomplete() {
   const map = useMap();
