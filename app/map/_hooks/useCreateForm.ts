@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Errors } from '@/types/Errors';
 import createPost from '@apis/post/createPost';
 
 export interface ContentField {
@@ -18,7 +19,13 @@ export interface ContentField {
 type LatLngLiteralOrNull = google.maps.LatLngLiteral | null;
 
 export default function useCreateForm(toggleModal: () => void) {
-  const { register, handleSubmit, reset, setValue } = useForm<ContentField>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<ContentField>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentPosition, setCurrentPosition] = useState<LatLngLiteralOrNull>({ lat: 12, lng: 12 });
   console.log('currentPosition', currentPosition);
@@ -48,38 +55,12 @@ export default function useCreateForm(toggleModal: () => void) {
       if (currentPosition) {
         const formDataToSend = new FormData();
 
-        // const formData2 = {
-        //   title: formData.title,
-        //   content: formData.content,
-        //   lat: String(currentPosition.lat),
-        //   lng: String(currentPosition.lng),
-        // };
-
-        // formDataToSend.append('title', formData.title);
-        // formDataToSend.append('content', formData.content);
-        // formDataToSend.append('lat', String(currentPosition.lat));
-        // formDataToSend.append('lng', String(currentPosition.lng));
-
         formDataToSend.append('data', new Blob([JSON.stringify(formData)]));
 
         formData.image.forEach((image) => {
           // formDataToSend.append(`image${index}`, image);
           formDataToSend.append(`file`, image);
         });
-        // //
-
-        // const jsonData = { nickname, bio, isPublic, lat: 12, lng: 12 };
-
-        // const formData = new FormData();
-        // formData.append('data', new Blob([JSON.stringify(jsonData)]));
-        // // formData.append('data', jsonData);
-
-        // if (selectedImage) {
-        //   formData.append('file', selectedImage);
-        // }
-
-        // console.log({ ...formData });
-        // //
         await createPost(formDataToSend);
         console.log('Post created successfully');
       } else {
@@ -89,8 +70,8 @@ export default function useCreateForm(toggleModal: () => void) {
       console.error('Error creating post:', error);
     }
 
-    // toggleModal();
+    toggleModal();
   }
 
-  return { register, setValue, handleSubmit, onSubmit, cancelForm };
+  return { register, setValue, handleSubmit, onSubmit, cancelForm, errors: errors as Errors };
 }
