@@ -63,7 +63,7 @@ export default function UpdateProfileModal() {
         </span>
       </header>
 
-      <main>
+      <main className={cx('main-section')}>
         <section className={cx('profile-image')}>
           {selectedImage ? (
             <Avatar size='medium' imageSource={URL.createObjectURL(selectedImage)} />

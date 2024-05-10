@@ -1,16 +1,24 @@
 @import '/styles/global-styles/index';
 
 .form {
-  @include flex-column-center;
+  @include flex-column-start;
+  align-items: center;
   width: 100%;
-  padding: 3.2rem 2.8rem 3.2rem 3.6rem;
+  height: 100vh;
+  overflow: scroll;
+  padding: 3.2rem 3.6rem;
   gap: 3.2rem;
 
   background: $BDS-Grayscale-1;
 
   @include tablet-and-desktop {
     width: 39.5rem;
+    height: fit-content;
   }
+}
+
+.main-section {
+  width: 100%;
 }
 
 .header {
