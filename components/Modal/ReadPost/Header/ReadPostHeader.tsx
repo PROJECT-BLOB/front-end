@@ -11,7 +11,7 @@ import calculateTimeWhenItWillDisappear from '@utils/calculateDisappearTime';
 
 import styles from './ReadPostHeader.module.scss';
 
-export default function Header() {
+export default function ReadPostHeader({ isFeed }: { isFeed?: boolean }) {
   const { toggleModal, postId } = useModalStore();
   const { mutateAsync: postLikeMutate } = useUpdatePostLike(postId);
 
@@ -24,6 +24,7 @@ export default function Header() {
   return (
     <header className={styles['read-header']}>
       <div className={styles['time-blob-and-close']}>
+        {/* 시간 만료시 공백 */}
         <div className={styles['time-blob']}>
           <div className={styles['name-and-icon']}>
             <strong className={styles.mention}>Time-Blob</strong>
@@ -33,9 +34,13 @@ export default function Header() {
             {calculateTimeWhenItWillDisappear(post?.data.expiresAt)} 남음
           </span>
         </div>
-        <button type='button' onClick={toggleModal} className={styles['close-button']}>
-          <Image src={closeButton} alt='close-button' />
-        </button>
+        {isFeed ? (
+          ''
+        ) : (
+          <button type='button' onClick={toggleModal} className={styles['close-button']}>
+            <Image src={closeButton} alt='close-button' />
+          </button>
+        )}
       </div>
       <div className={styles['like-mention-wrapper']}>
         <button type='button' onClick={handleClickLike} className={styles['like-wrapper']}>

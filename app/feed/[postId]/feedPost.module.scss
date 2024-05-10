@@ -1,0 +1,12 @@
+@import '/styles/global-styles/media-breakpoint';
+
+.feed-post {
+  width: 100%;
+  padding: 2.4rem 3.2rem;
+}
+
+@include tablet {
+  .feed-post {
+    width: 64.3rem;
+  }
+}

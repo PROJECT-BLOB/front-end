@@ -57,11 +57,6 @@
   font-size: 1.5rem;
   line-height: 160%; /* 24px */
   margin-bottom: 2rem;
-  // 글 줄임설정
-  // display: -webkit-box;
-  // text-overflow: ellipsis;
-  // -webkit-box-orient: vertical;
-  // -webkit-line-clamp: 2;
 }
 
 .time-and-city {
@@ -124,16 +119,40 @@
   border-bottom: 1px solid $BDS-Grayscale-6;
 }
 
+.image-list-container {
+  display: flex;
+  gap: 1.2rem;
+  overflow: auto;
+}
+
+.image-container {
+  position: relative;
+  flex-shrink: 0;
+  width: 12rem;
+  height: 12rem;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
 @include tablet {
   .main-container {
-    width: 41.8rem;
+    width: 57.9rem;
     flex-shrink: 0;
     max-height: 90vh;
     overflow-y: auto;
     overflow-x: hidden;
-  }
 
-  .comment-form {
-    width: 41.8rem;
+    &.feed {
+      overflow: visible;
+      max-height: 100%;
+    }
   }
 }
+
+// .image-modal {
+//   position: fixed;
+//   inset: 0;
+//   background: rgba(0, 0, 0, 0.5);
+//   z-index: 1;
+// }

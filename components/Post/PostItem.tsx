@@ -1,10 +1,11 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import HeartIcon from '@/public/icons/heart.svg';
 import CommentIcon from '@/public/icons/message-circle-02.svg';
 import { Post } from '@/types/Post';
-import useModalStore, { ModalName } from '@stores/useModalStore';
+import useModalStore from '@stores/useModalStore';
 
 import CategoryBox from '@components/CategoryBox';
 
@@ -13,17 +14,16 @@ import styles from './PostItem.module.scss';
 const cx = classNames.bind(styles);
 
 export default function PostItem({ post }: { post: Post }) {
-  const { toggleModal, setCurrentName, setPostId } = useModalStore();
+  const { setCurrentName, setPostId } = useModalStore();
 
-  function handleOpenModal(name: ModalName) {
-    setCurrentName(name);
-    setPostId(post.postId);
-    toggleModal();
+  function handleClickPost(postId: number) {
+    setCurrentName('read');
+    setPostId(postId);
   }
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <div className={cx('post-container')} onClick={() => handleOpenModal('read')}>
+    <Link className={cx('post-container')} href={`/feed/${post.postId}`} onClick={() => handleClickPost(post.postId)}>
       <header className={cx('header')}>
         <CategoryBox category={post.category} subcategory={post.subcategory} />
         <span>beloved 태그 보류</span>
@@ -53,6 +53,6 @@ export default function PostItem({ post }: { post: Post }) {
           </span>
         </p>
       </footer>
-    </div>
+    </Link>
   );
 }
