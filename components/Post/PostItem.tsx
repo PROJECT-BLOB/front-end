@@ -33,8 +33,8 @@ export default function PostItem({ post }: { post: Post }) {
           <span className={cx('text-black', 'large')}>{post?.title}</span>
           <span className={cx('text-black', 'middle')}>{post?.content}</span>
         </p>
-        <span className={cx('photo')}>
-          <Image fill src={post?.imageUrl[0]} alt='메인 이미지' />
+        <span className={cx('photo-container')}>
+          <Image fill objectFit='cover' src={post?.imageUrl[0]} alt='메인 이미지' />
         </span>
       </main>
       <footer className={cx('footer')}>

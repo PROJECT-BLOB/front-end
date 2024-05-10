@@ -59,8 +59,7 @@
   }
 }
 
-// TODO: object-fit이 안 먹는거 같다....
-.photo {
+.photo-container {
   display: block;
   position: relative;
   width: 10rem;
@@ -70,7 +69,6 @@
   border-radius: 2.4rem;
   // background: #c4c4c4;
   overflow: hidden;
-  object-fit: contain;
 
   @include tablet-and-desktop {
     width: 15rem;
