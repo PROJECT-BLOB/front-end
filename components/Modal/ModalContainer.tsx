@@ -23,10 +23,12 @@ const ModalList: { [key in ModalName]: JSX.Element } = {
 export default function ModalContainer() {
   const { isOpen, name } = useModalStore();
 
-  if (isOpen) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
+  if (typeof document !== 'undefined') {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
   }
 
   return (
