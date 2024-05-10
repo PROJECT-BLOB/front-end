@@ -12,7 +12,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 7px;
+  gap: 0.7rem;
   align-self: stretch;
 }
 
@@ -69,13 +69,13 @@
   font-size: 1.4rem;
   font-weight: 600;
   line-height: 142%; /* 19.88px */
+}
 
-  .line {
-    width: 44px;
-    height: 1px;
-    background: $BDS-Grayscale-13;
-    margin-right: 0.8rem;
-  }
+.line {
+  width: 4.4rem;
+  height: 0.1rem;
+  background: $BDS-Grayscale-13;
+  margin-right: 0.8rem;
 }
 
 .see-more-reply {
@@ -88,11 +88,4 @@
   line-height: 142%; /* 19.88px */
   margin-left: 4rem;
   margin-top: 2.4rem;
-
-  .line {
-    width: 44px;
-    height: 1px;
-    background: $BDS-Grayscale-13;
-    margin-right: 0.8rem;
-  }
 }

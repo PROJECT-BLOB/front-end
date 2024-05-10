@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 7px;
+  gap: 0.7rem;
   align-self: stretch;
   margin-bottom: 2.4rem;
 }
@@ -81,9 +81,7 @@
   .city {
     color: $BDS-Grayscale-7;
     font-feature-settings: 'ss10' on;
-
     font-size: 1.4rem;
-    font-style: normal;
     font-weight: 600;
     line-height: 142%; /* 19.88px */
   }
@@ -113,20 +111,17 @@
 
 .comment-line {
   display: inline-block;
-  color: var(--BDS-Grayscale-8, var(--BDS-Grayscale-8, #595959));
+  color: $BDS-Grayscale-8;
   font-feature-settings: 'ss10' on;
 
-  /* BDS/Body 2/Normal */
-  font-family: 'IBM Plex Sans KR';
-  font-size: 15px;
-  font-style: normal;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 146%; /* 21.9px */
   display: flex;
-  padding-bottom: 12px;
+  padding-bottom: 1.2rem;
   align-items: flex-start;
   align-self: stretch;
-  border-bottom: 1px solid var(--BDS-Grayscale-6, #bfbfbf);
+  border-bottom: 1px solid $BDS-Grayscale-6;
 }
 
 @include tablet {

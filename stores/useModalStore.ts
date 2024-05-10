@@ -12,7 +12,7 @@ interface ModalStore {
 }
 
 const useModalStore = create<ModalStore>((set) => ({
-  postId: 20,
+  postId: 22,
   isOpen: false,
   name: 'read',
   setPostId: (postId) => set(() => ({ postId })),
