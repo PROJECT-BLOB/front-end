@@ -5,22 +5,22 @@ import styles from './Kebab.module.scss';
 
 interface KebabProps {
   toggleKebab: () => void;
+  useId?: number;
   postId?: number;
   commentId?: number;
-  replyId?: number;
 }
 
-export default function Kebab({ toggleKebab, commentId, postId, replyId }: KebabProps) {
-  const { mutate: deleteCommentMutate } = useDeleteComment(postId, commentId, replyId);
+export default function Kebab({ toggleKebab, useId, commentId, postId }: KebabProps) {
+  const { mutate: deletePostMutate } = useDeletePost(postId, useId);
 
-  const { mutate: deletePostMutate } = useDeletePost(postId);
+  const { mutate: deleteCommentMutate } = useDeleteComment(postId, commentId);
 
   function handleClickDelete() {
-    if (commentId === undefined && replyId === undefined && postId) deletePostMutate(postId);
+    if (postId) deletePostMutate(postId);
 
-    if (postId && commentId) deleteCommentMutate(commentId);
+    if (commentId) deleteCommentMutate(commentId);
 
-    if (commentId && replyId) deleteCommentMutate(replyId);
+    toggleKebab();
   }
 
   return (

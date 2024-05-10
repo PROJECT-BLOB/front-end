@@ -56,7 +56,9 @@ export default function MainContainer({ contentData }: MainContentProps) {
               <Image src={kebab} alt='케밥버튼' width={24} height={24} />
             </button>
           )}
-          {isKebabClicked && <Kebab postId={contentData.postId} toggleKebab={toggleKebab} />}
+          {isKebabClicked && (
+            <Kebab useId={contentData.author.userId} postId={contentData.postId} toggleKebab={toggleKebab} />
+          )}
         </div>
         <CategoryBox category={contentData.category} subcategory={contentData.subcategory} />
 
