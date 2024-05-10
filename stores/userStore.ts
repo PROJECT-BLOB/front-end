@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { Location } from '@types/Map';
+import { Location } from '@/types/Map';
 
 interface UserStore {
   userId: number;
