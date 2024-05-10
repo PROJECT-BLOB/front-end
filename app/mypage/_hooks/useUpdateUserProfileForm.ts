@@ -1,13 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 
 import { Errors } from '@/types/Errors';
-import updateUserProfile, { UpdateUser } from '@apis/user/mypage/updateUserProfile';
+import { UpdateUser } from '@apis/user/mypage/updateUserProfile';
+import { useUpdateUserProfile } from '@queries/useUserQueries';
 import useModalStore from '@stores/useModalStore';
+import { useUserStore } from '@stores/userStore';
 
-export default function useUpdateUserForm(initialData: UpdateUser) {
+export default function useUpdateUserProfileForm(initialData: UpdateUser) {
+  const { userId } = useUserStore();
   const { toggleModal } = useModalStore();
+  const { mutate: updateUserProfileMutate } = useUpdateUserProfile(userId);
+
   const [isPublic, setIsPublic] = useState(initialData.isPublic);
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -20,7 +25,6 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
     }
   };
 
-  // TODO: 토글에 작은 버그있음....나중에 고쳐야지
   const {
     register,
     handleSubmit,
@@ -48,16 +52,7 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
       formData.append('file', selectedImage);
     }
 
-    const { data, status } = await updateUserProfile(formData);
-    console.log('data', data);
-
-    if (status === 200) {
-      console.log('프로필 수정 성공');
-      // TODO: 모달을 닫기 전에 성공했다고 alert창을 띄우는게 좋지 않을까?
-      toggleModal();
-
-      return;
-    }
+    updateUserProfileMutate(formData);
 
     toggleModal();
   }
@@ -66,11 +61,11 @@ export default function useUpdateUserForm(initialData: UpdateUser) {
     setIsPublic(checked);
   };
 
-  useEffect(() => {
-    const subscirbe = watch((data, { name }) => console.log(''));
+  // useEffect(() => {
+  //   const subscirbe = watch((data, { name }) => console.log(''));
 
-    return () => subscirbe.unsubscribe();
-  }, [watch]);
+  //   return () => subscirbe.unsubscribe();
+  // }, [watch]);
 
   return {
     register,
