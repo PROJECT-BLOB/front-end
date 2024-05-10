@@ -39,51 +39,55 @@ export default function WritePost() {
         </span>
       </header>
       <div className={cx('post-body')}>
-        <p className={cx('category-title')}>
-          카테고리<span className={cx('force')}> * </span>
-        </p>
-        <div className={cx('category-list')}>
-          {categories.map((category) => (
-            <CategoryFiltering key={category} category={category} filteringType='feed' />
-          ))}
-        </div>
+        <div className={cx('body-content')}>
+          <p className={cx('category-title')}>
+            카테고리<span className={cx('force')}> * </span>
+          </p>
+          <div className={cx('category-list')}>
+            {categories.map((category) => (
+              <CategoryFiltering key={category} category={category} filteringType='feed' />
+            ))}
+          </div>
 
-        <div className={cx('sub-category-list')}>
-          {subCategories.map((subcategory) => (
-            <SubCategoryFiltering key={subcategory} category='추천' filteringType='feed' title={subcategory} />
-          ))}
+          <div className={cx('sub-category-list')}>
+            {subCategories.map((subcategory) => (
+              <SubCategoryFiltering key={subcategory} category='추천' filteringType='feed' title={subcategory} />
+            ))}
+          </div>
+          <PostModalInput
+            required
+            // register={register}
+            {...register}
+            labelName='제목'
+            id='title'
+            name='title'
+            placeholder='제목은 필수입니다'
+            maxLength={20}
+            errors={errors}
+          />
+          <PostModalInput
+            required
+            // register={register}
+            {...register}
+            labelName='내용'
+            id='content'
+            name='content'
+            placeholder='내용을 입력해주세요'
+            maxLength={20}
+            errors={errors}
+          />
+          <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
+          <AutoCompleteCity
+            onSelectCity={(cityName: string, lat: number, lng: number) => {
+              // 선택된 도시 정보를 상태 변수에 저장
+              setSelectedCity({ cityName, lat, lng });
+            }}
+          />
+          <PositionDetail />
         </div>
-        <PostModalInput
-          required
-          // register={register}
-          {...register}
-          labelName='제목'
-          id='title'
-          name='title'
-          placeholder='제목은 필수입니다'
-          maxLength={20}
-          errors={errors}
-        />
-        <PostModalInput
-          required
-          // register={register}
-          {...register}
-          labelName='내용'
-          id='content'
-          name='content'
-          placeholder='내용을 입력해주세요'
-          maxLength={20}
-          errors={errors}
-        />
-        <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
-        <AutoCompleteCity
-          onSelectCity={(cityName: string, lat: number, lng: number) => {
-            // 선택된 도시 정보를 상태 변수에 저장
-            setSelectedCity({ cityName, lat, lng });
-          }}
-        />
-        <PositionDetail />
-        <ImageUploader setValue={setValue} />
+        <div className={cx('body-image')}>
+          <ImageUploader setValue={setValue} />
+        </div>
       </div>
       <div className={cx('post-footer')}>
         <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
