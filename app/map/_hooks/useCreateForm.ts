@@ -46,8 +46,8 @@ export default function useCreateForm(toggleModal: () => void) {
       ...formData,
       city: '서울',
       country: '대한민국',
-      title: '제목',
-      content: '내용',
+      // title: '제목',
+      // content: '내용',
       category: 'QUESTION',
     };
 

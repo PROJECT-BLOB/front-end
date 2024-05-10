@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import { ContentField } from '@/app/map/_hooks/useCreateForm';
 import Upload from '@public/icons/upload-01.svg';
+import UploadImg from '@public/icons/upload-image.svg';
 
 import useUploadImage from '@hooks/useUploadImage';
 
@@ -24,17 +25,17 @@ export default function ImageUploader({ setValue }: ModalImageProps) {
             key={image}
             src={image}
             alt='이미지'
-            width={48} // 원하는 너비를 설정하세요
-            height={48} // 원하는 높이를 설정하세요
+            width={78} // 원하는 너비를 설정하세요
+            height={78} // 원하는 높이를 설정하세요
           />
         ))}
       <label htmlFor='inputFile'>
         <div className={styles.inputFile}>
-          <Image src={Upload} alt='업로드하기' />
+          <Image src={UploadImg} alt='업로드하기' />
           <p>업로드</p>
         </div>
+        <input type='file' id='inputFile' accept='image/*' multiple onChange={handleChangeImage} />
       </label>
-      <input type='file' id='inputFile' accept='image/*' multiple onChange={handleChangeImage} />
     </>
   );
 }
