@@ -2,6 +2,7 @@
 
 .input-and-check {
   @include flex-column;
+  width: 100%;
   align-items: flex-start;
   gap: 0.4rem;
 }

@@ -7,13 +7,21 @@
   gap: 3.2rem;
 }
 
-.profile-and-bookmark {
+.profile-and-kebab {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 7px;
+  gap: 0.7rem;
   align-self: stretch;
   margin-bottom: 2.4rem;
+}
+
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
+  align-self: stretch;
 }
 
 .title-and-distance {
@@ -49,11 +57,6 @@
   font-size: 1.5rem;
   line-height: 160%; /* 24px */
   margin-bottom: 2rem;
-  // 글 줄임설정
-  // display: -webkit-box;
-  // text-overflow: ellipsis;
-  // -webkit-box-orient: vertical;
-  // -webkit-line-clamp: 2;
 }
 
 .time-and-city {
@@ -71,11 +74,11 @@
   }
 
   .city {
-    color: $BDS-Grayscale-8;
+    color: $BDS-Grayscale-7;
     font-feature-settings: 'ss10' on;
-    font-size: 1.3rem;
-    font-weight: 500;
-    line-height: 138.5%; /* 18.005px */
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
   }
 }
 
@@ -92,36 +95,64 @@
   font-weight: 600;
   line-height: 142.9%; /* 20.006px */
   margin-bottom: 1.6rem;
+
+  .alert {
+    color: $BDS-Grayscale-7;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
+  }
 }
 
 .comment-line {
   display: inline-block;
-  color: var(--BDS-Grayscale-8, var(--BDS-Grayscale-8, #595959));
+  color: $BDS-Grayscale-8;
   font-feature-settings: 'ss10' on;
 
-  /* BDS/Body 2/Normal */
-  font-family: 'IBM Plex Sans KR';
-  font-size: 15px;
-  font-style: normal;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 146%; /* 21.9px */
   display: flex;
-  padding-bottom: 12px;
+  padding-bottom: 1.2rem;
   align-items: flex-start;
   align-self: stretch;
-  border-bottom: 1px solid var(--BDS-Grayscale-6, #bfbfbf);
+  border-bottom: 1px solid $BDS-Grayscale-6;
+}
+
+.image-list-container {
+  display: flex;
+  gap: 1.2rem;
+  overflow: auto;
+}
+
+.image-container {
+  position: relative;
+  flex-shrink: 0;
+  width: 12rem;
+  height: 12rem;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 @include tablet {
   .main-container {
-    width: 41.8rem;
+    width: 57.9rem;
     flex-shrink: 0;
     max-height: 90vh;
     overflow-y: auto;
     overflow-x: hidden;
-  }
 
-  .comment-form {
-    width: 41.8rem;
+    &.feed {
+      overflow: visible;
+      max-height: 100%;
+    }
   }
 }
+
+// .image-modal {
+//   position: fixed;
+//   inset: 0;
+//   background: rgba(0, 0, 0, 0.5);
+//   z-index: 1;
+// }

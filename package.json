@@ -38,7 +38,7 @@
     "antd": "^5.16.5",
     "axios": "^1.6.7",
     "classnames": "^2.5.1",
-    "next": "14.2.1",
+    "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
     "react-google-autocomplete": "^2.7.3",
