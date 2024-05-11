@@ -42,5 +42,6 @@ export default function useImageControl(imageList: string[] = []) {
     handleTouchEnd,
     handlePreviousImage,
     handleNextImage,
+    setCurrentImageIndex,
   };
 }
