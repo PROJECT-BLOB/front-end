@@ -2,9 +2,7 @@
 @import '/styles/global-styles/media-breakpoint';
 
 .comment-form {
-    position: sticky;
     width: 100%;
-    bottom: 2rem;
     display: flex;
     gap: 1.2rem;
     flex: 1 0 0;
@@ -37,6 +35,7 @@
     font-size: 1.5rem;
     line-height: 146.7%; /* 22.005px */
     outline: none;
+    width: 100%;
     &::placeholder {
       color: $BDS-Grayscale-6;
     }
@@ -57,6 +56,7 @@
     font-size: 1.3rem;
     font-weight: 500;
     line-height: 138.5%; /* 18.005px */
+    flex-shrink: 0;
   }
   
   @include tablet {

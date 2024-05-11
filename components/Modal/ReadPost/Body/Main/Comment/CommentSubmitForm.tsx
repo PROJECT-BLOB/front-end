@@ -45,12 +45,10 @@ export default function CommentSubmitForm({ postId, replyInformation, setReplyIn
 
   return (
     <form className={styles['comment-form']} onSubmit={handleSubmit(handleSubmitComment)}>
-      <div>
-        {replyInformation.isReply && (
-          <span className={styles['target-nickname']}>@{replyInformation.targetCommentNickname}</span>
-        )}
-        <input type='text' className={styles['comment-input']} placeholder='댓글 남기기' {...register('comment')} />
-      </div>
+      {replyInformation.isReply && (
+        <span className={styles['target-nickname']}>@{replyInformation.targetCommentNickname}</span>
+      )}
+      <input type='text' className={styles['comment-input']} placeholder='댓글 남기기' {...register('comment')} />
       <button type='submit' className={styles['comment-submit-button']}>
         게시
       </button>

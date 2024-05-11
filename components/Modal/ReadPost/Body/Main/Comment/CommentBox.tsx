@@ -38,11 +38,13 @@ export default function CommentBox({ postId }: { postId: number }) {
       {/* // TODO 로딩 인디케이터 추가 */}
       {/* // <div ref={ref} />가 화면에 보일 때 fetchNextPage 호출 */}
       {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
-      <CommentSubmitForm
-        replyInformation={replyInformation}
-        postId={postId}
-        setReplyInformation={setReplyInformation}
-      />
+      <div className={styles['form-container']}>
+        <CommentSubmitForm
+          replyInformation={replyInformation}
+          postId={postId}
+          setReplyInformation={setReplyInformation}
+        />
+      </div>
     </div>
   );
 }
