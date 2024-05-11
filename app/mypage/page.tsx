@@ -17,7 +17,7 @@ import styles from './myPage.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function myPage() {
+export default function MyPage() {
   const { userId, isSignin } = useUserStore();
   const { selectedTab } = useTabStore();
   const router = useRouter();
