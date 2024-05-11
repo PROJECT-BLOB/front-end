@@ -1,9 +1,11 @@
 import classNames from 'classnames/bind';
 
 import { Comment } from '@/types/Post';
+import BelovedIcon from '@icons/check-heart-white.svg';
 import { useFetchTargetPost } from '@queries/usePostQueries';
 
 import CategoryBox from '@components/CategoryBox';
+import IconTag from '@components/IconTag/IconTag';
 import styles from '@components/Post/PostItem.module.scss';
 
 const cx = classNames.bind(styles);
@@ -21,13 +23,12 @@ export default function CommentItem({ comment }: { comment: Comment }) {
   }
 
   const post = data?.data ?? [];
-  // console.log('post데이터', post);
 
   return (
     <div className={cx('post-container')}>
       <header className={cx('header')}>
         <CategoryBox category={post.category} subcategory={post.subcategory} />
-        <span>beloved 태그 보류</span>
+        <IconTag IconSource={BelovedIcon}>Beloved</IconTag>
       </header>
       <main className={cx('main')}>
         <p className={cx('main-text')}>

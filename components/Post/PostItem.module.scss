@@ -7,12 +7,12 @@
 
   // width: 100%;
   padding: 3.2rem;
-  gap: 1rem;
+  gap: 1.2rem;
   border-bottom: 1px solid $BDS-Grayscale-6;
   font-feature-settings: 'ss10' on;
 
   @include tablet {
-    gap: 1rem;
+    gap: 2rem;
   }
 
   @include desktop {
@@ -28,41 +28,57 @@
 }
 
 .main {
-  display: flex;
-  align-items: flex-start;
-  width: 100%;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1.2rem; // TODO: 이 부분 수정
+  &-default {
+    align-items: flex-start;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    display: none;
 
-  @include tablet {
-    gap: 10rem;
+    @include tablet {
+      display: flex;
+      gap: 10rem;
+    }
+
+    @include desktop {
+      gap: 18rem;
+    }
   }
 
-  @include desktop {
-    gap: 18rem;
+  &-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.6rem;
+    align-self: stretch;
+
+    @include tablet-and-desktop {
+      display: none;
+    }
   }
 
-  &-text {
+  &-content-default {
     @include flex-column-start;
-    gap: 0.75rem;
-    // max-width: 52.1875rem;
-
-    gap: 3.2rem;
 
     @include tablet {
       gap: 3.2rem;
-      // max-width: 429px;
     }
 
     @include desktop {
       gap: 1.2rem;
     }
   }
+
+  &-content-mobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1.6rem;
+    align-self: stretch;
+  }
 }
 
-// TODO: object-fit이 안 먹는거 같다....
-.photo {
+.photo-container {
   display: block;
   position: relative;
   width: 10rem;
@@ -72,7 +88,6 @@
   border-radius: 2.4rem;
   // background: #c4c4c4;
   overflow: hidden;
-  object-fit: contain;
 
   @include tablet-and-desktop {
     width: 15rem;
@@ -122,15 +137,23 @@
 }
 
 .large {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 600;
   line-height: 144%;
-  letter-spacing: -0.00025rem;
+  letter-spacing: -0.0004rem;
+
+  @include desktop {
+    font-size: 2.4rem;
+  }
 }
 
 .middle {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 160%;
+
+  @include desktop {
+    font-size: 1.6rem;
+  }
 }
 
 .small {

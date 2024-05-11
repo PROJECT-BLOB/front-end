@@ -12,12 +12,10 @@ interface AvatarProps {
 }
 
 export default function Avatar({ size, imageSource }: AvatarProps) {
-  console.log(size);
-
   return (
     <>
       <div className={cx(size, 'profile-image')}>
-        <Image fill src={imageSource} alt='프로필 사진' />
+        <Image fill objectFit='cover' src={imageSource} alt='프로필 사진' />
       </div>
     </>
   );
