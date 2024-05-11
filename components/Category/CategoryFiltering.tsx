@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import classNames from 'classnames/bind';
 
@@ -21,6 +21,9 @@ export interface CategoryFilteringProps {
   category: Category;
   filteringType: FilteringType;
   subcategory?: ReactNode;
+  onClick: () => void;
+  isCategoryClicked: boolean;
+  isArrowClicked: boolean;
 }
 
 function selectedIcon(category: Category) {
@@ -45,29 +48,24 @@ export default function CategoryFiltering({
   category = '추천',
   filteringType = 'writing',
   subcategory,
+  isCategoryClicked,
+  isArrowClicked,
+  onClick,
 }: CategoryFilteringProps) {
-  const [isCategoryClicked, setIsCategoryClicked] = useState(false);
-  const [isArrowClicked, setIsArrowClicked] = useState(false);
+  // const handleClickArrow = (event: React.MouseEvent<SVGSVGElement>) => {
+  //   event.stopPropagation(); // 버튼의 클릭 이벤트가 발생하지 않도록 함
 
-  const handleClickCategory = () => {
-    setIsCategoryClicked(!isCategoryClicked);
-    setIsArrowClicked(true);
-  };
-
-  const handleClickArrow = (event: React.MouseEvent<SVGSVGElement>) => {
-    event.stopPropagation(); // 버튼의 클릭 이벤트가 발생하지 않도록 함
-
-    if (!isCategoryClicked) {
-      setIsCategoryClicked(!isCategoryClicked);
-    } else {
-      setIsArrowClicked(!isArrowClicked);
-    }
-  };
+  //   if (!isCategoryClicked) {
+  //     setIsCategoryClicked(!isCategoryClicked);
+  //   } else {
+  //     setIsArrowClicked(!isArrowClicked);
+  //   }
+  // };
 
   return (
     <button
       type='button'
-      onClick={handleClickCategory}
+      onClick={onClick}
       className={cx(
         'background',
         { [`button-clicked-color-${category}`]: isCategoryClicked },
@@ -85,7 +83,6 @@ export default function CategoryFiltering({
         {category}
       </span>
       <ChevronRightIcon
-        onClick={handleClickArrow}
         className={cx(
           'chevron-right-icon',
           {

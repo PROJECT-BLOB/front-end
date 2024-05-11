@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
@@ -16,6 +18,19 @@ const categories: Category[] = ['추천', '비추천', '질문', '주의', '도�
 const subCategories = ['날씨', '음식점', '숙소', '병원', '화장실', '약국', '교통', '박물관', '관광지', 'ATM'];
 
 export default function FilteringModal() {
+  const [selectedCategory, setSelectedCategory] = useState<Category>('추천');
+
+  const [selectedSubCategories, setSelectedSubCategories] = useState<Record<Category, string[]>>({
+    추천: [],
+    비추천: [],
+    질문: [],
+    주의: [],
+    도움요청: [],
+  });
+
+  const [isCategoryClicked, setIsCategoryClicked] = useState(false);
+  const [isArrowClicked, setIsArrowClicked] = useState(false);
+
   const { toggleModal } = useModalStore();
 
   return (
@@ -31,17 +46,59 @@ export default function FilteringModal() {
         <form className={cx('form')}>
           <section className={cx('category-box')}>
             <h2 className={cx('sub-title')}>카테고리</h2>
+
             <div className={cx('category-list')}>
               {categories.map((category) => (
-                <CategoryFiltering key={category} category={category} filteringType='feed' />
+                <CategoryFiltering
+                  key={category}
+                  category={category}
+                  filteringType='feed'
+                  isCategoryClicked={isCategoryClicked}
+                  isArrowClicked={isArrowClicked}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setSelectedSubCategories({
+                      ...selectedSubCategories,
+                      [category]: [],
+                    });
+                    setIsCategoryClicked(!isCategoryClicked);
+                    setIsArrowClicked(true);
+                  }}
+                />
               ))}
             </div>
 
-            {/* TODO 수정 필요 category별로 나눠야함  */}
-            <div className={cx('sub-category-list')}>
-              {subCategories.map((subcategory) => (
-                <SubCategoryFiltering key={subcategory} category='추천' filteringType='feed' title={subcategory} />
-              ))}
+            <div className={cx('sub-category-list-box')}>
+              {isCategoryClicked && isArrowClicked && (
+                <div className={cx('sub-category-list')}>
+                  {subCategories.map((subcategory) => (
+                    <SubCategoryFiltering
+                      key={subcategory}
+                      category={selectedCategory}
+                      selectedSubCategories={selectedSubCategories[selectedCategory]}
+                      filteringType='feed'
+                      title={subcategory}
+                      onClick={(subcategory) => {
+                        const currentSubCategories = selectedSubCategories[selectedCategory];
+
+                        if (currentSubCategories.includes(subcategory)) {
+                          setSelectedSubCategories({
+                            ...selectedSubCategories,
+                            [selectedCategory]: currentSubCategories.filter(
+                              (currentSubCategory) => currentSubCategory !== subcategory,
+                            ),
+                          });
+                        } else {
+                          setSelectedSubCategories({
+                            ...selectedSubCategories,
+                            [selectedCategory]: [...currentSubCategories, subcategory],
+                          });
+                        }
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </section>
           <h2 className={cx('sub-title')}>날짜 선택</h2>
