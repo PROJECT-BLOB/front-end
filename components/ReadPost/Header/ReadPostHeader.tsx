@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import Image from 'next/image';
 
 import filledRedHeart from '@public/icons/filled-red-heart.svg';
@@ -12,11 +14,13 @@ import calculateTimeWhenItWillDisappear from '@utils/calculateDisappearTime';
 import styles from './ReadPostHeader.module.scss';
 
 export default function ReadPostHeader({ isFeed }: { isFeed?: boolean }) {
+  const [isMouseEnter, setIsMouseEnter] = useState(false);
   const { toggleModal, postId } = useModalStore();
-  const { mutateAsync: postLikeMutate } = useUpdatePostLike(postId);
 
-  async function handleClickLike() {
-    await postLikeMutate(post?.data.postId);
+  const { mutate: postLikeMutate } = useUpdatePostLike(postId);
+
+  function handleClickLike() {
+    postLikeMutate(post?.data.postId);
   }
 
   const { data: post } = useFetchTargetPost(postId);
@@ -24,11 +28,19 @@ export default function ReadPostHeader({ isFeed }: { isFeed?: boolean }) {
   return (
     <header className={styles['read-header']}>
       <div className={styles['time-blob-and-close']}>
-        {/* 시간 만료시 공백 */}
         <div className={styles['time-blob']}>
           <div className={styles['name-and-icon']}>
             <strong className={styles.mention}>Time-Blob</strong>
-            <Image src={info} alt='설명아이콘' width={16} height={16} />
+            <Image
+              src={info}
+              alt='설명아이콘'
+              width={16}
+              height={16}
+              onMouseEnter={() => setIsMouseEnter(!isMouseEnter)}
+              onMouseOut={() => setIsMouseEnter(!isMouseEnter)}
+            />
+            {/* To Do : 디자인 */}
+            {isMouseEnter && <p>시간이 지나면 지도에서 사라집니다.</p>}
           </div>
           <span className={styles['delete-mention']}>
             {calculateTimeWhenItWillDisappear(post?.data.expiresAt)} 남음

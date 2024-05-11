@@ -3,8 +3,8 @@
 import { useFetchTargetPost } from '@queries/usePostQueries';
 import useModalStore from '@stores/useModalStore';
 
-import MainContainer from '@components/Modal/ReadPost/Body/Main/MainContainer';
-import ReadPostHeader from '@components/Modal/ReadPost/Header/ReadPostHeader';
+import ReadPostHeader from '@components/ReadPost/Header/ReadPostHeader';
+import MainContainer from '@components/ReadPost/Main/MainContainer';
 
 import styles from './feedPost.module.scss';
 

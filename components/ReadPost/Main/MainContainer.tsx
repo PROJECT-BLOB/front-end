@@ -35,19 +35,17 @@ export default function MainContainer({ contentData, isFeed }: MainContentProps)
   }
 
   // 신고
-  async function handleClickReport(isPost: boolean, id: number) {
+  function handleClickReport(isPost: boolean, id: number) {
     if (isPost) {
-      await updatePostReport(id);
+      updatePostReport(id);
     } else {
-      await updateCommentReport(id);
+      updateCommentReport(id);
     }
   }
 
   const toggleKebab = () => {
     setIsKebabClicked(!isKebabClicked);
   };
-
-  console.log(isFeed);
 
   return (
     <section className={`${styles['main-container']} ${isFeed && styles.feed}`}>
