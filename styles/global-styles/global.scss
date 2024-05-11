@@ -7,69 +7,6 @@
   /* 1rem = 10px */
   font-size: 62.5%;
   scrollbar-width: thin;
-
-  /*  Primary color */
-  --BDS-Primary-1: linear-gradient(90deg, #fff2ea 0%, #fff0f8 100%);
-  --BDS-Primary-2: linear-gradient(90deg, #ffe0ce 0%, #ffdaee 100%);
-  --BDS-Primary-3: linear-gradient(90deg, #ffc7a6 0%, #ffbde0 100%);
-  --BDS-Primary-4: linear-gradient(90deg, #ffac7d 0%, #fe9ed2 100%);
-  --BDS-Primary-5: linear-gradient(90deg, #ff9456 0%, #fe81c4 100%);
-  --BDS-Primary-6: linear-gradient(90deg, #ff7c31 0%, #fe65b7 100%);
-  --BDS-Primary-7: linear-gradient(90deg, #d9692a 0%, #d8569c 100%);
-  --BDS-Primary-8: linear-gradient(90deg, #b55823 0%, #b44882 100%);
-  --BDS-Primary-9: linear-gradient(90deg, #91471c 0%, #913a68 100%);
-  --BDS-Primary-10: linear-gradient(90deg, #733816 0%, #722d52 100%);
-
-  /*  Secondary color */
-  --BDS-Secondary-Yellow: #fff50c;
-  --BDS-Secondary-Blue: #1d2ba4;
-  --BDS-Secondary-Green: #96e6bb;
-
-  /* Category color */
-  --BDS-Category-recommend_hover: #f8bfde;
-  --BDS-Category-recommend_basic: #eb2f96;
-  --BDS-Category-recommend_press: #d32a87;
-
-  --BDS-Category-cation_hover: #fdcab9;
-  --BDS-Category-cation_basic: #fa541c;
-  --BDS-Category-cation_press: #e14c19;
-
-  --BDS-Category-tip_hover: #b6ecec;
-  --BDS-Category-tip_basic: #13c2c2;
-  --BDS-Category-tip_press: #11afaf;
-
-  --BDS-Category-question_hover: #fdf4b6;
-  --BDS-Category-question_basic: #fadb14;
-  --BDS-Category-question_press: #e1c512;
-
-  --BDS-Category-help_hover: #e2f3b5;
-  --BDS-Category-help_basic: #a0d911;
-  --BDS-Category-help_press: #90c30f;
-
-  /*  System color */
-  --BDS-System-Success: #52c41a;
-  --BDS-System-Warning: #faad14;
-  --BDS-System-Error: #ff4d4f;
-  --BDS-System-Complete: #1890ff;
-  --BDS-System-Success_bg: #cff2be;
-  --BDS-System-Warning_bg: #fbe2ae;
-  --BDS-System-Error_bg: #ffaeaf;
-  --BDS-System-Complete_bg: #abd6fe;
-
-  /* Grayscale */
-  --BDS-Grayscale-1: #fff;
-  --BDS-Grayscale-2: #fafafa;
-  --BDS-Grayscale-3: #f5f5f5;
-  --BDS-Grayscale-4: #f0f0f0;
-  --BDS-Grayscale-5: #d9d9d9;
-  --BDS-Grayscale-6: #bfbfbf;
-  --BDS-Grayscale-7: #8c8c8c;
-  --BDS-Grayscale-8: #595959;
-  --BDS-Grayscale-9: #434343;
-  --BDS-Grayscale-10: #262626;
-  --BDS-Grayscale-11: #1f1f1f;
-  --BDS-Grayscale-12: #141414;
-  --BDS-Grayscale-13: #000;
 }
 
 * {

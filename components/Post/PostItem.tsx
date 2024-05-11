@@ -11,6 +11,8 @@ import useModalStore from '@stores/useModalStore';
 import CategoryBox from '@components/CategoryBox';
 import IconTag from '@components/IconTag/IconTag';
 
+import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
+
 import styles from './PostItem.module.scss';
 
 const cx = classNames.bind(styles);
@@ -52,9 +54,9 @@ export default function PostItem({ post }: { post: Post }) {
         <p className={cx('footer-content-gap', 'text-gray')}>
           <span>{post?.author?.nickname}</span>
           {/* //TODO: 시간  연결 */}
-          <span>3시간 전</span>
+          <span>{calculateTimePastSinceItCreated(post.createdDate)}</span>
           {/* //TODO: 위치  추가 */}
-          <span>경기도 남양주시 경춘로 1015번길 5-12</span>
+          <span>{`${post.country} ${post.city}`}</span>
         </p>
         <p className={cx('footer-content-gap')}>
           <span className={cx('icon-box')}>
