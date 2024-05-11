@@ -28,7 +28,7 @@ export default function PostItem({ post }: { post: Post }) {
     <div className={cx('post-container')} onClick={() => handleOpenModal('read')}>
       <header className={cx('header')}>
         <CategoryBox category={post.category} subcategory={post.subcategory} />
-        <IconTag IconSource={BelovedIcon}>Beloved</IconTag>
+        {post.likeCount >= 100 && <IconTag IconSource={BelovedIcon}>Beloved</IconTag>}
       </header>
       <main className={cx('main-mobile')}>
         <span className={cx('text-black', 'large')}>{post?.title}</span>
