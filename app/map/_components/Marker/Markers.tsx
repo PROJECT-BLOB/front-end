@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { AdvancedMarker } from '@vis.gl/react-google-maps';
-
-import Marker from '@/app/map/_components/Marker/Marker';
+import MarkerWithInfoWindow from '@/app/map/_components/Marker/MarkerWithInfoWindow';
 import trees from '@/app/map/_mock/trees';
 
 export default function Markers() {
@@ -17,15 +15,13 @@ export default function Markers() {
   return (
     <>
       {locations.map((location) => (
-        <AdvancedMarker
-          // animation={google.maps.Animation.BOUNCE}
-          key={`${location.lat}_${location.lng}`}
-          title={location.name}
-          position={{ lat: location.lat, lng: location.lng }}
-          onClick={() => console.log('MarkerClicked')}
-        >
-          <Marker />
-        </AdvancedMarker>
+        <MarkerWithInfoWindow
+          key={`${location.lat}_${location.lng}`} // key값은 id
+          title={location.name} // 제목으로
+          position={{ lat: location.lat, lng: location.lng }} // 좌표
+          createdAt={'3시간전'} // 생성 시간 변경
+          markerType='recommendation' // 마커 타입 변경
+        />
       ))}
     </>
   );
