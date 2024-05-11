@@ -30,10 +30,16 @@ export default function CommentItem({ comment }: { comment: Comment }) {
         <CategoryBox category={post.category} subcategory={post.subcategory} />
         <IconTag IconSource={BelovedIcon}>Beloved</IconTag>
       </header>
-      <main className={cx('main')}>
-        <p className={cx('main-text')}>
-          <span className={cx('text', 'black', 'large')}>{post?.title}</span>
-          <span className={cx('text', 'black', 'middle')}>{comment?.content}</span>
+      <main className={cx('main-default')}>
+        <p className={cx('main-content-default')}>
+          <span className={cx('text-black', 'large')}>{post?.title}</span>
+          <span className={cx('text-black', 'middle')}>{comment?.content}</span>
+        </p>
+      </main>
+      <main className={cx('main-mobile')}>
+        <span className={cx('text-black', 'large')}>{post?.title}</span>
+        <p className={cx('main-content-mobile')}>
+          <span className={cx('text-black', 'middle')}>{comment?.content}</span>
         </p>
       </main>
       <footer className={cx('footer')}>

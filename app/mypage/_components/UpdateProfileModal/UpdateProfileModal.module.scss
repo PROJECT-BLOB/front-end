@@ -60,10 +60,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 133%;
-
-  @include tablet-and-desktop {
-    width: 33.1rem;
-  }
 }
 
 .toggle-box {
