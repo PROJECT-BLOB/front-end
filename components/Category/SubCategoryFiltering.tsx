@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import classNames from 'classnames/bind';
 
 import CloseButton from '@icons/x-close.svg?component';
@@ -13,17 +11,21 @@ export interface SubCategoryFilteringProps {
   category: Category;
   filteringType: FilteringType;
   title: string;
+  selectedSubCategories: string[];
+  onClick: (subcategory: string) => void;
 }
 
 export default function SubCategoryFiltering({
   category = '추천',
   filteringType = 'writing',
   title = '날씨',
+  selectedSubCategories = [],
+  onClick,
 }: SubCategoryFilteringProps) {
-  const [isCategoryClicked, setIsCategoryClicked] = useState(false);
+  const isCategoryClicked = selectedSubCategories.includes(title);
 
   const handleClickCategory = () => {
-    setIsCategoryClicked(!isCategoryClicked);
+    onClick(title);
   };
 
   return (
