@@ -22,9 +22,10 @@ import ProfileContainer from './ProfileContainer';
 
 interface MainContentProps {
   contentData: Post;
+  isFeed?: boolean;
 }
 
-export default function MainContainer({ contentData }: MainContentProps) {
+export default function MainContainer({ contentData, isFeed }: MainContentProps) {
   const [isKebabClicked, setIsKebabClicked] = useState(false);
   // 북마크 한 후 게시글 조회 초기화 - 이러면 조회수 올라가서 다르게 해줘야할듯
   const { mutate: postBookmarkMutate } = useUpdatePostBookmark(contentData.postId);
@@ -34,11 +35,11 @@ export default function MainContainer({ contentData }: MainContentProps) {
   }
 
   // 신고
-  async function handleClickReport(isPost: boolean, id: number) {
+  function handleClickReport(isPost: boolean, id: number) {
     if (isPost) {
-      await updatePostReport(id);
+      updatePostReport(id);
     } else {
-      await updateCommentReport(id);
+      updateCommentReport(id);
     }
   }
 
@@ -47,7 +48,7 @@ export default function MainContainer({ contentData }: MainContentProps) {
   };
 
   return (
-    <section className={styles['main-container']}>
+    <section className={`${styles['main-container']} ${isFeed && styles.feed}`}>
       <div>
         <div className={styles['profile-and-kebab']}>
           <ProfileContainer author={contentData.author} isLarge />
@@ -83,6 +84,20 @@ export default function MainContainer({ contentData }: MainContentProps) {
         </div>
 
         <p className={styles.content}>{contentData.content}</p>
+        {isFeed && (
+          <div className={styles['image-list-container']}>
+            {contentData.imageUrl.map((image) => (
+              <div key={image} className={styles['image-container']}>
+                <Image src={image} alt='image' fill style={{ objectFit: 'cover' }} />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 이미지 클릭했을때 처리해줘야함 */}
+        {/* <div className={styles['image-modal']}>
+          <ImageContainer contentData={contentData} />
+        </div> */}
         <div className={styles['time-and-city']}>
           <p className={styles['time-ago']}>{calculateTimePastSinceItCreated(contentData.createdDate)}</p>
           <p className={styles.city}>

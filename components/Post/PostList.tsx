@@ -16,7 +16,6 @@ const cx = classNames.bind(styles);
 interface GetPostListProps {
   userId?: number;
   selectedTab?: string;
-  // 타입 수정해주십셔...
   filteredData?: filteredData;
 }
 

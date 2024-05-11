@@ -22,4 +22,9 @@
     height: 90vh;
     display: flex;
   }
+  .main {
+    display: flex;
+    gap: 2.4rem;
+    overflow: hidden;
+  }
 }

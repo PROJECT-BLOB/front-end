@@ -19,7 +19,7 @@ import TextArea from '@components/Input/TextArea';
 import { nicknameValidator } from '@utils/registerOptions';
 
 import styles from './UpdateProfileModal.module.scss';
-import useUpdateUserForm from '../../_hooks/useUpdateUserForm';
+import useUpdateUserProfileForm from '../../_hooks/useUpdateUserProfileForm';
 
 const cx = classNames.bind(styles);
 
@@ -52,7 +52,7 @@ export default function UpdateProfileModal() {
     onChangeToggle,
     selectedImage,
     handleChangeImage,
-  } = useUpdateUserForm(initialData);
+  } = useUpdateUserProfileForm(initialData);
 
   return (
     <form className={cx('form')} onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
@@ -63,15 +63,15 @@ export default function UpdateProfileModal() {
         </span>
       </header>
 
-      <main>
+      <main className={cx('main-section')}>
         <section className={cx('profile-image')}>
           {selectedImage ? (
             <Avatar size='medium' imageSource={URL.createObjectURL(selectedImage)} />
           ) : (
             <Avatar size='medium' imageSource={userData?.profileUrl || ''} />
           )}
-
-          <input id='profileImageInput' type='file' style={{ display: 'none' }} onChange={handleChangeImage} />
+          {/* TODO: 이 부분 수정해야 됨ㅋㅋ */}
+          <input id='profileImageInput' type='file' onChange={handleChangeImage} />
           {document.getElementById('profileImageInput') && (
             <MonoButton
               text='이미지 수정'

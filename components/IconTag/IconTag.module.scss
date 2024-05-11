@@ -1,0 +1,29 @@
+@import '/styles/global-styles/color-pallete';
+
+.tag-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+
+  &.pink-gradient {
+    background: $BDS-Primary-5;
+  }
+}
+
+.text {
+  color: $BDS-Grayscale-1;
+  font-feature-settings: 'ss10' on;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 138.5%;
+}
+
+.icon-container {
+  position: relative;
+
+  width: 1.6rem;
+  height: 1.6rem;
+}

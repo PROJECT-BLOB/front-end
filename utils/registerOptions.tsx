@@ -3,8 +3,8 @@ import checkBlobId from '@apis/user/sign/checkBlobId';
 // 영문 대소문자+숫자
 const BLOBID_REGEX = /^[a-zA-Z0-9]*$/;
 
-// 영문 대소문자+한글+숫자
-const NICKNAME_REGEX = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]+$/;
+// 영문 대소문자+한글(자음/모음)+숫자
+const NICKNAME_REGEX = /^[ㄱ-ㅎ가-힣ㅏ-ㅣa-zA-Z0-9]+$/;
 
 export interface ValidatorType {
   required: string;
@@ -23,7 +23,6 @@ export interface ValidatorType {
   validate?: (value: string) => Promise<string | undefined>;
 }
 
-// TODO: api 만들어지면 연결
 const checkIdExists = async (blobId: string) => {
   const { data: isDuplicated, status } = await checkBlobId(blobId);
   console.log('isDuplicated: ', isDuplicated);
