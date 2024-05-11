@@ -4,7 +4,7 @@ import { FieldValues, UseFormRegister } from 'react-hook-form';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import AutoCompleteCity from '@/app/maptest/_deprecated/AutoCompleteCity';
+import AutoCompleteCity from '@/app/map/_deprecated/AutoCompleteCity';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 

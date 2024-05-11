@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
-import LatLngLiteral = google.maps.LatLngLiteral;
+import { SearchedCity } from '@/types/Map';
 
-import { SearchedCity } from 'types/Map';
+import LatLngLiteral = google.maps.LatLngLiteral;
 
 const LOCATION_SEOUL = {
   lat: 37.5665,

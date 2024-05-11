@@ -13,7 +13,7 @@ import CategoryBox from '@components/CategoryBox';
 import PostList from '@components/Post/PostList';
 
 import styles from './Feed.module.scss';
-import AutoCompleteCity from '../maptest/_deprecated/AutoCompleteCity';
+import AutoCompleteCity from '../map/_deprecated/AutoCompleteCity';
 
 type Order = 'hot' | 'likes' | 'views' | 'recent';
 const ORDERS = {
