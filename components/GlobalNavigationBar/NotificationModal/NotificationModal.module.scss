@@ -11,7 +11,9 @@
 }
 
 .header {
-  @include flex-center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   gap: 6rem;
   align-self: stretch;
 }
@@ -31,9 +33,10 @@
   height: 3.2rem;
 }
 
-.alarm-list-container {
+.notification-list-container {
   @include flex-column;
   align-items: flex-end;
+  width: 100%;
   gap: 1.2rem;
   flex: 1 0 0;
 }

@@ -2,10 +2,11 @@
 
 .container {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
-  gap: 12px;
+  // gap: 1.2rem;
   align-self: stretch;
 
-  overflow: scroll;
+  overflow-y: scroll;
 }
