@@ -8,7 +8,7 @@ import useModalStore, { ModalName } from '@stores/useModalStore';
 import Portal from '@components/Portal';
 
 import styles from './ModalContainer.module.scss';
-import ReadPost from './ReadPost/ReadPost';
+import ReadPost from '../../app/map/_components/ReadPostModal';
 import WritePost from './WritePost/WritePost';
 
 // key 타입은 ModalName의 값, 값은 JSX.Element
@@ -22,6 +22,14 @@ const ModalList: { [key in ModalName]: JSX.Element } = {
 
 export default function ModalContainer() {
   const { isOpen, name } = useModalStore();
+
+  if (typeof document !== 'undefined') {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }
 
   return (
     isOpen && (

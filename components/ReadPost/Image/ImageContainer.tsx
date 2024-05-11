@@ -7,7 +7,7 @@ import previousButton from '@/public/icons/previous-button.svg';
 import { Post } from '@/types/Post';
 
 import styles from './ImageContainer.module.scss';
-import useImageControl from '../../hooks/useImageControl';
+import useImageControl from '../hooks/useImageControl';
 
 interface ImageContainerProps {
   contentData: Post;
@@ -23,10 +23,10 @@ export default function ImageContainer({ contentData }: ImageContainerProps) {
       <Image src={contentData.imageUrl[currentImageIndex]} className={styles.image} alt='이미지' fill />
 
       <button type='button' className={styles['previous-btn']} onClick={handlePreviousImage}>
-        <Image src={previousButton} alt='이전 버튼' />
+        <Image src={previousButton} alt='이전 버튼' className={styles.button} />
       </button>
       <button type='button' className={styles['next-btn']} onClick={handleNextImage}>
-        <Image src={nextButton} alt='다음 버튼' />
+        <Image src={nextButton} alt='다음 버튼' className={styles.button} />
       </button>
 
       <div className={styles['index-wrapper']}>

@@ -14,12 +14,12 @@ export default function ProfileContainer({ author, isLarge }: ProfileContainerPr
   return (
     <div className={styles['profile-container']}>
       <div className={`${styles['profile-image-wrapper']} ${isLarge ? styles.large : ''}`}>
-        <Image src={author.profileUrl} alt='프로필이미지' fill />
+        <Image src={author?.profileUrl} alt='프로필이미지' fill />
       </div>
-      <b className={`${styles['profile-nickname']} ${isLarge ? styles.large : ''}`}>{author.nickname}</b>
+      <b className={`${styles['profile-nickname']} ${isLarge ? styles.large : ''}`}>{author?.nickname}</b>
       <div className={styles['like-container']}>
         <Image src={checkHeart} alt='좋아요 아이콘' height={isLarge ? 20 : 16} width={isLarge ? 20 : 16} />
-        <b className={`${styles['like-count']} ${isLarge ? styles.large : ''}`}>Lv. {author.likedCount}</b>
+        <b className={`${styles['like-count']} ${isLarge ? styles.large : ''}`}>Lv. {author?.likedCount}</b>
       </div>
     </div>
   );

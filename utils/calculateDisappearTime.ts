@@ -8,5 +8,7 @@ export default function calculateDisappearTime(expiresAt: string) {
 
   const result = ` ${time}시간 ${minute}분 ${second}초 `;
 
+  if (secondDiff < 0) return 0;
+
   return result;
 }
