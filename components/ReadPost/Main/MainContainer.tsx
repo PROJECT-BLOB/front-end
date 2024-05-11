@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -25,8 +25,11 @@ interface MainContentProps {
   isFeed?: boolean;
 }
 
+const SCROLL_WIDTH = 264;
+
 export default function MainContainer({ contentData, isFeed }: MainContentProps) {
   const [isKebabClicked, setIsKebabClicked] = useState(false);
+  const imageContainerRef = useRef<HTMLDivElement>(null);
   // 북마크 한 후 게시글 조회 초기화 - 이러면 조회수 올라가서 다르게 해줘야할듯
   const { mutate: postBookmarkMutate } = useUpdatePostBookmark(contentData.postId);
 
@@ -46,6 +49,24 @@ export default function MainContainer({ contentData, isFeed }: MainContentProps)
   const toggleKebab = () => {
     setIsKebabClicked(!isKebabClicked);
   };
+
+  function handleSlideLeft() {
+    const imageContainer = imageContainerRef.current;
+
+    imageContainer?.scrollTo({
+      left: imageContainer.scrollLeft - SCROLL_WIDTH,
+      behavior: 'smooth',
+    });
+  }
+
+  function handleSlideRight() {
+    const imageContainer = imageContainerRef.current;
+
+    imageContainer?.scrollTo({
+      left: imageContainer.scrollLeft + SCROLL_WIDTH,
+      behavior: 'smooth',
+    });
+  }
 
   return (
     <section className={`${styles['main-container']} ${isFeed && styles.feed}`}>
@@ -83,14 +104,25 @@ export default function MainContainer({ contentData, isFeed }: MainContentProps)
           )}
         </div>
 
+        {/* 이미지 슬라이드랑 확대모달 구현 해야함 */}
         <p className={styles.content}>{contentData.content}</p>
         {isFeed && (
-          <div className={styles['image-list-container']}>
+          <div className={styles['image-list-container']} ref={imageContainerRef}>
             {contentData.imageUrl.map((image) => (
               <div key={image} className={styles['image-container']}>
                 <Image src={image} alt='image' fill style={{ objectFit: 'cover' }} />
               </div>
             ))}
+          </div>
+        )}
+        {contentData.imageUrl.length !== 0 && isFeed && (
+          <div className={styles['slider-button-container']}>
+            <button type='button' onClick={handleSlideLeft} className={styles['image-slider-left-button']}>
+              &lt;
+            </button>
+            <button type='button' onClick={handleSlideRight} className={styles['image-slider-right-button']}>
+              &gt;
+            </button>
           </div>
         )}
 
