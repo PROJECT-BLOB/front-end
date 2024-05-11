@@ -1,0 +1,21 @@
+@import '/styles/global-styles/index';
+
+.input-and-check {
+  @include flex-column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.message {
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 133%;
+}
+
+.error-text {
+  color: $BDS-System-Error;
+}
+
+.success-text {
+  color: $BDS-System-Success;
+}
