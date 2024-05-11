@@ -1,0 +1,9 @@
+@import '/styles/global-styles/index';
+
+.container {
+  display: flex;
+  padding: 1.6rem 0rem 1.6rem 0.8rem;
+  align-items: flex-start;
+  gap: 0.8rem;
+  align-self: stretch;
+}

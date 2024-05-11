@@ -1,0 +1,48 @@
+@import '/styles/global-styles/index';
+
+.modal-container {
+  @include flex-column-items-start;
+  width: 35.5rem;
+  padding: 3.2rem 3.6rem;
+  gap: 4.8rem;
+
+  background: $BDS-Grayscale-1;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.5);
+}
+
+.header {
+  @include flex-center;
+  gap: 6rem;
+  align-self: stretch;
+}
+
+.title {
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.close {
+  position: relative;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.alarm-list-container {
+  @include flex-column;
+  align-items: flex-end;
+  gap: 1.2rem;
+  flex: 1 0 0;
+}
+
+.delete-button {
+  color: $BDS-Grayscale-8;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 138%;
+}

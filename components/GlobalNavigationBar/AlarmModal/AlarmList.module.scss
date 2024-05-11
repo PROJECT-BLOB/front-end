@@ -1,0 +1,11 @@
+@import '/styles/global-styles/index';
+
+.container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+
+  overflow: scroll;
+}
