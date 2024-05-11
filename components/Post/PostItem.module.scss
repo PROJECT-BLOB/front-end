@@ -1,6 +1,8 @@
 @import '/styles/global-styles/index';
 
 .post-container {
+  text-decoration: none;
+
   @include flex-column-start;
 
   // width: 100%;

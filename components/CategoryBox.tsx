@@ -33,7 +33,7 @@ export default function CategoryBox({ category, subcategory, isFeed, handleClick
 
   return (
     <div className={`${styles.category} ${styles[color]}`}>
-      <p>{`${subcategory} ${MAIN_CATEGORY[category]}`}</p>
+      <p>{`${subcategory || ''} ${MAIN_CATEGORY[category]}`}</p>
       {isFeed && (
         <button type='button' onClick={handleClickDelete}>
           <Image src={deleteIcon} alt='x' />

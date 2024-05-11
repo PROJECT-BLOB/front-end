@@ -13,6 +13,7 @@ import CategoryBox from '@components/CategoryBox';
 import PostList from '@components/Post/PostList';
 
 import styles from './Feed.module.scss';
+import AutoCompleteCity from '../maptest/_deprecated/AutoCompleteCity';
 
 type Order = 'hot' | 'likes' | 'views' | 'recent';
 const ORDERS = {
@@ -40,16 +41,13 @@ export interface filteredData {
 export default function Feed() {
   // TO DO: 기본 값 설정
   const [filteredData, setFilteredData] = useState<filteredData>({
-    // country, city 맵에서 받아와야 함
     country: '대한민국',
     city: '서울',
     sortBy: 'recent',
     categories: '',
     startDate: '',
     endDate: '',
-    // false로 하면 전체 true로 하면 이미지 있는것만
     hasImage: false,
-    // 이것도 이미지와 마찬가지
     hasLocation: false,
     minLikes: 0,
     keyword: '',
@@ -92,11 +90,22 @@ export default function Feed() {
     return arrayCategory.map((category) => category.join(':')).join(',');
   }
 
+  const handleOnSelectCity = (address: string) => {
+    let countryAndCity = address.split(' ');
+
+    if (countryAndCity.length >= 3) countryAndCity = [countryAndCity[0], countryAndCity[countryAndCity.length - 1]];
+
+    setFilteredData((previous) => ({ ...previous, country: countryAndCity[0], city: countryAndCity[1] }));
+  };
+
   return (
     <main className={styles.feed}>
       <section className={styles['search-country-and-filtering-container']}>
         <div>
-          <span className={styles['search-mention']}>실시간 #{`${filteredData.city} ${filteredData.country}`}</span>
+          <span className={styles['search-mention']}>
+            <AutoCompleteCity onSelectCity={handleOnSelectCity} /> 실시간 #
+            {`${filteredData.city} ${filteredData.country}`}
+          </span>
         </div>
         <div className={styles['filtering-container']}>
           <div className={styles['filtering-button-wrapper']}>

@@ -3,9 +3,14 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 
 import { Comment } from '@/types/Post';
+import updateCommentReport from '@apis/post/updateCommentReport';
+import updatePostReport from '@apis/post/updatePostReport';
+import kebab from '@public/icons/dots-horizontal.svg';
 import filledRedHeart from '@public/icons/filled-red-heart.svg';
 import vacantHeart from '@public/icons/heart.svg';
 import { useFetchTargetCommentReply, useUpdateCommentLike } from '@queries/usePostQueries';
+
+import Kebab from '@components/Kebab';
 
 import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
 
@@ -21,6 +26,7 @@ interface CommentProps {
 }
 
 export default function CommentContainer({ comment, setReplyInformation }: CommentProps) {
+  const [isKebabClicked, setIsKebabClicked] = useState(false);
   const [isViewReplyClicked, setIsViewReplyClicked] = useState(false);
 
   // 답글 조회
@@ -33,9 +39,29 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
     updateCommentLike(comment.commentId);
   }
 
+  const toggleKebab = () => {
+    setIsKebabClicked(!isKebabClicked);
+  };
+
+  async function handleClickReport(isPost: boolean, id: number) {
+    if (isPost) {
+      await updatePostReport(id);
+    } else {
+      await updateCommentReport(id);
+    }
+  }
+
   return (
     <div className={styles['comment-container']}>
-      <ProfileContainer author={comment.author} />
+      <div className={styles['profile-and-kebab']}>
+        <ProfileContainer author={comment.author} />
+        {comment.canDelete && (
+          <button type='button' onClick={toggleKebab}>
+            <Image src={kebab} alt='케밥버튼' width={16} height={16} />
+          </button>
+        )}
+        {isKebabClicked && <Kebab commentId={comment.commentId} toggleKebab={toggleKebab} />}
+      </div>
       <div className={styles['content-like-wrapper']}>
         <p className={styles.content}>{comment.content}</p>
         <button type='button' onClick={handleClickLike}>
@@ -58,6 +84,11 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
         >
           답글달기
         </button>
+        {!comment.canDelete && (
+          <button className={styles.alert} type='button' onClick={() => handleClickReport(true, comment.commentId)}>
+            신고하기
+          </button>
+        )}
       </div>
       {replyList?.pages[0].data.count ? (
         <button
