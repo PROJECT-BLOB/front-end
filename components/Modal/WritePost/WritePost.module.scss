@@ -1,11 +1,7 @@
 @import '/styles/global-styles/color-pallete';
 
-.title {
-  display: inline-block;
-  color: #000;
-}
-
 .close-header {
+  width: 39.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,7 +11,7 @@
   font-feature-settings: 'ss10' on;
 
   font-family: 'IBM Plex Sans KR';
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 600;
   line-height: 140%;
@@ -29,6 +25,8 @@
 }
 
 .form {
+  //야매로 일단 오버플로우...
+  overflow-x: scroll;
   display: flex;
   padding: 2rem 1.75rem 2rem 2.25rem;
   flex-direction: column;
@@ -41,21 +39,30 @@
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.5);
 }
 
-.postFooter {
+.post-footer {
+  width: 39.5rem;
   display: flex;
   align-items: flex-end;
   gap: 0.625rem;
   padding: 0 0 0 200px;
   background-color: $BDS-Grayscale-1;
 }
-
+.body-content {
+  display: flex;
+  flex-direction: column; // 이걸 다 따로 주기
+}
 .post-body {
+  width: 39.5rem;
+  flex-direction: column; // 이걸 다 따로 주기
   display: flex;
   padding: 2rem 1.75rem 2rem 2.25rem;
-  flex-direction: column;
   align-items: flex-start;
   gap: 2rem;
   background-color: $BDS-Grayscale-1;
+}
+.body-image{
+  display: flex;
+  flex-direction: row;
 }
 
 .category-title {
@@ -63,7 +70,7 @@
 
   /* BDS/Body 1/Highlight */
   font-family: 'IBM Plex Sans KR';
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: 500;
   line-height: 150%; /* 1.5rem */
@@ -84,4 +91,16 @@
   background-color: #fff;
   border: solid 0.1px #000;
   color: #000;
+}
+
+.category-list {
+  display: flex;
+  white-space: nowrap;
+  gap: 1.2rem;
+}
+
+.sub-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
 }
