@@ -15,22 +15,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 1.6rem;
 
   .name-and-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 0.4rem;
   }
   .mention {
-    color: var(--BDS-Grayscale-13, #000);
+    color: $BDS-Grayscale-13;
     text-align: center;
     font-feature-settings: 'ss10' on;
 
     /* BDS/Headline 2 */
     font-family: 'IBM Plex Sans KR';
-    font-size: 17px;
+    font-size: 1.6rem;
     font-style: normal;
     font-weight: 600;
     line-height: 141%; /* 23.97px */
@@ -58,12 +58,8 @@
   }
 
   .mention {
-    color: var(--BDS-Grayscale-13, #000);
-
-    /* BDS/Headline 1 */
-    font-family: 'IBM Plex Sans KR';
-    font-size: 18px;
-    font-style: normal;
+    color: $BDS-Grayscale-13;
+    font-size: 1.4rem;
     font-weight: 600;
     line-height: 144%; /* 25.92px */
     letter-spacing: -0.004px;
@@ -71,22 +67,9 @@
 }
 
 .delete-mention {
-  color: var(--BDS-Grayscale-13, var(--BDS-Grayscale-13, #000));
+  color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
-
-  /* BDS/Body 1/Normal */
-  font-family: 'IBM Plex Sans KR';
-  font-size: 16px;
-  font-style: normal;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 150%; /* 24px */
-}
-
-// 961px 부터 화면 width의 90%가 모달폭
-@include tablet {
-  .read-modal {
-    width: 90%;
-    height: 90vh;
-    display: flex;
-  }
 }
