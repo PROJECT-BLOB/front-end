@@ -27,11 +27,12 @@ import useImageControl from '../hooks/useImageControl';
 interface MainContentProps {
   contentData: Post;
   isFeed?: boolean;
+  postId: number;
 }
 
 const SCROLL_WIDTH = 264;
 
-export default function MainContainer({ contentData, isFeed }: MainContentProps) {
+export default function MainContainer({ contentData, isFeed, postId }: MainContentProps) {
   const [isKebabClicked, setIsKebabClicked] = useState(false);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const [isImageClicked, setIsImageClicked] = useState(false);
@@ -39,8 +40,9 @@ export default function MainContainer({ contentData, isFeed }: MainContentProps)
   const { currentImageIndex, handlePreviousImage, handleNextImage, setCurrentImageIndex } = useImageControl(
     contentData.imageUrl,
   );
+
   // 북마크 한 후 게시글 조회 초기화 - 이러면 조회수 올라가서 다르게 해줘야할듯
-  const { mutate: postBookmarkMutate } = useUpdatePostBookmark(contentData.postId);
+  const { mutate: postBookmarkMutate } = useUpdatePostBookmark(postId);
 
   function handleClickBookmark() {
     postBookmarkMutate(contentData.postId);

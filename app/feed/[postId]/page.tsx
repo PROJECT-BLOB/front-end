@@ -17,7 +17,7 @@ export default function FeedPost({ params }: Param) {
   return (
     <div className={styles['feed-post']}>
       <ReadPostHeader isFeed />
-      {post && <MainContainer contentData={post.data} isFeed />}
+      {post && <MainContainer contentData={post.data} isFeed postId={params.postId} />}
     </div>
   );
 }
