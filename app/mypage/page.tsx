@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useUserStore } from '@stores/userStore';
 import { useTabStore } from '@stores/useTabStore';
 
+import BackToTopButton from '@components/BackToTopButton/BackToTopButton';
 import PostList from '@components/Post/PostList';
 
 import TabList from './_components/Tab/TabList';
@@ -38,6 +39,9 @@ export default function myPage() {
       <section className={cx('post-list')}>
         <PostList userId={userId} selectedTab={selectedTab} />
       </section>
+      <div className={cx('back-to-top')}>
+        <BackToTopButton />
+      </div>
     </div>
   );
 }
