@@ -9,7 +9,7 @@ import styles from './MarkerHighlight.module.scss';
 
 const cx = classNames.bind(styles);
 
-interface MarkerHighlightProps {
+export interface MarkerHighlightProps {
   markerType: MarkerType;
   title: string;
   createdAt: string;

@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import classNames from 'classnames/bind';
 
 import AtomIcon from '@icons/atom-01.svg?component';
@@ -12,10 +14,11 @@ const cx = classNames.bind(styles);
 
 export type MarkerType = 'recommendation' | 'blame' | 'question' | 'caution' | 'help';
 
-interface MarkerProps {
+export interface MarkerProps {
   markerType?: MarkerType;
   // TODO: opacity는 향후 도메인 로직으로 교체하여 시간에따라 변경될 수 있게 한다.
   opacity?: 25 | 50 | 75 | 100;
+  markerRef?: React.RefObject<HTMLDivElement>;
 }
 
 function SelectedIcon(markerType: MarkerType) {
@@ -35,8 +38,12 @@ function SelectedIcon(markerType: MarkerType) {
   }
 }
 
-export default function Marker({ markerType = 'recommendation', opacity = 100 }: MarkerProps) {
+function Marker({ markerType = 'recommendation', opacity = 100, markerRef }: MarkerProps) {
   return (
-    <div className={cx('background', `color-${markerType}`, `opacity-${opacity}`)}>{SelectedIcon(markerType)}</div>
+    <div ref={markerRef} className={cx('background', `color-${markerType}`, `opacity-${opacity}`)}>
+      {SelectedIcon(markerType)}
+    </div>
   );
 }
+
+export default forwardRef<HTMLDivElement, MarkerProps>(Marker);
