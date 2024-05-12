@@ -31,7 +31,7 @@ export default function MyPage() {
   return (
     <div className={cx('wrappper')}>
       <section>
-        <UserProfile userId={userId} />
+        <UserProfile userId={userId} isMypage />
       </section>
       <section className={cx('tabs')}>
         <TabList />
