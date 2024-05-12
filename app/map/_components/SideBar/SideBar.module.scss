@@ -1,0 +1,51 @@
+.side-bar {
+  position: fixed;
+  bottom: 0;
+  height: calc(100vh - 7.35rem);
+  width: 100%;
+  background-color: black;
+  display: flex;
+  padding: 12px 0px;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  border-radius: 24px 24px 0px 0px;
+  background: var(--BDS-Grayscale-1, #fff);
+
+  padding: 2.4rem;
+  /* BDS Effect/Bottom Sheet */
+  box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.16);
+}
+
+.top-line {
+  position: absolute;
+  height: 0;
+  top: 0.8rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 19px;
+  align-self: stretch;
+  .mention {
+    color: var(--BDS-Grayscale-13, var(--BDS-Grayscale-13, #000));
+    text-align: center;
+    font-feature-settings: 'ss10' on;
+
+    /* BDS/Body 1/Normal */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 24px */
+    color: var(--BDS-Grayscale-13, var(--BDS-Grayscale-13, #000));
+    font-feature-settings: 'ss10' on;
+    font-family: 'IBM Plex Sans KR';
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%;
+  }
+}

@@ -24,8 +24,8 @@ const ORDERS = {
 };
 
 export interface filteredData {
-  country: string;
-  city: string;
+  cityLat: number;
+  cityLng: number;
   sortBy: Order;
   categories: string;
   startDate: string;
@@ -41,8 +41,8 @@ export interface filteredData {
 export default function Feed() {
   // TO DO: 기본 값 설정
   const [filteredData, setFilteredData] = useState<filteredData>({
-    country: '대한민국',
-    city: '서울',
+    cityLat: 37.5326,
+    cityLng: 127.024612,
     sortBy: 'recent',
     categories: '',
     startDate: '',
@@ -52,6 +52,7 @@ export default function Feed() {
     minLikes: 0,
     keyword: '',
   });
+  const [countryAndCity, setCountryAndCity] = useState({ city: '서울', country: '대한민국' });
   const { toggleModal, setCurrentName } = useModalStore();
 
   const [categoryList, setCategoryList] = useState<string[][]>(stringCategoryListToArray(filteredData.categories));
@@ -95,7 +96,7 @@ export default function Feed() {
 
     if (countryAndCity.length >= 3) countryAndCity = [countryAndCity[0], countryAndCity[countryAndCity.length - 1]];
 
-    setFilteredData((previous) => ({ ...previous, country: countryAndCity[0], city: countryAndCity[1] }));
+    setCountryAndCity({ country: countryAndCity[0], city: countryAndCity[1] });
   };
 
   return (
@@ -104,7 +105,7 @@ export default function Feed() {
         <div>
           <span className={styles['search-mention']}>
             <AutoCompleteCity onSelectCity={handleOnSelectCity} /> 실시간 #
-            {`${filteredData.city} ${filteredData.country}`}
+            {`${countryAndCity.city} ${countryAndCity.country}`}
           </span>
         </div>
         <div className={styles['filtering-container']}>

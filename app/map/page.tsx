@@ -2,6 +2,8 @@
 
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
+import SideBar from './_components/SideBar/SideBar';
+
 export default function Map() {
   const { toggleModal, setCurrentName } = useModalStore();
 
@@ -20,6 +22,7 @@ export default function Map() {
       <button type='button' onClick={() => handleClickModal('read')}>
         읽기
       </button>
+      {/* <SideBar /> */}
     </>
   );
 }
