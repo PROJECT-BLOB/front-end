@@ -25,26 +25,29 @@ export default function PostItem({ post }: { post: Post }) {
       </header>
       <main className={cx('main-mobile')}>
         <span className={cx('text-black', 'large')}>{post?.title}</span>
-        <p className={cx('main-content-mobile')}>
+        <section className={cx('main-content-mobile')}>
           <span className={cx('text-black', 'middle')}>{post?.content}</span>
-          <span className={cx('photo-container')}>
-            <Image fill objectFit='cover' src={post?.imageUrl[0]} alt='메인 이미지' />
-          </span>
-        </p>
+          {post?.imageUrl.length > 0 && (
+            <div className={cx('photo-container')}>
+              <Image fill style={{ objectFit: 'cover' }} src={post?.imageUrl[0]} alt='메인 이미지' />
+            </div>
+          )}
+        </section>
       </main>
       <main className={cx('main-default')}>
         <p className={cx('main-content-default')}>
           <span className={cx('text-black', 'large')}>{post?.title}</span>
           <span className={cx('text-black', 'middle')}>{post?.content}</span>
         </p>
-        <span className={cx('photo-container')}>
-          <Image fill objectFit='cover' src={post?.imageUrl[0]} alt='메인 이미지' />
-        </span>
+        {post?.imageUrl.length > 0 && (
+          <span className={cx('photo-container')}>
+            <Image fill style={{ objectFit: 'cover' }} src={post?.imageUrl[0]} alt='메인 이미지' />
+          </span>
+        )}
       </main>
       <footer className={cx('footer')}>
         <p className={cx('footer-content-gap', 'text-gray')}>
           <span>{post?.author?.nickname}</span>
-          {/* //TODO: 시간  연결 */}
           <span>{calculateTimePastSinceItCreated(post.createdDate)}</span>
           {/* //TODO: 위치  추가 */}
           <span>{`${post.country} ${post.city}`}</span>

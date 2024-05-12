@@ -6,6 +6,7 @@ import RegisterModal from '@/app/signin/_components/RegisterModal/RegisterModal'
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import NotificationModal from '@components/GlobalNavigationBar/NotificationModal/NotificationModal';
+import ProfileModal from '@components/GlobalNavigationBar/ProfileModal/ProfileModal';
 import Portal from '@components/Portal';
 
 import styles from './ModalContainer.module.scss';
@@ -20,6 +21,7 @@ const ModalList: { [key in ModalName]: JSX.Element } = {
   updateProfile: <UpdateProfileModal />,
   filtering: <FilteringModal />,
   showNotification: <NotificationModal />,
+  showProfileDetail: <ProfileModal />,
 };
 
 export default function ModalContainer() {

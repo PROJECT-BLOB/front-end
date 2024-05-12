@@ -1,0 +1,48 @@
+@import '/styles/global-styles/index';
+
+.modal-container {
+  @include flex-column;
+  align-items: center;
+
+  width: 35.5rem;
+  height: fit-content;
+  padding: 3.2rem 3.6rem;
+
+  background: $BDS-Grayscale-1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6rem;
+  align-self: stretch;
+}
+
+.title {
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 140%;
+}
+
+.close {
+  position: relative;
+  width: 3.2rem;
+  height: 3.2rem;
+}
+
+.profile-detail-container {
+  @include flex-column-center;
+  gap: 1.9rem;
+  align-self: stretch;
+}
+
+.routing-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 1.6rem;
+}
