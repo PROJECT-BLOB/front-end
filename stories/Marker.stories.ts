@@ -1,4 +1,4 @@
-import Marker, { MarkerType } from '@/app/map/_components/Marker';
+import Marker, { MarkerType } from '@/app/map/_components/Marker/Marker';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
