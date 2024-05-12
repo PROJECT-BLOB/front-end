@@ -23,6 +23,7 @@ const ModalList: { [key in ModalName]: JSX.Element } = {
 export default function ModalContainer() {
   const { isOpen, name } = useModalStore();
 
+  // 뒷배경 스크롤 방지
   if (typeof document !== 'undefined') {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
