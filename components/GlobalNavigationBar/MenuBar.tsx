@@ -16,6 +16,7 @@ import styles from './MenuBar.module.scss';
 export default function MenuBar() {
   // 새알림 여부 확인
   usePolling();
+
   const { toggleModal, setCurrentName } = useModalStore();
   const { isSignin } = useUserStore();
   const { hasNewNotification, setHasNewNotification } = useNotificationStore();
@@ -26,7 +27,11 @@ export default function MenuBar() {
     setHasNewNotification(false);
   }
 
-  const handleClickMyPageIcon = () => {};
+  function handleClickMyPageIcon(name: ModalName) {
+    setCurrentName(name);
+    toggleModal();
+    setHasNewNotification(false);
+  }
 
   useEffect(() => {
     if (isSignin && hasNewNotification) {
@@ -40,7 +45,7 @@ export default function MenuBar() {
         hasNewNotification={hasNewNotification}
         onClick={() => handleClickNotificationIcon('showNotification')}
       />
-      <MyPageIcon onClick={handleClickMyPageIcon} />
+      <MyPageIcon onClick={() => handleClickMyPageIcon('showProfileDetail')} style={{ cursor: 'pointer' }} />
     </div>
   );
 }

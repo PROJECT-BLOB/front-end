@@ -1,7 +1,7 @@
 import instance from '@apis/axios';
 
-export default async function signout(userId: number) {
-  const { data } = await instance.delete(`/users/${userId}/signout`);
+export default async function signout() {
+  const { data, status } = await instance.get(`/oauth/logout`);
 
-  return data;
+  return { data, status };
 }
