@@ -4,25 +4,18 @@ import { persist } from 'zustand/middleware';
 
 interface NotificationStore {
   hasNewNotification: boolean;
-  previousNotifications: Array<Notification | null>;
+  previousNotificationId: number;
   setHasNewNotification: (hasNewNotification: boolean) => void;
-  setPreviousNotifications: (notifications: Array<Notification | null>) => void;
+  setPreviousNotificationId: (notificationId: number) => void;
 }
-
-// export const useNotificationStore = create<NotificationStore>((set) => ({
-//   hasNewNotification: false,
-//   previousNotifications: [],
-//   setHasNewNotification: (hasNewNotification: boolean) => set({ hasNewNotification: hasNewNotification }),
-//   setPreviousNotifications: (notifications) => set({ previousNotifications: notifications }),
-// }));
 
 export const useNotificationStore = create(
   persist<NotificationStore>(
     (set) => ({
       hasNewNotification: false,
-      previousNotifications: [],
+      previousNotificationId: 0,
       setHasNewNotification: (hasNewNotification: boolean) => set({ hasNewNotification }),
-      setPreviousNotifications: (notifications) => set({ previousNotifications: notifications }),
+      setPreviousNotificationId: (notificationId) => set({ previousNotificationId: notificationId }),
     }),
     {
       name: 'notificationStorage',
