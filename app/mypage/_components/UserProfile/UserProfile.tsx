@@ -28,8 +28,6 @@ export default function UserProfile({ userId }: { userId: number }) {
 
   const userData: UserDetail | undefined = data?.data;
 
-  console.log('userData', userData);
-
   return (
     <div className={cx('container')}>
       <Avatar size='large' imageSource={userData?.profileUrl || ''} />
