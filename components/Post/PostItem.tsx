@@ -21,7 +21,7 @@ export default function PostItem({ post }: { post: Post }) {
     <Link className={cx('post-container')} href={`/feed/${post.postId}`}>
       <header className={cx('header')}>
         <CategoryBox category={post.category} subcategory={post.subcategory} />
-        <IconTag IconSource={BelovedIcon}>Beloved</IconTag>
+        {post.likeCount >= 100 && <IconTag IconSource={BelovedIcon}>Beloved</IconTag>}
       </header>
       <main className={cx('main-mobile')}>
         <span className={cx('text-black', 'large')}>{post?.title}</span>

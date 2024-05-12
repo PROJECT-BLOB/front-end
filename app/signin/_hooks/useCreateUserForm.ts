@@ -28,15 +28,16 @@ export default function useCreateUserForm() {
 
   async function onSubmit(userData: FieldValues) {
     const { id, nickname } = userData;
-    // 회원가입 요청
 
-    const { data, status } = await createUser({ id, nickname });
-    console.log('data', data);
+    // 회원가입 요청
+    const { status } = await createUser({ id, nickname });
+    // console.log('data', data);
 
     if (status === 200) {
       console.log('회원가입 성공');
       // TODO: 일단 마이페이지로 이동시킴. 나중에 맵으로 이동하는 것으로 변경예정
       signin();
+      toggleModal();
       router.push('/mypage');
       // router.push('/map');
 

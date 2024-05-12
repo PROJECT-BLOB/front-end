@@ -1,0 +1,32 @@
+@import '/styles/global-styles/index';
+
+.container {
+  display: flex;
+  padding: 1.6rem 0rem 1.6rem 0.8rem;
+  align-items: flex-start;
+  width: 100%;
+  gap: 0.8rem;
+  align-self: stretch;
+}
+
+.icon {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+}
+
+.content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  flex: 1 0 0;
+
+  overflow: hidden;
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+  text-overflow: ellipsis;
+
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 138%; /* 17.94px */
+}
