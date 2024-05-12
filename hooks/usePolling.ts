@@ -4,7 +4,7 @@ import getNotificationList from '@apis/notification/getNotificationList';
 import { useNotificationStore } from '@stores/useNotificationStore';
 
 // Polling 주기 (밀리초)
-const POLLING_INTERVAL = 10000; // 몇초로 하는게 적당할까요...일단 1분으로 해둠
+const POLLING_INTERVAL = 100000; // 몇초로 하는게 적당할까요...일단 1분으로 해둠
 
 export default function usePolling() {
   const { previousNotificationId, setPreviousNotificationId, setHasNewNotification } = useNotificationStore();
