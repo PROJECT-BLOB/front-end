@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import MiniMapSearch from '@/app/map/_components/Map/MiniMap';
+
 import Checkbox from '@components/Checkbox/Checkbox';
 
 export default function PositionDetail() {
@@ -16,8 +18,7 @@ export default function PositionDetail() {
         <p>상세위치를 적으면 지도에 표시됩니다.</p>
       </div>
       <Checkbox value='someValue' checkedItemHandler={handleCheckboxChange} />
-      {isChecked && <input type='text' />}
-      {/* 미니맵 등 컴포넌트를 추가할 예정입니다 */}
+      {isChecked && <MiniMapSearch />}
     </>
   );
 }

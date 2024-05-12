@@ -1,5 +1,5 @@
-import { MarkerType } from '@/app/map/_components/Marker';
-import MarkerHighlight from '@/app/map/_components/MarkerHighlight';
+import { MarkerType } from '@/app/map/_components/Marker/Marker';
+import MarkerHighlight from '@/app/map/_components/Marker/MarkerHighlight';
 
 import type { Meta, StoryObj } from '@storybook/react';
 

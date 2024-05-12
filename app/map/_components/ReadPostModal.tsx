@@ -18,7 +18,7 @@ export default function ReadPostModal() {
         {post?.data && (
           <>
             <ImageContainer contentData={post.data} />
-            <MainContainer contentData={post.data} />
+            <MainContainer contentData={post.data} postId={postId} />
           </>
         )}
       </section>
