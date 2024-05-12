@@ -1,25 +1,21 @@
 'use client';
 
-import useModalStore, { ModalName } from '@stores/useModalStore';
+import React from 'react';
 
-export default function Map() {
-  const { toggleModal, setCurrentName } = useModalStore();
+import { APIProvider } from '@vis.gl/react-google-maps';
 
-  function handleClickModal(name: ModalName) {
-    setCurrentName(name);
-    toggleModal();
-  }
+import Autocomplete from '@/app/map/_components/Autocomplete/Autocomplete';
+import BlobMap from '@/app/map/_components/Map/BlobMap';
+
+export default function MapTest() {
+  const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
 
   return (
     <>
-      <h2>Map 페이지</h2>
-      <button type='button' onClick={() => handleClickModal('write')}>
-        작성하기
-      </button>
-      <hr />
-      <button type='button' onClick={() => handleClickModal('read')}>
-        읽기
-      </button>
+      <APIProvider apiKey={GOOGLE_MAP_API_KEY} libraries={['marker']}>
+        <Autocomplete />
+        <BlobMap />
+      </APIProvider>
     </>
   );
 }

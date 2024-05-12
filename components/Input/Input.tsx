@@ -39,7 +39,8 @@ export default function Input({
         <input
           className={cx('input-field', borderColor)}
           type='text'
-          {...(register && register(name as 'id' | 'nickname', validator))}
+          // {...(register && register(name as 'id' | 'nickname', validator))}
+          {...(register && register(name, validator))}
           id={id}
           name={name}
           maxLength={maxLength}
