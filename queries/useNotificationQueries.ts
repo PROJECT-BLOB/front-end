@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import getNotificationList from '@apis/notification/getNotificationList';
 import readNotification from '@apis/notification/readNotification';
@@ -15,16 +15,34 @@ export function useFetchNotificationList() {
   });
 }
 
-export function useReadNotification(notificationId: number) {
-  return useQuery({
-    queryKey: notifications.detail(notificationId).queryKey,
-    queryFn: () => readNotification(notificationId),
+export function useReadNotification() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: readNotification,
+    onSuccess: ({ data }) => {
+      console.log(data);
+
+      queryClient.invalidateQueries({ queryKey: notifications.all.queryKey });
+    },
+    onError: (error) => {
+      console.error('실패ㅜㅜ:', error);
+    },
   });
 }
 
 export function useReadNotificationAll() {
-  return useQuery({
-    queryKey: notifications.all.queryKey,
-    queryFn: () => readNotificationAll(),
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: readNotificationAll,
+    onSuccess: ({ data }) => {
+      console.log(data);
+
+      queryClient.invalidateQueries({ queryKey: notifications.all.queryKey });
+    },
+    onError: (error) => {
+      console.error('실패ㅜㅜ:', error);
+    },
   });
 }

@@ -12,12 +12,15 @@ const cx = classNames.bind(styles);
 
 export default function NotificationModal() {
   const { toggleModal } = useModalStore();
+  const { mutate: deleteNotificationAllMutate } = useReadNotificationAll();
 
-  function handleClickDeleteAll() {
-    const { data } = useReadNotificationAll();
-    console.log('알림을 모두 삭제합니다.', data);
-  }
+  const handleClickDeleteAllNotification = () => {
+    deleteNotificationAllMutate();
 
+    console.log('알림을 전체 삭제합니다.');
+  };
+
+  // TODO: 알림 없을 시 화면 추가
   return (
     <div className={cx('modal-container')}>
       <header className={cx('header')}>
@@ -27,7 +30,7 @@ export default function NotificationModal() {
         </span>
       </header>
       <main className={cx('notification-list-container')}>
-        <button type='button' className={cx('delete-button')} onClick={handleClickDeleteAll}>
+        <button type='button' className={cx('delete-button')} onClick={handleClickDeleteAllNotification}>
           모두 삭제
         </button>
         <NotificationList />
