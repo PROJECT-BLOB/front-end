@@ -5,6 +5,7 @@ import { AdvancedMarker, useMap } from '@vis.gl/react-google-maps';
 import { interpolateRgb } from 'd3-interpolate';
 
 import Marker from '@/app/map/_components/Marker/Marker';
+import MarkerWithInfoWindow from '@/app/map/_components/Marker/MarkerWithInfoWindow';
 import trees from '@/app/map/_mock/trees';
 
 type Point = google.maps.LatLngLiteral & { key: string };
@@ -89,7 +90,7 @@ export default function Markers({ points }: Props) {
           onClick={() => console.log('MarkerClicked')}
           ref={(marker) => setMarkerRef(marker, point.key)}
         >
-          <Marker />
+          <MarkerWithInfoWindow createdAt={'3시간전'} title={point.name} markerType={'blame'} opacity={100} />
         </AdvancedMarker>
       ))}
     </>
