@@ -22,34 +22,38 @@ import { COMMENTS_PAGE_LIMIT, POSTS_PAGE_LIMIT } from '@constants/pageValues';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 
 const posts = createQueryKeys('posts', {
-  all: (userId: number) => ['readPostList', userId],
+  // all: (userId: number) => ['readPostList', userId],
+  // detail: (postId: number) => ['readPost', postId],
+  // bookmark: (userId: number) => ['bookmarkList', userId],
+  // commentList: (userId: number) => ['readCommentList', userId],
+  all: (blobId: string) => ['readPostList', blobId],
   detail: (postId: number) => ['readPost', postId],
-  bookmark: (userId: number) => ['bookmarkList', userId],
-  commentList: (userId: number) => ['readCommentList', userId],
+  bookmark: (blobId: string) => ['bookmarkList', blobId],
+  commentList: (blobId: string) => ['readCommentList', blobId],
   feedList: () => ['feedPost'],
   comment: (postId: number) => ['readComment', postId],
   reply: (commentId: number) => ['readReply', commentId],
 });
 
 // 조회
-export function useFetchPostList(userId: number) {
+export function useFetchPostList(blobId: string) {
   return useInfiniteScrollQuery({
-    queryKey: posts.all(userId).queryKey,
-    queryFn: (page: number) => getUserPostList({ userId, page, size: POSTS_PAGE_LIMIT }),
+    queryKey: posts.all(blobId).queryKey,
+    queryFn: (page: number) => getUserPostList({ blobId, page, size: POSTS_PAGE_LIMIT }),
   });
 }
 
-export function useFetchBookmarkList(userId: number) {
+export function useFetchBookmarkList(blobId: string) {
   return useInfiniteScrollQuery({
-    queryKey: posts.bookmark(userId).queryKey,
-    queryFn: (page: number) => getUserBookmarkList({ userId, page, size: POSTS_PAGE_LIMIT }),
+    queryKey: posts.bookmark(blobId).queryKey,
+    queryFn: (page: number) => getUserBookmarkList({ blobId, page, size: POSTS_PAGE_LIMIT }),
   });
 }
 
-export function useFetchCommentList(userId: number) {
+export function useFetchCommentList(blobId: string) {
   return useInfiniteScrollQuery({
-    queryKey: posts.commentList(userId).queryKey,
-    queryFn: (page: number) => getUserCommentList({ userId, page, size: POSTS_PAGE_LIMIT }),
+    queryKey: posts.commentList(blobId).queryKey,
+    queryFn: (page: number) => getUserCommentList({ blobId, page, size: POSTS_PAGE_LIMIT }),
   });
 }
 
@@ -156,6 +160,7 @@ export function useDeleteComment(postId?: number, commentId?: number) {
   });
 }
 
+// TODO: 여기도 blobId 적용해야될듯요
 export function useDeletePost(postId?: number, userId?: number) {
   const queryClient = useQueryClient();
   const router = useRouter();

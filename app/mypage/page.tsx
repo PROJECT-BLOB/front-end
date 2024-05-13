@@ -18,7 +18,7 @@ import styles from './myPage.module.scss';
 const cx = classNames.bind(styles);
 
 export default function MyPage() {
-  const { userId, isSignin } = useUserStore();
+  const { blobId, isSignin } = useUserStore();
   const { selectedTab } = useTabStore();
   const router = useRouter();
 
@@ -31,13 +31,13 @@ export default function MyPage() {
   return (
     <div className={cx('wrappper')}>
       <section>
-        <UserProfile userId={userId} isMypage />
+        <UserProfile blobId={blobId ?? ''} isMypage />
       </section>
       <section className={cx('tabs')}>
         <TabList />
       </section>
       <section className={cx('post-list')}>
-        <PostList userId={userId} selectedTab={selectedTab} />
+        <PostList blobId={blobId ?? ''} selectedTab={selectedTab} />
       </section>
       <div className={cx('back-to-top')}>
         <BackToTopButton />
