@@ -64,6 +64,7 @@
     "@storybook/test": "^8.0.9",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query-devtools": "^5.25.0",
+    "@types/d3-interpolate": "^3.0.4",
     "@types/google.maps": "^3.55.7",
     "@types/node": "^20",
     "@types/react": "^18",

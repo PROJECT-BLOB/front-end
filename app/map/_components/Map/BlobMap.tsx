@@ -9,6 +9,7 @@ import { DEFAULT_STYLES, DISPLAY_NONE } from '@/app/map/_constants/mapOptions';
 import { useMapStore } from '@stores/useMapStore';
 
 import style from './MapTest.module.scss';
+import formatted from '../../_mock/trees';
 
 interface BlobMapProps {
   isDisplaying?: boolean;
@@ -39,7 +40,7 @@ export default function BlobMap({ isDisplaying = true }: BlobMapProps) {
         mapId={process.env.NEXT_PUBLIC_MAP_ID}
         onDrag={handleDragMap}
       >
-        <Markers points={trees} />
+        <Markers points={formatted} />
         <MapControlComponents />
         <MapHandler />
       </Map>

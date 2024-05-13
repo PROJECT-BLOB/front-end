@@ -1,8 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Cluster, ClusterStats, Marker, MarkerClusterer } from '@googlemaps/markerclusterer';
 import { AdvancedMarker, useMap } from '@vis.gl/react-google-maps';
-// @ts-expect-error d3-interpolate type
 import { interpolateRgb } from 'd3-interpolate';
 
 // import Marker from '@/app/map/_components/Marker/Marker';
