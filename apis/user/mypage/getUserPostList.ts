@@ -9,7 +9,7 @@ export interface PostList {
 }
 
 export interface PostListProps {
-  userId: number;
+  blobId: string;
   page: number;
   size: number;
   // sort: 'asc' | 'desc';
@@ -17,7 +17,7 @@ export interface PostListProps {
 
 // getUserPostList : 유저가 작성한 글 모음
 export default async function getUserPostList(body: PostListProps): Promise<{ data: PostList; status: number }> {
-  const { data, status } = await instance.get<PostList>(`/user/${body.userId}/post`, {
+  const { data, status } = await instance.get<PostList>(`/user/${body.blobId}/post`, {
     params: { page: body.page, size: body.size },
   });
 

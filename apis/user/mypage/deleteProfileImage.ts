@@ -1,11 +1,7 @@
 import instance from '@apis/axios';
 
-interface ProfileImage {
-  imageUrl: string;
-}
-
-export default async function deleteProfileImage(userId: number) {
-  const { data } = await instance.delete<ProfileImage>(`/users/${userId}/profile-image`);
+export default async function deleteProfileImage() {
+  const { data } = await instance.delete(`/user/profilePic`);
 
   return data;
 }
