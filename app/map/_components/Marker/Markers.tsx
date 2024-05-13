@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Cluster, ClusterStats, MarkerClusterer } from '@googlemaps/markerclusterer';
+import { Cluster, ClusterStats, Marker, MarkerClusterer } from '@googlemaps/markerclusterer';
 import { AdvancedMarker, useMap } from '@vis.gl/react-google-maps';
 // @ts-expect-error d3-interpolate type
 import { interpolateRgb } from 'd3-interpolate';
 
-import Marker from '@/app/map/_components/Marker/Marker';
-
+// import Marker from '@/app/map/_components/Marker/Marker';
 import MarkerWithInfoWindow from '@/app/map/_components/Marker/MarkerWithInfoWindow';
 import trees from '@/app/map/_mock/trees';
 
