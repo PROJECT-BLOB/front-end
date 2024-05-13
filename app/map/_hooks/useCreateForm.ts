@@ -78,6 +78,8 @@ export default function useCreateForm(toggleModal: () => void) {
       country: '대한민국', // 시티 레벨 검색바에서 가져오기
       actualLat: currentPosition?.lat ?? 0,
       actualLng: currentPosition?.lng ?? 0,
+      lat: 37.499866,
+      lng: 127.024832,
       category: 'QUESTION', // 카테고리 중복선택 이슈4
       subcategory: '음식점',
     };
