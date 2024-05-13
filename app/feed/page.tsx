@@ -9,6 +9,7 @@ import searchIcon from '@public/icons/search-icon-gray.svg';
 import settingIcon from '@public/icons/settings-04.svg';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
+import BackToTopButton from '@components/BackToTopButton/BackToTopButton';
 import CategoryBox from '@components/CategoryBox';
 import PostList from '@components/Post/PostList';
 
@@ -41,8 +42,8 @@ export interface filteredData {
 export default function Feed() {
   // TO DO: 기본 값 설정
   const [filteredData, setFilteredData] = useState<filteredData>({
-    cityLat: 37.5326,
-    cityLng: 127.024612,
+    cityLat: 37.5518911,
+    cityLng: 126.9917937,
     sortBy: 'recent',
     categories: '',
     startDate: '',
@@ -152,6 +153,9 @@ export default function Feed() {
       </section>
       {/* {data?.pages[0].data.count ? <PostList filteredData={filteredData} /> : '검색 결과가 없습니다'} */}
       <PostList filteredData={filteredData} selectedTab='Feed' />
+      <div className={styles['back-to-top']}>
+        <BackToTopButton />
+      </div>
     </main>
   );
 }

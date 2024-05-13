@@ -1,4 +1,4 @@
-import React from 'react'; // 안하면 오류가 나더라구용..
+import { useState } from 'react';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import classNames from 'classnames/bind';
@@ -29,7 +29,29 @@ export default function WritePost() {
   const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal);
 
   // 선택된 도시의 정보를 담을 상태 변수
-  const [selectedCity, setSelectedCity] = React.useState<{ cityName: string; lat: number; lng: number } | null>(null);
+  const [selectedCity, setSelectedCity] = useState<{ cityName: string; lat: number; lng: number } | null>(null);
+  const [buttonClicked, setButtonClicked] = useState(false); // 버튼 클릭 여부 상태 추가
+
+  const getCurrentPosition = () => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setSelectedCity({ cityName: '현재 위치', lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error('Error getting current position', error);
+        },
+      );
+    } else {
+      console.error('Geolocation is not available');
+    }
+  };
+
+  const handleGetCurrentPosition = () => {
+    setButtonClicked(true); // 버튼 클릭됨을 상태에 저장
+    getCurrentPosition(); // getCurrentPosition 호출
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cx('form')} encType='multipart/form-data'>
@@ -83,10 +105,13 @@ export default function WritePost() {
             }}
           />
           <PositionDetail />
+          <button type='button' onClick={handleGetCurrentPosition}>
+            현재 내 위치
+          </button>
         </div>
         <div className={cx('body-image')}>
           <p>사진업로드(최대5장) - 최대 5mb</p>
-          <ImageUploader setValue={setValue} />
+          <ImageUploader setValue={setValue} /> {/* multiple prop 추가 */}
         </div>
       </div>
       <div className={cx('post-footer')}>
