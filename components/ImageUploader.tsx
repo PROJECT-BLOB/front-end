@@ -26,9 +26,15 @@ export default function ImageUploader({ setValue }: ModalImageProps) {
       <label htmlFor='inputFile'>
         <div className={styles.inputFile}>
           <Image src={UploadImg} alt='업로드하기' />
-          <p>업로드</p>
         </div>
-        <input type='file' id='inputFile' accept='image/*' multiple onChange={handleChangeImage} />
+        <input
+          className={styles.inputstyle}
+          type='file'
+          id='inputFile'
+          accept='image/*'
+          multiple
+          onChange={handleChangeImage}
+        />
       </label>
     </>
   );

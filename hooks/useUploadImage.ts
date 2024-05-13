@@ -17,6 +17,8 @@ export default function useUploadImage({ setValue }: UploadImageProps) {
       const newImage = Array.from(e.target.files);
       const currentImageList = [...imageList, ...newImage];
 
+      // setValue('image', newImage);
+
       if (imageList.length + newImage.length > 5) {
         // alert('이미지는 5개까지만 업로드 가능합니다.');
         return;
@@ -24,7 +26,7 @@ export default function useUploadImage({ setValue }: UploadImageProps) {
 
       // 임시..
       setImageList(currentImageList);
-      setValue('image', currentImageList as unknown as FileList); // hook form 사용시 사용, 추후 hook form 사용 안하는 데이터 있을 시 로직 추가
+      setValue('image', e.target.files); // setValue 함수의 인수를 FileList로 변경
     }
   }
 

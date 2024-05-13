@@ -16,7 +16,10 @@ export interface ContentField {
   country: string;
   cityLat: number;
   cityLng: number;
+  actualLat: number;
+  actualLng: number;
   category: string;
+  subcategory: string;
   address: string;
   image: FileList; // FileList로 변경하여 다중 파일을 처리
 }
@@ -69,11 +72,16 @@ export default function useCreateForm(toggleModal: () => void) {
 
     formData = {
       ...formData,
-      cityLat: 37.5518911,
-      cityLng: 126.9917937,
-      city: '서울', // 임시값, 선택된 도시로 대체할 것
-      country: '대한민국', // 임시값, 선택된 국가로 대체할 것
-      category: 'QUESTION', // 임시값, 선택된 카테고리로 대체할 것
+      cityLat: 37.5518911, // 시티 레벨 검색바에서 가져오기
+      cityLng: 126.9917937, // 시티 레벨 검색바에서 가져오기
+      city: '서울', // 시티 레벨 검색바에서 가져오기
+      country: '대한민국', // 시티 레벨 검색바에서 가져오기
+      actualLat: currentPosition?.lat ?? 0,
+      actualLng: currentPosition?.lng ?? 0,
+      lat: 37.499866,
+      lng: 127.024832,
+      category: 'QUESTION', // 카테고리 중복선택 이슈4
+      subcategory: '음식점',
     };
 
     try {
@@ -86,7 +94,7 @@ export default function useCreateForm(toggleModal: () => void) {
         }
 
         // 데이터 추가
-        formDataToSend.append('data', JSON.stringify(formData));
+        formDataToSend.append('data', new Blob([JSON.stringify(formData)]));
 
         await createPost(formDataToSend);
         // 임시: 만들어졌을 시 피드 업데이트
