@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 
 import { APIProvider, ControlPosition, Map, MapControl, MapEvent } from '@vis.gl/react-google-maps';
 
-import Autocomplete from '@/app/map/_components/Autocomplete/Autocomplete';
 import MapHandler from '@/app/map/_components/Map/MapHandler';
 import Marker from '@/app/map/_components/Marker/Marker';
 import { MINI_MAP_STYLES } from '@/app/map/_constants/mapOptions';
@@ -20,12 +19,34 @@ export default function MiniMap() {
     const newLocation = event.map.getCenter()?.toJSON();
     setLastMapCenter(newLocation);
   };
+  const [, setSelectedCity] = React.useState<{ cityName: string; lat: number; lng: number } | null>(null);
+  const [, setButtonClicked] = React.useState(false); // 버튼 클릭 여부 상태 추가
+
+  const getCurrentPosition = () => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setSelectedCity({ cityName: '현재 위치', lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error('Error getting current position', error);
+        },
+      );
+    } else {
+      console.error('Geolocation is not available');
+    }
+  };
+
+  const handleGetCurrentPosition = () => {
+    setButtonClicked(true); // 버튼 클릭됨을 상태에 저장
+    getCurrentPosition(); // getCurrentPosition 호출
+  };
 
   useEffect(() => {}, []);
 
   return (
     <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || ''} libraries={['marker']}>
-      <Autocomplete />
       <div className={style['map-container']}>
         <Map
           defaultCenter={lastMapCenter}
@@ -42,6 +63,7 @@ export default function MiniMap() {
       <MapControl position={ControlPosition.CENTER}>
         <Marker />
       </MapControl>
+      <button type='button' onClick={handleGetCurrentPosition} />{' '}
     </APIProvider>
   );
 }

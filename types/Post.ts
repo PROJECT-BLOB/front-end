@@ -17,8 +17,13 @@ export interface Post {
   author: Author;
   country: string;
   city: string;
+  cityLat: number;
+  cityLng: number;
   lat: number;
   lng: number;
+  address: string;
+  actualLat: number;
+  actualLng: number;
   distFromActual: number;
   views: number;
   createdDate: string;

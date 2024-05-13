@@ -14,8 +14,8 @@ export default function PositionDetail() {
   return (
     <>
       <div>
-        <p>상세위치 표시</p>
-        <p>상세위치를 적으면 지도에 표시됩니다.</p>
+        <p>미니맵 표시</p>
+        <p>Quote</p>
       </div>
       <Checkbox value='someValue' checkedItemHandler={handleCheckboxChange} />
       {isChecked && <MiniMapSearch />}
