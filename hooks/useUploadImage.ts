@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 
 import { ContentField } from '@/app/map/_hooks/useCreateForm';
@@ -12,7 +12,7 @@ interface UploadImageProps {
 export default function useUploadImage({ setValue }: UploadImageProps) {
   const [imageList, setImageList] = useState<File[]>([]);
 
-  function handleChangeImage(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChangeImage(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files) {
       const newImage = Array.from(e.target.files);
       const currentImageList = [...imageList, ...newImage];
@@ -23,7 +23,6 @@ export default function useUploadImage({ setValue }: UploadImageProps) {
         return;
       }
 
-      // 임시..
       setImageList(currentImageList);
       setValue('image', currentImageList); // setValue 함수의 인수를 FileList로 변경
     }
