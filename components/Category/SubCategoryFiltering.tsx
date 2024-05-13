@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import CloseButton from '@icons/x-close.svg?component';
-
 import { Category, FilteringType } from './CategoryFiltering';
 import styles from './SubCategoryFiltering.module.scss';
 
@@ -47,7 +45,6 @@ export default function SubCategoryFiltering({
         )}
       >
         <span>{title}</span>
-        <CloseButton className={cx('close-button', { 'button-clicked': isCategoryClicked })} />
       </div>
     </button>
   );

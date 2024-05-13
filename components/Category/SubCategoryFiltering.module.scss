@@ -17,10 +17,6 @@
     }
   }
 
-  &.button-clicked {
-    padding: 0.4rem 0.8rem;
-  }
-
   &.button-clicked-color {
     &-추천 {
       background-color: $BDS-Category-recommend_press;
@@ -112,20 +108,6 @@
 
     &-도움요청 {
       color: $BDS-Category-help_press;
-    }
-  }
-}
-
-.close-button {
-  display: none;
-
-  &.button-clicked {
-    display: inline-block;
-    width: 1.2rem;
-    height: 1.2rem;
-
-    path {
-      stroke: $BDS-Grayscale-1;
     }
   }
 }
