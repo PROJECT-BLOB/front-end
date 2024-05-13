@@ -13,12 +13,14 @@ import styles from './UserProfile.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function UserProfile({ userId }: { userId: number }) {
+export default function UserProfile({ userId, isMypage }: { userId: number; isMypage?: boolean }) {
   const { toggleModal, setCurrentName } = useModalStore();
   function handleClickOpenModal(name: ModalName) {
     setCurrentName(name);
     toggleModal();
   }
+
+  const padding = isMypage ? 'p-large' : 'p-small';
 
   const { data, isLoading, isError, error } = useDetailQueries(userId);
 
@@ -28,12 +30,14 @@ export default function UserProfile({ userId }: { userId: number }) {
 
   const userData: UserDetail | undefined = data?.data;
 
-  console.log('userData', userData);
-
   return (
-    <div className={cx('container')}>
+    <div className={cx('container', padding)}>
       <Avatar size='large' imageSource={userData?.profileUrl || ''} />
-      <MonoButton text='프로필 수정' type='button' size='large' onClick={() => handleClickOpenModal('updateProfile')} />
+      {isMypage && (
+        <MonoButton type='button' size='large' onClick={() => handleClickOpenModal('updateProfile')}>
+          프로필 수정
+        </MonoButton>
+      )}
 
       <div className={cx('user-detail')}>
         <p className={cx('user-nickname-section')}>

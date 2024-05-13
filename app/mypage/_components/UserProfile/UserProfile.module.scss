@@ -5,18 +5,25 @@
   flex-direction: column;
 
   width: 100%;
-  padding: 8rem 0rem;
   gap: 1.9rem;
 
   font-feature-settings: 'ss10' on;
+}
+
+.p-large {
+  padding: 4rem 0rem;
 
   @include tablet {
     padding: 6rem 0rem;
   }
 
   @include desktop {
-    padding: 4rem 0rem;
+    padding: 8rem 0rem;
   }
+}
+
+.p-small {
+  padding: 4.8rem 0rem;
 }
 
 .user {
