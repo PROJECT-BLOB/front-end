@@ -9,7 +9,8 @@ export default function useControlBottomSheet() {
 
   const [offsetY, setOffsetY] = useState(windowHeight - HEADER_HEIGHT);
 
-  const handleTouchMove = (event) => {
+  //   타입 찾자
+  const handleTouchMove = (event: any) => {
     // 화면 높이
     const windowHeight = window.innerHeight;
     // 현재 터치 위치

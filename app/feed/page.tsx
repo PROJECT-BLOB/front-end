@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { APIProvider } from '@vis.gl/react-google-maps';
 import Image from 'next/image';
 
 import searchIcon from '@public/icons/search-icon-gray.svg';
@@ -14,7 +15,8 @@ import CategoryBox from '@components/CategoryBox';
 import PostList from '@components/Post/PostList';
 
 import styles from './Feed.module.scss';
-import AutoCompleteCity from '../map/_deprecated/AutoCompleteCity';
+import Autocomplete from '../map/_components/Autocomplete/Autocomplete';
+import BlobMap from '../map/_components/Map/BlobMap';
 
 type Order = 'hot' | 'likes' | 'views' | 'recent';
 const ORDERS = {
@@ -40,6 +42,8 @@ export interface filteredData {
 }
 
 export default function Feed() {
+  const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
+
   // TO DO: 기본 값 설정
   const [filteredData, setFilteredData] = useState<filteredData>({
     cityLat: 37.5518911,
@@ -53,7 +57,7 @@ export default function Feed() {
     minLikes: 0,
     keyword: '',
   });
-  const [countryAndCity, setCountryAndCity] = useState({ city: '서울', country: '대한민국' });
+  // const [countryAndCity, setCountryAndCity] = useState({ city: '서울', country: '대한민국' });
   const { toggleModal, setCurrentName } = useModalStore();
 
   const [categoryList, setCategoryList] = useState<string[][]>(stringCategoryListToArray(filteredData.categories));
@@ -92,21 +96,23 @@ export default function Feed() {
     return arrayCategory.map((category) => category.join(':')).join(',');
   }
 
-  const handleOnSelectCity = (address: string) => {
-    let countryAndCity = address.split(' ');
+  // const handleOnSelectCity = (address: string) => {
+  //   let countryAndCity = address.split(' ');
 
-    if (countryAndCity.length >= 3) countryAndCity = [countryAndCity[0], countryAndCity[countryAndCity.length - 1]];
+  //   if (countryAndCity.length >= 3) countryAndCity = [countryAndCity[0], countryAndCity[countryAndCity.length - 1]];
 
-    setCountryAndCity({ country: countryAndCity[0], city: countryAndCity[1] });
-  };
+  //   setCountryAndCity({ country: countryAndCity[0], city: countryAndCity[1] });
+  // };
 
   return (
     <main className={styles.feed}>
       <section className={styles['search-country-and-filtering-container']}>
         <div>
           <span className={styles['search-mention']}>
-            <AutoCompleteCity onSelectCity={handleOnSelectCity} /> 실시간 #
-            {`${countryAndCity.city} ${countryAndCity.country}`}
+            <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
+              <Autocomplete />
+              <BlobMap isDisplaying={false} />
+            </APIProvider>
           </span>
         </div>
         <div className={styles['filtering-container']}>

@@ -30,7 +30,7 @@ export default function WritePost() {
 
   // 선택된 도시의 정보를 담을 상태 변수
   const [selectedCity, setSelectedCity] = useState<{ cityName: string; lat: number; lng: number } | null>(null);
-  const [buttonClicked, setButtonClicked] = useState(false); // 버튼 클릭 여부 상태 추가
+  // const [buttonClicked, setButtonClicked] = useState(false); // 버튼 클릭 여부 상태 추가
 
   const getCurrentPosition = () => {
     if ('geolocation' in navigator) {
@@ -49,7 +49,7 @@ export default function WritePost() {
   };
 
   const handleGetCurrentPosition = () => {
-    setButtonClicked(true); // 버튼 클릭됨을 상태에 저장
+    // setButtonClicked(true); // 버튼 클릭됨을 상태에 저장
     getCurrentPosition(); // getCurrentPosition 호출
   };
 
