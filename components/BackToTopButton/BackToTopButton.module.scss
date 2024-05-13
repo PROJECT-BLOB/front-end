@@ -1,0 +1,62 @@
+@import '/styles/global-styles/index';
+
+.button-container {
+  //   padding: 1.6rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @include tablet-and-desktop {
+    // padding: 2.4rem;
+    gap: 0.4rem;
+  }
+}
+
+.show {
+  display: inline-flex;
+}
+
+.hide {
+  display: none;
+}
+
+.icon {
+  &-small {
+    position: relative;
+    display: block;
+    width: 1.6rem;
+    height: 1.6rem;
+    cursor: pointer;
+
+    @include tablet-and-desktop {
+      display: none;
+    }
+  }
+
+  &-large {
+    position: relative;
+    display: none;
+    cursor: pointer;
+
+    @include tablet-and-desktop {
+      display: block;
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
+
+.text {
+  color: $BDS-Grayscale-13;
+  text-align: center;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 1.2rem;
+  line-height: 133%;
+
+  @include tablet-and-desktop {
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 142%;
+  }
+}
