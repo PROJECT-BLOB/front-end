@@ -16,7 +16,6 @@ export default function useUploadImage({ setValue }: UploadImageProps) {
     if (e.target.files) {
       const newImage = Array.from(e.target.files);
       const currentImageList = [...imageList, ...newImage];
-      console.log(currentImageList);
       // setValue('image', newImage);
 
       if (imageList.length + newImage.length > 5) {
