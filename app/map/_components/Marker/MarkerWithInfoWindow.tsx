@@ -6,6 +6,7 @@ import MarkerHighlight, { MarkerHighlightProps } from '@/app/map/_components/Mar
 type MarkerWithInfoWindowProps = Omit<MarkerProps, 'markerRef'> & MarkerHighlightProps;
 
 export default function MarkerWithInfoWindow({ markerType, opacity, createdAt, title }: MarkerWithInfoWindowProps) {
+    
   const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(false);
   const markerRef = useRef<HTMLDivElement | null>(null);
 

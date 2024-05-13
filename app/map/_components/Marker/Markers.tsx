@@ -6,6 +6,7 @@ import { AdvancedMarker, useMap } from '@vis.gl/react-google-maps';
 import { interpolateRgb } from 'd3-interpolate';
 
 import Marker from '@/app/map/_components/Marker/Marker';
+
 import MarkerWithInfoWindow from '@/app/map/_components/Marker/MarkerWithInfoWindow';
 import trees from '@/app/map/_mock/trees';
 
