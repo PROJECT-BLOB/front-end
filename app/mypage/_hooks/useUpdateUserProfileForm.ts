@@ -3,14 +3,15 @@ import { FieldValues, useForm } from 'react-hook-form';
 
 import { Errors } from '@/types/Errors';
 import { UpdateUser } from '@apis/user/mypage/updateUserProfile';
-import { useUpdateUserProfile } from '@queries/useUserQueries';
+import { useDeleteProfileImage, useUpdateUserProfile } from '@queries/useUserQueries';
 import useModalStore from '@stores/useModalStore';
 import { useUserStore } from '@stores/userStore';
 
 export default function useUpdateUserProfileForm(initialData: UpdateUser) {
-  const { userId } = useUserStore();
+  const { blobId } = useUserStore();
   const { toggleModal } = useModalStore();
-  const { mutate: updateUserProfileMutate } = useUpdateUserProfile(userId);
+  const { mutate: updateUserProfileMutate } = useUpdateUserProfile(blobId);
+  const { mutate: deleteUserProfileMutate } = useDeleteProfileImage(blobId);
 
   const [isPublic, setIsPublic] = useState(initialData.isPublic);
 
@@ -57,6 +58,10 @@ export default function useUpdateUserProfileForm(initialData: UpdateUser) {
     }
 
     updateUserProfileMutate(formData);
+
+    if (isDeleteProfileImage) {
+      deleteUserProfileMutate();
+    }
 
     toggleModal();
   }
