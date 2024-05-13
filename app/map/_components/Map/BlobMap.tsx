@@ -6,6 +6,7 @@ import MapControlComponents from '@/app/map/_components/Map/MapControls';
 import MapHandler from '@/app/map/_components/Map/MapHandler';
 import Markers from '@/app/map/_components/Marker/Markers';
 import { DEFAULT_STYLES } from '@/app/map/_constants/mapOptions';
+import trees from '@/app/map/_mock/trees';
 import { useMapStore } from '@stores/useMapStore';
 
 import style from './MapTest.module.scss';
@@ -35,7 +36,7 @@ export default function BlobMap() {
         mapId={process.env.NEXT_PUBLIC_MAP_ID}
         onDrag={handleDragMap}
       >
-        <Markers />
+        <Markers points={trees} />
         <MapControlComponents />
         <MapHandler />
       </Map>
