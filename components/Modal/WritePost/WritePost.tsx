@@ -30,6 +30,29 @@ export default function WritePost() {
 
   // 선택된 도시의 정보를 담을 상태 변수
   const [selectedCity, setSelectedCity] = React.useState<{ cityName: string; lat: number; lng: number } | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [buttonClicked, setButtonClicked] = React.useState(false); // 버튼 클릭 여부 상태 추가
+
+  const getCurrentPosition = () => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setSelectedCity({ cityName: '현재 위치', lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error('Error getting current position', error);
+        },
+      );
+    } else {
+      console.error('Geolocation is not available');
+    }
+  };
+
+  const handleGetCurrentPosition = () => {
+    setButtonClicked(true); // 버튼 클릭됨을 상태에 저장
+    getCurrentPosition(); // getCurrentPosition 호출
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cx('form')} encType='multipart/form-data'>
@@ -72,7 +95,7 @@ export default function WritePost() {
             id='content'
             name='content'
             placeholder='내용을 입력해주세요'
-            maxLength={20}
+            maxLength={2000}
             errors={errors}
           />
           <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
@@ -83,6 +106,9 @@ export default function WritePost() {
             }}
           />
           <PositionDetail />
+          <button type='button' onClick={handleGetCurrentPosition}>
+            현재 내 위치
+          </button>
         </div>
         <div className={cx('body-image')}>
           <p>사진업로드(최대5장) - 최대 5mb</p>
