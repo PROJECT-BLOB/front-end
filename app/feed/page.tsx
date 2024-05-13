@@ -156,7 +156,6 @@ export default function Feed() {
           ))}
         </div>
       </section>
-      {/* {data?.pages[0].data.count ? <PostList filteredData={filteredData} /> : '검색 결과가 없습니다'} */}
       <PostList filteredData={filteredData} selectedTab='Feed' />
       <div className={styles['back-to-top']}>
         <BackToTopButton />
