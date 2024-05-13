@@ -38,6 +38,7 @@
     "antd": "^5.16.5",
     "axios": "^1.6.7",
     "classnames": "^2.5.1",
+    "d3-interpolate": "^3.0.1",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
