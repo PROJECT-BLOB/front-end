@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import { APIProvider } from '@vis.gl/react-google-maps';
@@ -82,9 +81,6 @@ export default function WritePost() {
           </APIProvider>
 
           <PositionDetail />
-          <button type='button' onClick={handleGetCurrentPosition}>
-            현재 내 위치
-          </button>
         </div>
         <div className={cx('body-image')}>
           <p>사진업로드(최대5장) - 최대 5mb</p>

@@ -16,7 +16,7 @@ export default function useUploadImage({ setValue }: UploadImageProps) {
     if (e.target.files) {
       const newImage = Array.from(e.target.files);
       const currentImageList = [...imageList, ...newImage];
-
+      console.log(currentImageList);
       // setValue('image', newImage);
 
       if (imageList.length + newImage.length > 5) {
@@ -26,7 +26,7 @@ export default function useUploadImage({ setValue }: UploadImageProps) {
 
       // 임시..
       setImageList(currentImageList);
-      setValue('image', e.target.files); // setValue 함수의 인수를 FileList로 변경
+      setValue('image', currentImageList); // setValue 함수의 인수를 FileList로 변경
     }
   }
 

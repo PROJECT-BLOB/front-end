@@ -21,7 +21,7 @@ export interface ContentField {
   category: string;
   subcategory: string;
   address: string;
-  image: FileList; // FileList로 변경하여 다중 파일을 처리
+  image: File[];
 }
 
 // 수정된 onSubmit 함수
@@ -38,8 +38,6 @@ export default function useCreateForm(toggleModal: () => void) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentPosition, setCurrentPosition] = useState<LatLngLiteralOrNull>({ lat: 0, lng: 0 });
   const queryClient = useQueryClient();
-
-  console.log('currentPosition', currentPosition);
 
   function cancelForm() {
     reset();
@@ -81,7 +79,7 @@ export default function useCreateForm(toggleModal: () => void) {
       lat: 37.499866,
       lng: 127.024832,
       category: 'QUESTION', // 카테고리 중복선택 이슈4
-      subcategory: '음식점',
+      // subcategory: '음식점',
     };
 
     try {
