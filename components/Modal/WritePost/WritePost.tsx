@@ -78,6 +78,7 @@ export default function WritePost() {
           />
           <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
           <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
+            {/* 요기 검색이 안됩니다.. */}
             <Autocomplete />
           </APIProvider>
 
