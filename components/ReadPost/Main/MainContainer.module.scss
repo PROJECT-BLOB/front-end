@@ -2,9 +2,66 @@
 @import '/styles/global-styles/media-breakpoint';
 
 .main-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 3.2rem;
+}
+
+.overlay {
+  position: fixed;
+  padding: 0 13rem;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  .image {
+    object-fit: contain;
+    width: 90%;
+    flex-shrink: 0;
+    transition: all ease 0.3s;
+  }
+}
+
+.close-image {
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  border-radius: 22px;
+  background: $BDS-Grayscale-8;
+  display: inline-flex;
+  padding: 16px;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.image-big-slider-left-button {
+  position: fixed;
+  display: inline-flex;
+  padding: 16px 14px;
+  border-radius: 22px;
+  background: $BDS-Grayscale-3;
+  opacity: 0.5;
+  left: 10%;
+  bottom: 50%;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.image-big-slider-right-button {
+  position: fixed;
+  display: inline-flex;
+  padding: 16px 14px;
+  gap: 10px;
+  border-radius: 22px;
+  background: $BDS-Grayscale-3;
+  opacity: 0.5;
+  right: 10%;
+  bottom: 50%;
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .profile-and-kebab {
@@ -120,9 +177,49 @@
 }
 
 .image-list-container {
+  position: relative;
   display: flex;
+  align-items: center;
   gap: 1.2rem;
   overflow: auto;
+  scrollbar-width: none; // 스크롤바 안보이게
+}
+
+.slider-button-container {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+}
+
+.image-slider-left-button {
+  display: inline-flex;
+  padding: 16px 14px;
+  gap: 10px;
+  border-radius: 22px;
+  background: $BDS-Grayscale-3;
+  opacity: 0.5;
+  position: relative;
+  top: -10rem;
+  left: -2.5rem;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.image-slider-right-button {
+  display: inline-flex;
+  padding: 16px 14px;
+  gap: 10px;
+  border-radius: 22px;
+  background: $BDS-Grayscale-3;
+  opacity: 0.5;
+  position: relative;
+  top: -10rem;
+  right: -2.5rem;
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .image-container {

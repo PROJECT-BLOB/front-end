@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
-import Markers from '@/app/maptest/Markers';
+import Markers from '@/app/map/_components/Marker/Markers';
 
 /*
  * [Next.js]구글 맵 @react-google-maps/api 활용해서 구현

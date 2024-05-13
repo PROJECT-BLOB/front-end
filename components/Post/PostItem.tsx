@@ -6,7 +6,6 @@ import { Post } from '@/types/Post';
 import BelovedIcon from '@icons/check-heart-white.svg';
 import HeartIcon from '@icons/heart.svg';
 import CommentIcon from '@icons/message-circle-02.svg';
-import useModalStore from '@stores/useModalStore';
 
 import CategoryBox from '@components/CategoryBox';
 import IconTag from '@components/IconTag/IconTag';
@@ -18,19 +17,11 @@ import styles from './PostItem.module.scss';
 const cx = classNames.bind(styles);
 
 export default function PostItem({ post }: { post: Post }) {
-  const { setCurrentName, setPostId } = useModalStore();
-
-  function handleClickPost(postId: number) {
-    setCurrentName('read');
-    setPostId(postId);
-  }
-
   return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-    <Link className={cx('post-container')} href={`/feed/${post.postId}`} onClick={() => handleClickPost(post.postId)}>
+    <Link className={cx('post-container')} href={`/feed/${post.postId}`}>
       <header className={cx('header')}>
         <CategoryBox category={post.category} subcategory={post.subcategory} />
-        <IconTag IconSource={BelovedIcon}>Beloved</IconTag>
+        {post.likeCount >= 100 && <IconTag IconSource={BelovedIcon}>Beloved</IconTag>}
       </header>
       <main className={cx('main-mobile')}>
         <span className={cx('text-black', 'large')}>{post?.title}</span>

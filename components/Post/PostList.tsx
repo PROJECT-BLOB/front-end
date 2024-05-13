@@ -1,4 +1,3 @@
-// postlist 안에서 데이터 불러오는 버전
 import { useEffect } from 'react';
 
 import classNames from 'classnames/bind';
@@ -19,6 +18,7 @@ interface GetPostListProps {
   filteredData?: filteredData;
 }
 
+// TODO:리팩토링 해야됨
 export default function PostList({ userId, selectedTab, filteredData }: GetPostListProps) {
   // 찾아야함
   let fetchDataFunction: any;
