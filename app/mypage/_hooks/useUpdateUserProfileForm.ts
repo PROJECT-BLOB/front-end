@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, useState } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 
@@ -16,12 +15,17 @@ export default function useUpdateUserProfileForm(initialData: UpdateUser) {
   const [isPublic, setIsPublic] = useState(initialData.isPublic);
 
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [isDeleteProfileImage, setIsDeleteProfileImage] = useState(false);
 
   const handleChangeImage = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
 
     if (file) {
       setSelectedImage(file);
+      setIsDeleteProfileImage(false);
+    } else {
+      // 업로드 취소할 경우
+      setSelectedImage(null);
     }
   };
 
@@ -61,12 +65,6 @@ export default function useUpdateUserProfileForm(initialData: UpdateUser) {
     setIsPublic(checked);
   };
 
-  // useEffect(() => {
-  //   const subscirbe = watch((data, { name }) => console.log(''));
-
-  //   return () => subscirbe.unsubscribe();
-  // }, [watch]);
-
   return {
     register,
     handleSubmit,
@@ -78,6 +76,8 @@ export default function useUpdateUserProfileForm(initialData: UpdateUser) {
     selectedImage,
     setSelectedImage,
     handleChangeImage,
+    isDeleteProfileImage,
+    setIsDeleteProfileImage,
     errors: errors as Errors,
   };
 }

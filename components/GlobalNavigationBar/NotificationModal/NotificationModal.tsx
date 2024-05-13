@@ -25,9 +25,9 @@ export default function NotificationModal() {
     <div className={cx('modal-container')}>
       <header className={cx('header')}>
         <span className={cx('title')}>알림</span>
-        <span className={cx('close')}>
+        <button type='button' className={cx('close')}>
           <Image src={CloseIcon} fill alt='닫기' onClick={toggleModal} />
-        </span>
+        </button>
       </header>
       <main className={cx('notification-list-container')}>
         <button type='button' className={cx('delete-button')} onClick={handleClickDeleteAllNotification}>

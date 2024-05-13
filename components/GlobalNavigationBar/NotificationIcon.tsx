@@ -8,21 +8,13 @@ interface NotificationProps {
   onClick: () => void;
 }
 
-/*
- * TODO: 알림(notification) 할일
- * 알림 타입 만들기-> 완
- * 알림 axios 만들기->완
- * NotificationQuery 만들기 -> useNotificationQuery-> 완
- * 서버상태: NotificationStore 만들기 -> useNotificationStore
- * */
-
 export default function NotificationIcon({ hasNewNotification = false, onClick }: NotificationProps) {
   return (
     <div>
       {hasNewNotification ? (
-        <NotificationIconWithNew width={24} height={24} onClick={onClick} />
+        <NotificationIconWithNew width={24} height={24} onClick={onClick} style={{ cursor: 'pointer' }} />
       ) : (
-        <NotificationIconIconWithoutNew width={24} height={24} onClick={onClick} />
+        <NotificationIconIconWithoutNew width={24} height={24} onClick={onClick} style={{ cursor: 'pointer' }} />
       )}
     </div>
   );
