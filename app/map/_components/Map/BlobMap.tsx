@@ -39,7 +39,7 @@ export default function BlobMap({ isDisplaying = true }: BlobMapProps) {
         mapId={process.env.NEXT_PUBLIC_MAP_ID}
         onDrag={handleDragMap}
       >
-        <Markers />
+        <Markers points={trees} />
         <MapControlComponents />
         <MapHandler />
       </Map>
