@@ -2,11 +2,14 @@
 
 import React, { useEffect } from 'react';
 
+import { UserDetail } from '@/types/User';
 import MyPageIcon from '@icons/user-24.svg?component';
+import { useDetailQueries } from '@queries/useUserQueries';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 import { useNotificationStore } from '@stores/useNotificationStore';
 import { useUserStore } from '@stores/userStore';
 
+import Avatar from '@components/Avatar/Avatar';
 import NotificationIcon from '@components/GlobalNavigationBar/NotificationIcon';
 
 import usePolling from '@hooks/usePolling';
@@ -18,8 +21,11 @@ export default function MenuBar() {
   usePolling();
 
   const { toggleModal, setCurrentName } = useModalStore();
-  const { isSignin } = useUserStore();
+  const { isSignin, userId } = useUserStore();
   const { hasNewNotification, setHasNewNotification } = useNotificationStore();
+  const { data } = useDetailQueries(userId);
+
+  const userData: UserDetail | undefined = data?.data;
 
   function handleClickNotificationIcon(name: ModalName) {
     setCurrentName(name);
@@ -45,7 +51,15 @@ export default function MenuBar() {
         hasNewNotification={hasNewNotification}
         onClick={() => handleClickNotificationIcon('showNotification')}
       />
-      <MyPageIcon onClick={() => handleClickMyPageIcon('showProfileDetail')} style={{ cursor: 'pointer' }} />
+      {isSignin ? (
+        <Avatar
+          size='xsmall'
+          imageSource={userData?.profileUrl || ''}
+          onClick={() => handleClickMyPageIcon('showProfileDetail')}
+        />
+      ) : (
+        <MyPageIcon onClick={() => handleClickMyPageIcon('showProfileDetail')} style={{ cursor: 'pointer' }} />
+      )}
     </div>
   );
 }
