@@ -1,10 +1,11 @@
 import React from 'react'; // 안하면 오류가 나더라구용..
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
+import { APIProvider } from '@vis.gl/react-google-maps';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 
-import AutoCompleteCity from '@/app/maptest/_deprecated/AutoCompleteCity';
+import Autocomplete from '@/app/map/_components/Autocomplete/Autocomplete';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
@@ -25,11 +26,11 @@ const categories: Category[] = ['추천', '비추천', '질문', '주의', '도�
 const subCategories = ['날씨', '음식점', '숙소', '병원', '화장실', '약국', '교통', '박물관', '관광지', 'ATM'];
 
 export default function WritePost() {
+  const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
   const { toggleModal } = useModalStore();
   const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal);
 
   // 선택된 도시의 정보를 담을 상태 변수
-  const [selectedCity, setSelectedCity] = React.useState<{ cityName: string; lat: number; lng: number } | null>(null);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cx('form')} encType='multipart/form-data'>
@@ -72,16 +73,14 @@ export default function WritePost() {
             id='content'
             name='content'
             placeholder='내용을 입력해주세요'
-            maxLength={20}
+            maxLength={2000}
             errors={errors}
           />
           <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
-          <AutoCompleteCity
-            onSelectCity={(cityName: string, lat: number, lng: number) => {
-              // 선택된 도시 정보를 상태 변수에 저장
-              setSelectedCity({ cityName, lat, lng });
-            }}
-          />
+          <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
+            <Autocomplete />
+          </APIProvider>
+
           <PositionDetail />
         </div>
         <div className={cx('body-image')}>
@@ -93,13 +92,6 @@ export default function WritePost() {
         <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
         <BlobButton text='BLOB' type='submit' color='button-colord-contain' />
       </div>
-      {/* 선택된 도시의 정보를 hidden input으로 추가하여 폼 데이터에 포함 */}
-      {selectedCity && (
-        <>
-          <input type='hidden' {...register('lat')} value={selectedCity?.lat} />
-          <input type='hidden' {...register('lng')} value={selectedCity?.lng} />
-        </>
-      )}
     </form>
   );
 }

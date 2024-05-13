@@ -1,6 +1,13 @@
 import { create } from 'zustand';
 
-export type ModalName = 'write' | 'read' | 'registerUser' | 'updateProfile' | 'filtering';
+export type ModalName =
+  | 'write'
+  | 'read'
+  | 'registerUser'
+  | 'updateProfile'
+  | 'filtering'
+  | 'showNotification'
+  | 'showProfileDetail';
 
 interface ModalStore {
   postId: number;

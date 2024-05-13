@@ -5,3 +5,10 @@
   min-width: 350px;
   @include flex-column-center;
 }
+
+.mini-map-container{
+    width: 100%;
+    min-width: 350px;
+  height: 70vh;
+    @include flex-column-center;
+}

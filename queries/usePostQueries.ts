@@ -1,5 +1,6 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 import { filteredData } from '@/app/feed/page';
 import createComment from '@apis/post/createComment';
@@ -17,11 +18,10 @@ import getUserBookmarkList from '@apis/user/mypage/getUserBookmarkList';
 import getUserCommentList from '@apis/user/mypage/getUserCommentList';
 import getUserPostList from '@apis/user/mypage/getUserPostList';
 import { COMMENTS_PAGE_LIMIT, POSTS_PAGE_LIMIT } from '@constants/pageValues';
-import useModalStore from '@stores/useModalStore';
 
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 
-const posts = createQueryKeys('posts', {
+export const posts = createQueryKeys('posts', {
   all: (userId: number) => ['readPostList', userId],
   detail: (postId: number) => ['readPost', postId],
   bookmark: (userId: number) => ['bookmarkList', userId],
@@ -157,8 +157,8 @@ export function useDeleteComment(postId?: number, commentId?: number) {
 }
 
 export function useDeletePost(postId?: number, userId?: number) {
-  const { toggleModal } = useModalStore();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   return useMutation({
     mutationFn: deletePost,
@@ -172,7 +172,7 @@ export function useDeletePost(postId?: number, userId?: number) {
         queryClient.invalidateQueries({ queryKey: posts.bookmark(userId).queryKey });
       }
 
-      toggleModal();
+      router.back();
     },
   });
 }

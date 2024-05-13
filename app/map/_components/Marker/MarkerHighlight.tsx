@@ -2,14 +2,14 @@ import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { MarkerType } from '@/app/map/_components/Marker';
+import { MarkerType } from '@/app/map/_components/Marker/Marker';
 import PolygonIcon from '@icons/polygon-1.svg?component';
 
 import styles from './MarkerHighlight.module.scss';
 
 const cx = classNames.bind(styles);
 
-interface MarkerHighlightProps {
+export interface MarkerHighlightProps {
   markerType: MarkerType;
   title: string;
   createdAt: string;
