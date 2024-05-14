@@ -21,7 +21,7 @@ import { COMMENTS_PAGE_LIMIT, POSTS_PAGE_LIMIT } from '@constants/pageValues';
 
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 
-const posts = createQueryKeys('posts', {
+export const posts = createQueryKeys('posts', {
   all: (blobId: string) => ['readPostList', blobId],
   detail: (postId: number) => ['readPost', postId],
   bookmark: (blobId: string) => ['bookmarkList', blobId],
