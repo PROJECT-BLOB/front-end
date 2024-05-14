@@ -5,8 +5,8 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import Autocomplete from '@/app/map/_components/Autocomplete/Autocomplete';
+import BlobMap from '@/app/map/_components/Map/BlobMap';
 import useCreateForm from '@/app/map/_hooks/useCreateForm';
-// import BlobMap from '@/app/map/_components/Map/BlobMap';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
@@ -79,7 +79,7 @@ export default function WritePost() {
           <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
           <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
             <Autocomplete />
-            {/* <BlobMap isDisplaying={false} /> */}
+            <BlobMap isDisplaying={false} />
           </APIProvider>
 
           <PositionDetail />

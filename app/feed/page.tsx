@@ -28,13 +28,8 @@ const ORDERS = {
 };
 
 export interface filteredData {
-<<<<<<< HEAD
-  cityLat: number;
-  cityLng: number;
-=======
   cityLat?: number;
   cityLng?: number;
->>>>>>> f2e572afd66af9b582eb2f5f270b0eefb6899132
   sortBy: Order;
   categories: string;
   startDate: string;
@@ -53,13 +48,8 @@ export default function Feed() {
 
   // 기본 값
   const [filteredData, setFilteredData] = useState<filteredData>({
-<<<<<<< HEAD
-    cityLat: 37.5518911,
-    cityLng: 126.9917937,
-=======
     cityLat: lastSearchCity.location?.lat,
     cityLng: lastSearchCity.location?.lng,
->>>>>>> f2e572afd66af9b582eb2f5f270b0eefb6899132
     sortBy: 'recent',
     categories: '',
     startDate: '',
@@ -69,7 +59,7 @@ export default function Feed() {
     minLikes: 0,
     keyword: '',
   });
-  const [countryAndCity, setCountryAndCity] = useState({ city: '서울', country: '대한민국' });
+  // const [countryAndCity, setCountryAndCity] = useState({ city: '서울', country: '대한민국' });
   const { toggleModal, setCurrentName } = useModalStore();
   const [categoryList, setCategoryList] = useState<string[][]>(stringCategoryListToArray(filteredData.categories));
   const { register, handleSubmit } = useForm<{ keyword: string }>();
@@ -106,15 +96,6 @@ export default function Feed() {
     return arrayCategory.map((category) => category.join(':')).join(',');
   }
 
-<<<<<<< HEAD
-  const handleOnSelectCity = (address: string) => {
-    let countryAndCity = address.split(' ');
-
-    if (countryAndCity.length >= 3) countryAndCity = [countryAndCity[0], countryAndCity[countryAndCity.length - 1]];
-
-    setCountryAndCity({ country: countryAndCity[0], city: countryAndCity[1] });
-  };
-=======
   // 검색 결과 달라질때마다 필터링 적용
   useEffect(() => {
     setFilteredData((previous) => ({
@@ -123,24 +104,16 @@ export default function Feed() {
       cityLng: lastSearchCity.location?.lng,
     }));
   }, [lastSearchCity]);
->>>>>>> f2e572afd66af9b582eb2f5f270b0eefb6899132
 
   return (
     <main className={styles.feed}>
       <section className={styles['search-country-and-filtering-container']}>
         <div>
-<<<<<<< HEAD
-          <span className={styles['search-mention']}>
-            <AutoCompleteCity onSelectCity={handleOnSelectCity} /> 실시간 #
-            {`${countryAndCity.city} ${countryAndCity.country}`}
-          </span>
-=======
           <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
             <Autocomplete />
             <BlobMap isDisplaying={false} />
           </APIProvider>
           <span className={styles['search-mention']}>{`${lastSearchCity.country} ${lastSearchCity.city}`}</span>
->>>>>>> f2e572afd66af9b582eb2f5f270b0eefb6899132
         </div>
         <div className={styles['filtering-container']}>
           <div className={styles['filtering-button-wrapper']}>
