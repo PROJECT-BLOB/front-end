@@ -13,13 +13,13 @@ export default function Footer() {
       <div className={cx('logo')}>
         <Image src={Logo} alt='logo' />
       </div>
-      <p className={cx('text-wrapper', 'text')}>
+      <div className={cx('text-wrapper', 'text')}>
         <p className={cx('label')}>
           <span>여행 기록 서비스, BLOB</span>
           <span>Contact : codeitblob01@gmail.com</span>
         </p>
         <span className={cx('caption')}>@2024 BlOB. All rights reserved</span>
-      </p>
+      </div>
     </div>
   );
 }
