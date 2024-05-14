@@ -9,7 +9,5 @@ export default function useCurrentLocationAddress(): string {
     throw Error('Failed to fetch current location address');
   }
 
-  const result = data?.data || 'Loading...';
-
-  return result;
+  return data?.data || '표시할 주소 없음';
 }
