@@ -39,7 +39,7 @@ export default function ProfileModal() {
         </button>
       </header>
       <main>
-        <UserProfile blobId={blobId} />
+        <UserProfile blobId={blobId} isModal />
       </main>
       <footer className={cx('routing-buttons')}>
         <MonoButton type='button' onClick={handleClickMypage}>

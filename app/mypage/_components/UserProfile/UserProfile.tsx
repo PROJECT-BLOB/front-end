@@ -13,14 +13,22 @@ import styles from './UserProfile.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function UserProfile({ blobId, isMypage }: { blobId: string; isMypage?: boolean }) {
+export default function UserProfile({
+  blobId,
+  isMypage,
+  isModal,
+}: {
+  blobId: string;
+  isMypage?: boolean;
+  isModal?: boolean;
+}) {
   const { toggleModal, setCurrentName } = useModalStore();
   function handleClickOpenModal(name: ModalName) {
     setCurrentName(name);
     toggleModal();
   }
 
-  const padding = isMypage ? 'p-large' : 'p-small';
+  const padding = isModal ? 'p-small' : 'p-large';
 
   const { data, isLoading, isError, error } = useDetailQueries(blobId);
 

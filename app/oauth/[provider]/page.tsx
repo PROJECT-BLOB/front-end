@@ -46,8 +46,6 @@ export default function AwaitSignin({ params }: { params: providerType }) {
         signin();
         router.push(REDIRECT_URL_SIGN_IN_COMPLETE);
       } else if (state === 'INCOMPLETE') {
-        // TODO: 로그아웃 기능이 아직 없어서 임시로 넣어둠-나중에 지울 것
-        // signout();
         router.push(REDIRECT_URL_SIGN_IN_INCOMPLETE);
       }
     }
