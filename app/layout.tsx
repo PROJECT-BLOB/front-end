@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 
+import Footer from '@components/Footer/Footer';
 import GlobalNavigationBar from '@components/GlobalNavigationBar/GlobalNavigationBar';
 import ModalContainer from '@components/Modal/ModalContainer';
 
@@ -27,6 +28,7 @@ export default function RootLayout({
           <ModalContainer />
           <GlobalNavigationBar />
           {children}
+          <Footer />
         </WrapperProvider>
       </body>
     </html>
