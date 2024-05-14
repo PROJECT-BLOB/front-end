@@ -190,7 +190,7 @@ export default function MainContainer({ contentData, isFeed, postId }: MainConte
         </div>
       </div>
       <p className={styles['comment-line']}>댓글</p>
-      <CommentBox postId={contentData.postId} />
+      <CommentBox isFeed postId={contentData.postId} />
     </section>
   );
 }

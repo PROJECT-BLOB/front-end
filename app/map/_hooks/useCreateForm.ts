@@ -22,7 +22,7 @@ export interface ContentField {
   category: string;
   subcategory: string;
   address: string;
-  image: File[]; // FileList로 변경하여 다중 파일을 처리
+  image: File[];
 }
 
 // 수정된 onSubmit 함수

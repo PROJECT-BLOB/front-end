@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
 
 import { ContentField } from '@/app/map/_hooks/useCreateForm';
@@ -12,11 +12,10 @@ interface UploadImageProps {
 export default function useUploadImage({ setValue }: UploadImageProps) {
   const [imageList, setImageList] = useState<File[]>([]);
 
-  function handleChangeImage(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleChangeImage(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files) {
       const newImage = Array.from(e.target.files);
       const currentImageList = [...imageList, ...newImage];
-
       // setValue('image', newImage);
 
       if (imageList.length + newImage.length > 5) {

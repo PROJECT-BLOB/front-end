@@ -7,13 +7,12 @@ import styles from './CommentBox.module.scss';
 import CommentContainer from './CommentContainer';
 import CommentSubmitForm from './CommentSubmitForm';
 
-export default function CommentBox({ postId }: { postId: number }) {
+export default function CommentBox({ postId, isFeed }: { postId: number; isFeed: boolean }) {
   const [replyInformation, setReplyInformation] = useState({
     isReply: false,
     targetCommentId: 0,
     targetCommentNickname: '',
   });
-
   // 댓글 조회
   const { data, isPending, isError, isFetchingNextPage, ref } = useFetchTargetPostComment(postId);
 
@@ -38,7 +37,7 @@ export default function CommentBox({ postId }: { postId: number }) {
       {/* // TODO 로딩 인디케이터 추가 */}
       {/* // <div ref={ref} />가 화면에 보일 때 fetchNextPage 호출 */}
       {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
-      <div className={styles['form-container']}>
+      <div className={`${styles['form-container']} ${isFeed ? styles.feed : ''}`}>
         <CommentSubmitForm
           replyInformation={replyInformation}
           postId={postId}

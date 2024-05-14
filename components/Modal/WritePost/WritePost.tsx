@@ -1,4 +1,3 @@
-import React from 'react'; // 안하면 오류가 나더라구용..
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import { APIProvider } from '@vis.gl/react-google-maps';
@@ -6,6 +5,7 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import Autocomplete from '@/app/map/_components/Autocomplete/Autocomplete';
+import useCreateForm from '@/app/map/_hooks/useCreateForm';
 // import BlobMap from '@/app/map/_components/Map/BlobMap';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
@@ -17,7 +17,6 @@ import ImageUploader from '@components/ImageUploader';
 import PositionDetail from './PositionDetail';
 import PostModalInput from './PostModalInput';
 import styles from './WritePost.module.scss';
-import useCreateForm from '../../../app/map/_hooks/useCreateForm';
 import BlobButton from '../../Button/BlobButton';
 
 const cx = classNames.bind(styles);
@@ -87,7 +86,7 @@ export default function WritePost() {
         </div>
         <div className={cx('body-image')}>
           <p>사진업로드(최대5장) - 최대 5mb</p>
-          <ImageUploader setValue={setValue} />
+          <ImageUploader setValue={setValue} /> {/* multiple prop 추가 */}
         </div>
       </div>
       <div className={cx('post-footer')}>
