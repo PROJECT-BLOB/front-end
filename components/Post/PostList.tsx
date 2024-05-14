@@ -6,11 +6,9 @@ import { filteredData } from '@/app/feed/page';
 import CommentItem from '@/app/mypage/_components/Comment/CommentItem';
 import { Comment, Post } from '@/types/Post';
 import { useFetchBookmarkList, useFetchCommentList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
-import { useDetailQueries } from '@queries/useUserQueries';
 
 import PostItem from './PostItem';
 import styles from './PostList.module.scss';
-// import CtaComponent from '@components/CtaComponent/CtaComponent';
 
 const cx = classNames.bind(styles);
 
@@ -18,21 +16,10 @@ interface GetPostListProps {
   blobId?: string;
   selectedTab?: string;
   filteredData?: filteredData;
-  isUserPage?: boolean;
 }
 
 // TODO: 이 파일 전체 리팩토링 해야됨
-export default function PostList({ blobId, selectedTab, filteredData, isUserPage }: GetPostListProps) {
-  const {
-    data: userData,
-    // isLoading: isUserDataLoading,
-    // isError: isUserDataError,
-    // error: userDataError,
-  } = useDetailQueries(blobId || '');
-  // console.log(userData);
-  const isPublic: boolean = userData?.data?.isPublic ?? false;
-  console.log(isPublic);
-
+export default function PostList({ blobId, selectedTab, filteredData }: GetPostListProps) {
   // 찾아야함
   let fetchDataFunction: any;
   switch (selectedTab) {
@@ -60,11 +47,11 @@ export default function PostList({ blobId, selectedTab, filteredData, isUserPage
     isFetchingNextPage,
     ref,
     refetch,
-  } = isPublic && (blobId ? fetchDataFunction(blobId) : fetchDataFunction(filteredData));
+  } = blobId ? fetchDataFunction(blobId) : fetchDataFunction(filteredData);
 
   useEffect(() => {
-    if (isPublic) refetch();
-  }, [filteredData, refetch, isPublic]);
+    refetch();
+  }, [filteredData, refetch]);
 
   if (isPending) {
     // TODO 스켈레톤 UI 추가
@@ -77,28 +64,18 @@ export default function PostList({ blobId, selectedTab, filteredData, isUserPage
 
   const postsPages = postsData?.pages ?? [];
 
-  // 비공개 계정 && 유저페이지일 경우
-  if (!isPublic && isUserPage) {
-    // TODO: cta 추가
-    return <div>비공개계정입니다.</div>;
-  }
+  return (
+    <div className={cx('container')}>
+      {fetchDataFunction === useFetchCommentList
+        ? postsPages.map((postsPage: { data: { content: Comment[] } }) =>
+            postsPage.data.content.map((comment) => <CommentItem key={comment.commentId} comment={comment} />),
+          )
+        : postsPages.map((postsPage: { data: { content: Post[] } }) =>
+            postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
+          )}
+      {/*  TODO 로딩 인디케이터 추가 */}
 
-  // 공개 계정 || 마이페이지일 경우
-  if (isPublic || !isUserPage) {
-    return (
-      <div className={cx('container')}>
-        {fetchDataFunction === useFetchCommentList
-          ? postsPages.map((postsPage: { data: { content: Comment[] } }) =>
-              postsPage.data.content.map((comment) => <CommentItem key={comment.commentId} comment={comment} />),
-            )
-          : postsPages.map((postsPage: { data: { content: Post[] } }) =>
-              postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
-            )}
-        {/* <CtaComponent /> */}
-        {/*  TODO 로딩 인디케이터 추가 */}
-
-        {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}
-      </div>
-    );
-  }
+      {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}
+    </div>
+  );
 }
