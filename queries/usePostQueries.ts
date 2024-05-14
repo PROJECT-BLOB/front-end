@@ -160,8 +160,7 @@ export function useDeleteComment(postId?: number, commentId?: number) {
   });
 }
 
-// TODO: 여기도 blobId 적용해야될듯요
-export function useDeletePost(postId?: number, userId?: number) {
+export function useDeletePost(postId?: number, blobId?: string) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
@@ -172,9 +171,9 @@ export function useDeletePost(postId?: number, userId?: number) {
       postId && queryClient.invalidateQueries({ queryKey: posts.feedList().queryKey });
 
       // 마이페이지에서 내가 쓴 글이나 북마크삭제 시 목록 다시 불러옴
-      if (userId) {
-        queryClient.invalidateQueries({ queryKey: posts.all(userId).queryKey });
-        queryClient.invalidateQueries({ queryKey: posts.bookmark(userId).queryKey });
+      if (blobId) {
+        queryClient.invalidateQueries({ queryKey: posts.all(blobId).queryKey });
+        queryClient.invalidateQueries({ queryKey: posts.bookmark(blobId).queryKey });
       }
 
       router.back();

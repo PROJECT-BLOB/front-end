@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 
 interface OAuthStore {
-  userId: number | 0;
+  blobId: string | null;
   accessToken: string | null;
   refreshToken: string | null;
   state: string | null;
-  setOAuth: (userId: number, accessToken: string, refreshToken: string, state: string) => void;
+  setOAuth: (blobId: string, accessToken: string, refreshToken: string, state: string) => void;
 }
 
 export const useOAuthStore = create<OAuthStore>((set) => ({
-  userId: 0,
+  blobId: null,
   accessToken: null,
   refreshToken: null,
   state: null,
-  setOAuth: (userId, accessToken, refreshToken, state) => set({ userId, accessToken, refreshToken, state }),
+  setOAuth: (blobId, accessToken, refreshToken, state) => set({ blobId, accessToken, refreshToken, state }),
 }));
