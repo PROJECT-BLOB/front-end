@@ -28,6 +28,7 @@ export default function ImageUploader({ setValue }: ModalImageProps) {
           <Image src={UploadImg} alt='업로드하기' />
         </div>
         <input
+          // ref={imgref}
           className={styles.inputstyle}
           type='file'
           id='inputFile'

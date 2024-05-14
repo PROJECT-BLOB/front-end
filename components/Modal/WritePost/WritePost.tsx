@@ -47,13 +47,13 @@ export default function WritePost() {
           </p>
           <div className={cx('category-list')}>
             {categories.map((category) => (
-              <CategoryFiltering key={category} category={category} filteringType='feed' />
+              <CategoryFiltering key={category} category={category} filteringType='writing' />
             ))}
           </div>
 
           <div className={cx('sub-category-list')}>
             {subCategories.map((subcategory) => (
-              <SubCategoryFiltering key={subcategory} category='추천' filteringType='feed' title={subcategory} />
+              <SubCategoryFiltering key={subcategory} category='추천' filteringType='writing' title={subcategory} />
             ))}
           </div>
           <PostModalInput
@@ -86,7 +86,7 @@ export default function WritePost() {
         </div>
         <div className={cx('body-image')}>
           <p>사진업로드(최대5장) - 최대 5mb</p>
-          <ImageUploader setValue={setValue} /> {/* multiple prop 추가 */}
+          <ImageUploader setValue={setValue} />
         </div>
       </div>
       <div className={cx('post-footer')}>

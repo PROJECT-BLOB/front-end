@@ -84,7 +84,7 @@ export default function useCreateForm(toggleModal: () => void) {
       lat: lastSearchCity?.location?.lat ?? 0, // 상세 주소 좌표 -> 미니맵에서 가져오기
       lng: lastSearchCity?.location?.lng ?? 0, // 상세 주소 좌표 -> 미니맵에서 가져오기
       category: 'QUESTION', // 카테고리 중복선택 이슈
-      // subcategory: '음식점',
+      subcategory: 'WEATHER',
     };
 
     try {
