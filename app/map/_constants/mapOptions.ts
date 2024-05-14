@@ -11,3 +11,8 @@ export const MINI_MAP_STYLES = {
   // display: 'flex',
   // justifyContent: 'center',
 };
+
+export const DISPLAY_NONE = {
+  display: 'none',
+  width: '0',
+};

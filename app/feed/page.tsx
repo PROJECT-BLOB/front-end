@@ -1,19 +1,23 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { APIProvider } from '@vis.gl/react-google-maps';
 import Image from 'next/image';
 
 import searchIcon from '@public/icons/search-icon-gray.svg';
 import settingIcon from '@public/icons/settings-04.svg';
+import { useMapStore } from '@stores/useMapStore';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
+import BackToTopButton from '@components/BackToTopButton/BackToTopButton';
 import CategoryBox from '@components/CategoryBox';
 import PostList from '@components/Post/PostList';
 
 import styles from './Feed.module.scss';
-import AutoCompleteCity from '../map/_deprecated/AutoCompleteCity';
+import Autocomplete from '../map/_components/Autocomplete/Autocomplete';
+import BlobMap from '../map/_components/Map/BlobMap';
 
 type Order = 'hot' | 'likes' | 'views' | 'recent';
 const ORDERS = {
@@ -24,8 +28,8 @@ const ORDERS = {
 };
 
 export interface filteredData {
-  country: string;
-  city: string;
+  cityLat?: number;
+  cityLng?: number;
   sortBy: Order;
   categories: string;
   startDate: string;
@@ -39,10 +43,13 @@ export interface filteredData {
 }
 
 export default function Feed() {
-  // TO DO: 기본 값 설정
+  const { lastSearchCity } = useMapStore();
+  const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
+
+  // 기본 값
   const [filteredData, setFilteredData] = useState<filteredData>({
-    country: '대한민국',
-    city: '서울',
+    cityLat: lastSearchCity.location?.lat,
+    cityLng: lastSearchCity.location?.lng,
     sortBy: 'recent',
     categories: '',
     startDate: '',
@@ -53,9 +60,7 @@ export default function Feed() {
     keyword: '',
   });
   const { toggleModal, setCurrentName } = useModalStore();
-
   const [categoryList, setCategoryList] = useState<string[][]>(stringCategoryListToArray(filteredData.categories));
-
   const { register, handleSubmit } = useForm<{ keyword: string }>();
 
   function handleClickModal(name: ModalName) {
@@ -90,22 +95,24 @@ export default function Feed() {
     return arrayCategory.map((category) => category.join(':')).join(',');
   }
 
-  const handleOnSelectCity = (address: string) => {
-    let countryAndCity = address.split(' ');
-
-    if (countryAndCity.length >= 3) countryAndCity = [countryAndCity[0], countryAndCity[countryAndCity.length - 1]];
-
-    setFilteredData((previous) => ({ ...previous, country: countryAndCity[0], city: countryAndCity[1] }));
-  };
+  // 검색 결과 달라질때마다 필터링 적용
+  useEffect(() => {
+    setFilteredData((previous) => ({
+      ...previous,
+      cityLat: lastSearchCity.location?.lat,
+      cityLng: lastSearchCity.location?.lng,
+    }));
+  }, [lastSearchCity]);
 
   return (
     <main className={styles.feed}>
       <section className={styles['search-country-and-filtering-container']}>
         <div>
-          <span className={styles['search-mention']}>
-            <AutoCompleteCity onSelectCity={handleOnSelectCity} /> 실시간 #
-            {`${filteredData.city} ${filteredData.country}`}
-          </span>
+          <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
+            <Autocomplete />
+            <BlobMap isDisplaying={false} />
+          </APIProvider>
+          <span className={styles['search-mention']}>{`${lastSearchCity.country} ${lastSearchCity.city}`}</span>
         </div>
         <div className={styles['filtering-container']}>
           <div className={styles['filtering-button-wrapper']}>
@@ -149,8 +156,10 @@ export default function Feed() {
           ))}
         </div>
       </section>
-      {/* {data?.pages[0].data.count ? <PostList filteredData={filteredData} /> : '검색 결과가 없습니다'} */}
       <PostList filteredData={filteredData} selectedTab='Feed' />
+      <div className={styles['back-to-top']}>
+        <BackToTopButton />
+      </div>
     </main>
   );
 }

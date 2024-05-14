@@ -5,13 +5,17 @@ import { Map, MapEvent } from '@vis.gl/react-google-maps';
 import MapControlComponents from '@/app/map/_components/Map/MapControls';
 import MapHandler from '@/app/map/_components/Map/MapHandler';
 import Markers from '@/app/map/_components/Marker/Markers';
-import { DEFAULT_STYLES } from '@/app/map/_constants/mapOptions';
-import trees from '@/app/map/_mock/trees';
+import { DEFAULT_STYLES, DISPLAY_NONE } from '@/app/map/_constants/mapOptions';
 import { useMapStore } from '@stores/useMapStore';
 
 import style from './MapTest.module.scss';
+import formatted from '../../_mock/trees';
 
-export default function BlobMap() {
+interface BlobMapProps {
+  isDisplaying?: boolean;
+}
+
+export default function BlobMap({ isDisplaying = true }: BlobMapProps) {
   const lastMapCenter = useMapStore((state) => state.lastMapCenter);
   const setLastMapCenter = useMapStore((state) => state.setLastMapCenter);
 
@@ -30,13 +34,13 @@ export default function BlobMap() {
       <Map
         defaultCenter={lastMapCenter}
         defaultZoom={15}
-        style={DEFAULT_STYLES}
+        style={isDisplaying ? DEFAULT_STYLES : DISPLAY_NONE}
         minZoom={4}
         disableDefaultUI
         mapId={process.env.NEXT_PUBLIC_MAP_ID}
         onDrag={handleDragMap}
       >
-        <Markers points={trees} />
+        <Markers points={formatted} />
         <MapControlComponents />
         <MapHandler />
       </Map>
