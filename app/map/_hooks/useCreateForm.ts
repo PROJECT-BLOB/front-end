@@ -92,8 +92,10 @@ export default function useCreateForm(toggleModal: () => void) {
         const formDataToSend = new FormData();
 
         // 이미지 파일 추가
-        for (let i = 0; i < formData.image.length; i++) {
-          formDataToSend.append('file', formData.image[i]);
+        if (formData.image) {
+          for (let i = 0; i < formData.image.length; i++) {
+            formDataToSend.append('file', formData.image[i]);
+          }
         }
 
         // 데이터 추가
