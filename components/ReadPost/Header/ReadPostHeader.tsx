@@ -13,47 +13,51 @@ import calculateTimeWhenItWillDisappear from '@utils/calculateDisappearTime';
 
 import styles from './ReadPostHeader.module.scss';
 
-export default function ReadPostHeader({ isFeed }: { isFeed?: boolean }) {
+export default function ReadPostHeader({ isFeed, postId }: { isFeed?: boolean; postId?: number }) {
   const [isMouseEnter, setIsMouseEnter] = useState(false);
-  const { toggleModal, postId } = useModalStore();
+  const { toggleModal, postId: modalPostId } = useModalStore();
 
-  const { mutate: postLikeMutate } = useUpdatePostLike(postId);
+  const { mutate: postLikeMutate } = useUpdatePostLike(postId ?? modalPostId);
 
   function handleClickLike() {
-    postLikeMutate(post?.data.postId);
+    postLikeMutate(postId ?? post?.data.postId);
   }
 
-  const { data: post } = useFetchTargetPost(postId);
+  const { data: post } = useFetchTargetPost(postId ?? modalPostId);
 
   return (
     <header className={styles['read-header']}>
-      <div className={styles['time-blob-and-close']}>
-        <div className={styles['time-blob']}>
-          <div className={styles['name-and-icon']}>
-            <strong className={styles.mention}>Time-Blob</strong>
-            <Image
-              src={info}
-              alt='설명아이콘'
-              width={16}
-              height={16}
-              onMouseEnter={() => setIsMouseEnter(!isMouseEnter)}
-              onMouseOut={() => setIsMouseEnter(!isMouseEnter)}
-            />
-            {/* To Do : 디자인 */}
-            {isMouseEnter && <p>시간이 지나면 지도에서 사라집니다.</p>}
+      {calculateTimeWhenItWillDisappear(post?.data.expiresAt) === 0 ? (
+        ''
+      ) : (
+        <div className={styles['time-blob-and-close']}>
+          <div className={styles['time-blob']}>
+            <div className={styles['name-and-icon']}>
+              <strong className={styles.mention}>Time-Blob</strong>
+              <Image
+                src={info}
+                alt='설명아이콘'
+                width={16}
+                height={16}
+                onMouseEnter={() => setIsMouseEnter(!isMouseEnter)}
+                onMouseOut={() => setIsMouseEnter(!isMouseEnter)}
+              />
+              {/* To Do : 디자인 */}
+              {isMouseEnter && <p>시간이 지나면 지도에서 사라집니다.</p>}
+            </div>
+            <span className={styles['delete-mention']}>
+              {calculateTimeWhenItWillDisappear(post?.data.expiresAt)} 남음
+            </span>
           </div>
-          <span className={styles['delete-mention']}>
-            {calculateTimeWhenItWillDisappear(post?.data.expiresAt)} 남음
-          </span>
+          {isFeed ? (
+            ''
+          ) : (
+            <button type='button' onClick={toggleModal} className={styles['close-button']}>
+              <Image src={closeButton} alt='close-button' />
+            </button>
+          )}
         </div>
-        {isFeed ? (
-          ''
-        ) : (
-          <button type='button' onClick={toggleModal} className={styles['close-button']}>
-            <Image src={closeButton} alt='close-button' />
-          </button>
-        )}
-      </div>
+      )}
       <div className={styles['like-mention-wrapper']}>
         <button type='button' onClick={handleClickLike} className={styles['like-wrapper']}>
           <Image src={post?.data.liked ? filledRedHeart : vacantHeart} alt='좋아요 아이콘' width={20} height={20} />

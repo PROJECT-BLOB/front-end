@@ -22,10 +22,6 @@ import { COMMENTS_PAGE_LIMIT, POSTS_PAGE_LIMIT } from '@constants/pageValues';
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 
 const posts = createQueryKeys('posts', {
-  // all: (userId: number) => ['readPostList', userId],
-  // detail: (postId: number) => ['readPost', postId],
-  // bookmark: (userId: number) => ['bookmarkList', userId],
-  // commentList: (userId: number) => ['readCommentList', userId],
   all: (blobId: string) => ['readPostList', blobId],
   detail: (postId: number) => ['readPost', postId],
   bookmark: (blobId: string) => ['bookmarkList', blobId],
@@ -60,7 +56,14 @@ export function useFetchCommentList(blobId: string) {
 export function useFetchFeedList(filteredData: filteredData) {
   return useInfiniteScrollQuery({
     queryKey: posts.feedList().queryKey,
-    queryFn: (page: number) => getFeed({ ...filteredData, page, size: COMMENTS_PAGE_LIMIT }),
+    queryFn: (page: number) =>
+      getFeed({
+        ...filteredData,
+        page,
+        size: COMMENTS_PAGE_LIMIT,
+        country: '',
+        city: '',
+      }),
   });
 }
 
