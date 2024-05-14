@@ -56,7 +56,14 @@ export function useFetchCommentList(userId: number) {
 export function useFetchFeedList(filteredData: filteredData) {
   return useInfiniteScrollQuery({
     queryKey: posts.feedList().queryKey,
-    queryFn: (page: number) => getFeed({ ...filteredData, page, size: COMMENTS_PAGE_LIMIT }),
+    queryFn: (page: number) =>
+      getFeed({
+        ...filteredData,
+        page,
+        size: COMMENTS_PAGE_LIMIT,
+        country: '',
+        city: '',
+      }),
   });
 }
 

@@ -1,4 +1,3 @@
-import React from 'react'; // 안하면 오류가 나더라구용..
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import { APIProvider } from '@vis.gl/react-google-maps';
@@ -85,7 +84,7 @@ export default function WritePost() {
         </div>
         <div className={cx('body-image')}>
           <p>사진업로드(최대5장) - 최대 5mb</p>
-          <ImageUploader setValue={setValue} />
+          <ImageUploader setValue={setValue} /> {/* multiple prop 추가 */}
         </div>
       </div>
       <div className={cx('post-footer')}>

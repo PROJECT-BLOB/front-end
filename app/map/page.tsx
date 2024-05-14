@@ -7,7 +7,9 @@ import { APIProvider } from '@vis.gl/react-google-maps';
 import Autocomplete from '@/app/map/_components/Autocomplete/Autocomplete';
 import BlobMap from '@/app/map/_components/Map/BlobMap';
 
-export default function MapTest() {
+import SideBar from './_components/SideBar/SideBar';
+
+export default function Map() {
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
 
   return (
@@ -15,6 +17,7 @@ export default function MapTest() {
       <APIProvider apiKey={GOOGLE_MAP_API_KEY} libraries={['marker']}>
         <Autocomplete />
         <BlobMap />
+        <SideBar />
       </APIProvider>
     </>
   );
