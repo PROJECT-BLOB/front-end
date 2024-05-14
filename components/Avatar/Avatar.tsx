@@ -16,17 +16,15 @@ interface AvatarProps {
 
 export default function Avatar({ size, imageSource, onClick }: AvatarProps) {
   return (
-    <>
-      <div className={cx(size, 'profile-image')}>
-        <Image
-          priority
-          fill
-          style={{ objectFit: 'cover' }}
-          src={imageSource || defaultUserProfileImage}
-          alt='프로필 사진'
-          onClick={onClick}
-        />
-      </div>
-    </>
+    <div className={cx(size, 'profile-image')}>
+      <Image
+        priority
+        fill
+        style={{ objectFit: 'cover' }}
+        src={imageSource || defaultUserProfileImage}
+        alt='프로필 사진'
+        onClick={onClick}
+      />
+    </div>
   );
 }

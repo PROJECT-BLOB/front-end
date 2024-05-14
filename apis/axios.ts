@@ -48,12 +48,14 @@ instance.interceptors.response.use(
   async (error): Promise<AxiosError> => {
     const originalRequest = error.config; // error.config에 담겨있는 원래 리퀘스트를 가져온다.
 
+    console.log('토큰만료 확인-error.response?.status: ', error.response?.status);
+
     if (error.response?.status === 401 && !originalRequest._retry) {
       // 토큰 만료: 401
 
       // 토큰 발급 요청 시 데이터가 필요없을 경우에 undefined..추후 수정될 수 있음.
-      await instance.post(GET_REFRESH_URL, undefined, { _retry: true } as AxiosRequestConfig<undefined>); // 토큰 재발급 하고
-
+      const result = await instance.post(GET_REFRESH_URL, undefined, { _retry: true } as AxiosRequestConfig<undefined>); // 토큰 재발급 하고
+      console.log('refresh 토큰 응답: ', result);
       originalRequest._retry = true;
 
       return instance(originalRequest); // 리퀘스트 재시도 하도록 설정
