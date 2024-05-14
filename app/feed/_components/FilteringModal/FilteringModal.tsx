@@ -12,6 +12,7 @@ import SubCategoryFiltering, { subCategories, SubCategory } from '@components/Ca
 import styles from './FilteringModal.module.scss';
 
 const cx = classNames.bind(styles);
+// 커밋 테스트
 
 const categories: Category[] = ['추천', '비추천', '질문', '주의', '도움요청'];
 
