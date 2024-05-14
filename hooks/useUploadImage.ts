@@ -25,7 +25,7 @@ export default function useUploadImage({ setValue }: UploadImageProps) {
       }
 
       setImageList(currentImageList);
-      setValue('image', e.target.files); // setValue 함수의 인수를 FileList로 변경
+      setValue('image', currentImageList); // setValue 함수의 인수를 FileList로 변경
     }
   }
 
