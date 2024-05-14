@@ -50,15 +50,21 @@
   align-items: flex-start;
   gap: 1.2rem;
   align-self: stretch;
+  margin-bottom: 7.6rem;
 }
 
 .category-list {
   display: flex;
-  white-space: nowrap;
+  flex-wrap: wrap;
   gap: 1.2rem;
+  width: 31.5rem;
+  position: relative;
 }
 
 .sub-category-list {
+  position: absolute;
+  top: 11rem;
+  left: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
