@@ -4,7 +4,9 @@ import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from 'axios';
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const isServer = typeof window === 'undefined';
 const ACCESS_TOKEN = 'accessToken';
-const GET_REFRESH_URL = '/oauth/refresh';
+const REFRESH_TOKEN = 'refreshToken';
+
+// const GET_REFRESH_URL = '/oauth/refresh';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -48,15 +50,26 @@ instance.interceptors.response.use(
   async (error): Promise<AxiosError> => {
     const originalRequest = error.config; // error.config에 담겨있는 원래 리퀘스트를 가져온다.
 
-    console.log('토큰만료 확인-error.response?.status: ', error.response?.status);
+    const refreshToken = getCookie(REFRESH_TOKEN);
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       // 토큰 만료: 401
-
-      // 토큰 발급 요청 시 데이터가 필요없을 경우에 undefined..추후 수정될 수 있음.
-      const result = await instance.post(GET_REFRESH_URL, undefined, { _retry: true } as AxiosRequestConfig<undefined>); // 토큰 재발급 하고
-      console.log('refresh 토큰 응답: ', result);
+      const response = await axios.post(`${BASE_URL}/oauth/refresh`, undefined, {
+        headers: {
+          Authorization: `Bearer ${refreshToken}`,
+          'Content-Type': 'application/json',
+          withCredentials: true,
+        },
+      } as AxiosRequestConfig<undefined>); // 토큰 재발급 하고
       originalRequest._retry = true;
+
+      if (response.status === 200 && response.data.accessToken) {
+        const { accessToken } = response.data;
+
+        document.cookie = `accessToken=${accessToken}; path=/`;
+        const newAccessToken = getAccessToken();
+        error.config.headers.Authorization = `${newAccessToken}`;
+      }
 
       return instance(originalRequest); // 리퀘스트 재시도 하도록 설정
     }
@@ -77,6 +90,21 @@ export const getAccessToken = (): string | null => {
 
   if (accessToken) {
     return accessToken;
+  }
+
+  return null;
+};
+
+export const getRefreshToken = (): string | null => {
+  if (isServer) {
+    return null; // 서버 환경에서는 토큰을 가져올 수 없음
+  }
+
+  // TODO: 로그인 연결되면 쿠키에서 토큰을 가져오도록 수정
+  const refreshToken = getCookie(REFRESH_TOKEN);
+
+  if (refreshToken) {
+    return refreshToken;
   }
 
   return null;
