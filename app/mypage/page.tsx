@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useUserStore } from '@stores/userStore';
 import { useTabStore } from '@stores/useTabStore';
 
+import BackToTopButton from '@components/BackToTopButton/BackToTopButton';
 import PostList from '@components/Post/PostList';
 
 import TabList from './_components/Tab/TabList';
@@ -16,7 +17,7 @@ import styles from './myPage.module.scss';
 
 const cx = classNames.bind(styles);
 
-export default function myPage() {
+export default function MyPage() {
   const { userId, isSignin } = useUserStore();
   const { selectedTab } = useTabStore();
   const router = useRouter();
@@ -30,7 +31,7 @@ export default function myPage() {
   return (
     <div className={cx('wrappper')}>
       <section>
-        <UserProfile userId={userId} />
+        <UserProfile userId={userId} isMypage />
       </section>
       <section className={cx('tabs')}>
         <TabList />
@@ -38,6 +39,9 @@ export default function myPage() {
       <section className={cx('post-list')}>
         <PostList userId={userId} selectedTab={selectedTab} />
       </section>
+      <div className={cx('back-to-top')}>
+        <BackToTopButton />
+      </div>
     </div>
   );
 }

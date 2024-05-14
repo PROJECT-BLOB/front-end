@@ -2,6 +2,8 @@ import classNames from 'classnames/bind';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 
+import defaultUserProfileImage from '@images/default-user-image.svg';
+
 import styles from './Avatar.module.scss';
 
 const cx = classNames.bind(styles);
@@ -12,12 +14,16 @@ interface AvatarProps {
 }
 
 export default function Avatar({ size, imageSource }: AvatarProps) {
-  console.log(size);
-
   return (
     <>
       <div className={cx(size, 'profile-image')}>
-        <Image fill src={imageSource} alt='프로필 사진' />
+        <Image
+          priority
+          fill
+          style={{ objectFit: 'cover' }}
+          src={imageSource || defaultUserProfileImage}
+          alt='프로필 사진'
+        />
       </div>
     </>
   );

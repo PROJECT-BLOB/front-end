@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-
 import { Switch } from 'antd';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -19,7 +16,7 @@ import TextArea from '@components/Input/TextArea';
 import { nicknameValidator } from '@utils/registerOptions';
 
 import styles from './UpdateProfileModal.module.scss';
-import useUpdateUserForm from '../../_hooks/useUpdateUserForm';
+import useUpdateUserProfileForm from '../../_hooks/useUpdateUserProfileForm';
 
 const cx = classNames.bind(styles);
 
@@ -52,7 +49,9 @@ export default function UpdateProfileModal() {
     onChangeToggle,
     selectedImage,
     handleChangeImage,
-  } = useUpdateUserForm(initialData);
+    isDeleteProfileImage,
+    setIsDeleteProfileImage,
+  } = useUpdateUserProfileForm(initialData);
 
   return (
     <form className={cx('form')} onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
@@ -63,22 +62,24 @@ export default function UpdateProfileModal() {
         </span>
       </header>
 
-      <main>
+      <main className={cx('main-section')}>
         <section className={cx('profile-image')}>
           {selectedImage ? (
-            <Avatar size='medium' imageSource={URL.createObjectURL(selectedImage)} />
+            <Avatar size='medium' imageSource={isDeleteProfileImage ? '' : URL.createObjectURL(selectedImage)} />
           ) : (
-            <Avatar size='medium' imageSource={userData?.profileUrl || ''} />
+            <Avatar size='medium' imageSource={isDeleteProfileImage ? '' : userData?.profileUrl || ''} />
           )}
-
-          <input id='profileImageInput' type='file' style={{ display: 'none' }} onChange={handleChangeImage} />
+          {/* TODO: 이 부분 수정해야 됨ㅋㅋ */}
+          <input id='profileImageInput' type='file' onChange={handleChangeImage} />
           {document.getElementById('profileImageInput') && (
-            <MonoButton
-              text='이미지 수정'
-              type='button'
-              onClick={() => document.getElementById('profileImageInput')!.click()}
-            />
+            <MonoButton type='button' onClick={() => document.getElementById('profileImageInput')!.click()}>
+              이미지 수정
+            </MonoButton>
           )}
+          {/* // TODO: 임시-기본이미지로 변경 */}
+          <button type='button' onClick={() => setIsDeleteProfileImage(true)}>
+            기본이미지로 변경 버튼
+          </button>
         </section>
         <section className={cx('update-informations')}>
           <SignInput

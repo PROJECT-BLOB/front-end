@@ -1,0 +1,75 @@
+@import '/styles/global-styles/color-pallete';
+@import '/styles/global-styles/media-breakpoint';
+
+.read-header {
+  .time-blob-and-close {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+  }
+}
+
+.time-blob {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+
+  .name-and-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .mention {
+    color: $BDS-Grayscale-13;
+    text-align: center;
+    font-feature-settings: 'ss10' on;
+
+    /* BDS/Headline 2 */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 141%; /* 23.97px */
+  }
+}
+.close-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  background-color: $BDS-Grayscale-1;
+}
+
+.like-mention-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 2.4rem;
+
+  .like-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mention {
+    color: $BDS-Grayscale-13;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 144%; /* 25.92px */
+    letter-spacing: -0.004px;
+  }
+}
+
+.delete-mention {
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 150%; /* 24px */
+}

@@ -1,5 +1,6 @@
 import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 import { filteredData } from '@/app/feed/page';
 import createComment from '@apis/post/createComment';
@@ -20,7 +21,7 @@ import { COMMENTS_PAGE_LIMIT, POSTS_PAGE_LIMIT } from '@constants/pageValues';
 
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 
-const posts = createQueryKeys('posts', {
+export const posts = createQueryKeys('posts', {
   all: (userId: number) => ['readPostList', userId],
   detail: (postId: number) => ['readPost', postId],
   bookmark: (userId: number) => ['bookmarkList', userId],
@@ -55,7 +56,14 @@ export function useFetchCommentList(userId: number) {
 export function useFetchFeedList(filteredData: filteredData) {
   return useInfiniteScrollQuery({
     queryKey: posts.feedList().queryKey,
-    queryFn: (page: number) => getFeed({ ...filteredData, page, size: 5 }),
+    queryFn: (page: number) =>
+      getFeed({
+        ...filteredData,
+        page,
+        size: COMMENTS_PAGE_LIMIT,
+        country: '',
+        city: '',
+      }),
   });
 }
 
@@ -142,7 +150,7 @@ export function useUpdateReplyLike(commentId: number) {
 }
 
 // 삭제
-export function useDeleteComment(postId?: number, commentId?: number, replyId?: number) {
+export function useDeleteComment(postId?: number, commentId?: number) {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -150,18 +158,28 @@ export function useDeleteComment(postId?: number, commentId?: number, replyId?: 
     onSuccess: () => {
       if (postId) queryClient.invalidateQueries({ queryKey: posts.comment(postId).queryKey });
 
-      if (commentId && replyId) queryClient.invalidateQueries({ queryKey: posts.reply(commentId).queryKey });
+      if (commentId) queryClient.invalidateQueries({ queryKey: posts.reply(commentId).queryKey });
     },
   });
 }
 
-export function useDeletePost(postId?: number) {
+export function useDeletePost(postId?: number, userId?: number) {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   return useMutation({
     mutationFn: deletePost,
     onSuccess: () => {
-      postId && queryClient.invalidateQueries({ queryKey: posts.detail(postId).queryKey });
+      // 피드에서 삭제하면 피드 쿼리 다시 불러옴
+      postId && queryClient.invalidateQueries({ queryKey: posts.feedList().queryKey });
+
+      // 마이페이지에서 내가 쓴 글이나 북마크삭제 시 목록 다시 불러옴
+      if (userId) {
+        queryClient.invalidateQueries({ queryKey: posts.all(userId).queryKey });
+        queryClient.invalidateQueries({ queryKey: posts.bookmark(userId).queryKey });
+      }
+
+      router.back();
     },
   });
 }

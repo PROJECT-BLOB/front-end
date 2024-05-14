@@ -18,8 +18,4 @@
   overflow-y: auto;
 
   width: 100%;
-
-  @include tablet-and-desktop {
-    width: auto;
-  }
 }

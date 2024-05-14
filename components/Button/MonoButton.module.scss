@@ -16,14 +16,11 @@
   font-family: 'IBM Plex Sans KR';
 
   &:hover {
-    border: 1px solid $BDS-Grayscale-13;
     background: $BDS-Grayscale-4;
   }
 
-  // TODO: 나중에 추가
   &:active {
-    border: 1.6px solid $BDS-Primary-5;
-    background: $BDS-Primary-3;
+    background: $BDS-Grayscale-5;
   }
 }
 

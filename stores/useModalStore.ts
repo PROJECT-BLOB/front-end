@@ -1,6 +1,13 @@
 import { create } from 'zustand';
 
-export type ModalName = 'write' | 'read' | 'registerUser' | 'updateProfile' | 'filtering';
+export type ModalName =
+  | 'write'
+  | 'read'
+  | 'registerUser'
+  | 'updateProfile'
+  | 'filtering'
+  | 'showNotification'
+  | 'showProfileDetail';
 
 interface ModalStore {
   postId: number;
@@ -12,7 +19,7 @@ interface ModalStore {
 }
 
 const useModalStore = create<ModalStore>((set) => ({
-  postId: 1,
+  postId: 2,
   isOpen: false,
   name: 'read',
   setPostId: (postId) => set(() => ({ postId })),

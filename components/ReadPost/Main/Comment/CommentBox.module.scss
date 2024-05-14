@@ -1,0 +1,21 @@
+@import '/styles/global-styles/color-pallete';
+@import '/styles/global-styles/media-breakpoint';
+
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  align-items: flex-start;
+}
+
+.form-container {
+  position: sticky;
+  padding-bottom: 2rem;
+  bottom: 0;
+  background-color: white;
+  width: 100%;
+
+  &.feed {
+    position: relative;
+  }
+}
