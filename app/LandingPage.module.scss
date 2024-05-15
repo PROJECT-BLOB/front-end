@@ -45,13 +45,23 @@
   }
 }
 
-.sub-text {
+.sub-text-mobile {
+  display: block;
   align-self: stretch;
-
   font-size: 1.6rem;
   line-height: 162%;
 
   @include tablet-and-desktop {
+    display: none;
+  }
+}
+
+.sub-text {
+  display: none;
+
+  @include tablet-and-desktop {
+    align-self: stretch;
+    display: block;
     font-size: 1.8rem;
     font-weight: 600;
     line-height: 159%;
@@ -86,6 +96,10 @@
     font-weight: 600;
     line-height: 144%;
     letter-spacing: -0.0004rem;
+
+    &:hover {
+      background: $BDS-Secondary-Blue;
+    }
   }
 
   &-colored {
@@ -107,15 +121,31 @@
     font-size: 2.8rem;
     font-weight: 700;
     line-height: 136%;
+
+    .icon-chevron {
+      margin-left: 10px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    &:hover .icon-chevron {
+      transform: translateX(0.5rem);
+    }
   }
 }
 
 .line {
-  width: 100%;
+  width: 8rem;
   height: 0.1rem;
-  flex: 1;
 
   background: $BDS-Grayscale-13;
+
+  @include tablet {
+    width: 22rem;
+  }
+
+  @include desktop {
+    width: 40rem;
+  }
 }
 
 .index {
@@ -347,6 +377,12 @@
   &-arrow {
     width: 4rem;
     height: 4rem;
+    transition: transform 0.3s ease-in-out;
+    background: transparent;
+
+    &:hover {
+      transform: translateY(0.5rem);
+    }
   }
 }
 
