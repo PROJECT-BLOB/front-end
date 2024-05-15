@@ -18,12 +18,15 @@ export default function NotificationList() {
 
   return (
     <div className={styles.container}>
-      {notificationPages &&
+      {notificationPages[0].data.count > 0 ? (
         notificationPages.map((notificationsPage: { data: { content: Notification[] } }) =>
           notificationsPage.data.content.map((notification) => (
             <NotificationItem key={notification.notificationId} notification={notification} />
           )),
-        )}
+        )
+      ) : (
+        <div className={styles.empty}>알림이 없습니다.</div>
+      )}
 
       {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}
     </div>
