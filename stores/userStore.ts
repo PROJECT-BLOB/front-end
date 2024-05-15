@@ -6,6 +6,7 @@ import { Location } from '@/types/Map';
 interface UserStore {
   blobId: string;
   isSignin: boolean;
+  isLoaded: boolean;
 
   signin: () => void;
   signout: () => void;
@@ -19,6 +20,9 @@ export const useUserStore = create(
     (set) => ({
       blobId: typeof window !== 'undefined' ? localStorage.getItem('blobId') ?? '' : '', // 초기 로딩 때 로컬스토리지에서 값을 읽어오도록 함
       isSignin: typeof window !== 'undefined' ? localStorage.getItem('isSignin') === 'true' : false, // 초기 로딩 때 로컬스토리지에서 값을 읽어오도록 함
+      // blobId: '',
+      // isSignin: false,
+      isLoaded: false, // 로딩 상태 추가
       lastLocation: { lat: 0, lng: 0 },
       setBlobId: (newBlobId) => {
         localStorage.setItem('blobId', newBlobId); // 초기 로딩때 가져와야 하기 때문에 로컬스토리지에 값 저장
@@ -35,6 +39,14 @@ export const useUserStore = create(
     }),
     {
       name: 'userStorage',
+      onRehydrateStorage: () => (state) => {
+        // 클라이언트에서만 실행
+        if (typeof window !== 'undefined' && state) {
+          state.blobId = localStorage.getItem('blobId') ?? '';
+          state.isSignin = localStorage.getItem('isSignin') === 'true';
+          state.isLoaded = true; // 로딩 완료
+        }
+      },
     },
   ),
 );
