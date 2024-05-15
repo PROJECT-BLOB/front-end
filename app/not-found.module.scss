@@ -11,6 +11,8 @@
   flex-shrink: 0;
   width: 100%;
   height: 100vh;
+  // 헤더랑 푸터 안보이게..
+  background-color: $BDS-Grayscale-1;
 }
 
 .image {
