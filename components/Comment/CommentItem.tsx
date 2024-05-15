@@ -16,7 +16,7 @@ export default function CommentItem({ commentedPost, comment }: { commentedPost:
     <div className={cx('post-container')}>
       <header className={cx('header')}>
         <CategoryBox category={commentedPost?.category} subcategory={commentedPost.subcategory} />
-        <IconTag IconSource={BelovedIcon}>Beloved</IconTag>
+        {commentedPost.likeCount >= 100 && <IconTag IconSource={BelovedIcon}>Beloved</IconTag>}
       </header>
       <main className={cx('main-default')}>
         <p className={cx('main-content-default')}>
