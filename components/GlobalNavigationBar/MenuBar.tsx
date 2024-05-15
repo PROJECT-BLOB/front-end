@@ -1,79 +1,81 @@
-'use client';
+// TODO: 수정 버전이 문제 없이 작동하면 나중에 지울것
 
-import { useEffect } from 'react';
+// 'use client';
 
-import Link from 'next/link';
+// import { useEffect } from 'react';
 
-import { useDetailQueries } from '@queries/useUserQueries';
-import useModalStore, { ModalName } from '@stores/useModalStore';
-import { useNotificationStore } from '@stores/useNotificationStore';
-import { useUserStore } from '@stores/userStore';
+// import Link from 'next/link';
 
-import Avatar from '@components/Avatar/Avatar';
-import BlobButton from '@components/Button/BlobButton';
-import NotificationIcon from '@components/GlobalNavigationBar/NotificationIcon';
+// import { useDetailQueries } from '@queries/useUserQueries';
+// import useModalStore, { ModalName } from '@stores/useModalStore';
+// import { useNotificationStore } from '@stores/useNotificationStore';
+// import { useUserStore } from '@stores/userStore';
 
-import usePolling from '@hooks/usePolling';
+// import Avatar from '@components/Avatar/Avatar';
+// import BlobButton from '@components/Button/BlobButton';
+// import NotificationIcon from '@components/GlobalNavigationBar/NotificationIcon';
 
-import styles from './MenuBar.module.scss';
+// import usePolling from '@hooks/usePolling';
 
-export default function MenuBar() {
-  const { toggleModal, setCurrentName } = useModalStore();
-  const { isSignin, blobId, setBlobId, signin, isLoaded } = useUserStore();
-  const { hasNewNotification, setHasNewNotification } = useNotificationStore();
+// import styles from './MenuBar.module.scss';
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedBlobId = localStorage.getItem('blobId') ?? '';
-      const storedIsSignin = localStorage.getItem('isSignin') === 'true';
+// export default function MenuBar() {
+//   const { toggleModal, setCurrentName } = useModalStore();
+//   const { isSignin, blobId, setBlobId, signin, isLoaded } = useUserStore();
+//   const { hasNewNotification, setHasNewNotification } = useNotificationStore();
 
-      setBlobId(storedBlobId);
+//   useEffect(() => {
+//     if (typeof window !== 'undefined') {
+//       const storedBlobId = localStorage.getItem('blobId') ?? '';
+//       const storedIsSignin = localStorage.getItem('isSignin') === 'true';
 
-      if (storedIsSignin) {
-        signin();
-      }
-    }
-  }, [setBlobId, signin]);
+//       setBlobId(storedBlobId);
 
-  const { data } = useDetailQueries(blobId);
+//       if (storedIsSignin) {
+//         signin();
+//       }
+//     }
+//   }, [setBlobId, signin]);
 
-  // 새알림 여부 확인
-  usePolling();
+//   const { data } = useDetailQueries(blobId);
 
-  if (!isLoaded) return null;
+//   // 새알림 여부 확인
+//   usePolling();
 
-  function handleClickNotificationIcon(name: ModalName) {
-    setCurrentName(name);
-    toggleModal();
-    setHasNewNotification(false);
-  }
+//   if (!isLoaded) return null;
 
-  function handleClickMyPageIcon(name: ModalName) {
-    setCurrentName(name);
-    toggleModal();
-    setHasNewNotification(false);
-  }
+//   function handleClickNotificationIcon(name: ModalName) {
+//     setCurrentName(name);
+//     toggleModal();
+//     setHasNewNotification(false);
+//   }
 
-  return (
-    <>
-      {isSignin ? (
-        <div className={styles.align}>
-          <NotificationIcon
-            hasNewNotification={hasNewNotification}
-            onClick={() => handleClickNotificationIcon('showNotification')}
-          />
-          <Avatar
-            size='xsmall'
-            imageSource={data?.data?.profileUrl || ''}
-            onClick={() => handleClickMyPageIcon('showProfileDetail')}
-          />
-        </div>
-      ) : (
-        // 임의로 로그인 버튼 추가
-        <Link className={styles.login} href={'/signin'}>
-          <BlobButton text='로그인' type='button' color='button-colord-contain' />
-        </Link>
-      )}
-    </>
-  );
-}
+//   function handleClickMyPageIcon(name: ModalName) {
+//     setCurrentName(name);
+//     toggleModal();
+//     setHasNewNotification(false);
+//   }
+
+//   return (
+//     <>
+//       {isSignin ? (
+//         <div className={styles.align}>
+//           <NotificationIcon
+//             hasNewNotification={hasNewNotification}
+//             onClick={() => handleClickNotificationIcon('showNotification')}
+//           />
+//           <Avatar
+//             size='xsmall'
+//             imageSource={data?.data?.profileUrl || ''}
+//             onClick={() => handleClickMyPageIcon('showProfileDetail')}
+//           />
+//         </div>
+//       ) : (
+//         // 임의로 로그인 버튼 추가
+//         <Link className={styles.login} href={'/signin'}>
+//           <BlobButton text='로그인' type='button' color='button-colord-contain' />
+//         </Link>
+//       )}
+//     </>
+//   );
+// }
