@@ -1,39 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
-
-import CloseButton from '@icons/x-close.svg?component';
 
 import { Category, FilteringType } from './CategoryFiltering';
 import styles from './SubCategoryFiltering.module.scss';
 
 const cx = classNames.bind(styles);
 
+export const subCategories = [
+  '날씨',
+  '음식점',
+  '숙소',
+  '병원',
+  '화장실',
+  '약국',
+  '교통',
+  '박물관',
+  '관광지',
+  'ATM',
+] as const;
+
+export type SubCategory = (typeof subCategories)[number];
+
 export interface SubCategoryFilteringProps {
   category: Category;
   filteringType: FilteringType;
-  title: string;
+  subcategory: SubCategory;
+  onClick: () => void;
+  selectedSubCategories: SubCategory[];
 }
 
 export default function SubCategoryFiltering({
   category = '추천',
   filteringType = 'writing',
-  title = '날씨',
+  subcategory = '날씨',
+  onClick,
+  selectedSubCategories,
 }: SubCategoryFilteringProps) {
-  const [isCategoryClicked, setIsCategoryClicked] = useState(false);
+  const [isSubCategoryClicked, setIsSubCategoryClicked] = useState(false);
 
-  const handleClickCategory = () => {
-    setIsCategoryClicked(!isCategoryClicked);
+  const handleClickSubCategory = () => {
+    setIsSubCategoryClicked(!isSubCategoryClicked);
+    onClick();
   };
+
+  useEffect(() => {
+    if (selectedSubCategories.includes(subcategory)) {
+      setIsSubCategoryClicked(true);
+    }
+  }, [subcategory, selectedSubCategories]);
 
   return (
     <button
       type='button'
-      onClick={handleClickCategory}
+      onClick={handleClickSubCategory}
       className={cx(
         'background',
-        { 'button-clicked': isCategoryClicked },
-        { [`button-clicked-color-${category}`]: isCategoryClicked },
+        { 'button-clicked': isSubCategoryClicked },
+        { [`button-clicked-color-${category}`]: isSubCategoryClicked },
         `category-color-${category}`,
         `filtering-type-${filteringType}`,
       )}
@@ -41,13 +65,12 @@ export default function SubCategoryFiltering({
       <div
         className={cx(
           'title',
-          { 'button-clicked': isCategoryClicked },
+          { 'button-clicked': isSubCategoryClicked },
           `category-color-${category}`,
           `filtering-type-${filteringType}`,
         )}
       >
-        <span>{title}</span>
-        <CloseButton className={cx('close-button', { 'button-clicked': isCategoryClicked })} />
+        <span>{subcategory}</span>
       </div>
     </button>
   );

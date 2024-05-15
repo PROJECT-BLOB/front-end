@@ -5,7 +5,7 @@ export interface UserDetail {
   nickname: string;
   bio: string;
   profileUrl: string;
-  state: 'COMPLETE' | 'INCOMPLETE';
+  state: 'COMPLETE' | 'INCOMPLETE' | 'DELETED';
   postCount: 0;
   likedCount: 0;
   commentCount: 0;

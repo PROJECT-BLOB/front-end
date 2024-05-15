@@ -5,13 +5,13 @@ import styles from './Kebab.module.scss';
 
 interface KebabProps {
   toggleKebab: () => void;
-  useId?: number;
+  blobId?: string;
   postId?: number;
   commentId?: number;
 }
 
-export default function Kebab({ toggleKebab, useId, commentId, postId }: KebabProps) {
-  const { mutate: deletePostMutate } = useDeletePost(postId, useId);
+export default function Kebab({ toggleKebab, blobId, commentId, postId }: KebabProps) {
+  const { mutate: deletePostMutate } = useDeletePost(postId, blobId);
 
   const { mutate: deleteCommentMutate } = useDeleteComment(postId, commentId);
 

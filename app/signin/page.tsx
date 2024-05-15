@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import GoogleLogo from '@/public/icons/logo-google.svg';
@@ -32,10 +31,10 @@ export default function Signin() {
 
   const { toggleModal, setCurrentName } = useModalStore();
 
-  function handleOpenModal(name: ModalName) {
-    setCurrentName(name);
-    toggleModal();
-  }
+  // function handleOpenModal(name: ModalName) {
+  //   setCurrentName(name);
+  //   toggleModal();
+  // }
 
   // 소셜 로그인
   async function handleClickSignin(type: string) {
@@ -82,15 +81,10 @@ export default function Signin() {
           </SigninButton>
         ))}
       </section>
-      <p className={`${styles['title-gray']} ${styles.content}`}>
-        <span>아직 BLOB 회원이 아니세요?</span>
-        <Link href='/signin'>
-          <span className={styles.underline}>회원가입 하기</span>
-        </Link>
-      </p>
-      <button type='button' onClick={() => handleOpenModal('registerUser')}>
+
+      {/* <button type='button' onClick={() => handleOpenModal('registerUser')}>
         회원가입 모달 테스트용
-      </button>
+      </button> */}
     </main>
   );
 }

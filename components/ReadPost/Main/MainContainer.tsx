@@ -118,7 +118,7 @@ export default function MainContainer({ contentData, isFeed, postId }: MainConte
             </button>
           )}
           {isKebabClicked && (
-            <Kebab useId={contentData.author.userId} postId={contentData.postId} toggleKebab={toggleKebab} />
+            <Kebab blobId={contentData.author.blobId} postId={contentData.postId} toggleKebab={toggleKebab} />
           )}
         </div>
         <CategoryBox category={contentData.category} subcategory={contentData.subcategory} />
