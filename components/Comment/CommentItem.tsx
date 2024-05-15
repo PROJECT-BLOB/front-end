@@ -1,50 +1,38 @@
 import classNames from 'classnames/bind';
 
-import { Comment } from '@/types/Post';
+import { Comment, Post } from '@/types/Post';
 import BelovedIcon from '@icons/check-heart-white.svg';
-import { useFetchTargetPost } from '@queries/usePostQueries';
 
 import CategoryBox from '@components/CategoryBox';
 import IconTag from '@components/IconTag/IconTag';
 import styles from '@components/Post/PostItem.module.scss';
 
+import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
+
 const cx = classNames.bind(styles);
 
-export default function CommentItem({ comment }: { comment: Comment }) {
-  const { data, isPending, isError } = useFetchTargetPost(comment.postId);
-
-  if (isPending) {
-    // TODO 스켈레톤 UI 추가
-    return <div>loading...</div>;
-  }
-
-  if (isError) {
-    return <div>데이터 불러오는 중, 에러 발생</div>;
-  }
-
-  const post = data?.data ?? [];
-
+export default function CommentItem({ commentedPost, comment }: { commentedPost: Post; comment: Comment }) {
   return (
     <div className={cx('post-container')}>
       <header className={cx('header')}>
-        <CategoryBox category={post.category} subcategory={post.subcategory} />
+        <CategoryBox category={commentedPost?.category} subcategory={commentedPost.subcategory} />
         <IconTag IconSource={BelovedIcon}>Beloved</IconTag>
       </header>
       <main className={cx('main-default')}>
         <p className={cx('main-content-default')}>
-          <span className={cx('text-black', 'large')}>{post?.title}</span>
+          <span className={cx('text-black', 'large')}>{commentedPost?.title}</span>
           <span className={cx('text-black', 'middle')}>{comment?.content}</span>
         </p>
       </main>
       <main className={cx('main-mobile')}>
-        <span className={cx('text-black', 'large')}>{post?.title}</span>
+        <span className={cx('text-black', 'large')}>{commentedPost?.title}</span>
         <p className={cx('main-content-mobile')}>
           <span className={cx('text-black', 'middle')}>{comment?.content}</span>
         </p>
       </main>
       <footer className={cx('footer')}>
         <p className={cx('footer-content-gap', 'text', 'gray')}>
-          <span>3시간 전</span>
+          <span>{calculateTimePastSinceItCreated(commentedPost?.createdDate)}</span>
         </p>
       </footer>
     </div>
