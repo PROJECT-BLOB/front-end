@@ -21,8 +21,6 @@ interface TabItemProps {
 
 export default function TabItem({ value, isFocused, onClick }: TabItemProps) {
   const handleClick = (e: any) => {
-    console.log('clicked', e.target.innerText);
-
     if (onClick) {
       onClick(e.target.innerText || '');
     }

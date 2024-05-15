@@ -85,7 +85,6 @@ export const getAccessToken = (): string | null => {
     return null; // 서버 환경에서는 토큰을 가져올 수 없음
   }
 
-  // TODO: 로그인 연결되면 쿠키에서 토큰을 가져오도록 수정
   const accessToken = getCookie(ACCESS_TOKEN);
 
   if (accessToken) {
@@ -100,7 +99,6 @@ export const getRefreshToken = (): string | null => {
     return null; // 서버 환경에서는 토큰을 가져올 수 없음
   }
 
-  // TODO: 로그인 연결되면 쿠키에서 토큰을 가져오도록 수정
   const refreshToken = getCookie(REFRESH_TOKEN);
 
   if (refreshToken) {

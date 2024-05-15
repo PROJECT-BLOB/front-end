@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 
 import { Comment, Post } from '@/types/Post';
-import BelovedIcon from '@icons/check-heart-white.svg';
 
 import CategoryBox from '@components/CategoryBox';
 import IconTag from '@components/IconTag/IconTag';
@@ -16,7 +15,7 @@ export default function CommentItem({ commentedPost, comment }: { commentedPost:
     <div className={cx('post-container')}>
       <header className={cx('header')}>
         <CategoryBox category={commentedPost?.category} subcategory={commentedPost.subcategory} />
-        {commentedPost.likeCount >= 100 && <IconTag IconSource={BelovedIcon}>Beloved</IconTag>}
+        {commentedPost.likeCount >= 100 && <IconTag>Beloved</IconTag>}
       </header>
       <main className={cx('main-default')}>
         <p className={cx('main-content-default')}>

@@ -34,8 +34,6 @@ export function useUpdateUserProfile(blobId: string) {
 
       if (status === 200) {
         // TODO: 모달을 닫기 전에 성공했다고 alert창을 띄우는게 좋지 않을까?
-        // 임시
-        alert('프로필이 수정되었습니다.');
       }
 
       queryClient.invalidateQueries({ queryKey: users.detail(blobId).queryKey });
