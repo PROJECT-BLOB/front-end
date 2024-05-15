@@ -13,6 +13,7 @@
   height: 100vh;
   // 헤더랑 푸터 안보이게..
   background-color: $BDS-Grayscale-1;
+  z-index: 1;
 }
 
 .image {

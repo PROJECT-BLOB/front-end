@@ -17,7 +17,6 @@
   padding: 2.4rem;
   /* BDS Effect/Bottom Sheet */
   box-shadow: 0px -3px 4px 0px rgba(0, 0, 0, 0.16);
-  transition: all ease 0.1s;
 }
 
 .top-line {
@@ -36,6 +35,7 @@
   justify-content: space-between;
   gap: 1.9rem;
   align-self: stretch;
+  margin-bottom: 2rem;
   .mention {
     color: $BDS-Grayscale-13;
     text-align: center;
@@ -52,5 +52,34 @@
   }
 }
 
+.order-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.order-mention {
+  color: var(--BDS-Grayscale-6, var(--BDS-Grayscale-6, #bfbfbf));
+  font-feature-settings: 'ss10' on;
+
+  /* BDS/Label 1/Normal */
+  font-family: 'IBM Plex Sans KR';
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 142%;
+  &.active {
+    color: var(--BDS-Grayscale-13, #000);
+    font-feature-settings: 'ss10' on;
+
+    /* BDS/Label 1/Normal */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 142%; /* 19.88px */
+  }
+}
 @include tablet {
 }
