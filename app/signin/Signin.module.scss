@@ -3,14 +3,21 @@
 .signin {
   @include flex-column;
   align-items: center;
-  padding: 8rem 3rem;
+  padding: 8rem 2rem;
+  gap: 6rem;
+
+  @include tablet-and-desktop {
+    padding-top: 22rem;
+    gap: 12rem;
+  }
 }
 
-// .logo {
-//   width: 23.6rem;
-//   height: 10.8rem;
-//   margin-bottom: 12rem;
-// }
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+}
 
 .title {
   color: $BDS-Grayscale-13;
@@ -42,8 +49,6 @@
 .buttons {
   @include flex-column;
   gap: 2rem;
-  margin-top: 2.4rem;
-  margin-bottom: 4rem;
 }
 .content {
   display: flex;

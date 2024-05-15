@@ -1,9 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+import signout from '@apis/oauth/signout';
 import deleteProfileImage from '@apis/user/mypage/deleteProfileImage';
 import getUserDetail from '@apis/user/mypage/getUserDetail';
 import updateUserProfile from '@apis/user/mypage/updateUserProfile';
 import checkBlobId from '@apis/user/sign/checkBlobId';
+import deleteUser from '@apis/user/sign/deleteUser';
+import { useUserStore } from '@stores/userStore';
 
 import { users } from './keys/userQueryKeys';
 
@@ -31,8 +34,6 @@ export function useUpdateUserProfile(blobId: string) {
 
       if (status === 200) {
         // TODO: 모달을 닫기 전에 성공했다고 alert창을 띄우는게 좋지 않을까?
-        // 임시
-        alert('프로필이 수정되었습니다.');
       }
 
       queryClient.invalidateQueries({ queryKey: users.detail(blobId).queryKey });
@@ -58,4 +59,53 @@ export function useDeleteProfileImage(blobId: string) {
       console.error('삭제실패ㅜㅜ:', error);
     },
   });
+}
+
+// 로그아웃
+export function useSignout() {
+  const queryClient = useQueryClient();
+  const { signout: logout } = useUserStore();
+
+  return useMutation({
+    mutationFn: signout,
+    onSuccess: () => {
+      console.log('로그아웃 성공');
+
+      queryClient.invalidateQueries({ queryKey: users.all.queryKey });
+
+      logout();
+      deleteCookies();
+      localStorage.clear();
+    },
+    onError: (error) => {
+      console.error('로그아웃 실패ㅜㅜ:', error);
+    },
+  });
+}
+
+// 회원 탈퇴
+export function useDeleteUser() {
+  const queryClient = useQueryClient();
+  const { signout: logout } = useUserStore();
+
+  return useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      console.log('회원탈퇴 성공');
+
+      queryClient.invalidateQueries({ queryKey: users.all.queryKey });
+
+      logout();
+      deleteCookies();
+      localStorage.clear();
+    },
+    onError: (error) => {
+      console.error('회원탈퇴 실패ㅜㅜ:', error);
+    },
+  });
+}
+
+function deleteCookies() {
+  document.cookie = `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  document.cookie = `refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
