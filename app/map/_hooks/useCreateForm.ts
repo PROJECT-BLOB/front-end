@@ -6,6 +6,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Errors } from '@/types/Errors';
 import createPost from '@apis/post/createPost';
 import { posts } from '@queries/usePostQueries';
+import { useMapStore } from '@stores/useMapStore';
 
 export interface ContentField {
   title: string;
@@ -38,6 +39,10 @@ export default function useCreateForm(toggleModal: () => void) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currentPosition, setCurrentPosition] = useState<LatLngLiteralOrNull>({ lat: 0, lng: 0 });
   const queryClient = useQueryClient();
+  const mapState = useMapStore((state) => state);
+  const { lastSearchCity } = mapState;
+
+  console.log('currentPosition', currentPosition);
 
   function cancelForm() {
     reset();
@@ -70,16 +75,16 @@ export default function useCreateForm(toggleModal: () => void) {
 
     formData = {
       ...formData,
-      cityLat: 37.5518911, // 시티 레벨 검색바에서 가져오기
-      cityLng: 126.9917937, // 시티 레벨 검색바에서 가져오기
-      city: '서울', // 시티 레벨 검색바에서 가져오기
-      country: '대한민국', // 시티 레벨 검색바에서 가져오기
-      actualLat: currentPosition?.lat ?? 0,
-      actualLng: currentPosition?.lng ?? 0,
-      lat: 37.499866,
-      lng: 127.024832,
-      category: 'QUESTION', // 카테고리 중복선택 이슈4
-      // subcategory: '음식점',
+      cityLat: lastSearchCity?.location?.lat ?? 0, // 시티 레벨 검색바에서 가져오기 => 어떻게 해야할까???
+      cityLng: lastSearchCity?.location?.lng ?? 0, // 시티 레벨 검색바에서 가져오기
+      city: lastSearchCity?.city ?? '', // 시티 레벨 검색바에서 가져오기
+      country: lastSearchCity?.country ?? '', // 시티 레벨 검색바에서 가져오기
+      actualLat: currentPosition?.lat ?? 0, // 현재 정보 가져온거에서 가져오기
+      actualLng: currentPosition?.lng ?? 0, // 현재 정보 가져온거에서 가져오기
+      lat: lastSearchCity?.location?.lat ?? 0, // 상세 주소 좌표 -> 미니맵에서 가져오기
+      lng: lastSearchCity?.location?.lng ?? 0, // 상세 주소 좌표 -> 미니맵에서 가져오기
+      category: 'QUESTION', // 카테고리 중복선택 이슈
+      subcategory: 'WEATHER',
     };
 
     try {
@@ -87,8 +92,10 @@ export default function useCreateForm(toggleModal: () => void) {
         const formDataToSend = new FormData();
 
         // 이미지 파일 추가
-        for (let i = 0; i < formData.image.length; i++) {
-          formDataToSend.append('file', formData.image[i]);
+        if (formData.image) {
+          for (let i = 0; i < formData.image.length; i++) {
+            formDataToSend.append('file', formData.image[i]);
+          }
         }
 
         // 데이터 추가

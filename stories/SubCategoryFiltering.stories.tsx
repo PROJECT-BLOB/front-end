@@ -18,5 +18,5 @@ export const Primary = Template.bind({});
 Primary.args = {
   category: '추천',
   filteringType: 'writing',
-  title: '날씨',
+  subcategory: '날씨',
 };

@@ -14,7 +14,7 @@ const Template: StoryFn<CategoryFilteringProps> = (args: CategoryFilteringProps)
 
 export const Primary = Template.bind({});
 Primary.args = {
+  children: '날씨',
   category: '추천',
   filteringType: 'writing',
-  subcategory: '날씨',
 };

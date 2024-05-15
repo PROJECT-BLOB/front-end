@@ -10,7 +10,7 @@ export interface CommentList {
 }
 
 export interface CommentListProps {
-  userId: number;
+  blobId: string;
   page: number;
   size: number;
 }
@@ -18,7 +18,7 @@ export interface CommentListProps {
 export default async function getUserCommentList(
   body: CommentListProps,
 ): Promise<{ data: CommentList; status: number }> {
-  const { data, status } = await instance.get<CommentList>(`/user/${body.userId}/commented`, {
+  const { data, status } = await instance.get<CommentList>(`/user/${body.blobId}/commented`, {
     params: { page: body.page, size: body.size },
   });
 

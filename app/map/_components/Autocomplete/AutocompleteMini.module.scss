@@ -1,0 +1,63 @@
+@import "styles/global-styles/index";
+
+//변수적용이 안되는중 ㅠ 억까하지마라 진짜
+.container {
+  width: 60rem;
+  max-width: 60rem;
+
+  .input-container {
+    display: flex;
+
+    height: 6rem;
+    padding: 1.2rem 2rem 1.2rem 1.6rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    flex-shrink: 0;
+
+    border-radius: 1rem 3.2rem 3.2rem 1rem;
+    border: 2.4px solid var(--BDS-Primary-5, #FF9456);
+    background: var(--BDS-Grayscale-1, #FFF);
+
+
+    input {
+      border: none;
+      width: 100%;
+
+      caret-color: var(--BDS-Primary-5, #FF9456);
+
+      &:focus {
+        outline: 0;
+      }
+    }
+
+    svg {
+      width: 1.8rem;
+      height: 1.8rem;
+      flex-shrink: 0;
+      stroke-width: 2.4px;
+      stroke: var(--BDS-Primary-5, #FF9456);
+    }
+  }
+
+  ul {
+    z-index: $above +$z-index-root;
+    position: absolute;
+    background-color: whitesmoke;
+    width: inherit;
+    cursor: pointer;
+    border-radius: 1%;
+
+    li {
+      display: flex;
+      padding: 1.2rem 2rem 1.2rem 1.6rem;
+      align-items: flex-start;
+      gap: 1rem;
+
+      &:hover {
+        border-bottom: 1px solid var(--BDS-Grayscale-5, #D9D9D9);
+        background: var(--BDS-Primary-1, linear-gradient(90deg, #FFF2EA 0%, #FFF0F8 100%));
+      }
+    }
+  }
+}

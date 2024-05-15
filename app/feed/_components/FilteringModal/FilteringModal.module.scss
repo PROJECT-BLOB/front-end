@@ -4,11 +4,17 @@
   @include flex-column;
   gap: 4.8rem;
 
-  width: 35.5rem;
+  width: 39.5rem;
+  max-height: 100vh;
+  overflow: auto;
   padding: 3.2rem 2.8rem 3.2rem 3.6rem;
-
   background: $BDS-Grayscale-1;
   box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.5);
+}
+@include tablet {
+  .modal {
+    height: auto;
+  }
 }
 
 .header {
@@ -20,7 +26,6 @@
 .title {
   color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
-  font-family: 'IBM Plex Sans KR';
   font-size: 2rem;
   font-weight: 600;
   line-height: 140%; /* 28px */
@@ -40,7 +45,6 @@
 
 .sub-title {
   color: $BDS-Grayscale-13;
-  font-family: 'IBM Plex Sans KR';
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 150%; /* 24px */
@@ -52,16 +56,39 @@
   align-items: flex-start;
   gap: 1.2rem;
   align-self: stretch;
+  margin-bottom: 7.6rem;
 }
 
 .category-list {
   display: flex;
-  white-space: nowrap;
+  flex-wrap: wrap;
   gap: 1.2rem;
+  width: 31.5rem;
+  position: relative;
 }
 
 .sub-category-list {
+  position: absolute;
+  top: 11rem;
+  left: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
+}
+
+.date-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.button-box {
+  width: 7rem;
+  height: 2rem;
 }

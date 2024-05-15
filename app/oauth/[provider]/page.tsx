@@ -14,26 +14,26 @@ interface providerType {
 }
 
 export default function AwaitSignin({ params }: { params: providerType }) {
-  const { signin, signout, setUserId } = useUserStore();
+  const { signin, signout, setBlobId } = useUserStore();
   const { setOAuth } = useOAuthStore();
 
   const router = useRouter();
   const code = typeof window !== 'undefined' ? new URL(window.location.href).searchParams.get('code') : null;
 
   useEffect(() => {
-    function storeOAuth(userId: number, accessToken: string, refreshToken: string, state: string) {
+    function storeOAuth(blobId: string, accessToken: string, refreshToken: string, state: string) {
       document.cookie = `accessToken=${accessToken}; path=/`;
       document.cookie = `refreshToken=${refreshToken}; path=/`;
-      setOAuth(userId, accessToken, refreshToken, state);
+      setOAuth(blobId, accessToken, refreshToken, state);
 
-      setUserId(userId);
+      setBlobId(blobId);
     }
 
     async function setOAuthData() {
       const { data } = await getOAuthData(params.provider, code);
-      const { userId, accessToken, refreshToken, state } = data;
+      const { blobId, accessToken, refreshToken, state } = data;
 
-      storeOAuth(userId, accessToken, refreshToken, state);
+      storeOAuth(blobId, accessToken, refreshToken, state);
 
       return state;
     }
@@ -46,14 +46,12 @@ export default function AwaitSignin({ params }: { params: providerType }) {
         signin();
         router.push(REDIRECT_URL_SIGN_IN_COMPLETE);
       } else if (state === 'INCOMPLETE') {
-        // TODO: 로그아웃 기능이 아직 없어서 임시로 넣어둠-나중에 지울 것
-        signout();
         router.push(REDIRECT_URL_SIGN_IN_INCOMPLETE);
       }
     }
 
     redirectBasedOnState();
-  }, [code, params.provider, router, setUserId, signin, signout, setOAuth]);
+  }, [code, params.provider, router, setBlobId, signin, signout, setOAuth]);
 
   return (
     <>

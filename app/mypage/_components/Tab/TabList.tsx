@@ -6,7 +6,7 @@ import TabItem from './TabItem';
 import styles from './TabList.module.scss';
 
 const MYPAGE_TABS = [
-  { label: 'MyPosts', value: '내가 쓴 글' },
+  { label: 'MyPosts', value: '작성한 글' },
   { label: 'Bookmarks', value: '저장한 글' },
   { label: 'MyComments', value: '댓글 단 글' },
 ];
