@@ -2,7 +2,6 @@ import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import { filteredData } from '@/app/feed/page';
 import createComment from '@apis/post/createComment';
 import createReply from '@apis/post/creatReply';
 import deleteComment from '@apis/post/deleteComment';
