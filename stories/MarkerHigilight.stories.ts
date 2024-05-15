@@ -1,5 +1,5 @@
-import { MarkerType } from '@/app/map/_components/Marker/Marker';
 import MarkerHighlight from '@/app/map/_components/Marker/MarkerHighlight';
+import { Category } from '@apis/map/getMarkers';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -24,7 +24,7 @@ type Story = StoryObj<typeof meta>;
 
 export const MarkerHighlight_Default: Story = {
   args: {
-    markerType: 'recommendation' as MarkerType,
+    markerType: 'recommendation' as Category,
     title: '제목이 없습니다.',
     createdAt: '3시간전',
     children: '내용이 없습니다.',

@@ -9,7 +9,8 @@ import { DEFAULT_STYLES, DISPLAY_NONE } from '@/app/map/_constants/mapOptions';
 import { useMapStore } from '@stores/useMapStore';
 
 import style from './MapTest.module.scss';
-import formatted from '../../_mock/trees';
+
+import LatLngBoundsLiteral = google.maps.LatLngBoundsLiteral;
 
 interface BlobMapProps {
   isDisplaying?: boolean;
@@ -18,13 +19,16 @@ interface BlobMapProps {
 export default function BlobMap({ isDisplaying = true }: BlobMapProps) {
   const lastMapCenter = useMapStore((state) => state.lastMapCenter);
   const setLastMapCenter = useMapStore((state) => state.setLastMapCenter);
-
-  const lastSearchCity = useMapStore((state) => state.lastSearchCity);
-  console.log('lastSearchCity', lastSearchCity);
+  const setLastBound = useMapStore((state) => state.setLastBound);
 
   const handleDragMap = (event: MapEvent) => {
     const newLocation = event.map.getCenter()?.toJSON();
     setLastMapCenter(newLocation);
+  };
+
+  const handleChangeBound = (event: MapEvent) => {
+    const newBound = event.map.getBounds()?.toJSON() as LatLngBoundsLiteral;
+    setLastBound(newBound);
   };
 
   useEffect(() => {}, []);
@@ -34,13 +38,15 @@ export default function BlobMap({ isDisplaying = true }: BlobMapProps) {
       <Map
         defaultCenter={lastMapCenter}
         defaultZoom={15}
+        gestureHandling={'greedy'}
         style={isDisplaying ? DEFAULT_STYLES : DISPLAY_NONE}
         minZoom={4}
         disableDefaultUI
         mapId={process.env.NEXT_PUBLIC_MAP_ID}
         onDrag={handleDragMap}
+        onBoundsChanged={handleChangeBound}
       >
-        <Markers points={formatted} />
+        <Markers />
         <MapControlComponents />
         <MapHandler />
       </Map>

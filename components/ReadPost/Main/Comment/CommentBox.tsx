@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { Comment } from '@/types/Post';
 import { useFetchTargetPostComment } from '@queries/usePostQueries';
 
+import Loading from '@components/Loading/Loading';
+
 import styles from './CommentBox.module.scss';
 import CommentContainer from './CommentContainer';
 import CommentSubmitForm from './CommentSubmitForm';
@@ -18,7 +20,7 @@ export default function CommentBox({ postId, isFeed }: { postId: number; isFeed:
 
   if (isPending) {
     // TODO 스켈레톤 UI 추가
-    return <div className={styles.loading}>loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
@@ -34,9 +36,8 @@ export default function CommentBox({ postId, isFeed }: { postId: number; isFeed:
           <CommentContainer key={comment.commentId} comment={comment} setReplyInformation={setReplyInformation} />
         )),
       )}
-      {/* // TODO 로딩 인디케이터 추가 */}
       {/* // <div ref={ref} />가 화면에 보일 때 fetchNextPage 호출 */}
-      {isFetchingNextPage ? <div className={styles.loading}>로딩 중...</div> : <div ref={ref} />}
+      {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
       <div className={`${styles['form-container']} ${isFeed ? styles.feed : ''}`}>
         <CommentSubmitForm
           replyInformation={replyInformation}

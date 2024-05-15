@@ -31,11 +31,6 @@ export default function Signin() {
 
   const { toggleModal, setCurrentName } = useModalStore();
 
-  // function handleOpenModal(name: ModalName) {
-  //   setCurrentName(name);
-  //   toggleModal();
-  // }
-
   // 소셜 로그인
   async function handleClickSignin(type: string) {
     const { data } = await getRedirectUrl(type);
@@ -58,33 +53,29 @@ export default function Signin() {
 
   useEffect(() => {
     if (isSignin) {
-      // 테스트를 위해 잠시 주석처리...
-      console.log('로그인된 유저입니다. 맵으로 이동...');
-      // router.push('map');
+      // console.log('로그인된 유저입니다. 맵으로 이동...');
+      router.push('map');
     }
   }, [isSignin, router]);
 
   return (
-    <main className={styles.signin}>
-      {/* TODO: 로고크기 나중에 수정 */}
-      <Logo />
-      <h1 className={styles.title}>SNS로 간편하게 로그인하기</h1>
-      <section className={styles.buttons}>
-        {OAUTH_PROVIDER.map((provider) => (
-          <SigninButton
-            key={provider.id}
-            providerName={provider.value}
-            iconSource={provider.iconSource}
-            onClick={() => handleClickSignin(provider.value)}
-          >
-            {provider.text}
-          </SigninButton>
-        ))}
-      </section>
-
-      {/* <button type='button' onClick={() => handleOpenModal('registerUser')}>
-        회원가입 모달 테스트용
-      </button> */}
-    </main>
+    <div className={styles.signin}>
+      <Logo size='large' />
+      <main className={styles.main}>
+        <h1 className={styles.title}>SNS로 간편하게 로그인하기</h1>
+        <div className={styles.buttons}>
+          {OAUTH_PROVIDER.map((provider) => (
+            <SigninButton
+              key={provider.id}
+              providerName={provider.value}
+              iconSource={provider.iconSource}
+              onClick={() => handleClickSignin(provider.value)}
+            >
+              {provider.text}
+            </SigninButton>
+          ))}
+        </div>
+      </main>
+    </div>
   );
 }

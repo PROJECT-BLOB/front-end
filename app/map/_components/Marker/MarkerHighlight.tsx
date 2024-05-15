@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { MarkerType } from '@/app/map/_components/Marker/Marker';
+import { Category } from '@apis/map/getMarkers';
 import PolygonIcon from '@icons/polygon-1.svg?component';
 
 import styles from './MarkerHighlight.module.scss';
@@ -10,13 +10,13 @@ import styles from './MarkerHighlight.module.scss';
 const cx = classNames.bind(styles);
 
 export interface MarkerHighlightProps {
-  markerType: MarkerType;
+  markerType: Category;
   title: string;
   createdAt: string;
 }
 
 export default function MarkerHighlight({
-  markerType = 'recommendation',
+  markerType = 'RECOMMENDED',
   title = '제목이 없습니다.',
   createdAt,
   children,

@@ -5,12 +5,9 @@ import { Cluster, ClusterStats, Marker, MarkerClusterer } from '@googlemaps/mark
 import { AdvancedMarker, useMap } from '@vis.gl/react-google-maps';
 import { interpolateRgb } from 'd3-interpolate';
 
-// import Marker from '@/app/map/_components/Marker/Marker';
 import MarkerWithInfoWindow from '@/app/map/_components/Marker/MarkerWithInfoWindow';
-import trees from '@/app/map/_mock/trees';
-
-type Point = google.maps.LatLngLiteral & { key: string };
-type Props = { points: Point[] };
+import { useGetMarkers } from '@queries/useBlobmapQueries';
+import { useMapStore } from '@stores/useMapStore';
 
 const interpolatedRenderer = {
   palette: interpolateRgb('red', 'blue'),
@@ -43,8 +40,10 @@ const interpolatedRenderer = {
 };
 
 // eslint-disable-next-line
-export default function Markers({ points }: Props) {
-  const locations = trees;
+export default function Markers() {
+  const lastBound = useMapStore((state) => state.lastBound);
+  const { data } = useGetMarkers([], lastBound);
+  const locations = data ? data.data : [];
   const map = useMap();
   const [markers, setMarkers] = useState<{ [key: string]: Marker }>({});
   const clusterer = useRef<MarkerClusterer | null>(null);
@@ -86,13 +85,13 @@ export default function Markers({ points }: Props) {
       {locations.map((point) => (
         <AdvancedMarker
           // animation={google.maps.Animation.BOUNCE}
-          key={`${point.lat}_${point.lng}`}
-          title={point.name}
+          key={`${point.postId}`}
+          title={point.title}
           position={{ lat: point.lat, lng: point.lng }}
           onClick={() => console.log('MarkerClicked')}
-          ref={(marker) => setMarkerRef(marker, point.key)}
+          ref={(marker) => setMarkerRef(marker, point.postId.toString())}
         >
-          <MarkerWithInfoWindow createdAt={'3시간전'} title={point.name} markerType={'blame'} opacity={100} />
+          <MarkerWithInfoWindow createdAt={'3시간전'} title={point.title} markerType={point.category} opacity={100} />
         </AdvancedMarker>
       ))}
     </>

@@ -30,18 +30,16 @@ export default function useCreateUserForm() {
     const { id, nickname } = userData;
 
     // 회원가입 요청
-    const { status } = await createUser({ id, nickname });
+    const { data, status } = await createUser({ id, nickname });
     // console.log('data', data);
 
     if (status === 200) {
-      console.log('회원가입 성공');
+      console.log('회원가입 성공', data);
       // 회원가입 성공하면 로컬스토리지에 블롭아이디 저장
       setBlobId(id);
-      // TODO: 일단 마이페이지로 이동시킴. 나중에 맵으로 이동하는 것으로 변경예정
       signin();
       toggleModal();
-      router.push('/mypage');
-      // router.push('/map');
+      router.push('/map');
 
       return;
     }
