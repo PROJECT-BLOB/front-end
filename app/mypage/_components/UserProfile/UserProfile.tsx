@@ -8,6 +8,7 @@ import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import Avatar from '@components/Avatar/Avatar';
 import MonoButton from '@components/Button/MonoButton';
+import Loading from '@components/Loading/Loading';
 
 import styles from './UserProfile.module.scss';
 
@@ -32,7 +33,7 @@ export default function UserProfile({
 
   const { data, isLoading, isError, error } = useDetailQueries(blobId);
 
-  if (isLoading) return <div>로딩중...</div>;
+  if (isLoading) return <Loading />;
 
   if (isError) return <div>에러 발생: {error.toString()}</div>;
 

@@ -1,6 +1,8 @@
 import { Notification } from '@/types/Notification';
 import { useFetchNotificationList } from '@queries/useNotificationQueries';
 
+import Loading from '@components/Loading/Loading';
+
 import NotificationItem from './NotificationItem';
 import styles from './NotificationList.module.scss';
 
@@ -9,7 +11,7 @@ export default function NotificationList() {
   const notificationPages = data?.pages ?? [];
 
   if (isPending) {
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
@@ -28,7 +30,7 @@ export default function NotificationList() {
         <div className={styles.empty}>새로운 알림이 없어요.</div>
       )}
 
-      {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}
+      {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
     </div>
   );
 }

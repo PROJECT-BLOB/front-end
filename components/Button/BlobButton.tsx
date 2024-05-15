@@ -12,7 +12,6 @@ export interface ButtonProps {
 
 export default function BlobButton({ text, type, color, onClick, disabled }: ButtonProps) {
   return (
-    // TODO: type 에서 에러 처리
     // eslint-disable-next-line react/button-has-type
     <button type={type} className={`${styles[color]}`} onClick={onClick} disabled={disabled}>
       {text}

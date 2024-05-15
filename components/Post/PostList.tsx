@@ -8,6 +8,7 @@ import { useFetchBookmarkList, useFetchFeedList, useFetchPostList } from '@queri
 import { FilteredData } from '@stores/useFilteringStore';
 
 import CtaComponent from '@components/CtaComponent/CtaComponent';
+import Loading from '@components/Loading/Loading';
 
 import PostItem from './PostItem';
 import styles from './PostList.module.scss';
@@ -54,8 +55,7 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
   }, [filteredData, refetch]);
 
   if (isPending) {
-    // TODO 스켈레톤 UI 추가
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
@@ -75,9 +75,8 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
       ) : (
         <CtaComponent />
       )}
-      {/*  TODO 로딩 인디케이터 추가 */}
 
-      {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}
+      {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
     </div>
   );
 }

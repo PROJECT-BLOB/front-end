@@ -1,4 +1,6 @@
-import Marker, { MarkerType } from '@/app/map/_components/Marker/Marker';
+// eslint-disable-next-line import/named
+import Marker from '@/app/map/_components/Marker/Marker';
+import { Category } from '@apis/map/getMarkers';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
@@ -28,7 +30,7 @@ type Story = StoryObj<typeof Marker>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Marker_Default: Story = {
   args: {
-    markerType: 'recommendation' as MarkerType,
+    markerType: 'recommendation' as Category,
     opacity: 100,
   },
 };

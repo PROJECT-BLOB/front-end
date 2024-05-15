@@ -9,6 +9,10 @@ import { REDIRECT_URL_SIGN_IN_COMPLETE, REDIRECT_URL_SIGN_IN_INCOMPLETE } from '
 import { useOAuthStore } from '@stores/useOAuthStore';
 import { useUserStore } from '@stores/userStore';
 
+import Loading from '@components/Loading/Loading';
+
+import styles from './AwaitSignin.module.scss';
+
 interface providerType {
   provider: 'naver' | 'kakao' | 'google';
 }
@@ -54,8 +58,9 @@ export default function AwaitSignin({ params }: { params: providerType }) {
   }, [code, params.provider, router, setBlobId, signin, signout, setOAuth]);
 
   return (
-    <>
-      <h1>{`This is OAUTH - ${params.provider} test page`}</h1>
-    </>
+    <main className={styles.main}>
+      <Loading />
+      <h1 className={styles.title}>{`${params.provider} 로그인 중`}</h1>
+    </main>
   );
 }
