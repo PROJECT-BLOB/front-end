@@ -6,6 +6,7 @@ import { useFetchTargetPost } from '@queries/usePostQueries';
 
 import CategoryBox from '@components/CategoryBox';
 import IconTag from '@components/IconTag/IconTag';
+import Loading from '@components/Loading/Loading';
 import styles from '@components/Post/PostItem.module.scss';
 
 const cx = classNames.bind(styles);
@@ -14,8 +15,7 @@ export default function CommentItem({ comment }: { comment: Comment }) {
   const { data, isPending, isError } = useFetchTargetPost(comment.postId);
 
   if (isPending) {
-    // TODO 스켈레톤 UI 추가
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
