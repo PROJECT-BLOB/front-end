@@ -16,7 +16,7 @@
 
 
 .color {
-  &-recommendation {
+  &-RECOMMENDED {
     background-color: $BDS-Category-recommend_basic;
 
     &:hover {
@@ -28,7 +28,7 @@
     }
   }
 
-  &-blame {
+  &-NOT_RECOMMENDED {
     background: $BDS-Category-cation_basic;
 
     &:hover {
@@ -40,7 +40,7 @@
     }
   }
 
-  &-question {
+  &-QUESTION {
     background: $BDS-Category-question_basic;
 
     &:hover {
@@ -54,7 +54,7 @@
 
   }
 
-  &-caution {
+  &-WARNING {
     background: $BDS-Category-help_basic;
 
     &:hover {
@@ -67,7 +67,7 @@
 
   }
 
-  &-help {
+  &-HELP {
 
     background: $BDS-Category-tip_basic;
 
