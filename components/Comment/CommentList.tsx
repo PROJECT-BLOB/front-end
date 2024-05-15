@@ -6,6 +6,7 @@ import { Post } from '@/types/Post';
 import { useFetchCommentList } from '@queries/usePostQueries';
 
 import CtaComponent from '@components/CtaComponent/CtaComponent';
+import Loading from '@components/Loading/Loading';
 
 import CommentedPostItem from './CommentedPostItem';
 import styles from '../Post/PostList.module.scss';
@@ -20,8 +21,7 @@ export default function CommentList({ blobId }: GetCommentListProps) {
   const { data: commentsData, isPending, isError, isFetchingNextPage, ref } = useFetchCommentList(blobId || '');
 
   if (isPending) {
-    // TODO 스켈레톤 UI 추가
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
@@ -39,9 +39,8 @@ export default function CommentList({ blobId }: GetCommentListProps) {
       ) : (
         <CtaComponent />
       )}
-      {/*  TODO 로딩 인디케이터 추가 */}
 
-      {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}
+      {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
     </div>
   );
 }

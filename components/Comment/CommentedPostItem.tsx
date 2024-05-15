@@ -2,6 +2,8 @@ import { Comment, Post } from '@/types/Post';
 import { useFetchTargetPostComment } from '@queries/usePostQueries';
 import { useUserStore } from '@stores/userStore';
 
+import Loading from '@components/Loading/Loading';
+
 import CommentItem from './CommentItem';
 
 // TODO: 댓글이 다 안 불러와짐... 이유를 모르겟음
@@ -12,8 +14,7 @@ export default function CommentedPostItem({ commentedPost }: { commentedPost: Po
   const { data: commentsData, isPending, isError } = useFetchTargetPostComment(commentedPost.postId);
 
   if (isPending) {
-    // TODO 스켈레톤 UI 추가
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
