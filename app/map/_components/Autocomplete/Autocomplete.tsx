@@ -1,12 +1,22 @@
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 
 import { useMap, useMapsLibrary } from '@vis.gl/react-google-maps';
+import classNames from 'classnames/bind';
 
-import './autocomplete.css';
 import { SearchedCity } from '@/types/Map';
+import SearchLensIcon from '@icons/search-lens-color.svg?component';
 import { useMapStore } from '@stores/useMapStore';
 
-export default function Autocomplete() {
+import styles from './Autocomplete.module.scss';
+// 이부분에 스타일링 하시면 됩니다.
+import styles2 from './AutocompleteMini.module.scss';
+
+type AutocompleteType = 'normal' | 'mini';
+interface AutocompleteProps {
+  type?: AutocompleteType;
+}
+
+export default function Autocomplete({ type = 'normal' }: AutocompleteProps) {
   const map = useMap();
   const places = useMapsLibrary('places');
 
@@ -22,6 +32,8 @@ export default function Autocomplete() {
 
   const setLastSearchCity = useMapStore((state) => state.setLastSearchCity);
   const setLastMapCenter = useMapStore((state) => state.setLastMapCenter);
+
+  const cx = type === 'normal' ? classNames.bind(styles) : classNames.bind(styles2);
 
   useEffect(() => {
     if (!places || !map) return;
@@ -103,12 +115,15 @@ export default function Autocomplete() {
   );
 
   return (
-    <div className='autocomplete-container'>
-      <input
-        value={inputValue}
-        onInput={(event: FormEvent<HTMLInputElement>) => onInputChange(event)}
-        placeholder='BLOB NOW!'
-      />
+    <div className={cx('container')}>
+      <div className={cx('input-container')}>
+        <input
+          value={inputValue}
+          onInput={(event: FormEvent<HTMLInputElement>) => onInputChange(event)}
+          placeholder='궁금한 도시를 검색해보세요 :)'
+        />
+        <SearchLensIcon />
+      </div>
 
       {predictionResults.length > 0 && (
         <ul className='custom-list'>
