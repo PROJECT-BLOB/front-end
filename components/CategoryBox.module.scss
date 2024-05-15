@@ -8,29 +8,54 @@
   flex-shrink: 0;
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
-  color: $BDS-Grayscale-1;
   font-feature-settings: 'ss10' on;
   font-size: 1.3rem;
   font-weight: 500;
   line-height: 138.5%; /* 18.005px */
+  border-radius: 4px;
+
+  &.option {
+    color: var(--BDS-Grayscale-13, var(--BDS-Grayscale-13, #000));
+    font-feature-settings: 'ss10' on;
+
+    /* BDS/Label 2 */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 138%; /* 17.94px */
+    border: 1px solid var(--BDS-Grayscale-13, #000);
+    background: var(--BDS-Grayscale-1, #fff);
+  }
 
   &.pink {
+    color: $BDS-Grayscale-1;
     background: $BDS-Category-recommend_press;
   }
 
   &.yellow {
+    color: $BDS-Grayscale-1;
     background: $BDS-Category-question_press;
   }
 
   &.red {
+    color: $BDS-Grayscale-1;
     background: $BDS-Category-cation_press;
   }
 
   &.blue {
+    color: $BDS-Grayscale-1;
     background: $BDS-Category-tip_press;
   }
 
   &.green {
+    color: $BDS-Grayscale-1;
     background: $BDS-Category-help_press;
   }
+}
+
+.image-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
