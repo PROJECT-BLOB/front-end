@@ -22,23 +22,20 @@
       border: none;
       width: 100%;
 
-      caret-color: var(--BDS-Grayscale-6, #bfbfbf);
-
       &:focus {
+        border: none;
+
         border-bottom: 2.4px solid var(--BDS-Primary-3, #ffc7a6);
         background: var(--BDS-Grayscale-1, #fff);
       }
     }
 
     svg {
-      width: 1.8rem; 
+      width: 1.8rem;
       height: 1.8rem;
       flex-shrink: 0;
       stroke-width: 2.4px;
-      stroke: var(--BDS-Grayscale-6, #bfbfbf);
-      &:focus {
-        stroke: var(--BDS-Primary-3, #ffc7a6);
-      }
+      stroke: var(--BDS-Primary-5, #ff9456);
     }
   }
 
