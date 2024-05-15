@@ -10,8 +10,8 @@ import useCreateForm from '@/app/map/_hooks/useCreateForm';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
-import CategoryFiltering, { Category } from '@components/Category/CategoryFiltering';
-import SubCategoryFiltering from '@components/Category/SubCategoryFiltering';
+// import CategoryFiltering, { Category } from '@components/Category/CategoryFiltering';
+// import SubCategoryFiltering from '@components/Category/SubCategoryFiltering';
 import ImageUploader from '@components/ImageUploader';
 
 import PositionDetail from './PositionDetail';
@@ -21,9 +21,9 @@ import BlobButton from '../../Button/BlobButton';
 
 const cx = classNames.bind(styles);
 
-const categories: Category[] = ['추천', '비추천', '질문', '주의', '도움요청'];
+// const categories: Category[] = ['추천', '비추천', '질문', '주의', '도움요청'];
 
-const subCategories = ['날씨', '음식점', '숙소', '병원', '화장실', '약국', '교통', '박물관', '관광지', 'ATM'];
+// const subCategories = ['날씨', '음식점', '숙소', '병원', '화장실', '약국', '교통', '박물관', '관광지', 'ATM'];
 
 export default function WritePost() {
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
@@ -46,15 +46,15 @@ export default function WritePost() {
             카테고리<span className={cx('force')}> * </span>
           </p>
           <div className={cx('category-list')}>
-            {categories.map((category) => (
+            {/* {categories.map((category) => (
               <CategoryFiltering key={category} category={category} filteringType='writing' />
-            ))}
+            ))} */}
           </div>
 
           <div className={cx('sub-category-list')}>
-            {subCategories.map((subcategory) => (
+            {/* {subCategories.map((subcategory) => (
               <SubCategoryFiltering key={subcategory} category='추천' filteringType='writing' title={subcategory} />
-            ))}
+            ))} */}
           </div>
           <PostModalInput
             required

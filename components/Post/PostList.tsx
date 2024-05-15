@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { filteredData } from '@/app/feed/page';
 import CommentItem from '@/app/mypage/_components/Comment/CommentItem';
 import { Comment, Post } from '@/types/Post';
 import { useFetchBookmarkList, useFetchCommentList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
+import { FilteredData } from '@stores/useFilteringStore';
 
 import CtaComponent from '@components/CtaComponent/CtaComponent';
 
@@ -18,7 +18,7 @@ const cx = classNames.bind(styles);
 interface GetPostListProps {
   blobId?: string;
   selectedTab?: string;
-  filteredData?: filteredData;
+  filteredData?: FilteredData;
 }
 
 // TODO: 이 파일 전체 리팩토링 해야됨
@@ -54,6 +54,7 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
 
   useEffect(() => {
     refetch();
+    console.log(filteredData);
   }, [filteredData, refetch]);
 
   if (isPending) {

@@ -2,7 +2,6 @@ import { createQueryKeys } from '@lukemorales/query-key-factory';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import { filteredData } from '@/app/feed/page';
 import createComment from '@apis/post/createComment';
 import createReply from '@apis/post/creatReply';
 import deleteComment from '@apis/post/deleteComment';
@@ -18,6 +17,7 @@ import getUserBookmarkList from '@apis/user/mypage/getUserBookmarkList';
 import getUserCommentList from '@apis/user/mypage/getUserCommentList';
 import getUserPostList from '@apis/user/mypage/getUserPostList';
 import { COMMENTS_PAGE_LIMIT, POSTS_PAGE_LIMIT } from '@constants/pageValues';
+import { FilteredData } from '@stores/useFilteringStore';
 
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 
@@ -53,7 +53,7 @@ export function useFetchCommentList(blobId: string) {
   });
 }
 
-export function useFetchFeedList(filteredData: filteredData) {
+export function useFetchFeedList(filteredData: FilteredData) {
   return useInfiniteScrollQuery({
     queryKey: posts.feedList().queryKey,
     queryFn: (page: number) =>
