@@ -25,8 +25,6 @@
 }
 
 .form {
-  //야매로 일단 오버플로우...
-  overflow-x: scroll;
   display: flex;
   padding: 2rem 1.75rem 2rem 2.25rem;
   flex-direction: column;
@@ -48,6 +46,8 @@
   background-color: $BDS-Grayscale-1;
 }
 .body-content {
+  gap: 3.2rem;
+
   display: flex;
   flex-direction: column; // 이걸 다 따로 주기
 }
@@ -57,20 +57,19 @@
   display: flex;
   padding: 2rem 1.75rem 2rem 2.25rem;
   align-items: flex-start;
-  gap: 2rem;
   background-color: $BDS-Grayscale-1;
 }
-.body-image{
+.body-image {
   display: flex;
   flex-direction: row;
 }
 
-.category-title {
+.title {
   color: $BDS-Grayscale-13;
 
   /* BDS/Body 1/Highlight */
   font-family: 'IBM Plex Sans KR';
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
   line-height: 150%; /* 1.5rem */
@@ -94,6 +93,7 @@
 }
 
 .category-list {
+  overflow: auto;
   display: flex;
   white-space: nowrap;
   gap: 1.2rem;

@@ -1,0 +1,28 @@
+@import '/styles/global-styles/color-pallete';
+
+.minimap-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 33.1rem;
+  height: 18rem;
+  align-items: flex-end;
+  gap: 0.8rem;
+}
+
+.current-location-button {
+  display: flex;
+  width: 120px;
+  height: 20px;
+  gap: 0.4rem;
+  background-color: $BDS-Grayscale-1;
+  color: $BDS-Grayscale-13;
+  cursor: pointer;
+
+  font-feature-settings: 'ss10' on;
+  /* BDS/Caption 1 */
+  font-family: 'IBM Plex Sans';
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 133%; /* 15.96px */
+}
