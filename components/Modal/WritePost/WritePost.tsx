@@ -1,3 +1,4 @@
+// import { useState } from 'react';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import { APIProvider } from '@vis.gl/react-google-maps';
@@ -10,8 +11,8 @@ import useCreateForm from '@/app/map/_hooks/useCreateForm';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
-// import CategoryFiltering, { Category } from '@components/Category/CategoryFiltering';
-// import SubCategoryFiltering from '@components/Category/SubCategoryFiltering';
+// import CategoryFiltering from '@components/Category/CategoryFiltering';
+// import SubCategoryFiltering, { subCategories } from '@components/Category/SubCategoryFiltering';
 import ImageUploader from '@components/ImageUploader';
 
 import PositionDetail from './PositionDetail';
@@ -21,16 +22,21 @@ import BlobButton from '../../Button/BlobButton';
 
 const cx = classNames.bind(styles);
 
-// const categories: Category[] = ['추천', '비추천', '질문', '주의', '도움요청'];
-
-// const subCategories = ['날씨', '음식점', '숙소', '병원', '화장실', '약국', '교통', '박물관', '관광지', 'ATM'];
-
 export default function WritePost() {
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
   const { toggleModal } = useModalStore();
   const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal);
+  // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  // const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
 
-  // 선택된 도시의 정보를 담을 상태 변수
+  // const handleCategoryClick = (category: string) => {
+  //   setSelectedCategory(category);
+  //   setSelectedSubCategory(null); // 카테고리를 선택하면 서브카테고리 선택을 초기화
+  // };
+
+  // const handleSubCategoryClick = (subcategory: string) => {
+  //   setSelectedSubCategory(subcategory);
+  // };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cx('form')} encType='multipart/form-data'>
@@ -45,17 +51,32 @@ export default function WritePost() {
           <p className={cx('title')}>
             카테고리<span className={cx('force')}> * </span>
           </p>
-          <div className={cx('category-list')}>
-            {/* {categories.map((category) => (
-              <CategoryFiltering key={category} category={category} filteringType='writing' />
-            ))} */}
-          </div>
-
-          <div className={cx('sub-category-list')}>
-            {/* {subCategories.map((subcategory) => (
-              <SubCategoryFiltering key={subcategory} category='추천' filteringType='writing' title={subcategory} />
-            ))} */}
-          </div>
+          {/* <div className={cx('category-list')}>
+            {categories.map((category) => (
+              <CategoryFiltering
+                key={category}
+                category={category}
+                filteringType='feed'
+                setSelectedCategories={setSelectedCategories}
+                setActiveCategory={setActiveCategory}
+              >
+                {category === activeCategory && (
+                  <div className={cx('sub-category-list')}>
+                    {subCategories.map((subcategory) => (
+                      <SubCategoryFiltering
+                        key={subcategory}
+                        category={category}
+                        filteringType='feed'
+                        subcategory={subcategory}
+                        onClick={() => handleSubCategoryClick(category, subcategory)}
+                        selectedSubCategories={selectedCategories[category].subCategories}
+                      />
+                    ))}
+                  </div>
+                )}
+              </CategoryFiltering>
+            ))}
+          </div> */}
           <PostModalInput
             required
             register={register as unknown as UseFormRegister<FieldValues>}
@@ -78,7 +99,7 @@ export default function WritePost() {
           />
           <p className={cx('title')}> 어디에 관한 글인가요? (도시까지)</p>
           <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
-            <Autocomplete />
+            <Autocomplete type='mini' />
             <BlobMap isDisplaying={false} />
           </APIProvider>
           <PositionDetail />
