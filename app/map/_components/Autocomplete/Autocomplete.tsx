@@ -13,7 +13,7 @@ import styles2 from './AutocompleteMini.module.scss';
 
 type AutocompleteType = 'normal' | 'mini';
 interface AutocompleteProps {
-  type: AutocompleteType;
+  type?: AutocompleteType;
 }
 
 export default function Autocomplete({ type = 'normal' }: AutocompleteProps) {
