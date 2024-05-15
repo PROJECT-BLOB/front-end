@@ -28,6 +28,7 @@ export default function MiniMap() {
         (position) => {
           const { latitude, longitude } = position.coords;
           setSelectedCity({ cityName: '현재 위치', lat: latitude, lng: longitude });
+          console.log('현재 위치', latitude, longitude);
         },
         (error) => {
           console.error('Error getting current position', error);
@@ -46,24 +47,30 @@ export default function MiniMap() {
   useEffect(() => {}, []);
 
   return (
-    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || ''} libraries={['marker']}>
-      <div className={style['map-container']}>
-        <Map
-          defaultCenter={lastMapCenter}
-          defaultZoom={14}
-          style={MINI_MAP_STYLES}
-          maxZoom={14}
-          minZoom={14}
-          disableDefaultUI
-          mapId={process.env.NEXT_PUBLIC_MAP_ID}
-          onDrag={handleDragMap}
-        />
-      </div>
-      <MapHandler />
-      <MapControl position={ControlPosition.CENTER}>
-        <Marker />
-      </MapControl>
-      <button type='button' onClick={handleGetCurrentPosition} />{' '}
-    </APIProvider>
+    <div>
+      <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || ''} libraries={['marker']}>
+        <div className={style['map-container']}>
+          <Map
+            defaultCenter={lastMapCenter}
+            defaultZoom={14}
+            style={MINI_MAP_STYLES}
+            maxZoom={14}
+            minZoom={14}
+            disableDefaultUI
+            mapId={process.env.NEXT_PUBLIC_MAP_ID}
+            onDrag={handleDragMap}
+          />
+        </div>
+        <MapHandler />
+        <MapControl position={ControlPosition.CENTER}>
+          <Marker />
+        </MapControl>
+      </APIProvider>
+      <button
+        type='button'
+        onClick={handleGetCurrentPosition}
+        style={{ width: '20px', height: '20px', background: 'red' }}
+      />
+    </div>
   );
 }

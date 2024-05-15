@@ -12,13 +12,13 @@ import { useUserStore } from '@stores/userStore';
 import Avatar from '@components/Avatar/Avatar';
 import NotificationIcon from '@components/GlobalNavigationBar/NotificationIcon';
 
-import usePolling from '@hooks/usePolling';
+// import usePolling from '@hooks/usePolling';
 
 import styles from './MenuBar.module.scss';
 
 export default function MenuBar() {
   // 새알림 여부 확인
-  usePolling();
+  // usePolling();
 
   const { toggleModal, setCurrentName } = useModalStore();
   const { isSignin, blobId } = useUserStore();

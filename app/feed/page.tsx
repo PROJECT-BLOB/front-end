@@ -59,6 +59,7 @@ export default function Feed() {
     minLikes: 0,
     keyword: '',
   });
+  // const [countryAndCity, setCountryAndCity] = useState({ city: '서울', country: '대한민국' });
   const { toggleModal, setCurrentName } = useModalStore();
   const [categoryList, setCategoryList] = useState<string[][]>(stringCategoryListToArray(filteredData.categories));
   const { register, handleSubmit } = useForm<{ keyword: string }>();
