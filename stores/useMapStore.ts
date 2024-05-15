@@ -32,6 +32,9 @@ interface MapStore {
   lastSearchCity: SearchedCity;
   setLastSearchCity: (city: SearchedCity) => void;
 
+  // 사용자의 현재 위치 정보
+  currentPosition: LatLngLiteral | null;
+  setCurrentPosition: (position: LatLngLiteral | null) => void;
   lastBound: google.maps.LatLngBoundsLiteral;
   setLastBound: (bound: google.maps.LatLngBoundsLiteral) => void;
 }
@@ -43,6 +46,8 @@ export const useMapStore = create(
       setLastMapCenter: (newLocation) => set({ lastMapCenter: newLocation }),
       lastSearchCity: DEFAULT_SEARCHED_CITY,
       setLastSearchCity: (city) => set({ lastSearchCity: city }),
+      currentPosition: null, // 초기 현재 위치 상태 설정
+      setCurrentPosition: (position) => set({ currentPosition: position }), // 현재 위치 설정
       lastBound: DEFAULT_BOUND,
       setLastBound: (bound) => set({ lastBound: bound }),
     }),
