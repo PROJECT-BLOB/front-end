@@ -25,7 +25,7 @@ export interface Post {
   title: string;
   content: string;
   category: Category;
-  subcategory: string;
+  subcategory: SubCategory;
   author: Author;
   country: string;
   city: string;

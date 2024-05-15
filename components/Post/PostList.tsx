@@ -38,9 +38,6 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
     case 'Feed':
       fetchDataFunction = useFetchFeedList;
       break;
-    // case 'SideBar':
-    //   fetChDataFunction = useFetchSideBarList;
-    //   break;
     default:
       fetchDataFunction = useFetchPostList; // 기본값으로 내가 쓴 글을 가져오도록 설정함
       break;

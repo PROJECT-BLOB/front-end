@@ -3,14 +3,13 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 
 import { Comment } from '@/types/Post';
-import updateCommentReport from '@apis/post/updateCommentReport';
-import updatePostReport from '@apis/post/updatePostReport';
 import kebab from '@public/icons/dots-horizontal.svg';
 import filledRedHeart from '@public/icons/filled-red-heart.svg';
 import vacantHeart from '@public/icons/heart.svg';
 import { useFetchTargetCommentReply, useUpdateCommentLike } from '@queries/usePostQueries';
 
 import Kebab from '@components/Kebab';
+import useReport from '@components/ReadPost/hooks/useReport';
 
 import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
 
@@ -28,6 +27,7 @@ interface CommentProps {
 export default function CommentContainer({ comment, setReplyInformation }: CommentProps) {
   const [isKebabClicked, setIsKebabClicked] = useState(false);
   const [isViewReplyClicked, setIsViewReplyClicked] = useState(false);
+  const { handleClickReport } = useReport();
 
   // 답글 조회
   const { data: replyList, fetchNextPage } = useFetchTargetCommentReply(comment.commentId);
@@ -43,14 +43,6 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
     setIsKebabClicked(!isKebabClicked);
   };
 
-  async function handleClickReport(isPost: boolean, id: number) {
-    if (isPost) {
-      await updatePostReport(id);
-    } else {
-      await updateCommentReport(id);
-    }
-  }
-
   return (
     <div className={styles['comment-container']}>
       <div className={styles['profile-and-kebab']}>
@@ -60,7 +52,7 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
             <Image src={kebab} alt='케밥버튼' width={16} height={16} />
           </button>
         )}
-        {isKebabClicked && <Kebab commentId={comment.commentId} toggleKebab={toggleKebab} />}
+        {isKebabClicked && <Kebab postId={comment.postId} commentId={comment.commentId} toggleKebab={toggleKebab} />}
       </div>
       <div className={styles['content-like-wrapper']}>
         <p className={styles.content}>{comment.content}</p>
@@ -85,7 +77,7 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
           답글달기
         </button>
         {!comment.canDelete && (
-          <button className={styles.alert} type='button' onClick={() => handleClickReport(true, comment.commentId)}>
+          <button className={styles.alert} type='button' onClick={() => handleClickReport(false, comment.commentId)}>
             신고하기
           </button>
         )}
@@ -104,7 +96,7 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
       )}
 
       {isViewReplyClicked &&
-        replyList?.pages[0].data.count &&
+        replyList?.pages[0].data.count !== 0 &&
         replyList?.pages.map((page) =>
           page.data.content.map((reply: Comment) => (
             <Reply key={reply.commentId} reply={reply} commentId={comment.commentId} />
@@ -117,14 +109,16 @@ export default function CommentContainer({ comment, setReplyInformation }: Comme
             답글 ({replyList?.pages[replyList.pages.length - 1].data.remaining})개 더 보기
           </button>
         ) : (
-          <button
-            type='button'
-            onClick={() => setIsViewReplyClicked(!isViewReplyClicked)}
-            className={styles['see-more-reply']}
-          >
-            <div className={styles.line} />
-            답글 숨기기
-          </button>
+          replyList?.pages[0].data.count !== 0 && (
+            <button
+              type='button'
+              onClick={() => setIsViewReplyClicked(!isViewReplyClicked)}
+              className={styles['see-more-reply']}
+            >
+              <div className={styles.line} />
+              답글 숨기기
+            </button>
+          )
         ))}
     </div>
   );
