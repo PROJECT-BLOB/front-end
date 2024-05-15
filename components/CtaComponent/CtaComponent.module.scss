@@ -1,0 +1,40 @@
+@import '/styles/global-styles/index';
+
+.container {
+  display: flex;
+  // width: 33.5rem;
+  width: 100%;
+  padding-top: 6rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.h1 {
+  color: $BDS-Grayscale-13;
+
+  font-size: 2.2rem;
+  font-weight: 600;
+  line-height: 136%;
+}
+
+.h2 {
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 1.7rem;
+  font-weight: 600;
+  line-height: 141%;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.2rem;
+  // align-self: stretch;
+
+  @include tablet-and-desktop {
+    flex-direction: row;
+  }
+}

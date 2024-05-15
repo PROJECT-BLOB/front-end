@@ -1,0 +1,53 @@
+@import '/styles/global-styles/index';
+
+.container {
+  display: flex;
+  //   width: var(--Desktop, 128.0rem);
+  width: 100%;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-shrink: 0;
+
+  background: $BDS-Grayscale-2;
+
+  padding: 2rem 0rem 2rem 2.4rem;
+
+  @include tablet-and-desktop {
+    padding: 2.8rem 0rem 2.8rem 4.4rem;
+  }
+}
+
+.logo {
+  position: relative;
+  width: 7.7rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+}
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+}
+
+.text {
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 138%;
+}
+
+.caption {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 127%;
+}
