@@ -4,12 +4,12 @@ import { useRouter } from 'next/navigation';
 
 import UserProfile from '@/app/mypage/_components/UserProfile/UserProfile';
 import CloseIcon from '@icons/x-close.svg';
+import { useSignout } from '@queries/useUserQueries';
 import useModalStore from '@stores/useModalStore';
 import { useUserStore } from '@stores/userStore';
 
 import MonoButton from '@components/Button/MonoButton';
 
-import useSignout from './_hooks/useSignout';
 import styles from './ProfileModal.module.scss';
 
 const cx = classNames.bind(styles);
@@ -17,12 +17,17 @@ const cx = classNames.bind(styles);
 export default function ProfileModal() {
   const { toggleModal } = useModalStore();
   const { blobId } = useUserStore();
-  const { handleSignout } = useSignout();
+  const { mutate: signoutMutate } = useSignout();
 
   const router = useRouter();
 
-  const handleClickSignout = async () => {
-    await handleSignout();
+  const handleClickSignout = () => {
+    // 로그아웃
+    signoutMutate();
+
+    // 모달 닫고 메인으로 이동
+    toggleModal();
+    router.push('/');
   };
 
   const handleClickMypage = () => {

@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 
-import styles from './CatButton.module.scss';
+import styles from './CtaButton.module.scss';
 
 const cx = classNames.bind(styles);
 

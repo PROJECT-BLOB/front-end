@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 
 import classNames from 'classnames/bind';
 
-import CommentItem from '@/app/mypage/_components/Comment/CommentItem';
-import { Comment, Post } from '@/types/Post';
-import { useFetchBookmarkList, useFetchCommentList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
+import { Post } from '@/types/Post';
+import { useFetchBookmarkList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
 import { FilteredData } from '@stores/useFilteringStore';
 
 import CtaComponent from '@components/CtaComponent/CtaComponent';
+import Loading from '@components/Loading/Loading';
 
 import PostItem from './PostItem';
 import styles from './PostList.module.scss';
@@ -31,9 +31,6 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
       break;
     case 'Bookmarks':
       fetchDataFunction = useFetchBookmarkList;
-      break;
-    case 'MyComments':
-      fetchDataFunction = useFetchCommentList;
       break;
     case 'Feed':
       fetchDataFunction = useFetchFeedList;
@@ -58,8 +55,7 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
   }, [filteredData, refetch]);
 
   if (isPending) {
-    // TODO 스켈레톤 UI 추가
-    return <div>loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {
@@ -73,21 +69,14 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
   return (
     <div className={cx('container')}>
       {postsPages[0]?.data?.content?.length > 0 ? (
-        fetchDataFunction === useFetchCommentList ? (
-          postsPages.map((postsPage: { data: { content: Comment[] } }) =>
-            postsPage.data.content.map((comment) => <CommentItem key={comment.commentId} comment={comment} />),
-          )
-        ) : (
-          postsPages.map((postsPage: { data: { content: Post[] } }) =>
-            postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
-          )
+        postsPages.map((postsPage: { data: { content: Post[] } }) =>
+          postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
         )
       ) : (
         <CtaComponent />
       )}
-      {/*  TODO 로딩 인디케이터 추가 */}
 
-      {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}
+      {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
     </div>
   );
 }

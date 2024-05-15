@@ -1,5 +1,4 @@
-@import "/styles/global-styles/index";
-
+@import '/styles/global-styles/index';
 
 .align {
   display: flex;
@@ -13,4 +12,8 @@
   @include desktop {
     padding-right: 4rem;
   }
+}
+
+.login {
+  width: fit-content;
 }
