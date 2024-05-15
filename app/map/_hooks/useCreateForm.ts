@@ -75,14 +75,14 @@ export default function useCreateForm(toggleModal: () => void) {
 
     formData = {
       ...formData,
-      cityLat: lastSearchCity?.location?.lat ?? 0, // 시티 레벨 검색바에서 가져오기 => 어떻게 해야할까???
-      cityLng: lastSearchCity?.location?.lng ?? 0, // 시티 레벨 검색바에서 가져오기
-      city: lastSearchCity?.city ?? '', // 시티 레벨 검색바에서 가져오기
-      country: lastSearchCity?.country ?? '', // 시티 레벨 검색바에서 가져오기
-      actualLat: currentPosition?.lat ?? 0, // 현재 정보 가져온거에서 가져오기
-      actualLng: currentPosition?.lng ?? 0, // 현재 정보 가져온거에서 가져오기
-      lat: lastSearchCity?.location?.lat ?? 0, // 상세 주소 좌표 -> 미니맵에서 가져오기
-      lng: lastSearchCity?.location?.lng ?? 0, // 상세 주소 좌표 -> 미니맵에서 가져오기
+      cityLat: lastSearchCity?.location?.lat ?? 0,
+      cityLng: lastSearchCity?.location?.lng ?? 0,
+      city: lastSearchCity?.city ?? '',
+      country: lastSearchCity?.country ?? '',
+      actualLat: currentPosition?.lat ?? 0,
+      actualLng: currentPosition?.lng ?? 0,
+      lat: lastSearchCity?.location?.lat ?? 0,
+      lng: lastSearchCity?.location?.lng ?? 0,
       category: 'QUESTION', // 카테고리 중복선택 이슈
       subcategory: 'WEATHER',
     };
