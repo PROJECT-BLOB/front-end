@@ -1,9 +1,9 @@
-@import "styles/global-styles/index";
+@import 'styles/global-styles/index';
 
 //변수적용이 안되는중 ㅠ 억까하지마라 진짜
 .container {
-  width: 60rem;
-  max-width: 60rem;
+  width: 30rem;
+  max-width: 30rem;
 
   .input-container {
     display: flex;
@@ -15,33 +15,35 @@
     gap: 1.2rem;
     flex-shrink: 0;
 
-    border-radius: 1rem 3.2rem 3.2rem 1rem;
-    border: 2.4px solid var(--BDS-Primary-5, #FF9456);
-    background: var(--BDS-Grayscale-1, #FFF);
-
+    border-bottom: 1.6px solid var(--BDS-Grayscale-6, #bfbfbf);
+    background: var(--BDS-Grayscale-1, #fff);
 
     input {
       border: none;
       width: 100%;
 
-      caret-color: var(--BDS-Primary-5, #FF9456);
+      caret-color: var(--BDS-Grayscale-6, #bfbfbf);
 
       &:focus {
-        outline: 0;
+        border-bottom: 2.4px solid var(--BDS-Primary-3, #ffc7a6);
+        background: var(--BDS-Grayscale-1, #fff);
       }
     }
 
     svg {
-      width: 1.8rem;
+      width: 1.8rem; 
       height: 1.8rem;
       flex-shrink: 0;
       stroke-width: 2.4px;
-      stroke: var(--BDS-Primary-5, #FF9456);
+      stroke: var(--BDS-Grayscale-6, #bfbfbf);
+      &:focus {
+        stroke: var(--BDS-Primary-3, #ffc7a6);
+      }
     }
   }
 
   ul {
-    z-index: $above +$z-index-root;
+    z-index: $above + $z-index-root;
     position: absolute;
     background-color: whitesmoke;
     width: inherit;
@@ -55,8 +57,8 @@
       gap: 1rem;
 
       &:hover {
-        border-bottom: 1px solid var(--BDS-Grayscale-5, #D9D9D9);
-        background: var(--BDS-Primary-1, linear-gradient(90deg, #FFF2EA 0%, #FFF0F8 100%));
+        border-bottom: 1px solid var(--BDS-Grayscale-5, #d9d9d9);
+        background: var(--BDS-Primary-1, linear-gradient(90deg, #fff2ea 0%, #fff0f8 100%));
       }
     }
   }
