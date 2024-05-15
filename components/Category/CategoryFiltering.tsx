@@ -2,6 +2,7 @@ import { ReactNode, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
+import { CategoryState } from '@/app/feed/_components/FilteringModal/FilteringModal';
 import AtomIcon from '@icons/atom-02.svg?component';
 import ChevronRightIcon from '@icons/chevron-right.svg?component';
 import MagicWandIcon from '@icons/magic-wand-02-2.svg?component';
@@ -10,7 +11,6 @@ import ThumbsDownIcon from '@icons/thumbs-down-orange.svg?component';
 import ThumbsUpIcon from '@icons/thumbs-up-red.svg?component';
 
 import styles from './CategoryFiltering.module.scss';
-import { SubCategory } from './SubCategoryFiltering';
 
 const cx = classNames.bind(styles);
 
@@ -22,7 +22,7 @@ export interface CategoryFilteringProps {
   children: ReactNode;
   category: Category;
   filteringType: FilteringType;
-  setSelectedCategories: (updater: (prev: Record<Category, SubCategory[]>) => Record<Category, SubCategory[]>) => void;
+  setSelectedCategories: (updater: (prev: Record<Category, CategoryState>) => Record<Category, CategoryState>) => void;
   setActiveCategory: (category: Category) => void;
 }
 
@@ -55,13 +55,24 @@ export default function CategoryFiltering({
   const [isArrowClicked, setIsArrowClicked] = useState(false);
 
   const resetSelectedCategory = (category: Category) => {
-    setSelectedCategories((prev) => ({ ...prev, [category]: [] }));
+    setSelectedCategories((prev) => ({
+      ...prev,
+      [category]: { isSelected: false, subCategories: [] },
+    }));
   };
 
   const handleClickCategory = () => {
     setIsCategoryClicked(!isCategoryClicked);
     setIsArrowClicked(true);
     setActiveCategory(category);
+
+    setSelectedCategories((prev) => ({
+      ...prev,
+      [category]: {
+        ...prev[category],
+        isSelected: !prev[category].isSelected,
+      },
+    }));
 
     // 카테고리가 클릭 된 상태에서 클릭했을 때, 선택된 카테고리를 초기화
     if (isCategoryClicked) {

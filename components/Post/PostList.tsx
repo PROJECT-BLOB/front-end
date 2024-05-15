@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { filteredData } from '@/app/feed/page';
 import CommentItem from '@/app/mypage/_components/Comment/CommentItem';
 import { Comment, Post } from '@/types/Post';
 import { useFetchBookmarkList, useFetchCommentList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
+import { FilteredData } from '@stores/useFilteringStore';
 
 import PostItem from './PostItem';
 import styles from './PostList.module.scss';
@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 interface GetPostListProps {
   userId?: number;
   selectedTab?: string;
-  filteredData?: filteredData;
+  filteredData?: FilteredData;
 }
 
 // TODO:리팩토링 해야됨
@@ -46,6 +46,7 @@ export default function PostList({ userId, selectedTab, filteredData }: GetPostL
 
   useEffect(() => {
     refetch();
+    console.log(filteredData);
   }, [filteredData, refetch]);
 
   if (isPending) {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { APIProvider } from '@vis.gl/react-google-maps';
@@ -8,6 +8,7 @@ import Image from 'next/image';
 
 import searchIcon from '@public/icons/search-icon-gray.svg';
 import settingIcon from '@public/icons/settings-04.svg';
+import { Order, useFilteringStore } from '@stores/useFilteringStore';
 import { useMapStore } from '@stores/useMapStore';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
@@ -19,7 +20,6 @@ import styles from './Feed.module.scss';
 import Autocomplete from '../map/_components/Autocomplete/Autocomplete';
 import BlobMap from '../map/_components/Map/BlobMap';
 
-type Order = 'hot' | 'likes' | 'views' | 'recent';
 const ORDERS = {
   hot: '인기순',
   recent: '최신순',
@@ -27,40 +27,13 @@ const ORDERS = {
   likes: '좋아요순',
 };
 
-export interface filteredData {
-  cityLat?: number;
-  cityLng?: number;
-  sortBy: Order;
-  categories: string;
-  startDate: string;
-  endDate: string;
-  // false로 하면 전체 true로 하면 이미지 있는것만
-  hasImage: boolean;
-  // 이것도 이미지와 마찬가지
-  hasLocation: boolean;
-  minLikes: number;
-  keyword: string;
-}
-
 export default function Feed() {
   const { lastSearchCity } = useMapStore();
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
 
   // 기본 값
-  const [filteredData, setFilteredData] = useState<filteredData>({
-    cityLat: lastSearchCity.location?.lat,
-    cityLng: lastSearchCity.location?.lng,
-    sortBy: 'recent',
-    categories: '',
-    startDate: '',
-    endDate: '',
-    hasImage: false,
-    hasLocation: false,
-    minLikes: 0,
-    keyword: '',
-  });
+  const { filteredData, setFilteredData } = useFilteringStore();
   const { toggleModal, setCurrentName } = useModalStore();
-  const [categoryList, setCategoryList] = useState<string[][]>(stringCategoryListToArray(filteredData.categories));
   const { register, handleSubmit } = useForm<{ keyword: string }>();
 
   function handleClickModal(name: ModalName) {
@@ -69,21 +42,32 @@ export default function Feed() {
   }
 
   function handleClickOrder(order: Order) {
-    setFilteredData(() => ({ ...filteredData, sortBy: order }));
+    setFilteredData({ sortBy: order });
   }
 
   function handleSubmitKeywordSearch(formData: { keyword: string }) {
-    setFilteredData(() => ({ ...filteredData, keyword: formData.keyword }));
+    setFilteredData({ keyword: formData.keyword });
   }
 
   // 카테고리 x 표시 누르면 삭제된값 적용
   function handleClickDeleteCategory(index: number) {
+    const categoryList = stringCategoryListToArray(filteredData.categories);
+
     if (categoryList) {
       const newArray = [...categoryList.slice(0, index), ...categoryList.slice(index + 1, categoryList.length)];
-      setCategoryList(newArray);
-      setFilteredData({ ...filteredData, categories: arrayCategoryListToArray(newArray) });
+      setFilteredData({ categories: arrayCategoryListToArray(newArray) });
     }
   }
+
+  type Option = 'image' | 'location' | 'calendar';
+
+  const handleClickeDeleteOption = (option: Option) => {
+    if (option === 'image') setFilteredData({ ...filteredData, hasImage: false });
+
+    if (option === 'location') setFilteredData({ ...filteredData, hasLocation: false });
+
+    if (option === 'calendar') setFilteredData({ ...filteredData, startDate: '', endDate: '' });
+  };
 
   // 카테고리 리스트를 2차원 배열로 변환
   function stringCategoryListToArray(stringCategory: string) {
@@ -97,12 +81,11 @@ export default function Feed() {
 
   // 검색 결과 달라질때마다 필터링 적용
   useEffect(() => {
-    setFilteredData((previous) => ({
-      ...previous,
+    setFilteredData({
       cityLat: lastSearchCity.location?.lat,
       cityLng: lastSearchCity.location?.lng,
-    }));
-  }, [lastSearchCity]);
+    });
+  }, [lastSearchCity, setFilteredData]);
 
   return (
     <main className={styles.feed}>
@@ -115,16 +98,18 @@ export default function Feed() {
           <span className={styles['search-mention']}>{`${lastSearchCity.country} ${lastSearchCity.city}`}</span>
         </div>
         <div className={styles['filtering-container']}>
-          <div className={styles['filtering-button-wrapper']}>
-            <button type='button' className={styles['filtering-mention']} onClick={() => handleClickModal('filtering')}>
-              필터링
-            </button>
+          <button
+            type='button'
+            className={styles['filtering-button-wrapper']}
+            onClick={() => handleClickModal('filtering')}
+          >
+            <span className={styles['filtering-mention']}> 필터링</span>
             <Image className={styles['setting-icon']} src={settingIcon} alt='세팅아이콘' />
-          </div>
+          </button>
 
           {/* 타입 찾아야됨 */}
-          {categoryList.length
-            ? categoryList?.map((category: any, index) => (
+          {filteredData.categories.length
+            ? stringCategoryListToArray(filteredData.categories)?.map((category: any, index) => (
                 <CategoryBox
                   key={category}
                   category={category[0]}
@@ -134,6 +119,27 @@ export default function Feed() {
                 />
               ))
             : ''}
+          {filteredData.hasImage && (
+            <CategoryBox
+              isFeed
+              optionData='이미지 있는 글만 모아보기'
+              handleClickDelete={() => handleClickeDeleteOption('image')}
+            />
+          )}
+          {filteredData.hasLocation && (
+            <CategoryBox
+              isFeed
+              optionData='상세위치 있는 글만 모아보기'
+              handleClickDelete={() => handleClickeDeleteOption('location')}
+            />
+          )}
+          {filteredData.startDate && (
+            <CategoryBox
+              isFeed
+              optionData={`${filteredData.startDate.replaceAll('-', '.').slice(2)} ~ ${filteredData.endDate.replaceAll('-', '.').slice(2)}`}
+              handleClickDelete={() => handleClickeDeleteOption('calendar')}
+            />
+          )}
         </div>
       </section>
       <section className={styles['search-and-order-container']}>
