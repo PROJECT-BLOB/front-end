@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { Category } from '@/types/Post';
+import { Category, SubCategory } from '@/types/Post';
 import deleteIcon from '@public/icons/category-x.svg';
 import optionDeleteIcon from '@public/icons/x.svg';
 
@@ -22,10 +22,23 @@ enum MAIN_CATEGORY {
   WARNING = '조심하세요',
 }
 
+enum SUB_CATEGORY {
+  WEATHER = '날씨',
+  RESTAURANT = '음식점',
+  ACCOMMODATION = '숙소',
+  HOSPITAL = '병원',
+  TOILET = '화장실',
+  PHARMACY = '약국',
+  TRANSPORT = '교통',
+  MUSEUM = '박물관',
+  ATTRACTIONS = '관광지',
+  ATM = 'ATM',
+}
+
 interface CategoryBoxProps {
   optionData?: string;
   category?: Category;
-  subcategory?: string;
+  subcategory?: SubCategory;
   isFeed?: boolean;
   handleClickDelete?: () => void;
 }
@@ -41,7 +54,9 @@ export default function CategoryBox({
 
   return (
     <div className={`${styles.category} ${color && styles[color]} ${optionData ? styles.option : ''}`}>
-      <p>{optionData || `${subcategory || ''} ${category && MAIN_CATEGORY[category]}`}</p>
+      <p>
+        {optionData || `${(subcategory && SUB_CATEGORY[subcategory]) || ''} ${category && MAIN_CATEGORY[category]}`}
+      </p>
       {isFeed && (
         <button type='button' onClick={handleClickDelete} className={styles['image-wrapper']}>
           <Image src={optionData ? optionDeleteIcon : deleteIcon} alt='x' width={16} height={16} />
