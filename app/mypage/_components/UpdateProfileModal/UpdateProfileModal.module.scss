@@ -5,7 +5,7 @@
   align-items: center;
   width: 100%;
   height: 100vh;
-  overflow: scroll;
+  overflow-y: scroll;
   padding: 3.2rem 3.6rem;
   gap: 3.2rem;
 
@@ -26,6 +26,7 @@
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
+  margin-bottom: 0.4rem;
 
   color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
@@ -38,6 +39,7 @@
 .profile-image {
   @include flex-column-center;
   gap: 1.6rem;
+  margin-bottom: 3.6rem;
 }
 
 .update-informations {
@@ -81,10 +83,17 @@
   cursor: pointer;
 }
 
-.buttons {
+.form-buttons {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
   margin-left: auto;
+}
+
+.profile-edit-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
 }

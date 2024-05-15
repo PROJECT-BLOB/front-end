@@ -31,7 +31,6 @@ export default function Feed() {
   const { lastSearchCity } = useMapStore();
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
 
-  // 기본 값
   const { filteredData, setFilteredData } = useFilteringStore();
   const { toggleModal, setCurrentName } = useModalStore();
   const { register, handleSubmit } = useForm<{ keyword: string }>();

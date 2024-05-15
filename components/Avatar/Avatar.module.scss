@@ -1,7 +1,14 @@
+@import '/styles/global-styles/index';
+
 .profile-image {
   position: relative;
   border-radius: 20rem;
   overflow: hidden;
+}
+
+.xsmall {
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .small {

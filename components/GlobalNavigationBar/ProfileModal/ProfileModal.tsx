@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 
 export default function ProfileModal() {
   const { toggleModal } = useModalStore();
-  const { userId } = useUserStore();
+  const { blobId } = useUserStore();
   const { handleSignout } = useSignout();
 
   const router = useRouter();
@@ -39,7 +39,7 @@ export default function ProfileModal() {
         </button>
       </header>
       <main>
-        <UserProfile userId={userId} />
+        <UserProfile blobId={blobId} isModal />
       </main>
       <footer className={cx('routing-buttons')}>
         <MonoButton type='button' onClick={handleClickMypage}>

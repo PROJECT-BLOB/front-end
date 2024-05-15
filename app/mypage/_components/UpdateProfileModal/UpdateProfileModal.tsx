@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import { Switch } from 'antd';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
@@ -21,9 +23,9 @@ import useUpdateUserProfileForm from '../../_hooks/useUpdateUserProfileForm';
 const cx = classNames.bind(styles);
 
 export default function UpdateProfileModal() {
-  const { userId } = useUserStore();
+  const { blobId } = useUserStore();
 
-  const { data, isLoading, isError, error } = useDetailQueries(userId);
+  const { data, isLoading, isError, error } = useDetailQueries(blobId);
 
   if (isLoading) return <div>유저 데이터 로딩중...</div>;
 
@@ -53,6 +55,12 @@ export default function UpdateProfileModal() {
     setIsDeleteProfileImage,
   } = useUpdateUserProfileForm(initialData);
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClickInput = () => {
+    inputRef.current?.click();
+  };
+
   return (
     <form className={cx('form')} onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
       <header className={cx('header')}>
@@ -69,17 +77,15 @@ export default function UpdateProfileModal() {
           ) : (
             <Avatar size='medium' imageSource={isDeleteProfileImage ? '' : userData?.profileUrl || ''} />
           )}
-          {/* TODO: 이 부분 수정해야 됨ㅋㅋ */}
-          <input id='profileImageInput' type='file' onChange={handleChangeImage} />
-          {document.getElementById('profileImageInput') && (
-            <MonoButton type='button' onClick={() => document.getElementById('profileImageInput')!.click()}>
+          <div className={cx('profile-edit-buttons')}>
+            <MonoButton type='button' onClick={() => setIsDeleteProfileImage(true)}>
+              기본 이미지로 변경
+            </MonoButton>
+            <input type='file' onChange={handleChangeImage} ref={inputRef} style={{ display: 'none' }} />
+            <MonoButton type='button' onClick={handleClickInput}>
               이미지 수정
             </MonoButton>
-          )}
-          {/* // TODO: 임시-기본이미지로 변경 */}
-          <button type='button' onClick={() => setIsDeleteProfileImage(true)}>
-            기본이미지로 변경 버튼
-          </button>
+          </div>
         </section>
         <section className={cx('update-informations')}>
           <SignInput
@@ -113,7 +119,7 @@ export default function UpdateProfileModal() {
           </div>
         </section>
       </main>
-      <footer className={cx('buttons')}>
+      <footer className={cx('form-buttons')}>
         <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
         <BlobButton text='BLOB' type='submit' color='button-colord-contain' />
       </footer>

@@ -2,7 +2,7 @@ import instance, { BASE_URL } from '@apis/axios';
 
 interface OAuthToken {
   state: string;
-  userId: number;
+  blobId: string;
   accessToken: string;
   refreshToken: string;
 }
