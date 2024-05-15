@@ -42,7 +42,7 @@ export default function WritePost() {
       </header>
       <div className={cx('post-body')}>
         <div className={cx('body-content')}>
-          <p className={cx('category-title')}>
+          <p className={cx('title')}>
             카테고리<span className={cx('force')}> * </span>
           </p>
           <div className={cx('category-list')}>
@@ -76,16 +76,15 @@ export default function WritePost() {
             maxLength={2000}
             errors={errors}
           />
-          <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
+          <p className={cx('title')}> 어디에 관한 글인가요? (도시까지)</p>
           <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
             <Autocomplete />
             <BlobMap isDisplaying={false} />
           </APIProvider>
-
           <PositionDetail />
         </div>
         <div className={cx('body-image')}>
-          <p>사진업로드(최대5장) - 최대 5mb</p>
+          <p className={cx('title')}>사진업로드(최대5장) - 최대 5mb</p>
           <ImageUploader setValue={setValue} />
         </div>
       </div>

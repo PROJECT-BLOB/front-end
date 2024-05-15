@@ -5,6 +5,7 @@
   flex-direction: column;
   width: 33.1rem;
   height: 18rem;
+  align-items: flex-end;
   gap: 0.8rem;
 }
 
@@ -13,6 +14,7 @@
   width: 120px;
   height: 20px;
   gap: 0.4rem;
+  background-color: $BDS-Grayscale-1;
   color: $BDS-Grayscale-13;
   cursor: pointer;
 
