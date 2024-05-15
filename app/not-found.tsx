@@ -13,7 +13,7 @@ export default function NotFound() {
       <div className={styles['mention-wrapper']}>
         <p className={styles.mention}>잘못된 접근입니다.</p>
         <Link href='/' className={styles['to-main']}>
-          <Image src={home} alt='home' /> 메인으로 이동
+          <Image src={home} alt='home' priority /> 메인으로 이동
         </Link>
       </div>
     </div>

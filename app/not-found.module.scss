@@ -63,4 +63,8 @@
   font-weight: 600;
   line-height: 144%; /* 25.92px */
   letter-spacing: -0.0004rem;
+  
+  &:hover {
+    background: linear-gradient(90deg, #ffac7d 0%, #fe9ed2 100%);
+  }
 }
