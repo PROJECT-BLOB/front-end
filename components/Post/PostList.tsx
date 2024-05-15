@@ -17,7 +17,7 @@ const cx = classNames.bind(styles);
 interface GetPostListProps {
   blobId?: string;
   selectedTab?: string;
-  filteredData?: filteredData;
+  filteredData?: FilteredData;
 }
 
 // TODO: 이 파일 전체 리팩토링 해야됨
@@ -50,6 +50,7 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
 
   useEffect(() => {
     refetch();
+    console.log(filteredData);
   }, [filteredData, refetch]);
 
   if (isPending) {

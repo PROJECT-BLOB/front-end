@@ -5,24 +5,25 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import Autocomplete from '@/app/map/_components/Autocomplete/Autocomplete';
+import BlobMap from '@/app/map/_components/Map/BlobMap';
+import useCreateForm from '@/app/map/_hooks/useCreateForm';
 import CloseButton from '@/public/icons/x-close.svg';
 import useModalStore from '@stores/useModalStore';
 
-import CategoryFiltering, { Category } from '@components/Category/CategoryFiltering';
-import SubCategoryFiltering from '@components/Category/SubCategoryFiltering';
+// import CategoryFiltering, { Category } from '@components/Category/CategoryFiltering';
+// import SubCategoryFiltering from '@components/Category/SubCategoryFiltering';
 import ImageUploader from '@components/ImageUploader';
 
 import PositionDetail from './PositionDetail';
 import PostModalInput from './PostModalInput';
 import styles from './WritePost.module.scss';
-import useCreateForm from '../../../app/map/_hooks/useCreateForm';
 import BlobButton from '../../Button/BlobButton';
 
 const cx = classNames.bind(styles);
 
-const categories: Category[] = ['추천', '비추천', '질문', '주의', '도움요청'];
+// const categories: Category[] = ['추천', '비추천', '질문', '주의', '도움요청'];
 
-const subCategories = ['날씨', '음식점', '숙소', '병원', '화장실', '약국', '교통', '박물관', '관광지', 'ATM'];
+// const subCategories = ['날씨', '음식점', '숙소', '병원', '화장실', '약국', '교통', '박물관', '관광지', 'ATM'];
 
 export default function WritePost() {
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
@@ -45,19 +46,19 @@ export default function WritePost() {
             카테고리<span className={cx('force')}> * </span>
           </p>
           <div className={cx('category-list')}>
-            {categories.map((category) => (
-              <CategoryFiltering key={category} category={category} filteringType='feed' />
-            ))}
+            {/* {categories.map((category) => (
+              <CategoryFiltering key={category} category={category} filteringType='writing' />
+            ))} */}
           </div>
 
           <div className={cx('sub-category-list')}>
-            {subCategories.map((subcategory) => (
-              <SubCategoryFiltering key={subcategory} category='추천' filteringType='feed' title={subcategory} />
-            ))}
+            {/* {subCategories.map((subcategory) => (
+              <SubCategoryFiltering key={subcategory} category='추천' filteringType='writing' title={subcategory} />
+            ))} */}
           </div>
           <PostModalInput
             required
-            register={register as unknown as UseFormRegister<FieldValues>} // 왜 이걸 하면 오류가 날까..
+            register={register as unknown as UseFormRegister<FieldValues>}
             labelName='제목'
             id='title'
             name='title'
@@ -78,13 +79,14 @@ export default function WritePost() {
           <p className={cx('city-title')}> 어디에 관한 글인가요? (도시까지)</p>
           <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
             <Autocomplete />
+            <BlobMap isDisplaying={false} />
           </APIProvider>
 
           <PositionDetail />
         </div>
         <div className={cx('body-image')}>
           <p>사진업로드(최대5장) - 최대 5mb</p>
-          <ImageUploader setValue={setValue} /> {/* multiple prop 추가 */}
+          <ImageUploader setValue={setValue} />
         </div>
       </div>
       <div className={cx('post-footer')}>

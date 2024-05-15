@@ -4,8 +4,6 @@ import { UseFormSetValue } from 'react-hook-form';
 import { ContentField } from '@/app/map/_hooks/useCreateForm';
 
 interface UploadImageProps {
-  // TODO: 오류가 난다...
-  // type: 'post' | 'comment';
   setValue: UseFormSetValue<ContentField>;
 }
 
@@ -18,9 +16,11 @@ export default function useUploadImage({ setValue }: UploadImageProps) {
       const currentImageList = [...imageList, ...newImage];
       // setValue('image', newImage);
 
-      if (imageList.length + newImage.length > 5) {
-        // alert('이미지는 5개까지만 업로드 가능합니다.');
-        return;
+      if (currentImageList.length > 0) {
+        if (imageList.length + newImage.length > 5) {
+          // alert('이미지는 5개까지만 업로드 가능합니다.');
+          return;
+        }
       }
 
       setImageList(currentImageList);

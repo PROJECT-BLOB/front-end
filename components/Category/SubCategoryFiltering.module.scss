@@ -17,10 +17,6 @@
     }
   }
 
-  &.button-clicked {
-    padding: 0.4rem 0.8rem;
-  }
-
   &.button-clicked-color {
     &-추천 {
       background-color: $BDS-Category-recommend_press;
@@ -69,13 +65,12 @@
 .title {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 0.6rem;
   text-align: center;
   font-feature-settings: 'ss10' on;
 
   &.filtering-type {
     &-map {
-      font-family: 'IBM Plex Sans KR';
       font-size: 1.4rem;
       font-weight: 600;
       line-height: 142%; /* 19.88px */
@@ -85,7 +80,6 @@
     &-feed {
       font-family: 'IBM Plex Sans';
       font-size: 1.2rem;
-      font-weight: 400;
       line-height: 133%; /* 15.96px */
       color: $BDS-Grayscale-13 !important;
     }
@@ -114,20 +108,6 @@
 
     &-도움요청 {
       color: $BDS-Category-help_press;
-    }
-  }
-}
-
-.close-button {
-  display: none;
-
-  &.button-clicked {
-    display: inline-block;
-    width: 1.2rem;
-    height: 1.2rem;
-
-    path {
-      stroke: $BDS-Grayscale-1;
     }
   }
 }
