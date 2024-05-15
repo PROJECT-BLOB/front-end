@@ -9,6 +9,7 @@ import { useUserStore } from '@stores/userStore';
 import { useTabStore } from '@stores/useTabStore';
 
 import BackToTopButton from '@components/BackToTopButton/BackToTopButton';
+import CommentList from '@components/Comment/CommentList';
 import PostList from '@components/Post/PostList';
 
 import TabList from './_components/Tab/TabList';
@@ -37,7 +38,11 @@ export default function MyPage() {
         <TabList />
       </section>
       <section className={cx('post-list')}>
-        <PostList blobId={blobId ?? ''} selectedTab={selectedTab} />
+        {selectedTab === 'MyComments' ? (
+          <CommentList blobId={blobId ?? ''} />
+        ) : (
+          <PostList blobId={blobId ?? ''} selectedTab={selectedTab} />
+        )}
       </section>
       <div className={cx('back-to-top')}>
         <BackToTopButton />

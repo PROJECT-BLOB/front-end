@@ -14,6 +14,7 @@ import Avatar from '@components/Avatar/Avatar';
 import BlobButton from '@components/Button/BlobButton';
 import MonoButton from '@components/Button/MonoButton';
 import TextArea from '@components/Input/TextArea';
+import Loading from '@components/Loading/Loading';
 
 import { nicknameValidator } from '@utils/registerOptions';
 
@@ -27,7 +28,7 @@ export default function UpdateProfileModal() {
 
   const { data, isLoading, isError, error } = useDetailQueries(blobId);
 
-  if (isLoading) return <div>유저 데이터 로딩중...</div>;
+  if (isLoading) return <Loading />;
 
   if (isError) return <div>에러 발생: {error.toString()}</div>;
 

@@ -80,23 +80,23 @@
 }
 
 .wrapper.color {
-  &-recommendation {
+  &-RECOMMENDED {
     background: $BDS-Category-recommend_hover;
   }
 
-  &-blame {
+  &-NOT_RECOMMENDED {
     background: $BDS-Category-cation_hover;
   }
 
-  &-question {
+  &-QUESTION {
     background: $BDS-Category-question_hover;
   }
 
-  &-help {
+  &-HELP {
     background: $BDS-Category-help_hover;
   }
 
-  &-caution {
+  &-WARNING {
     background: $BDS-Category-tip_hover;
   }
 }
@@ -108,25 +108,25 @@
 }
 
 .svg.color {
-  &-recommendation {
+  &-RECOMMENDED {
     path {
       fill: $BDS-Category-recommend_hover;
     }
   }
 
-  &-blame {
+  &-BLAME {
     path {
       fill: $BDS-Category-cation_hover;
     }
   }
 
-  &-question {
+  &-QUESTION {
     path {
       fill: $BDS-Category-question_hover;
     }
   }
 
-  &-help {
+  &-HELP {
     path {
       fill: $BDS-Category-help_hover;
     }
