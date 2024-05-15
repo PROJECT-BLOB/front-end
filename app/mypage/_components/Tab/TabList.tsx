@@ -22,7 +22,6 @@ export default function TabList() {
   const handleClickTab = (value: string) => {
     const selectedTabLabel = MYPAGE_TABS.find((tab) => tab.value === value)?.label || ''; // 해당 value에 대응하는 label 찾기
     setSelectedTab(selectedTabLabel);
-    console.log('clicked: ', selectedTabLabel);
   };
 
   return (

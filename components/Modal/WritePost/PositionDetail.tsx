@@ -1,8 +1,14 @@
 import { useState } from 'react';
 
+import classNames from 'classnames/bind';
+
 import MiniMapSearch from '@/app/map/_components/Map/MiniMap';
 
 import Checkbox from '@components/Checkbox/Checkbox';
+
+import styles from './PositionDetail.module.scss';
+
+const cx = classNames.bind(styles);
 
 export default function PositionDetail() {
   const [isChecked, setIsChecked] = useState(false);
@@ -13,11 +19,13 @@ export default function PositionDetail() {
 
   return (
     <>
-      <div>
-        <p>미니맵 표시</p>
-        <p>Quote</p>
+      <div className={cx('minimap-wrapper')}>
+        <div className={cx('minimap-title')}>
+          <p className={cx('title')}>미니맵 표시</p>
+          <p className={cx('sub-title')}>버튼을 누르면 미니맵이 나타납니다.</p>
+        </div>
+        <Checkbox value='someValue' checkedItemHandler={handleCheckboxChange} />
       </div>
-      <Checkbox value='someValue' checkedItemHandler={handleCheckboxChange} />
       {isChecked && <MiniMapSearch />}
     </>
   );

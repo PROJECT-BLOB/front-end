@@ -16,6 +16,13 @@ const DEFAULT_SEARCHED_CITY = {
   location: LOCATION_SEOUL,
 };
 
+const DEFAULT_BOUND = {
+  north: 180,
+  south: 0,
+  east: 180,
+  west: -180,
+};
+
 interface MapStore {
   // 사용자가 마지막으로 본 위치좌표
   lastMapCenter: LatLngLiteral;
@@ -24,6 +31,9 @@ interface MapStore {
   // 사용자가 마지막으로 검색한 도시 정보
   lastSearchCity: SearchedCity;
   setLastSearchCity: (city: SearchedCity) => void;
+
+  lastBound: google.maps.LatLngBoundsLiteral;
+  setLastBound: (bound: google.maps.LatLngBoundsLiteral) => void;
 }
 
 export const useMapStore = create(
@@ -33,6 +43,8 @@ export const useMapStore = create(
       setLastMapCenter: (newLocation) => set({ lastMapCenter: newLocation }),
       lastSearchCity: DEFAULT_SEARCHED_CITY,
       setLastSearchCity: (city) => set({ lastSearchCity: city }),
+      lastBound: DEFAULT_BOUND,
+      setLastBound: (bound) => set({ lastBound: bound }),
     }),
     {
       name: 'blob-map-storage',
