@@ -4,8 +4,12 @@ const HEADER_HEIGHT = 73.5;
 
 export default function useControlBottomSheet() {
   const startY = 0;
+  let windowHeight = 650;
+
+  if (typeof window !== 'undefined') windowHeight = window.innerHeight;
+
   // 컨테이너 높이
-  const [offsetY, setOffsetY] = useState(window.innerHeight - HEADER_HEIGHT);
+  const [offsetY, setOffsetY] = useState(windowHeight - HEADER_HEIGHT);
 
   //   타입 찾자
   const handleTouchMove = (event: any) => {
@@ -22,8 +26,6 @@ export default function useControlBottomSheet() {
   };
 
   const handleTouchEnd = () => {
-    const windowHeight = window.innerHeight;
-
     const percentage = (Math.abs(offsetY) / windowHeight) * 100;
     let newOffsetY;
 
@@ -49,8 +51,6 @@ export default function useControlBottomSheet() {
 
   // 헤더 버튼 클릭시 위치에 따라 펼쳐짐 정도 다르게 해줌
   function handleClickSheet() {
-    const windowHeight = window.innerHeight;
-
     if (offsetY === windowHeight - HEADER_HEIGHT) setOffsetY(windowHeight * 0.4);
 
     if (offsetY === windowHeight * 0.4) setOffsetY(HEADER_HEIGHT);
