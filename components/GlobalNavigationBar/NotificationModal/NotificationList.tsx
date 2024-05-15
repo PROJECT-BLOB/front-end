@@ -25,7 +25,7 @@ export default function NotificationList() {
           )),
         )
       ) : (
-        <div className={styles.empty}>알림이 없습니다.</div>
+        <div className={styles.empty}>새로운 알림이 없어요.</div>
       )}
 
       {isFetchingNextPage ? <div>로딩 중...</div> : <div ref={ref} />}

@@ -97,7 +97,6 @@ export function useDeleteUser() {
 
       logout();
       deleteCookies();
-      localStorage.clear();
     },
     onError: (error) => {
       console.error('회원탈퇴 실패ㅜㅜ:', error);
