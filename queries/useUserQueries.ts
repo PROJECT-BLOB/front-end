@@ -5,6 +5,7 @@ import deleteProfileImage from '@apis/user/mypage/deleteProfileImage';
 import getUserDetail from '@apis/user/mypage/getUserDetail';
 import updateUserProfile from '@apis/user/mypage/updateUserProfile';
 import checkBlobId from '@apis/user/sign/checkBlobId';
+import deleteUser from '@apis/user/sign/deleteUser';
 import { useUserStore } from '@stores/userStore';
 
 import { users } from './keys/userQueryKeys';
@@ -80,6 +81,28 @@ export function useSignout() {
     },
     onError: (error) => {
       console.error('로그아웃 실패ㅜㅜ:', error);
+    },
+  });
+}
+
+// 회원 탈퇴
+export function useDeleteUser() {
+  const queryClient = useQueryClient();
+  const { signout: logout } = useUserStore();
+
+  return useMutation({
+    mutationFn: deleteUser,
+    onSuccess: () => {
+      console.log('회원탈퇴 성공');
+
+      queryClient.invalidateQueries({ queryKey: users.all.queryKey });
+
+      logout();
+      deleteCookies();
+      localStorage.clear();
+    },
+    onError: (error) => {
+      console.error('회원탈퇴 실패ㅜㅜ:', error);
     },
   });
 }
