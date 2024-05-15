@@ -26,7 +26,11 @@ export default function MarkerWithInfoWindow({ markerType, opacity, createdAt, t
     <>
       {
         // eslint-disable-next-line
-        <div onClick={() => setIsInfoWindowOpen(!isInfoWindowOpen)}>
+        <div
+          onClick={() => {
+            setIsInfoWindowOpen(!isInfoWindowOpen);
+          }}
+        >
           <div className='postion-fixer'>
             {isInfoWindowOpen && <MarkerHighlight markerType={markerType} title={title} createdAt={createdAt} />}
             <Marker markerType={markerType} opacity={opacity} markerRef={markerRef} />
