@@ -42,7 +42,7 @@ const interpolatedRenderer = {
 // eslint-disable-next-line
 export default function Markers() {
   const lastBound = useMapStore((state) => state.lastBound);
-  const { data } = useGetMarkers([], lastBound);
+  const { data } = useGetMarkers([] as unknown as string, lastBound);
   const locations = data ? data.data : [];
   const map = useMap();
   const [markers, setMarkers] = useState<{ [key: string]: Marker }>({});

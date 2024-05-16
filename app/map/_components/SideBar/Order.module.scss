@@ -1,0 +1,33 @@
+@import '/styles/global-styles/color-pallete';
+@import '/styles/global-styles/media-breakpoint';
+
+.order-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .order-mention {
+    color: var(--BDS-Grayscale-6, var(--BDS-Grayscale-6, #bfbfbf));
+    font-feature-settings: 'ss10' on;
+
+    /* BDS/Label 1/Normal */
+    font-family: 'IBM Plex Sans KR';
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 142%;
+    &.active {
+      color: var(--BDS-Grayscale-13, #000);
+      font-feature-settings: 'ss10' on;
+
+      /* BDS/Label 1/Normal */
+      font-family: 'IBM Plex Sans KR';
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 142%; /* 19.88px */
+    }
+  }

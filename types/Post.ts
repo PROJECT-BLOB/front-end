@@ -1,5 +1,17 @@
 export type Category = 'RECOMMENDED' | 'NOT_RECOMMENDED' | 'HELP' | 'QUESTION' | 'WARNING';
 
+export type SubCategory =
+  | 'WEATHER'
+  | 'RESTAURANT'
+  | 'ACCOMMODATION'
+  | 'HOSPITAL'
+  | 'TOILET'
+  | 'PHARMACY'
+  | 'TRANSPORT'
+  | 'MUSEUM'
+  | 'ATTRACTIONS'
+  | 'ATM';
+
 export interface Author {
   userId: number;
   blobId: string;
@@ -13,7 +25,7 @@ export interface Post {
   title: string;
   content: string;
   category: Category;
-  subcategory: string;
+  subcategory: SubCategory;
   author: Author;
   country: string;
   city: string;
