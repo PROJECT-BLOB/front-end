@@ -49,7 +49,7 @@ export default function BottomSheet() {
           <PostList />
         </>
       ) : (
-        <CtaComponent />
+        <CtaComponent isSidebar />
       )}
     </div>
   );

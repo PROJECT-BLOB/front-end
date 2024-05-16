@@ -55,7 +55,7 @@ export default function Reply({ reply, commentId }: ReplyProps) {
         <span>{calculateTimePastSinceItCreated(reply.createdDate)}</span>
         <span>좋아요 {reply.likeCount}개</span>
         {!reply.canDelete && (
-          <button className={styles.alert} type='button' onClick={() => handleClickReport(true, reply.commentId)}>
+          <button className={styles.alert} type='button' onClick={() => handleClickReport(false, reply.commentId)}>
             신고하기
           </button>
         )}
