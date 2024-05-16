@@ -1,11 +1,12 @@
 import instance from '@apis/axios';
+import { Order } from '@stores/useFilteringStore';
 
 export interface GetFeedProps {
-  country: string;
-  city: string;
-  sortBy: string;
   page: number;
   size: number;
+  cityLat?: number;
+  cityLng?: number;
+  sortBy: Order;
   categories: string;
   startDate: string;
   endDate: string;

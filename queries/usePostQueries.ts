@@ -61,8 +61,6 @@ export function useFetchFeedList(filteredData: FilteredData) {
         ...filteredData,
         page,
         size: COMMENTS_PAGE_LIMIT,
-        country: '',
-        city: '',
       }),
   });
 }
