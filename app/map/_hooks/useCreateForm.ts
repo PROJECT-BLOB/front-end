@@ -37,6 +37,8 @@ export default function useCreateForm(toggleModal: () => void, formatArray: () =
   const queryClient = useQueryClient();
   const mapState = useMapStore((state) => state);
   const { lastSearchCity } = mapState;
+  const formattedCategories = formatArray();
+  const [category, subcategory] = formattedCategories.split(':');
 
   console.log('currentPosition', currentPosition);
 
@@ -58,12 +60,12 @@ export default function useCreateForm(toggleModal: () => void, formatArray: () =
       actualLng: currentPosition?.lng ?? 0,
       lat: lastSearchCity?.location?.lat ?? 0,
       lng: lastSearchCity?.location?.lng ?? 0,
-      category: 'QUESTION',
-      subcategory: 'WEATHER',
+      category: category ?? '',
+      subcategory: subcategory ?? '',
     };
 
-    const formattedCategories = formatArray();
-    formData.category = formattedCategories;
+    // const formattedCategories = formatArray();
+    // formData.category = formattedCategories;
 
     try {
       const formDataToSend = new FormData();

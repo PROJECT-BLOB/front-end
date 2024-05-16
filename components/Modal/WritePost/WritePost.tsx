@@ -54,7 +54,7 @@ enum SUB_CATEGORY {
 export default function WritePost() {
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
   const { toggleModal } = useModalStore();
-  const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal, formatArray);
+  // const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal, formatArray);
   // const { filteredData, setFilteredData } = useFilteringStore();
 
   // TODO 추천, 비추천 등 한 줄로 줄여보기
@@ -84,6 +84,9 @@ export default function WritePost() {
 
     return result.join(',');
   }
+  // useCreateForm을 호출하는 시점에서 selectedCategories를 인자로 넘기도록 수정
+
+  const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal, formatArray);
 
   const [activeCategory, setActiveCategory] = useState<Category | null>(null);
 
