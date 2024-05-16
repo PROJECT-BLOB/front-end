@@ -48,8 +48,7 @@ export default function PostItem({ post }: { post: Post }) {
         <p className={cx('footer-content-gap', 'text-gray')}>
           <span>{post?.author?.nickname}</span>
           <span>{calculateTimePastSinceItCreated(post.createdDate)}</span>
-          {/* //TODO: 위치  추가 */}
-          <span>{`${post.country} ${post.city}`}</span>
+          <span>{post.address || `${post.country} ${post.city}`}</span>
         </p>
         <p className={cx('footer-content-gap')}>
           <span className={cx('icon-box')}>

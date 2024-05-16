@@ -49,11 +49,8 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
     refetch,
   } = blobId ? fetchDataFunction(blobId) : fetchDataFunction(filteredData);
 
-  console.log(2, postsData);
-  console.log(3, fetchDataFunction);
   useEffect(() => {
     refetch();
-    // console.log(filteredData);
   }, [filteredData, refetch]);
 
   if (isPending) {
@@ -65,8 +62,6 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
   }
 
   const postsPages = postsData?.pages ?? [];
-
-  console.log('postsPages', postsPages);
 
   return (
     <div className={cx('container')}>
