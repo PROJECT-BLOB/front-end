@@ -56,7 +56,6 @@
   align-items: flex-start;
   gap: 1.2rem;
   align-self: stretch;
-  margin-bottom: 7.6rem;
 }
 
 .category-list {
@@ -65,6 +64,11 @@
   gap: 1.2rem;
   width: 31.5rem;
   position: relative;
+
+  &.category-list-clicked {
+    margin-bottom: 7.6rem;
+    transition: 0.3s;
+  }
 }
 
 .sub-category-list {

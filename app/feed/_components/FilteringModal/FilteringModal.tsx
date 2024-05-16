@@ -146,7 +146,7 @@ export default function FilteringModal() {
         <form className={cx('form')}>
           <section className={cx('category-box')}>
             <h2 className={cx('sub-title')}>카테고리</h2>
-            <div className={cx('category-list')}>
+            <div className={cx('category-list', { 'category-list-clicked': activeCategory })}>
               {categories.map((category) => (
                 <CategoryFiltering
                   key={category}
