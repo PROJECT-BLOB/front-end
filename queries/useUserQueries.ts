@@ -29,9 +29,7 @@ export function useUpdateUserProfile(blobId: string) {
 
   return useMutation({
     mutationFn: updateUserProfile,
-    onSuccess: ({ data, status }) => {
-      console.log('프로필 수정 성공:', data);
-
+    onSuccess: ({ status }) => {
       if (status === 200) {
         // TODO: 모달을 닫기 전에 성공했다고 alert창을 띄우는게 좋지 않을까?
       }
@@ -51,8 +49,6 @@ export function useDeleteProfileImage(blobId: string) {
   return useMutation({
     mutationFn: deleteProfileImage,
     onSuccess: () => {
-      console.log('프로필사진 삭제성공');
-
       queryClient.invalidateQueries({ queryKey: users.detail(blobId).queryKey });
     },
     onError: (error) => {
@@ -69,8 +65,6 @@ export function useSignout() {
   return useMutation({
     mutationFn: signout,
     onSuccess: () => {
-      console.log('로그아웃 성공');
-
       queryClient.invalidateQueries({ queryKey: users.all.queryKey });
 
       logout();
@@ -91,8 +85,6 @@ export function useDeleteUser() {
   return useMutation({
     mutationFn: deleteUser,
     onSuccess: () => {
-      console.log('회원탈퇴 성공');
-
       queryClient.invalidateQueries({ queryKey: users.all.queryKey });
 
       logout();
