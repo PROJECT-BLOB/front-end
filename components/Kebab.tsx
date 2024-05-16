@@ -8,17 +8,20 @@ interface KebabProps {
   blobId?: string;
   postId?: number;
   commentId?: number;
+  replyId?: number;
 }
 
-export default function Kebab({ toggleKebab, blobId, commentId, postId }: KebabProps) {
+export default function Kebab({ toggleKebab, blobId, commentId, postId, replyId }: KebabProps) {
   const { mutate: deletePostMutate } = useDeletePost(postId, blobId);
 
   const { mutate: deleteCommentMutate } = useDeleteComment(postId, commentId);
 
   function handleClickDelete() {
-    if (postId) deletePostMutate(postId);
+    if (postId && blobId) deletePostMutate(postId);
 
-    if (commentId) deleteCommentMutate(commentId);
+    if (postId && commentId) deleteCommentMutate(commentId);
+
+    if (commentId && replyId) deleteCommentMutate(replyId);
 
     toggleKebab();
   }

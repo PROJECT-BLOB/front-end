@@ -22,8 +22,8 @@ type State = {
 
 export const useFilteringStore = create<State>((set) => ({
   filteredData: {
-    cityLat: 0,
-    cityLng: 0,
+    cityLat: 37.5518911,
+    cityLng: 126.9917937,
     sortBy: 'recent',
     categories: '',
     startDate: '',

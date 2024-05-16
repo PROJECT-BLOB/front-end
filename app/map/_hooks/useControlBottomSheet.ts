@@ -4,9 +4,11 @@ const HEADER_HEIGHT = 73.5;
 
 export default function useControlBottomSheet() {
   const startY = 0;
-  // 컨테이너 높이
-  const windowHeight = typeof window !== 'undefined' ? window.innerHeight : 0;
+  let windowHeight = 650;
 
+  if (typeof window !== 'undefined') windowHeight = window.innerHeight;
+
+  // 컨테이너 높이
   const [offsetY, setOffsetY] = useState(windowHeight - HEADER_HEIGHT);
 
   //   타입 찾자
