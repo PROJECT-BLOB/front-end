@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Bagel Fat One';
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local('BagelFatOne-Regular'),
+    url(./ttf/BagelFatOne-Regular.ttf) format('truetype');
+}
