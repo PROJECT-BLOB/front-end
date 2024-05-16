@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useQueryClient } from '@tanstack/react-query';
@@ -24,9 +25,10 @@ export interface ContentField {
   image: File[];
 }
 
-export default function useCreateForm(toggleModal: () => void) {
-  const { currentPosition } = useMapStore();
+// 수정된 onSubmit 함수
+type LatLngLiteralOrNull = google.maps.LatLngLiteral | null;
 
+export default function useCreateForm(toggleModal: () => void) {
   const {
     register,
     handleSubmit,
@@ -35,7 +37,7 @@ export default function useCreateForm(toggleModal: () => void) {
     formState: { errors },
   } = useForm<ContentField>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [currentPosition, setCurrentPosition] = useState<LatLngLiteralOrNull>({ lat: 0, lng: 0 });
+  const [currentPosition, setCurrentPosition] = useState<LatLngLiteralOrNull>({ lat: 0, lng: 0 });
   const queryClient = useQueryClient();
   const mapState = useMapStore((state) => state);
   const { lastSearchCity } = mapState;
@@ -46,6 +48,11 @@ export default function useCreateForm(toggleModal: () => void) {
     reset();
     toggleModal();
   }
+
+  // useEffect(() => {
+  //   // 페이지가 로드될 때 현재 위치 가져오기
+  //   getCurrentPosition();
+  // }, []);
 
   // const getCurrentPosition = () => {
   //   if ('geolocation' in navigator) {
@@ -94,6 +101,7 @@ export default function useCreateForm(toggleModal: () => void) {
       formDataToSend.append('data', new Blob([JSON.stringify(formData)]));
 
       await createPost(formDataToSend);
+      // 임시: 만들어졌을 시 피드 업데이트
       queryClient.invalidateQueries({ queryKey: posts.feedList().queryKey });
       console.log('Post created successfully');
     } catch (error) {
