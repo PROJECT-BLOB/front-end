@@ -83,13 +83,6 @@
   cursor: pointer;
 }
 
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-self: stretch;
-}
-
 .form-buttons {
   display: flex;
   align-items: center;
@@ -103,12 +96,4 @@
   justify-content: center;
   align-items: center;
   gap: 1.2rem;
-}
-
-.delete-user-button {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  text-decoration: underline;
-  color: $BDS-Grayscale-7;
 }
