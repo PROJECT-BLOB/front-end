@@ -48,7 +48,7 @@ export const useMapStore = create(
       lastSearchCity: DEFAULT_SEARCHED_CITY,
       setLastSearchCity: (city) => set({ lastSearchCity: city }),
       currentPosition: null, // 초기 현재 위치 상태 설정
-      setCurrentPosition: (position) => set({ currentPosition: position }), // 현재 위치 설정s
+      setCurrentPosition: (position) => set({ currentPosition: position }), // 현재 위치 설정
       lastBound: DEFAULT_BOUND,
       setLastBound: (bound) => set({ lastBound: bound }),
     }),

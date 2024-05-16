@@ -25,7 +25,7 @@ export default function MiniMap() {
     const newLocation = event.map.getCenter()?.toJSON();
     setLastMapCenter(newLocation);
   };
-  const [, setSelectedCity] = React.useState<{ cityName: string; lat: number; lng: number } | null>(null);
+  const setCurrentPosition = useMapStore((state) => state.setCurrentPosition);
   const [, setButtonClicked] = React.useState(false); // 버튼 클릭 여부 상태 추가
 
   const getCurrentPosition = () => {
@@ -33,8 +33,8 @@ export default function MiniMap() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setSelectedCity({ cityName: '현재 위치', lat: latitude, lng: longitude });
-          console.log('현재 위치', latitude, longitude);
+          setCurrentPosition({ lat: latitude, lng: longitude });
+          setLastMapCenter({ lat: latitude, lng: longitude });
         },
         (error) => {
           console.error('Error getting current position', error);
