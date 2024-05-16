@@ -194,10 +194,9 @@
 }
 
 .image-slider-left-button {
-  flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  padding: 16px 14px;
+  padding: 22px 14px;
   gap: 10px;
   border-radius: 22px;
   background: $BDS-Grayscale-3;
@@ -213,8 +212,7 @@
 .image-slider-right-button {
   display: inline-flex;
   align-items: center;
-
-  padding: 16px 14px;
+  padding: 22px 14px;
   gap: 10px;
   border-radius: 22px;
   background: $BDS-Grayscale-3;

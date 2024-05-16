@@ -1,11 +1,12 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
+import Image from 'next/image';
+
 import x from '@public/icons/x-square.svg';
 import { useCreateComment, useCreateReply } from '@queries/usePostQueries';
 
 import styles from './CommentSubmitForm.module.scss';
-import Image from 'next/image';
 
 interface CommentSubmitFormProps {
   postId: number;
