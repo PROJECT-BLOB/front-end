@@ -61,6 +61,22 @@
   align-items: flex-start;
   background-color: $BDS-Grayscale-1;
 }
+
+.post-body::-webkit-scrollbar {
+  width: 8px; /* 스크롤바의 너비 */
+}
+
+.post-body::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: $BDS-Category-recommend_press; /* 스크롤바의 색상 */
+
+  border-radius: 10px;
+}
+
+.post-body::-webkit-scrollbar-track {
+  background: $BDS-Category-recommend_hover; /*스크롤바 뒷 배경 색상*/
+}
+
 .body-image {
   display: flex;
   flex-direction: column;
