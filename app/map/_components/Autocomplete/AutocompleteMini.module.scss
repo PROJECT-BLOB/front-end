@@ -40,8 +40,8 @@
   }
 
   ul {
-    z-index: $above + $z-index-root;
-    position: absolute;
+    // z-index: $above + $z-index-root;
+    // position: absolute;
     background-color: whitesmoke;
     width: inherit;
     cursor: pointer;

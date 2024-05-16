@@ -24,7 +24,7 @@ export interface ContentField {
   image: File[];
 }
 
-export default function useCreateForm(toggleModal: () => void) {
+export default function useCreateForm(toggleModal: () => void, formatArray: () => string) {
   const { currentPosition } = useMapStore();
 
   const {
@@ -61,6 +61,9 @@ export default function useCreateForm(toggleModal: () => void) {
       category: 'QUESTION',
       subcategory: 'WEATHER',
     };
+
+    const formattedCategories = formatArray();
+    formData.category = formattedCategories;
 
     try {
       const formDataToSend = new FormData();
