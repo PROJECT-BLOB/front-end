@@ -80,8 +80,8 @@ instance.interceptors.response.use(
     } else if (error.response?.status === 409) {
       alert(error.response?.data.message);
     } else {
+      console.error(error);
       alert('잘못된 요청입니다.');
-      console.error(error.response?.data);
     }
 
     return Promise.reject(error);
