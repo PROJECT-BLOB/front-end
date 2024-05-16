@@ -54,10 +54,7 @@ enum SUB_CATEGORY {
 export default function WritePost() {
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
   const { toggleModal } = useModalStore();
-  // const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal, formatArray);
-  // const { filteredData, setFilteredData } = useFilteringStore();
 
-  // TODO 추천, 비추천 등 한 줄로 줄여보기
   const [selectedCategories, setSelectedCategories] = useState<Record<Category, CategoryState>>({
     추천: { isSelected: false, subCategories: [] },
     비추천: { isSelected: false, subCategories: [] },
@@ -66,7 +63,6 @@ export default function WritePost() {
     도움요청: { isSelected: false, subCategories: [] },
   });
 
-  // 객체 배열 카테고리 리스트로 변환
   function formatArray() {
     const result = Object.entries(selectedCategories)
       .map(([key, values]) => {
@@ -76,7 +72,6 @@ export default function WritePost() {
       })
       .filter(Boolean);
 
-    // 메인 카테고리 포메팅
     Object.entries(selectedCategories).forEach((category) => {
       if (category[1].isSelected && category[1].subCategories.length === 0)
         result.push(MAIN_CATEGORY[category[0] as keyof typeof MAIN_CATEGORY]);
