@@ -11,3 +11,19 @@
 
   overflow-y: scroll;
 }
+
+.empty {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  top: 40%;
+
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 138%; /* 17.94px */
+}

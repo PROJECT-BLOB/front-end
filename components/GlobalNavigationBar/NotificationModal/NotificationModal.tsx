@@ -16,11 +16,8 @@ export default function NotificationModal() {
 
   const handleClickDeleteAllNotification = () => {
     deleteNotificationAllMutate();
-
-    console.log('알림을 전체 삭제합니다.');
   };
 
-  // TODO: 알림 없을 시 화면 추가
   return (
     <div className={cx('modal-container')}>
       <header className={cx('header')}>
