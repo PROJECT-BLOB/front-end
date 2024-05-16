@@ -115,9 +115,17 @@ export default function LandingPage() {
         <div className={cx('service-feature-timeblob')}>
           <span className={cx('feature-text-large')}>가장 믿을 수 있는 정보, Blob </span>
           <span className={cx('feature-text-small')}>
-            Blob-Time 시스템
+            Time-Blob 시스템
             <br /> 유용하지 않은 정보는 지도에서 금새 사라져요.
           </span>
+          <div className={cx('image-timeblob', 'position-relative')}>
+            <Image fill src={TimeBlobImage} alt='타임블롭 이미지' />
+          </div>
+          <div className={cx('image-wrapper-timeblob')}>
+            <div className={cx('image-timeblob-mobile')}>
+              <Image fill src={TimeBlobImage} alt='타임블롭 이미지' />
+            </div>
+          </div>
         </div>
 
         <div className={cx('service-feature-timeblob-content')}>
@@ -126,14 +134,6 @@ export default function LandingPage() {
             <span className={cx('feature-text-medium')}>
               유저들이 인정한 진짜 필수 정보를 한눈에 알아볼 수 있게 도와줘요.
             </span>
-          </div>
-          <div className={cx('image-wrapper-timeblob')}>
-            <div className={cx('image-timeblob-mobile')}>
-              <Image fill src={TimeBlobImage} alt='타임블롭 이미지' />
-            </div>
-          </div>
-          <div className={cx('image-timeblob', 'position-relative')}>
-            <Image fill src={TimeBlobImage} alt='타임블롭 이미지' />
           </div>
         </div>
 

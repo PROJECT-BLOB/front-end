@@ -56,7 +56,7 @@ export default function SideBar() {
           <PostList />
         </>
       ) : (
-        <CtaComponent />
+        <CtaComponent isSidebar />
       )}
     </div>
   );

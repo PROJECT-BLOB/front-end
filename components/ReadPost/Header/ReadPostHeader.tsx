@@ -9,7 +9,7 @@ import closeButton from '@public/icons/x.svg';
 import { useFetchTargetPost, useUpdatePostLike } from '@queries/usePostQueries';
 import useModalStore from '@stores/useModalStore';
 
-import calculateTimeWhenItWillDisappear from '@utils/calculateDisappearTime';
+import calculateDisappearTime from '@utils/calculateDisappearTime';
 
 import styles from './ReadPostHeader.module.scss';
 
@@ -27,7 +27,7 @@ export default function ReadPostHeader({ isFeed, postId }: { isFeed?: boolean; p
 
   return (
     <header className={styles['read-header']}>
-      {calculateTimeWhenItWillDisappear(post?.data.expiresAt) === 0 ? (
+      {calculateDisappearTime(post?.data.expiresAt) === 0 ? (
         ''
       ) : (
         <div className={styles['time-blob-and-close']}>
@@ -45,9 +45,7 @@ export default function ReadPostHeader({ isFeed, postId }: { isFeed?: boolean; p
               {/* To Do : 디자인 */}
               {isMouseEnter && <p>시간이 지나면 지도에서 사라집니다.</p>}
             </div>
-            <span className={styles['delete-mention']}>
-              {calculateTimeWhenItWillDisappear(post?.data.expiresAt)} 남음
-            </span>
+            <span className={styles['delete-mention']}>{calculateDisappearTime(post?.data.expiresAt)} 남음</span>
           </div>
           {isFeed ? (
             ''
