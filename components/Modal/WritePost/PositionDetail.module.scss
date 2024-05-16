@@ -1,5 +1,10 @@
 @import '/styles/global-styles/color-pallete';
 
+.positiondetail-wrapper.expanded {
+  height: 30rem;
+  background-color: $BDS-Grayscale-1;
+}
+
 .minimap-wrapper {
   display: flex;
   align-items: center;

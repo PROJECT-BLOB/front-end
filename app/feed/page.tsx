@@ -81,8 +81,8 @@ export default function Feed() {
   // 검색 결과 달라질때마다 필터링 적용
   useEffect(() => {
     setFilteredData({
-      cityLat: lastSearchCity.location?.lat,
-      cityLng: lastSearchCity.location?.lng,
+      // cityLat: lastSearchCity.location?.lat,
+      // cityLng: lastSearchCity.location?.lng,
     });
   }, [lastSearchCity, setFilteredData]);
 

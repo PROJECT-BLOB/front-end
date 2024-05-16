@@ -11,3 +11,35 @@
 
   overflow-y: scroll;
 }
+
+.container::-webkit-scrollbar {
+  width: 8px; /* 스크롤바의 너비 */
+}
+
+.container::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: $BDS-Category-recommend_press; /* 스크롤바의 색상 */
+
+  border-radius: 10px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: $BDS-Category-recommend_hover; /*스크롤바 뒷 배경 색상*/
+}
+
+.empty {
+  padding: 1.6rem 0rem 1.6rem 1.6rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  flex: 1 0 0;
+
+  overflow: hidden;
+  color: $BDS-Grayscale-13;
+  font-feature-settings: 'ss10' on;
+  text-overflow: ellipsis;
+
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 138%; /* 17.94px */
+}

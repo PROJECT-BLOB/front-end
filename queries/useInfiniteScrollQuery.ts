@@ -20,6 +20,8 @@ export default function useInfiniteScrollQuery(queryOptions: {
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam: number) =>
       lastPage.data.hasMore ? lastPageParam + 1 : undefined,
+    gcTime: 0,
+    staleTime: 0,
   });
 
   useEffect(() => {

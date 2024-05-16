@@ -3,8 +3,8 @@ import { create } from 'zustand';
 export type Order = 'hot' | 'likes' | 'views' | 'recent';
 
 export interface FilteredData {
-  cityLat?: number;
-  cityLng?: number;
+  // cityLat?: number;
+  // cityLng?: number;
   sortBy: Order;
   categories: string;
   startDate: string;

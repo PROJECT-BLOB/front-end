@@ -1,9 +1,10 @@
-@import "/styles/global-styles/color-pallete", "/styles/global-styles/media-breakpoint";
+@import '/styles/global-styles/color-pallete', '/styles/global-styles/media-breakpoint',
+  '../../public/fonts/outfit/Outfit.css';
 
 .align {
   display: inline-flex;
   align-items: center;
-  gap: .8rem;
+  gap: 0.8rem;
 
   a {
     text-decoration: none;
@@ -14,7 +15,6 @@
     font-size: 1.6rem;
     font-weight: 600;
     line-height: 136.4%; /* 2.1824rem */
-
 
     &.selected {
       color: $BDS-Grayscale-13;
@@ -48,4 +48,3 @@
     }
   }
 }
-

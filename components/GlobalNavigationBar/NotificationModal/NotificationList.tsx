@@ -1,4 +1,4 @@
-import { Notification } from '@/types/Notification';
+// import { Notification } from '@/types/Notification';
 import { useFetchNotificationList } from '@queries/useNotificationQueries';
 
 import Loading from '@components/Loading/Loading';
@@ -18,14 +18,18 @@ export default function NotificationList() {
     return <div>데이터 불러오는 중, 에러 발생</div>;
   }
 
+  const notifications = notificationPages.flatMap((page) => page.data.content);
+  const hasNotifications = notifications.length > 0;
+
   return (
     <div className={styles.container}>
-      {notificationPages &&
-        notificationPages.map((notificationsPage: { data: { content: Notification[] } }) =>
-          notificationsPage.data.content.map((notification) => (
-            <NotificationItem key={notification.notificationId} notification={notification} />
-          )),
-        )}
+      {hasNotifications ? (
+        notifications.map((notification) => (
+          <NotificationItem key={notification.notificationId} notification={notification} />
+        ))
+      ) : (
+        <div className={styles.empty}>알림이 없습니다.</div>
+      )}
 
       {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
     </div>

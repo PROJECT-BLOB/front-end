@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 import arrowRight from '@public/icons/chevron-right.svg';
 import { useGetSidebarItems } from '@queries/useBlobmapQueries';
+import { useCategoryStore } from '@stores/useCategoryStore';
 import { useMapStore } from '@stores/useMapStore';
 
 import CtaComponent from '@components/CtaComponent/CtaComponent';
@@ -17,7 +18,8 @@ export default function SideBar() {
   const lastBound = useMapStore((state) => state.lastBound);
   const [order, setOrder] = useState<'recent' | 'hot'>('recent');
   // 카테고리
-  const { data, refetch } = useGetSidebarItems('', lastBound, 0, 100, order);
+  const categoryString = useCategoryStore((state) => state.getCategoryString());
+  const { data, refetch } = useGetSidebarItems(categoryString, lastBound, 0, 100, order);
   const sideBarRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -27,6 +29,7 @@ export default function SideBar() {
     };
     window.addEventListener('click', handleClickOutside);
 
+    //
     return () => {
       window.removeEventListener('click', handleClickOutside);
     };
@@ -34,7 +37,7 @@ export default function SideBar() {
 
   useEffect(() => {
     refetch();
-  }, [order, refetch]);
+  }, [order, lastBound, categoryString]);
 
   return (
     <div className={`${styles['side-bar']} ${isOpen ? styles.open : ''}`} ref={sideBarRef}>

@@ -6,6 +6,7 @@ import classNames from 'classnames/bind';
 import { Post } from '@/types/Post';
 import { useFetchBookmarkList, useFetchFeedList, useFetchPostList } from '@queries/usePostQueries';
 import { FilteredData } from '@stores/useFilteringStore';
+import { useMapStore } from '@stores/useMapStore';
 
 import CtaComponent from '@components/CtaComponent/CtaComponent';
 import Loading from '@components/Loading/Loading';
@@ -23,6 +24,8 @@ interface GetPostListProps {
 
 // TODO: 이 파일 전체 리팩토링 해야됨
 export default function PostList({ blobId, selectedTab, filteredData }: GetPostListProps) {
+  const lastSearchCity = useMapStore((state) => state.lastSearchCity);
+
   // 찾아야함
   let fetchDataFunction: any;
   switch (selectedTab) {
@@ -47,7 +50,7 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
     isFetchingNextPage,
     ref,
     refetch,
-  } = blobId ? fetchDataFunction(blobId) : fetchDataFunction(filteredData);
+  } = blobId ? fetchDataFunction(blobId) : fetchDataFunction(filteredData, lastSearchCity.location);
 
   useEffect(() => {
     refetch();
