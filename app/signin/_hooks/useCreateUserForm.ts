@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 
 import { useRouter } from 'next/navigation';
@@ -30,11 +30,9 @@ export default function useCreateUserForm() {
     const { id, nickname } = userData;
 
     // 회원가입 요청
-    const { data, status } = await createUser({ id, nickname });
-    // console.log('data', data);
+    const { status } = await createUser({ id, nickname });
 
     if (status === 200) {
-      console.log('회원가입 성공', data);
       // 회원가입 성공하면 로컬스토리지에 블롭아이디 저장
       setBlobId(id);
       signin();
@@ -47,11 +45,11 @@ export default function useCreateUserForm() {
     toggleModal();
   }
 
-  useEffect(() => {
-    const subscirbe = watch((data, { name }) => console.log(data, name));
+  // useEffect(() => {
+  //   const subscirbe = watch((data, { name }) => console.log(data, name));
 
-    return () => subscirbe.unsubscribe();
-  }, [watch]);
+  //   return () => subscirbe.unsubscribe();
+  // }, [watch]);
 
   return { register, handleSubmit, onSubmit, cancelForm, watch, errors: errors as Errors };
 }

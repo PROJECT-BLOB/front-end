@@ -23,7 +23,6 @@ export default function usePolling() {
         const newNotificationId: number = data.content[0]?.notificationId ?? -1;
 
         const isNewNotificationAdded = newNotificationId > previousNotificationId;
-        console.log('isNewNotificationAdded', isNewNotificationAdded);
 
         if (isNewNotificationAdded) {
           setHasNewNotification(true);
