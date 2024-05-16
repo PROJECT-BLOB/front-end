@@ -1,11 +1,9 @@
+/* eslint-disable no-alert */
 import instance from '@apis/axios';
 
 export default async function updatePostReport(postId: number) {
-  try {
-    const { data, status } = await instance.post(`/post/report/${postId}`);
+  const { data, status } = await instance.post(`/post/report/${postId}`);
+  alert(data);
 
-    return { data, status };
-  } catch (error) {
-    console.error(error);
-  }
+  return { data, status };
 }

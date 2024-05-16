@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-underscore-dangle */
 import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from 'axios';
 
@@ -52,7 +53,7 @@ instance.interceptors.response.use(
 
     const refreshToken = getCookie(REFRESH_TOKEN);
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (getRefreshToken() && error.response?.status === 401 && !originalRequest._retry) {
       // 토큰 만료: 401
       const response = await axios.post(`${BASE_URL}/oauth/refresh`, undefined, {
         headers: {
@@ -72,6 +73,15 @@ instance.interceptors.response.use(
       }
 
       return instance(originalRequest); // 리퀘스트 재시도 하도록 설정
+    }
+
+    if (error.response?.status === 401) {
+      alert('로그인 후 이용 가능합니다.');
+    } else if (error.response?.status === 409) {
+      alert(error.response?.data.message);
+    } else {
+      alert('잘못된 요청입니다.');
+      console.error(error.response?.data);
     }
 
     return Promise.reject(error);

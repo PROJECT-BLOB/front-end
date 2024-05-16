@@ -3,8 +3,6 @@ import { useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { Post } from '@/types/Post';
-import updateCommentReport from '@apis/post/updateCommentReport';
-import updatePostReport from '@apis/post/updatePostReport';
 import arrowLeft from '@public/icons/arrow-left.svg';
 import arrowRight from '@public/icons/arrow-right.svg';
 import bookmark from '@public/icons/bookmark.svg';
@@ -23,6 +21,7 @@ import CommentBox from './Comment/CommentBox';
 import styles from './MainContainer.module.scss';
 import ProfileContainer from './ProfileContainer';
 import useImageControl from '../hooks/useImageControl';
+import useReport from '../hooks/useReport';
 
 interface MainContentProps {
   contentData: Post;
@@ -36,6 +35,7 @@ export default function MainContainer({ contentData, isFeed, postId }: MainConte
   const [isKebabClicked, setIsKebabClicked] = useState(false);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const [isImageClicked, setIsImageClicked] = useState(false);
+  const { handleClickReport } = useReport();
 
   const { currentImageIndex, handlePreviousImage, handleNextImage, setCurrentImageIndex } = useImageControl(
     contentData.imageUrl,
@@ -46,15 +46,6 @@ export default function MainContainer({ contentData, isFeed, postId }: MainConte
 
   function handleClickBookmark() {
     postBookmarkMutate(contentData.postId);
-  }
-
-  // 신고
-  function handleClickReport(isPost: boolean, id: number) {
-    if (isPost) {
-      updatePostReport(id);
-    } else {
-      updateCommentReport(id);
-    }
   }
 
   const toggleKebab = () => {

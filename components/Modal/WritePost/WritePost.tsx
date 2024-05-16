@@ -178,7 +178,9 @@ export default function WritePost() {
         </div>
         <div className={cx('body-image')}>
           <p className={cx('title')}>사진업로드(최대5장) - 최대 5mb</p>
-          <ImageUploader setValue={setValue} />
+          <div className={cx('image-uploader')}>
+            <ImageUploader setValue={setValue} />
+          </div>
         </div>
       </div>
       <div className={cx('post-footer')}>

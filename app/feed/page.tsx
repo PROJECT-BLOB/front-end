@@ -94,7 +94,7 @@ export default function Feed() {
             <Autocomplete />
             <BlobMap isDisplaying={false} />
           </APIProvider>
-          <span className={styles['search-mention']}>{`${lastSearchCity.country} ${lastSearchCity.city}`}</span>
+          <span className={styles['search-mention']}>{`#${lastSearchCity.country} ${lastSearchCity.city}`}</span>
         </div>
         <div className={styles['filtering-container']}>
           <button
@@ -143,7 +143,11 @@ export default function Feed() {
       </section>
       <section className={styles['search-and-order-container']}>
         <form className={styles['input-wrapper']} onSubmit={handleSubmit(handleSubmitKeywordSearch)}>
-          <input placeholder='서울에서 검색하기' className={styles.input} {...register('keyword')} />
+          <input
+            placeholder={`${lastSearchCity.city}에서 검색하기`}
+            className={styles.input}
+            {...register('keyword')}
+          />
           <button type='submit'>
             <Image src={searchIcon} alt='검색아이콘' />
           </button>

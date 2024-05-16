@@ -9,7 +9,6 @@ import CommentItem from './CommentItem';
 // TODO: 댓글이 다 안 불러와짐... 이유를 모르겟음
 export default function CommentedPostItem({ commentedPost }: { commentedPost: Post }) {
   const { blobId } = useUserStore();
-  console.log('commentedPost', commentedPost);
 
   const { data: commentsData, isPending, isError } = useFetchTargetPostComment(commentedPost.postId);
 
@@ -31,8 +30,6 @@ export default function CommentedPostItem({ commentedPost }: { commentedPost: Po
     // 누적 배열 반환
     return foundComments;
   }, []);
-
-  console.log('targetComment', targetComments);
 
   return targetComments.map((comment: Comment) => (
     <CommentItem key={comment.commentId} commentedPost={commentedPost} comment={comment} />

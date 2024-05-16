@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import getGeocodedAddress from '@apis/map/getGeocodedAddress';
-import getMarkers, { Category } from '@apis/map/getMarkers';
+import getMarkers from '@apis/map/getMarkers';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import getSidebarItems, { SortInSidebar } from '@apis/map/getSidebarItems';
 import { blobmap } from '@queries/keys/blobmapQueryKeys';
@@ -17,7 +17,7 @@ export function useGetReversedGeocodeAddress(location: LatLngLiteral) {
 }
 
 // TODO: Query-Key-Factory 적용 필요.
-export function useGetMarkers(categories: Category[], bounds: LatLngBoundsLiteral) {
+export function useGetMarkers(categories: string, bounds: LatLngBoundsLiteral) {
   return useQuery({
     queryKey: ['markers', categories, bounds],
     queryFn: () =>
@@ -32,7 +32,7 @@ export function useGetMarkers(categories: Category[], bounds: LatLngBoundsLitera
 }
 
 export function useGetSidebarItems(
-  categories: Category[],
+  categories: string,
   bounds: LatLngBoundsLiteral,
   page: number,
   size: number,

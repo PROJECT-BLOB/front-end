@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { MouseEvent, PropsWithChildren } from 'react';
 
 import classNames from 'classnames/bind';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
@@ -11,7 +11,7 @@ const cx = classNames.bind(styles);
 interface CtaButtonProps {
   isSidebar?: boolean;
   imageSource: string | StaticImport;
-  onClick?: () => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function CtaButton({ children, isSidebar, imageSource, onClick }: PropsWithChildren<CtaButtonProps>) {
