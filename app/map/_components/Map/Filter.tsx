@@ -23,7 +23,6 @@ export type FullCategory = `${Category}:${SubCategory}` | Category;
 
 export default function Filter() {
   const [currentCategory, setCurrentCategory] = useState<Category | null>(null);
-  const [selectedCategoryList, setSelectedCategoryList] = useState<FullCategory[]>([]);
 
   return (
     <>
@@ -36,7 +35,6 @@ export default function Filter() {
               category={category as Category}
               currentCategory={currentCategory}
               setCurrentCategory={setCurrentCategory}
-              setSelectedCategoryList={setSelectedCategoryList}
             />
           ))}
         </section>
@@ -49,8 +47,6 @@ export default function Filter() {
                 key={index}
                 category={currentCategory}
                 subCategory={subCategory as SubCategory}
-                selectedCategoryList={selectedCategoryList}
-                setSelectedCategoryList={setSelectedCategoryList}
               />
             ))}
         </section>

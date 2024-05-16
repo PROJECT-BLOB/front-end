@@ -2,13 +2,14 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { CategoryNameMapper, FullCategory } from '@/app/map/_components/Map/Filter';
+import { CategoryNameMapper } from '@/app/map/_components/Map/Filter';
 import AtomIcon from '@icons/atom-02.svg?component';
 import ChevronRightIcon from '@icons/chevron-right.svg?component';
 import MagicWandIcon from '@icons/magic-wand-02-2.svg?component';
 import SignalIcon from '@icons/signal-02-2.svg?component';
 import ThumbsDownIcon from '@icons/thumbs-down-orange.svg?component';
 import ThumbsUpIcon from '@icons/thumbs-up-red.svg?component';
+import { useCategoryStore } from '@stores/useCategoryStore';
 
 import styles from './FilterCategoryButton.module.scss';
 
@@ -46,16 +47,15 @@ export interface FilterCategoryButtonProps {
   category: Category;
   currentCategory: Category | null;
   setCurrentCategory: (category: Category | null) => void;
-  setSelectedCategoryList: (category: FullCategory[]) => void;
 }
 
 export default function FilterCategoryButton({
   category = 'RECOMMENDED',
   currentCategory,
   setCurrentCategory,
-  setSelectedCategoryList,
 }: PropsWithChildren<FilterCategoryButtonProps>) {
   const [isClicked, setIsClicked] = useState(false);
+  const setSelectedCategoryList = useCategoryStore((state) => state.setSelectedCategoryList);
 
   const handleClickCategory = (category: Category) => {
     if (currentCategory === category) {

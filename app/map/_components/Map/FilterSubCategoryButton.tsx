@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 
 import classNames from 'classnames/bind';
 
-import { FullCategory, SubCategoryNameMapper } from '@/app/map/_components/Map/Filter';
+import { SubCategoryNameMapper } from '@/app/map/_components/Map/Filter';
 import { Category } from '@apis/map/getMarkers';
+import { useCategoryStore } from '@stores/useCategoryStore';
 
 import styles from './FilterSubCategoryButton.module.scss';
 
@@ -35,19 +36,14 @@ export const SUB_CATEGORY_NAME_MAPPER: SubCategoryNameMapper = {
 export interface FilterSubCategoryButtonProps {
   category?: Category | null;
   subCategory?: SubCategory;
-  selectedCategoryList: FullCategory[];
-  setSelectedCategoryList?: (selectedCategoryList: FullCategory[]) => void;
 }
 
-export default function FilterSubCategoryButton({
-  category,
-  subCategory,
-  selectedCategoryList,
-  setSelectedCategoryList,
-}: FilterSubCategoryButtonProps) {
+export default function FilterSubCategoryButton({ category, subCategory }: FilterSubCategoryButtonProps) {
   const cx = classNames.bind(styles);
 
   const [isClicked, setIsClicked] = useState(false);
+  const selectedCategoryList = useCategoryStore((state) => state.selectedCategoryList);
+  const setSelectedCategoryList = useCategoryStore((state) => state.setSelectedCategoryList);
 
   const handleClickSubCategory = () => {
     // add subCategory to selected List
