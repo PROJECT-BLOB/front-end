@@ -1,8 +1,9 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
+import { Simulate } from 'react-dom/test-utils';
 
 import classNames from 'classnames/bind';
 
-import { CategoryNameMapper } from '@/app/map/_components/Map/Filter';
+import { CategoryNameMapper, FullCategory } from '@/app/map/_components/Map/Filter';
 import AtomIcon from '@icons/atom-02.svg?component';
 import ChevronRightIcon from '@icons/chevron-right.svg?component';
 import MagicWandIcon from '@icons/magic-wand-02-2.svg?component';
@@ -11,6 +12,8 @@ import ThumbsDownIcon from '@icons/thumbs-down-orange.svg?component';
 import ThumbsUpIcon from '@icons/thumbs-up-red.svg?component';
 
 import styles from './FilterCategoryButton.module.scss';
+
+import select = Simulate.select;
 
 const cx = classNames.bind(styles);
 
@@ -44,19 +47,42 @@ function SelectedIcon(category: Category) {
 
 export interface FilterCategoryButtonProps {
   category: Category;
-  handleFilterStatus: (category: Category) => void;
+  currentCategory: Category | null;
+  setCurrentCategory: (category: Category | null) => void;
+  selectedCategoryList: FullCategory[];
+  setSelectedCategoryList: (category: FullCategory[]) => void;
 }
 
 export default function FilterCategoryButton({
   category = 'RECOMMENDED',
-  handleFilterStatus,
+  currentCategory,
+  setCurrentCategory,
+  selectedCategoryList,
+  setSelectedCategoryList,
 }: PropsWithChildren<FilterCategoryButtonProps>) {
   const [isClicked, setIsClicked] = useState(false);
 
   const handleClickCategory = (category: Category) => {
-    setIsClicked(!isClicked);
-    handleFilterStatus(category);
+    if (currentCategory === category) {
+      setCurrentCategory(null);
+      setSelectedCategoryList([]);
+      setIsClicked(false);
+
+      return;
+    }
+
+    setCurrentCategory(category);
+    setSelectedCategoryList([category]);
+    setIsClicked(true);
   };
+
+  useEffect(() => {
+    if (currentCategory === category) {
+      setIsClicked(true);
+    } else {
+      setIsClicked(false);
+    }
+  }, [currentCategory]);
 
   return (
     // eslint-disable-next-line

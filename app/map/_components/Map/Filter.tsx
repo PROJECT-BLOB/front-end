@@ -22,7 +22,7 @@ const subCategories = Object.keys(SUB_CATEGORY_NAME_MAPPER);
 export type FullCategory = `${Category}:${SubCategory}` | Category;
 
 export default function Filter() {
-  const [currentCategory, setCurrentCategory] = useState<Category | null>('NOT_RECOMMENDED');
+  const [currentCategory, setCurrentCategory] = useState<Category | null>(null);
   const [selectedCategoryList, setSelectedCategoryList] = useState<FullCategory[]>([]);
 
   const handleFilterStatus = (category: Category) => {
@@ -42,8 +42,15 @@ export default function Filter() {
       <div className={cx('area')}>
         <section className={cx('')}>
           {categories.map((category, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <FilterCategoryButton key={index} category={category as Category} handleFilterStatus={handleFilterStatus} />
+            <FilterCategoryButton
+              // eslint-disable-next-line react/no-array-index-key
+              key={index}
+              category={category as Category}
+              currentCategory={currentCategory}
+              setCurrentCategory={setCurrentCategory}
+              selectedCategoryList={selectedCategoryList}
+              setSelectedCategoryList={setSelectedCategoryList}
+            />
           ))}
         </section>
         <section className={cx('')}>
