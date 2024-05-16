@@ -20,9 +20,7 @@ export function useReadNotification() {
 
   return useMutation({
     mutationFn: readNotification,
-    onSuccess: ({ data }) => {
-      console.log(data);
-
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: notifications.all.queryKey });
     },
     onError: (error) => {
@@ -36,9 +34,7 @@ export function useReadNotificationAll() {
 
   return useMutation({
     mutationFn: readNotificationAll,
-    onSuccess: ({ data }) => {
-      console.log(data);
-
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: notifications.all.queryKey });
     },
     onError: (error) => {

@@ -53,7 +53,6 @@ export default function Signin() {
 
   useEffect(() => {
     if (isSignin) {
-      // console.log('로그인된 유저입니다. 맵으로 이동...');
       router.push('map');
     }
   }, [isSignin, router]);

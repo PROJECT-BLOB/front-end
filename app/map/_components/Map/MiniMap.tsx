@@ -1,6 +1,6 @@
 import * as process from 'process';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { APIProvider, ControlPosition, Map, MapControl, MapEvent } from '@vis.gl/react-google-maps';
 import classNames from 'classnames/bind';
@@ -25,17 +25,16 @@ export default function MiniMap() {
     const newLocation = event.map.getCenter()?.toJSON();
     setLastMapCenter(newLocation);
   };
+  const [, setSelectedCity] = React.useState<{ cityName: string; lat: number; lng: number } | null>(null);
   const [, setButtonClicked] = React.useState(false); // 버튼 클릭 여부 상태 추가
-
-  const { setCurrentPosition } = useMapStore();
 
   const getCurrentPosition = () => {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setCurrentPosition({ lat: latitude, lng: longitude });
-          console.log('현재 위치:', latitude, longitude);
+          setSelectedCity({ cityName: '현재 위치', lat: latitude, lng: longitude });
+          console.log('현재 위치', latitude, longitude);
         },
         (error) => {
           console.error('Error getting current position', error);
@@ -50,6 +49,8 @@ export default function MiniMap() {
     setButtonClicked(true); // 버튼 클릭됨을 상태에 저장
     getCurrentPosition(); // getCurrentPosition 호출
   };
+
+  useEffect(() => {}, []);
 
   return (
     <div className={cx('minimap-wrapper')}>

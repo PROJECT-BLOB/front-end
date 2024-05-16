@@ -128,7 +128,7 @@ export default function WritePost() {
               <CategoryFiltering
                 key={category}
                 category={category}
-                filteringType='writing'
+                filteringType='feed'
                 setSelectedCategories={setSelectedCategories}
                 setActiveCategory={setActiveCategory}
               >
@@ -138,7 +138,7 @@ export default function WritePost() {
                       <SubCategoryFiltering
                         key={subcategory}
                         category={category}
-                        filteringType='writing'
+                        filteringType='feed'
                         subcategory={subcategory}
                         onClick={() => handleSubCategoryClick(category, subcategory)}
                         selectedSubCategories={selectedCategories[category].subCategories}
@@ -149,44 +149,37 @@ export default function WritePost() {
               </CategoryFiltering>
             ))}
           </div>
-          <div className={cx('title-and-content')}>
-            <PostModalInput
-              required
-              register={register as unknown as UseFormRegister<FieldValues>}
-              labelName='제목'
-              id='title'
-              name='title'
-              placeholder='제목은 필수입니다'
-              maxLength={20}
-              errors={errors}
-            />
-            <PostModalInput
-              register={register as unknown as UseFormRegister<FieldValues>}
-              labelName='내용'
-              id='content'
-              name='content'
-              placeholder='내용을 입력해주세요'
-              maxLength={2000}
-              errors={errors}
-            />
-          </div>
-
-          <div className={cx('body-map-image')}>
-            <p className={cx('title')}>
-              어디에 관한 글인가요? (도시까지)<span className={cx('force')}> *</span>
-            </p>
-            <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
-              <Autocomplete type='mini' />
-              <BlobMap isDisplaying={false} />
-            </APIProvider>
-            <PositionDetail />
-
-            <div className={cx('body-image')}>
-              <p className={cx('title')}>사진업로드(최대5장) - 최대 5mb</p>
-              <div className={cx('image-uploader')}>
-                <ImageUploader setValue={setValue} />
-              </div>
-            </div>
+          <PostModalInput
+            required
+            register={register as unknown as UseFormRegister<FieldValues>}
+            labelName='제목'
+            id='title'
+            name='title'
+            placeholder='제목은 필수입니다'
+            maxLength={20}
+            errors={errors}
+          />
+          <PostModalInput
+            required
+            register={register as unknown as UseFormRegister<FieldValues>}
+            labelName='내용'
+            id='content'
+            name='content'
+            placeholder='내용을 입력해주세요'
+            maxLength={2000}
+            errors={errors}
+          />
+          <p className={cx('title')}> 어디에 관한 글인가요? (도시까지)</p>
+          <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
+            <Autocomplete type='mini' />
+            <BlobMap isDisplaying={false} />
+          </APIProvider>
+          <PositionDetail />
+        </div>
+        <div className={cx('body-image')}>
+          <p className={cx('title')}>사진업로드(최대5장) - 최대 5mb</p>
+          <div className={cx('image-uploader')}>
+            <ImageUploader setValue={setValue} />
           </div>
         </div>
       </div>

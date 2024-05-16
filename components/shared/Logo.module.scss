@@ -21,21 +21,6 @@
   width: 23.6rem;
   height: 8.4286rem;
   flex-shrink: 0;
-
-  // 그냥 넣어봤어여... 구리면 빼도 됨
-  @keyframes scaleLogo {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  animation: scaleLogo 2s infinite;
-  transform-origin: center;
 }
 
 .small {

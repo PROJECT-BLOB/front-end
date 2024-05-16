@@ -1,20 +1,12 @@
 @import '@styles/global-styles/index';
 
 .container {
-  position: relative;
-  top: 100px;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   // 기본 글씨 색 검정
   color: $BDS-Grayscale-13;
-}
-
-.core-feature-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }
 
 .title-section {
@@ -255,10 +247,6 @@
     @include tablet-and-desktop {
       padding-bottom: 4rem;
       gap: 6rem;
-    }
-
-    @include desktop {
-      padding: 0 0 4rem 12rem;
     }
   }
 

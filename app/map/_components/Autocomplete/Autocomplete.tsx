@@ -33,7 +33,7 @@ export default function Autocomplete({ type = 'normal' }: AutocompleteProps) {
   const setLastSearchCity = useMapStore((state) => state.setLastSearchCity);
   const setLastMapCenter = useMapStore((state) => state.setLastMapCenter);
 
-  const cx = classNames.bind(type === 'normal' ? styles : styles2);
+  const cx = type === 'normal' ? classNames.bind(styles) : classNames.bind(styles2);
 
   useEffect(() => {
     if (!places || !map) return;

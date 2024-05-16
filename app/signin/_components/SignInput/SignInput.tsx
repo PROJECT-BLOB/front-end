@@ -22,7 +22,6 @@ export default function SignInput({
   errors,
   validator,
 }: InputProps<FieldValues>) {
-  console.log('errors', errors);
   const errorText = errors && errors[name] ? 'error-text' : '';
   const errorInput = errors && errors[name] ? 'error-input' : '';
 
