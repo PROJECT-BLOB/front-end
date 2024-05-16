@@ -25,18 +25,6 @@ export default function Filter() {
   const [currentCategory, setCurrentCategory] = useState<Category | null>(null);
   const [selectedCategoryList, setSelectedCategoryList] = useState<FullCategory[]>([]);
 
-  const handleFilterStatus = (category: Category) => {
-    if (currentCategory === category) {
-      setCurrentCategory(() => null);
-      setSelectedCategoryList([]);
-
-      return;
-    }
-
-    setCurrentCategory(() => category);
-    setSelectedCategoryList(() => [category]);
-  };
-
   return (
     <>
       <div className={cx('area')}>
@@ -48,7 +36,6 @@ export default function Filter() {
               category={category as Category}
               currentCategory={currentCategory}
               setCurrentCategory={setCurrentCategory}
-              selectedCategoryList={selectedCategoryList}
               setSelectedCategoryList={setSelectedCategoryList}
             />
           ))}

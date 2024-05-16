@@ -1,5 +1,4 @@
 import { PropsWithChildren, useEffect, useState } from 'react';
-import { Simulate } from 'react-dom/test-utils';
 
 import classNames from 'classnames/bind';
 
@@ -12,8 +11,6 @@ import ThumbsDownIcon from '@icons/thumbs-down-orange.svg?component';
 import ThumbsUpIcon from '@icons/thumbs-up-red.svg?component';
 
 import styles from './FilterCategoryButton.module.scss';
-
-import select = Simulate.select;
 
 const cx = classNames.bind(styles);
 
@@ -49,7 +46,6 @@ export interface FilterCategoryButtonProps {
   category: Category;
   currentCategory: Category | null;
   setCurrentCategory: (category: Category | null) => void;
-  selectedCategoryList: FullCategory[];
   setSelectedCategoryList: (category: FullCategory[]) => void;
 }
 
@@ -57,7 +53,6 @@ export default function FilterCategoryButton({
   category = 'RECOMMENDED',
   currentCategory,
   setCurrentCategory,
-  selectedCategoryList,
   setSelectedCategoryList,
 }: PropsWithChildren<FilterCategoryButtonProps>) {
   const [isClicked, setIsClicked] = useState(false);
