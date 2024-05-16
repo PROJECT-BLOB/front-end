@@ -7,6 +7,7 @@ import { interpolateRgb } from 'd3-interpolate';
 
 import MarkerWithInfoWindow from '@/app/map/_components/Marker/MarkerWithInfoWindow';
 import { useGetMarkers } from '@queries/useBlobmapQueries';
+import { useCategoryStore } from '@stores/useCategoryStore';
 import { useMapStore } from '@stores/useMapStore';
 
 const interpolatedRenderer = {
@@ -42,7 +43,10 @@ const interpolatedRenderer = {
 // eslint-disable-next-line
 export default function Markers() {
   const lastBound = useMapStore((state) => state.lastBound);
-  const { data } = useGetMarkers([] as unknown as string, lastBound);
+  const selectedCategoryList = useCategoryStore((state) => state.selectedCategoryList);
+  const categoryString = selectedCategoryList.join(',');
+
+  const { data } = useGetMarkers(categoryString, lastBound);
   const locations = data ? data.data : [];
   const map = useMap();
   const [markers, setMarkers] = useState<{ [key: string]: Marker }>({});
@@ -82,18 +86,19 @@ export default function Markers() {
 
   return (
     <>
-      {locations.map((point) => (
-        <AdvancedMarker
-          // animation={google.maps.Animation.BOUNCE}
-          key={`${point.postId}`}
-          title={point.title}
-          position={{ lat: point.lat, lng: point.lng }}
-          onClick={() => console.log('MarkerClicked')}
-          ref={(marker) => setMarkerRef(marker, point.postId.toString())}
-        >
-          <MarkerWithInfoWindow createdAt={'3시간전'} title={point.title} markerType={point.category} opacity={100} />
-        </AdvancedMarker>
-      ))}
+      {locations.length > 0 &&
+        locations.map((point) => (
+          <AdvancedMarker
+            // animation={google.maps.Animation.BOUNCE}
+            key={`${point.postId}`}
+            title={point.title}
+            position={{ lat: point.lat, lng: point.lng }}
+            onClick={() => console.log('MarkerClicked')}
+            ref={(marker) => setMarkerRef(marker, point.postId.toString())}
+          >
+            <MarkerWithInfoWindow createdAt={'3시간전'} title={point.title} markerType={point.category} opacity={100} />
+          </AdvancedMarker>
+        ))}
     </>
   );
 }
