@@ -3,12 +3,11 @@ import { useRef } from 'react';
 import { Switch } from 'antd';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 import SignInput from '@/app/signin/_components/SignInput/SignInput';
 import { UserDetail } from '@/types/User';
 import CloseButton from '@icons/x-close.svg';
-import { useDeleteUser, useDetailQueries } from '@queries/useUserQueries';
+import { useDetailQueries } from '@queries/useUserQueries';
 import { useUserStore } from '@stores/userStore';
 
 import Avatar from '@components/Avatar/Avatar';
@@ -25,9 +24,7 @@ import useUpdateUserProfileForm from '../../_hooks/useUpdateUserProfileForm';
 const cx = classNames.bind(styles);
 
 export default function UpdateProfileModal() {
-  const router = useRouter();
   const { blobId } = useUserStore();
-  const { mutate: deleteUserMutate } = useDeleteUser();
 
   const { data, isLoading, isError, error } = useDetailQueries(blobId);
 
@@ -63,14 +60,6 @@ export default function UpdateProfileModal() {
 
   const handleClickInput = () => {
     inputRef.current?.click();
-  };
-
-  const handleClickDeleteUser = () => {
-    deleteUserMutate();
-
-    cancelForm();
-    localStorage.clear();
-    router.push('/');
   };
 
   return (
@@ -131,14 +120,9 @@ export default function UpdateProfileModal() {
           </div>
         </section>
       </main>
-      <footer className={cx('footer')}>
-        <button type='button' className={cx('delete-user-button')} onClick={handleClickDeleteUser}>
-          회원 탈퇴
-        </button>
-        <div className={cx('form-buttons')}>
-          <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
-          <BlobButton text='BLOB' type='submit' color='button-colord-contain' />
-        </div>
+      <footer className={cx('form-buttons')}>
+        <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
+        <BlobButton text='BLOB' type='submit' color='button-colord-contain' />
       </footer>
     </form>
   );

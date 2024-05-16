@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import { APIProvider } from '@vis.gl/react-google-maps';
@@ -9,11 +9,10 @@ import Autocomplete from '@/app/map/_components/Autocomplete/Autocomplete';
 import BlobMap from '@/app/map/_components/Map/BlobMap';
 import useCreateForm from '@/app/map/_hooks/useCreateForm';
 import CloseButton from '@/public/icons/x-close.svg';
-// import { useFilteringStore } from '@stores/useFilteringStore';
 import useModalStore from '@stores/useModalStore';
 
-import CategoryFiltering, { Category } from '@components/Category/CategoryFiltering';
-import SubCategoryFiltering, { subCategories, SubCategory } from '@components/Category/SubCategoryFiltering';
+// import CategoryFiltering from '@components/Category/CategoryFiltering';
+// import SubCategoryFiltering, { subCategories } from '@components/Category/SubCategoryFiltering';
 import ImageUploader from '@components/ImageUploader';
 
 import PositionDetail from './PositionDetail';
@@ -23,92 +22,21 @@ import BlobButton from '../../Button/BlobButton';
 
 const cx = classNames.bind(styles);
 
-const categories: Category[] = ['추천', '비추천', '질문', '주의', '도움요청'];
-
-export interface CategoryState {
-  isSelected: boolean;
-  subCategories: SubCategory[];
-}
-
-enum MAIN_CATEGORY {
-  '추천' = 'RECOMMENDED',
-  '비추천' = 'NOT_RECOMMENDED',
-  '도움요청' = 'HELP',
-  '질문' = 'QUESTION',
-  '주의' = 'WARNING',
-}
-
-enum SUB_CATEGORY {
-  '날씨' = 'WEATHER',
-  '음식점' = 'RESTAURANT',
-  '숙소' = 'ACCOMMODATION',
-  '병원' = 'HOSPITAL',
-  '화장실' = 'TOILET',
-  '약국' = 'PHARMACY',
-  '교통' = 'TRANSPORT',
-  '박물관' = 'MUSEUM',
-  '관광지' = 'ATTRACTIONS',
-  'ATM' = 'ATM',
-}
-
 export default function WritePost() {
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
   const { toggleModal } = useModalStore();
+  const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal);
+  // const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  // const [selectedSubCategory, setSelectedSubCategory] = useState<string | null>(null);
 
-  const [selectedCategories, setSelectedCategories] = useState<Record<Category, CategoryState>>({
-    추천: { isSelected: false, subCategories: [] },
-    비추천: { isSelected: false, subCategories: [] },
-    질문: { isSelected: false, subCategories: [] },
-    주의: { isSelected: false, subCategories: [] },
-    도움요청: { isSelected: false, subCategories: [] },
-  });
+  // const handleCategoryClick = (category: string) => {
+  //   setSelectedCategory(category);
+  //   setSelectedSubCategory(null); // 카테고리를 선택하면 서브카테고리 선택을 초기화
+  // };
 
-  function formatArray() {
-    const result = Object.entries(selectedCategories)
-      .map(([key, values]) => {
-        return values.subCategories
-          .map((value) => [MAIN_CATEGORY[key as keyof typeof MAIN_CATEGORY], SUB_CATEGORY[value]].join(':'))
-          .join(',');
-      })
-      .filter(Boolean);
-
-    Object.entries(selectedCategories).forEach((category) => {
-      if (category[1].isSelected && category[1].subCategories.length === 0)
-        result.push(MAIN_CATEGORY[category[0] as keyof typeof MAIN_CATEGORY]);
-    });
-
-    return result.join(',');
-  }
-  // useCreateForm을 호출하는 시점에서 selectedCategories를 인자로 넘기도록 수정
-
-  const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal, formatArray);
-
-  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
-
-  const handleSubCategoryClick = (category: Category, subcategory: SubCategory) => {
-    setSelectedCategories((prevState) => {
-      const prevSubCategories = prevState[category].subCategories;
-      const isAlreadySelected = prevSubCategories.includes(subcategory);
-
-      if (isAlreadySelected) {
-        return {
-          ...prevState,
-          [category]: {
-            ...prevState[category],
-            subCategories: prevSubCategories.filter((currentSubCategory) => currentSubCategory !== subcategory),
-          },
-        };
-      }
-
-      return {
-        ...prevState,
-        [category]: {
-          ...prevState[category],
-          subCategories: [...prevSubCategories, subcategory],
-        },
-      };
-    });
-  };
+  // const handleSubCategoryClick = (subcategory: string) => {
+  //   setSelectedSubCategory(subcategory);
+  // };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={cx('form')} encType='multipart/form-data'>
@@ -123,7 +51,7 @@ export default function WritePost() {
           <p className={cx('title')}>
             카테고리<span className={cx('force')}> * </span>
           </p>
-          <div className={cx('category-list', { 'category-list-clicked': activeCategory })}>
+          {/* <div className={cx('category-list')}>
             {categories.map((category) => (
               <CategoryFiltering
                 key={category}
@@ -148,7 +76,7 @@ export default function WritePost() {
                 )}
               </CategoryFiltering>
             ))}
-          </div>
+          </div> */}
           <PostModalInput
             required
             register={register as unknown as UseFormRegister<FieldValues>}

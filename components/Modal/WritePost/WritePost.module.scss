@@ -53,8 +53,6 @@
 }
 .post-body {
   width: 39.5rem;
-  height: 60rem;
-  overflow-y: scroll;
   flex-direction: column; // 이걸 다 따로 주기
   display: flex;
   padding: 2rem 1.75rem 2rem 2.25rem;
@@ -105,17 +103,4 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
-}
-
-.category-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem;
-  width: 31.5rem;
-  position: relative;
-
-  &.category-list-clicked {
-    margin-bottom: 7.6rem;
-    transition: 0.3s;
-  }
 }
