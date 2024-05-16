@@ -128,7 +128,7 @@ export default function WritePost() {
               <CategoryFiltering
                 key={category}
                 category={category}
-                filteringType='feed'
+                filteringType='writing'
                 setSelectedCategories={setSelectedCategories}
                 setActiveCategory={setActiveCategory}
               >
@@ -138,7 +138,7 @@ export default function WritePost() {
                       <SubCategoryFiltering
                         key={subcategory}
                         category={category}
-                        filteringType='feed'
+                        filteringType='writing'
                         subcategory={subcategory}
                         onClick={() => handleSubCategoryClick(category, subcategory)}
                         selectedSubCategories={selectedCategories[category].subCategories}

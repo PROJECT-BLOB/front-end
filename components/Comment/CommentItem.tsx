@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import Link from 'next/link';
 
 import { Comment, Post } from '@/types/Post';
 
@@ -12,7 +13,7 @@ const cx = classNames.bind(styles);
 
 export default function CommentItem({ commentedPost, comment }: { commentedPost: Post; comment: Comment }) {
   return (
-    <div className={cx('post-container')}>
+    <Link className={cx('post-container')} href={`/feed/${commentedPost.postId}`}>
       <header className={cx('header')}>
         <CategoryBox category={commentedPost?.category} subcategory={commentedPost.subcategory} />
         {commentedPost.likeCount >= 100 && <IconTag>Beloved</IconTag>}
@@ -34,6 +35,6 @@ export default function CommentItem({ commentedPost, comment }: { commentedPost:
           <span>{calculateTimePastSinceItCreated(commentedPost?.createdDate)}</span>
         </p>
       </footer>
-    </div>
+    </Link>
   );
 }

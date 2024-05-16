@@ -1,4 +1,4 @@
-import { Author } from '@/types/Post';
+import { Author, SubCategory } from '@/types/Post';
 import instance from '@apis/axios';
 
 export type Category = 'RECOMMENDED' | 'NOT_RECOMMENDED' | 'QUESTION' | 'WARNING' | 'HELP';
@@ -11,21 +11,21 @@ export type Category = 'RECOMMENDED' | 'NOT_RECOMMENDED' | 'QUESTION' | 'WARNING
 //   HELP = 'HELP',
 // }
 
-export enum SubCategory {
-  WEATHER = '날씨',
-  // RESTAURANT = '음식점',
-  // ACCOMMODATION = '숙소',
-  // HOSPITAL = '병원',
-  // TOILET = '화장실',
-  // PHARMACY = '약국',
-  // TRANSPORT = '교통',
-  // MUSEUM = '박물관',
-  // ATTRACTIONS = '관광지',
-  ATM = 'ATM',
-}
+// export enum SubCategory {
+//   WEATHER = '날씨',
+//   // RESTAURANT = '음식점',
+//   // ACCOMMODATION = '숙소',
+//   // HOSPITAL = '병원',
+//   // TOILET = '화장실',
+//   // PHARMACY = '약국',
+//   // TRANSPORT = '교통',
+//   // MUSEUM = '박물관',
+//   // ATTRACTIONS = '관광지',
+//   ATM = 'ATM',
+// }
 
 export interface GetMarkerRequest {
-  categories?: Category[] | [];
+  categories?: string;
   minLat: number;
   maxLat: number;
   minLng: number;
@@ -40,7 +40,7 @@ export interface IMarker {
   author: Author;
   lat: number;
   lng: number;
-  createdDate: Date;
+  createdDate: string;
 }
 
 export default async function getMarkers(request: GetMarkerRequest): Promise<{ data: IMarker[] | []; status: number }> {
