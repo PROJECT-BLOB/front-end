@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ControlPosition, MapControl } from '@vis.gl/react-google-maps';
 
+import Filter from '@/app/map/_components/Map/Filter';
 import useModalStore, { ModalName } from '@stores/useModalStore';
 
 import CreatePostButton from '@components/Button/CreatePostButton';
@@ -18,7 +19,7 @@ export default function MapControlComponents() {
   return (
     <>
       <MapControl position={ControlPosition.BLOCK_START_INLINE_CENTER}>
-        <div style={{ width: '70rem', background: 'purple', height: '10rem' }}>필터영역입니다.</div>
+        <Filter />
       </MapControl>
       <MapControl position={ControlPosition.INLINE_END_BLOCK_END}>
         <CreatePostButton onClick={() => handleClickModal(MODAL_NAME)} />
