@@ -1,7 +1,7 @@
 @import '/styles/global-styles/color-pallete';
 
 .close-header {
-  width: 39.5rem;
+  width: 41rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +38,7 @@
 }
 
 .post-footer {
-  width: 39.5rem;
+  width: 41rem;
   display: flex;
   align-items: flex-end;
   gap: 0.625rem;
@@ -52,9 +52,9 @@
   flex-direction: column; // 이걸 다 따로 주기
 }
 .post-body {
-  width: 39.5rem;
+  width: 41rem;
   height: 60rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   flex-direction: column; // 이걸 다 따로 주기
   display: flex;
   padding: 2rem 1.75rem 2rem 2.25rem;
@@ -63,7 +63,14 @@
 }
 .body-image {
   display: flex;
+  flex-direction: column;
+}
+.image-uploader {
+  display: flex;
   flex-direction: row;
+  gap: 1rem;
+  overflow-y: auto;
+  flex-wrap: wrap;
 }
 
 .title {
@@ -76,13 +83,15 @@
   font-weight: 500;
   line-height: 150%; /* 1.5rem */
 }
-
+.title-and-content {
+  width: 30rem;
+}
 .force {
   color: $BDS-System-Error;
 
   /* BDS/Body 1/Highlight */
   font-family: 'IBM Plex Sans KR';
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
