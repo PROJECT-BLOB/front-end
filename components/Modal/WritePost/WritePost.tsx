@@ -9,6 +9,7 @@ import Autocomplete from '@/app/map/_components/Autocomplete/Autocomplete';
 import BlobMap from '@/app/map/_components/Map/BlobMap';
 import useCreateForm from '@/app/map/_hooks/useCreateForm';
 import CloseButton from '@/public/icons/x-close.svg';
+// import { useFilteringStore } from '@stores/useFilteringStore';
 import useModalStore from '@stores/useModalStore';
 
 import CategoryFiltering, { Category } from '@components/Category/CategoryFiltering';
@@ -53,7 +54,6 @@ enum SUB_CATEGORY {
 export default function WritePost() {
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
   const { toggleModal } = useModalStore();
-  const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal);
 
   const [selectedCategories, setSelectedCategories] = useState<Record<Category, CategoryState>>({
     추천: { isSelected: false, subCategories: [] },
@@ -62,8 +62,6 @@ export default function WritePost() {
     주의: { isSelected: false, subCategories: [] },
     도움요청: { isSelected: false, subCategories: [] },
   });
-
-  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
 
   function formatArray() {
     const result = Object.entries(selectedCategories)
@@ -74,7 +72,6 @@ export default function WritePost() {
       })
       .filter(Boolean);
 
-    // 메인 카테고리 포메팅
     Object.entries(selectedCategories).forEach((category) => {
       if (category[1].isSelected && category[1].subCategories.length === 0)
         result.push(MAIN_CATEGORY[category[0] as keyof typeof MAIN_CATEGORY]);
@@ -82,9 +79,11 @@ export default function WritePost() {
 
     return result.join(',');
   }
+  // useCreateForm을 호출하는 시점에서 selectedCategories를 인자로 넘기도록 수정
 
-  // TODO : 카테고리 데이터 넘겨주세요!
-  console.log(formatArray(), ': 카테고리 데이터 확인');
+  const { errors, register, handleSubmit, onSubmit, cancelForm, setValue } = useCreateForm(toggleModal, formatArray);
+
+  const [activeCategory, setActiveCategory] = useState<Category | null>(null);
 
   const handleSubCategoryClick = (category: Category, subcategory: SubCategory) => {
     setSelectedCategories((prevState) => {
@@ -124,13 +123,12 @@ export default function WritePost() {
           <p className={cx('title')}>
             카테고리<span className={cx('force')}> * </span>
           </p>
-
           <div className={cx('category-list', { 'category-list-clicked': activeCategory })}>
             {categories.map((category) => (
               <CategoryFiltering
                 key={category}
                 category={category}
-                filteringType='writing'
+                filteringType='feed'
                 setSelectedCategories={setSelectedCategories}
                 setActiveCategory={setActiveCategory}
               >
@@ -140,7 +138,7 @@ export default function WritePost() {
                       <SubCategoryFiltering
                         key={subcategory}
                         category={category}
-                        filteringType='writing'
+                        filteringType='feed'
                         subcategory={subcategory}
                         onClick={() => handleSubCategoryClick(category, subcategory)}
                         selectedSubCategories={selectedCategories[category].subCategories}
@@ -151,7 +149,6 @@ export default function WritePost() {
               </CategoryFiltering>
             ))}
           </div>
-
           <PostModalInput
             required
             register={register as unknown as UseFormRegister<FieldValues>}
@@ -181,7 +178,9 @@ export default function WritePost() {
         </div>
         <div className={cx('body-image')}>
           <p className={cx('title')}>사진업로드(최대5장) - 최대 5mb</p>
-          <ImageUploader setValue={setValue} />
+          <div className={cx('image-uploader')}>
+            <ImageUploader setValue={setValue} />
+          </div>
         </div>
       </div>
       <div className={cx('post-footer')}>

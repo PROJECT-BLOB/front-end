@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useQueryClient } from '@tanstack/react-query';
@@ -25,10 +24,9 @@ export interface ContentField {
   image: File[];
 }
 
-// 수정된 onSubmit 함수
-type LatLngLiteralOrNull = google.maps.LatLngLiteral | null;
+export default function useCreateForm(toggleModal: () => void, formatArray: () => string) {
+  const { currentPosition } = useMapStore();
 
-export default function useCreateForm(toggleModal: () => void) {
   const {
     register,
     handleSubmit,
@@ -36,11 +34,11 @@ export default function useCreateForm(toggleModal: () => void) {
     setValue,
     formState: { errors },
   } = useForm<ContentField>();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentPosition, setCurrentPosition] = useState<LatLngLiteralOrNull>({ lat: 0, lng: 0 });
   const queryClient = useQueryClient();
   const mapState = useMapStore((state) => state);
   const { lastSearchCity } = mapState;
+  const formattedCategories = formatArray();
+  const [category, subcategory] = formattedCategories.split(':');
 
   console.log('currentPosition', currentPosition);
 
@@ -48,27 +46,6 @@ export default function useCreateForm(toggleModal: () => void) {
     reset();
     toggleModal();
   }
-
-  // useEffect(() => {
-  //   // 페이지가 로드될 때 현재 위치 가져오기
-  //   getCurrentPosition();
-  // }, []);
-
-  // const getCurrentPosition = () => {
-  //   if ('geolocation' in navigator) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         const { latitude, longitude } = position.coords;
-  //         setCurrentPosition({ lat: latitude, lng: longitude });
-  //       },
-  //       (error) => {
-  //         console.error('Error getting current position', error);
-  //       },
-  //     );
-  //   } else {
-  //     console.error('Geolocation is not available');
-  //   }
-  // };
 
   async function onSubmit(formData: ContentField) {
     console.log(formData);
@@ -83,25 +60,25 @@ export default function useCreateForm(toggleModal: () => void) {
       actualLng: currentPosition?.lng ?? 0,
       lat: lastSearchCity?.location?.lat ?? 0,
       lng: lastSearchCity?.location?.lng ?? 0,
-      category: 'QUESTION', // 카테고리 중복선택 이슈
-      subcategory: 'WEATHER',
+      category: category ?? '',
+      subcategory: subcategory ?? '',
     };
+
+    // const formattedCategories = formatArray();
+    // formData.category = formattedCategories;
 
     try {
       const formDataToSend = new FormData();
 
-      // 이미지 파일 추가
       if (formData.image) {
         for (let i = 0; i < formData.image.length; i++) {
           formDataToSend.append('file', formData.image[i]);
         }
       }
 
-      // 데이터 추가
       formDataToSend.append('data', new Blob([JSON.stringify(formData)]));
 
       await createPost(formDataToSend);
-      // 임시: 만들어졌을 시 피드 업데이트
       queryClient.invalidateQueries({ queryKey: posts.feedList().queryKey });
       console.log('Post created successfully');
     } catch (error) {
