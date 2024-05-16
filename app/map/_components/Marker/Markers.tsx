@@ -10,6 +10,8 @@ import { useGetMarkers } from '@queries/useBlobmapQueries';
 import { useCategoryStore } from '@stores/useCategoryStore';
 import { useMapStore } from '@stores/useMapStore';
 
+import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
+
 const interpolatedRenderer = {
   palette: interpolateRgb('red', 'blue'),
   render({ count, position }: Cluster, stats: ClusterStats): google.maps.Marker {
@@ -96,7 +98,12 @@ export default function Markers() {
             onClick={() => console.log('MarkerClicked')}
             ref={(marker) => setMarkerRef(marker, point.postId.toString())}
           >
-            <MarkerWithInfoWindow createdAt={'3시간전'} title={point.title} markerType={point.category} opacity={100} />
+            <MarkerWithInfoWindow
+              createdAt={calculateTimePastSinceItCreated(point.createdDate)}
+              title={point.title}
+              markerType={point.category}
+              opacity={100}
+            />
           </AdvancedMarker>
         ))}
     </>
