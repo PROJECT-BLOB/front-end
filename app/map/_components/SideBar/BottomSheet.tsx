@@ -21,7 +21,7 @@ export default function BottomSheet() {
   const lastBound = useMapStore((state) => state.lastBound);
   const [order, setOrder] = useState<'recent' | 'hot'>('recent');
 
-  const { data, refetch } = useGetSidebarItems('QUESTION', lastBound, 0, 100, 'recent');
+  const { data, refetch } = useGetSidebarItems('', lastBound, 0, 100, order);
 
   useEffect(() => {
     refetch();

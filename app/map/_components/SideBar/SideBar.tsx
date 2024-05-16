@@ -17,7 +17,7 @@ export default function SideBar() {
   const lastBound = useMapStore((state) => state.lastBound);
   const [order, setOrder] = useState<'recent' | 'hot'>('recent');
   // 카테고리
-  const { data, refetch } = useGetSidebarItems('QUESTION,HELP', lastBound, 0, 100, order);
+  const { data, refetch } = useGetSidebarItems('', lastBound, 0, 100, order);
   const sideBarRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

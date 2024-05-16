@@ -9,7 +9,7 @@ import styles from './PostList.module.scss';
 export default function PostList() {
   const lastBound = useMapStore((state) => state.lastBound);
 
-  const { data } = useGetSidebarItems('QUESTION', lastBound, 0, 100, 'recent');
+  const { data } = useGetSidebarItems('', lastBound, 0, 100, 'recent');
 
   return (
     <div className={styles['content-list']}>
