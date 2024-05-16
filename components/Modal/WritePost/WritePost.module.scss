@@ -106,3 +106,16 @@
   flex-wrap: wrap;
   gap: 0.8rem;
 }
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  width: 31.5rem;
+  position: relative;
+
+  &.category-list-clicked {
+    margin-bottom: 7.6rem;
+    transition: 0.3s;
+  }
+}

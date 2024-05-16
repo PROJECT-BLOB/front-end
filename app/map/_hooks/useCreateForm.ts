@@ -34,8 +34,6 @@ export default function useCreateForm(toggleModal: () => void) {
     setValue,
     formState: { errors },
   } = useForm<ContentField>();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [currentPosition, setCurrentPosition] = useState<LatLngLiteralOrNull>({ lat: 0, lng: 0 });
   const queryClient = useQueryClient();
   const mapState = useMapStore((state) => state);
   const { lastSearchCity } = mapState;
@@ -46,22 +44,6 @@ export default function useCreateForm(toggleModal: () => void) {
     reset();
     toggleModal();
   }
-
-  // const getCurrentPosition = () => {
-  //   if ('geolocation' in navigator) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         const { latitude, longitude } = position.coords;
-  //         setCurrentPosition({ lat: latitude, lng: longitude });
-  //       },
-  //       (error) => {
-  //         console.error('Error getting current position', error);
-  //       },
-  //     );
-  //   } else {
-  //     console.error('Geolocation is not available');
-  //   }
-  // };
 
   async function onSubmit(formData: ContentField) {
     console.log(formData);
@@ -76,21 +58,19 @@ export default function useCreateForm(toggleModal: () => void) {
       actualLng: currentPosition?.lng ?? 0,
       lat: lastSearchCity?.location?.lat ?? 0,
       lng: lastSearchCity?.location?.lng ?? 0,
-      category: 'QUESTION', // 카테고리 중복선택 이슈
+      category: 'QUESTION',
       subcategory: 'WEATHER',
     };
 
     try {
       const formDataToSend = new FormData();
 
-      // 이미지 파일 추가
       if (formData.image) {
         for (let i = 0; i < formData.image.length; i++) {
           formDataToSend.append('file', formData.image[i]);
         }
       }
 
-      // 데이터 추가
       formDataToSend.append('data', new Blob([JSON.stringify(formData)]));
 
       await createPost(formDataToSend);
