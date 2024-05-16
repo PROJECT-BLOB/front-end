@@ -18,6 +18,9 @@
 }
 
 .target-nickname {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
   color: $BDS-Grayscale-13;
   font-feature-settings: 'ss10' on;
   background-color: inherit;
@@ -25,6 +28,7 @@
   font-size: 1.5rem;
   line-height: 146.7%; /* 22.005px */
   outline: none;
+  gap: .2rem;
 }
 
 .comment-input {
@@ -39,6 +43,12 @@
   &::placeholder {
     color: $BDS-Grayscale-6;
   }
+}
+
+.cancel-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .comment-submit-button {

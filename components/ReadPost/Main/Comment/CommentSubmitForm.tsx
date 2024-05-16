@@ -1,6 +1,9 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 
+import Image from 'next/image';
+
+import x from '@public/icons/x-square.svg';
 import { useCreateComment, useCreateReply } from '@queries/usePostQueries';
 
 import styles from './CommentSubmitForm.module.scss';
@@ -46,7 +49,16 @@ export default function CommentSubmitForm({ postId, replyInformation, setReplyIn
   return (
     <form className={styles['comment-form']} onSubmit={handleSubmit(handleSubmitComment)}>
       {replyInformation.isReply && (
-        <span className={styles['target-nickname']}>@{replyInformation.targetCommentNickname}</span>
+        <div className={styles['target-nickname']}>
+          <span>@{replyInformation.targetCommentNickname}</span>
+          <button
+            type='button'
+            className={styles['cancel-button']}
+            onClick={() => setReplyInformation({ ...replyInformation, isReply: false })}
+          >
+            <Image src={x} alt='x' width={14} height={14} />
+          </button>
+        </div>
       )}
       <input type='text' className={styles['comment-input']} placeholder='댓글 남기기' {...register('comment')} />
       <button type='submit' className={styles['comment-submit-button']}>

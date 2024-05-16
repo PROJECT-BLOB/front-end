@@ -1,13 +1,14 @@
 @import '@styles/global-styles/index';
 
 .signin {
-  @include flex-column;
-  align-items: center;
-  padding: 8rem 2rem;
+  @include flex-column-center;
+  position: fixed;
+  inset: 0;
+  background-color: white;
+  z-index: 1;
   gap: 6rem;
 
   @include tablet-and-desktop {
-    padding-top: 22rem;
     gap: 12rem;
   }
 }

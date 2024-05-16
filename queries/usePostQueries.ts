@@ -158,9 +158,9 @@ export function useDeleteComment(postId?: number, commentId?: number) {
   return useMutation({
     mutationFn: deleteComment,
     onSuccess: () => {
-      if (postId) queryClient.invalidateQueries({ queryKey: posts.comment(postId).queryKey });
+      if (postId && commentId) queryClient.invalidateQueries({ queryKey: posts.comment(postId).queryKey });
 
-      if (commentId) queryClient.invalidateQueries({ queryKey: posts.reply(commentId).queryKey });
+      if (!postId && commentId) queryClient.invalidateQueries({ queryKey: posts.reply(commentId).queryKey });
     },
   });
 }

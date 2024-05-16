@@ -18,6 +18,16 @@
   }
 }
 
+.search-container {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  @include tablet{
+    gap: 0.8rem;
+  }
+}
+
 .search-country-and-filtering-container {
   display: flex;
   width: 100%;

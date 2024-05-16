@@ -23,7 +23,7 @@ export default function BottomSheet() {
   const [order, setOrder] = useState<'recent' | 'hot'>('recent');
   const categoryString = useCategoryStore((state) => state.getCategoryString());
 
-  const { data, refetch } = useGetSidebarItems(categoryString, lastBound, 0, 100, 'recent');
+  const { data, refetch } = useGetSidebarItems(categoryString, lastBound, 0, 100, order);
 
   useEffect(() => {
     refetch();
