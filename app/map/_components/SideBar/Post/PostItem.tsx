@@ -1,15 +1,20 @@
+/* eslint-disable react/destructuring-assignment */
+import { IMarker } from '@apis/map/getMarkers';
+
 import CategoryBox from '@components/CategoryBox';
+
+import calculateTimePastSinceItCreated from '@utils/calculateTimePastSinceItCreated';
 
 import styles from './PostItem.module.scss';
 
-export default function PostItem() {
+export default function PostItem({ content }: { content: IMarker }) {
   return (
     <div className={styles.content}>
-      <CategoryBox category='HELP' subcategory='ACCOMMODATION' />
-      <p className={styles.mention}>content</p>
+      <CategoryBox category={content.category} subcategory={content.subcategory} />
+      <p className={styles.mention}>{content.title}</p>
       <div className={styles.information}>
-        <span>닉네임</span>
-        <span>3시간전</span>
+        <span>{content.author?.nickname}</span>
+        <span>{calculateTimePastSinceItCreated(content.createdDate)}</span>
       </div>
     </div>
   );

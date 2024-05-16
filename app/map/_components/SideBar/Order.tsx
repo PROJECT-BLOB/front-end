@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import styles from './Order.module.scss';
 
-export default function Order() {
+export default function Order({ setOrder }: { setOrder: Dispatch<SetStateAction<'recent' | 'hot'>> }) {
   const [isClicked, setIsClicked] = useState({ recent: true, hot: false });
 
   return (
@@ -10,7 +10,10 @@ export default function Order() {
       <button
         className={`${styles['order-mention']} ${isClicked.recent ? styles.active : ''} `}
         type='button'
-        onClick={() => setIsClicked(() => ({ recent: true, hot: false }))}
+        onClick={() => {
+          setOrder('recent');
+          setIsClicked(() => ({ recent: true, hot: false }));
+        }}
       >
         최신순
       </button>
@@ -18,7 +21,10 @@ export default function Order() {
       <button
         className={`${styles['order-mention']} ${isClicked.hot ? styles.active : ''} `}
         type='button'
-        onClick={() => setIsClicked(() => ({ recent: false, hot: true }))}
+        onClick={() => {
+          setOrder('hot');
+          setIsClicked(() => ({ recent: false, hot: true }));
+        }}
       >
         인기순
       </button>
