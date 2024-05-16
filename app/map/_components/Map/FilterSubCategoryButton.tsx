@@ -42,17 +42,24 @@ export default function FilterSubCategoryButton({ category, subCategory }: Filte
   const cx = classNames.bind(styles);
 
   const [isClicked, setIsClicked] = useState(false);
-  const selectedCategoryList = useCategoryStore((state) => state.selectedCategoryList);
-  const setSelectedCategoryList = useCategoryStore((state) => state.setSelectedCategoryList);
+
+  const { removeListItem, addListItem, hasItem } = useCategoryStore();
 
   const handleClickSubCategory = () => {
     // add subCategory to selected List
     if (!isClicked) {
-      setSelectedCategoryList!([...selectedCategoryList, `${category!}:${subCategory!}`]);
+      // remove current state in selectedCategoryList
+      removeListItem!(category!);
+      addListItem!(`${category!}:${subCategory!}`);
     }
     // remove subCategory from selected List
     else {
-      setSelectedCategoryList!(selectedCategoryList.filter((item) => item !== `${category}:${subCategory}`));
+      removeListItem!(`${category!}:${subCategory!}`);
+
+      // if there is no current category in selectedCategoryList, add current category
+      if (!hasItem(category!)) {
+        addListItem(category!);
+      }
     }
 
     setIsClicked(!isClicked);

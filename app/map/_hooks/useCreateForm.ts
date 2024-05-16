@@ -36,7 +36,7 @@ export default function useCreateForm(toggleModal: () => void, formatArray: () =
   } = useForm<ContentField>();
   const queryClient = useQueryClient();
   const mapState = useMapStore((state) => state);
-  const { lastSearchCity } = mapState;
+  const { lastSearchCity, lastMapCenter } = mapState;
   const formattedCategories = formatArray();
   const [category, subcategory] = formattedCategories.split(':');
 
@@ -58,8 +58,8 @@ export default function useCreateForm(toggleModal: () => void, formatArray: () =
       country: lastSearchCity?.country ?? '',
       actualLat: currentPosition?.lat ?? 0,
       actualLng: currentPosition?.lng ?? 0,
-      lat: lastSearchCity?.location?.lat ?? 0,
-      lng: lastSearchCity?.location?.lng ?? 0,
+      lat: lastMapCenter?.lat ?? 0,
+      lng: lastMapCenter?.lng ?? 0,
       category: category ?? '',
       subcategory: subcategory ?? '',
     };

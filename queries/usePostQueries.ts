@@ -21,6 +21,8 @@ import { FilteredData } from '@stores/useFilteringStore';
 
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 
+import LatLngLiteral = google.maps.LatLngLiteral;
+
 export const posts = createQueryKeys('posts', {
   all: (blobId: string) => ['readPostList', blobId],
   detail: (postId: number) => ['readPost', postId],
@@ -53,12 +55,14 @@ export function useFetchCommentList(blobId: string) {
   });
 }
 
-export function useFetchFeedList(filteredData: FilteredData) {
+export function useFetchFeedList(filteredData: FilteredData, location: LatLngLiteral) {
   return useInfiniteScrollQuery({
     queryKey: posts.feedList().queryKey,
     queryFn: (page: number) =>
       getFeed({
         ...filteredData,
+        cityLat: location.lat,
+        cityLng: location.lng,
         page,
         size: COMMENTS_PAGE_LIMIT,
       }),
