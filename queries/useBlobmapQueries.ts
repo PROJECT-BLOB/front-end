@@ -39,7 +39,7 @@ export function useGetSidebarItems(
   sortBy: SortInSidebar,
 ) {
   return useQuery({
-    queryKey: ['markers', categories, bounds],
+    queryKey: ['markers', 'sidebars'],
     queryFn: () =>
       getSidebarItems({
         categories,

@@ -6,6 +6,7 @@ import arrowDown from '@public/icons/chevron-down.svg';
 import line from '@public/icons/line-horizontal.svg';
 import xClose from '@public/icons/x-close.svg';
 import { useGetSidebarItems } from '@queries/useBlobmapQueries';
+import { useCategoryStore } from '@stores/useCategoryStore';
 import { useMapStore } from '@stores/useMapStore';
 
 import CtaComponent from '@components/CtaComponent/CtaComponent';
@@ -20,12 +21,13 @@ export default function BottomSheet() {
 
   const lastBound = useMapStore((state) => state.lastBound);
   const [order, setOrder] = useState<'recent' | 'hot'>('recent');
+  const categoryString = useCategoryStore((state) => state.getCategoryString());
 
-  const { data, refetch } = useGetSidebarItems('QUESTION', lastBound, 0, 100, 'recent');
+  const { data, refetch } = useGetSidebarItems(categoryString, lastBound, 0, 100, order);
 
   useEffect(() => {
     refetch();
-  }, [order, refetch]);
+  }, [order, categoryString, lastBound]);
 
   return (
     <div className={styles['bottom-sheet']} style={sheetStyle}>
@@ -43,7 +45,7 @@ export default function BottomSheet() {
           <Image src={xClose} alt='closeIcon' width={24} height={24} />
         </button>
       </header>
-      {data?.data.count ? (
+      {data?.data ? (
         <>
           <Order setOrder={setOrder} />
           <PostList />

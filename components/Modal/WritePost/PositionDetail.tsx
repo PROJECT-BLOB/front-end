@@ -19,14 +19,16 @@ export default function PositionDetail() {
 
   return (
     <>
-      <div className={cx('minimap-wrapper')}>
-        <div className={cx('minimap-title')}>
-          <p className={cx('title')}>미니맵 표시</p>
-          <p className={cx('sub-title')}>버튼을 누르면 미니맵이 나타납니다.</p>
+      <div className={cx('positiondetail-wrapper', { expanded: isChecked })}>
+        <div className={cx('minimap-wrapper')}>
+          <div className={cx('minimap-title')}>
+            <p className={cx('title')}>미니맵 표시</p>
+            <p className={cx('sub-title')}>버튼을 누르면 미니맵이 나타납니다.</p>
+          </div>
+          <Checkbox value='someValue' checkedItemHandler={handleCheckboxChange} />
         </div>
-        <Checkbox value='someValue' checkedItemHandler={handleCheckboxChange} />
+        {isChecked && <MiniMapSearch />}
       </div>
-      {isChecked && <MiniMapSearch />}
     </>
   );
 }

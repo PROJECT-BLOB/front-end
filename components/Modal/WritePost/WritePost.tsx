@@ -160,7 +160,6 @@ export default function WritePost() {
             errors={errors}
           />
           <PostModalInput
-            required
             register={register as unknown as UseFormRegister<FieldValues>}
             labelName='내용'
             id='content'

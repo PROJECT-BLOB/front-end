@@ -1,0 +1,14 @@
+@import '/styles/global-styles/index';
+
+.area {
+  padding-top: 1rem;
+  @include flex-column-center;
+  gap: 1rem;
+  width: 89rem;
+
+  section {
+    width: fit-content;
+    @include flex-row-center;
+    gap: .5rem;
+  }
+}

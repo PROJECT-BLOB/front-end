@@ -81,20 +81,20 @@ export default function Feed() {
   // 검색 결과 달라질때마다 필터링 적용
   useEffect(() => {
     setFilteredData({
-      cityLat: lastSearchCity.location?.lat,
-      cityLng: lastSearchCity.location?.lng,
+      // cityLat: lastSearchCity.location?.lat,
+      // cityLng: lastSearchCity.location?.lng,
     });
   }, [lastSearchCity, setFilteredData]);
 
   return (
     <main className={styles.feed}>
       <section className={styles['search-country-and-filtering-container']}>
-        <div>
+        <div className={styles['search-container']}>
           <APIProvider apiKey={GOOGLE_MAP_API_KEY}>
             <Autocomplete />
             <BlobMap isDisplaying={false} />
           </APIProvider>
-          <span className={styles['search-mention']}>{`#${lastSearchCity.country} ${lastSearchCity.city}`}</span>
+          <span className={styles['search-mention']}>{`# ${lastSearchCity.country} ${lastSearchCity.city}`}</span>
         </div>
         <div className={styles['filtering-container']}>
           <button
