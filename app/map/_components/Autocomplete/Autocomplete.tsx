@@ -5,7 +5,7 @@ import classNames from 'classnames/bind';
 import Image from 'next/image';
 
 import { SearchedCity } from '@/types/Map';
-import settingIcon from '@icons/settings-04.svg';
+import searchIcon from '@icons/search-lens-color.svg';
 import { useMapStore } from '@stores/useMapStore';
 
 import styles from './Autocomplete.module.scss';
@@ -123,7 +123,7 @@ export default function Autocomplete({ type = 'normal' }: AutocompleteProps) {
           onInput={(event: FormEvent<HTMLInputElement>) => onInputChange(event)}
           placeholder='궁금한 도시를 검색해보세요 :)'
         />
-        <Image className={cx('shown')} src={settingIcon} alt='세팅아이콘' />
+        <Image className={cx('shown')} src={searchIcon} alt='세팅아이콘' />
       </div>
 
       {predictionResults.length > 0 && (
