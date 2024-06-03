@@ -7,12 +7,12 @@
   background: $BDS-Grayscale-1;
 
   &.filtering-type {
-    &-map {
+    &-MAP {
       height: 2.8rem;
     }
 
-    &-writing,
-    &-feed {
+    &-WRITE,
+    &-FEED {
       height: 2.4rem;
     }
   }
@@ -70,14 +70,14 @@
   font-feature-settings: 'ss10' on;
 
   &.filtering-type {
-    &-map {
+    &-MAP {
       font-size: 1.4rem;
       font-weight: 600;
       line-height: 142%; /* 19.88px */
     }
 
-    &-writing,
-    &-feed {
+    &-WRITE,
+    &-FEED {
       font-family: 'IBM Plex Sans';
       font-size: 1.2rem;
       line-height: 133%; /* 15.96px */
