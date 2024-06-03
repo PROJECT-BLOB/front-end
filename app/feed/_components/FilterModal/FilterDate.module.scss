@@ -1,0 +1,14 @@
+@import '/styles/global-styles/index';
+
+.date-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sub-title {
+  color: $BDS-Grayscale-13;
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 150%; /* 24px */
+}

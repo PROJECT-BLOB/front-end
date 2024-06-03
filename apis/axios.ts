@@ -75,15 +75,14 @@ instance.interceptors.response.use(
       return instance(originalRequest); // 리퀘스트 재시도 하도록 설정
     }
 
-    if (error.response?.status === 401) {
-      alert('로그인 후 이용 가능합니다.');
-    } else if (error.response?.status === 409) {
-      alert(error.response?.data.message);
-    } else {
-      console.error(error);
-      alert('잘못된 요청입니다.');
-    }
-
+    // if (error.response?.status === 401) {
+    //   alert('로그인 후 이용 가능합니다.');
+    // } else if (error.response?.status === 409) {
+    //   alert(error.response?.data.message);
+    // } else {
+    //   alert('잘못된 요청입니다.');
+    //   console.error(error.response?.data);
+    // }
     return Promise.reject(error);
   },
 );
