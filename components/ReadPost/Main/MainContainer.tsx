@@ -31,7 +31,7 @@ interface MainContentProps {
 
 const SCROLL_WIDTH = 264;
 
-export default function MainContainer({ contentData, isFeed, postId }: MainContentProps) {
+export default function MainContainer({ contentData, isFeed = false, postId }: MainContentProps) {
   const [isKebabClicked, setIsKebabClicked] = useState(false);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const [isImageClicked, setIsImageClicked] = useState(false);
@@ -179,7 +179,7 @@ export default function MainContainer({ contentData, isFeed, postId }: MainConte
         </div>
       </div>
       <p className={styles['comment-line']}>댓글</p>
-      <CommentBox isFeed postId={contentData.postId} />
+      <CommentBox isFeed={isFeed} postId={contentData.postId} />
     </section>
   );
 }
