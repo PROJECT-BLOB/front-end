@@ -18,6 +18,7 @@ import getUserCommentList from '@apis/user/mypage/getUserCommentList';
 import getUserPostList from '@apis/user/mypage/getUserPostList';
 import { COMMENTS_PAGE_LIMIT, POSTS_PAGE_LIMIT } from '@constants/pageValues';
 import { FilteredData } from '@stores/useFilteringStore';
+import useModalStore from '@stores/useModalStore';
 
 import useInfiniteScrollQuery from './useInfiniteScrollQuery';
 
@@ -165,9 +166,10 @@ export function useDeleteComment(postId?: number, commentId?: number) {
   });
 }
 
-export function useDeletePost(postId?: number, blobId?: string) {
+export function useDeletePost(isFeed: boolean, postId?: number, blobId?: string) {
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { toggleModal } = useModalStore();
 
   return useMutation({
     mutationFn: deletePost,
@@ -181,7 +183,10 @@ export function useDeletePost(postId?: number, blobId?: string) {
         queryClient.invalidateQueries({ queryKey: posts.bookmark(blobId).queryKey });
       }
 
-      router.back();
+      console.log(isFeed);
+
+      if (isFeed) router.back();
+      else toggleModal();
     },
   });
 }
