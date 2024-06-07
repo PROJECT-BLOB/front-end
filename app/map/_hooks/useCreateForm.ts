@@ -67,6 +67,7 @@ export default function useCreateForm(toggleModal: () => void, formatArray: () =
     // const formattedCategories = formatArray();
     // formData.category = formattedCategories;
 
+    // 현재위치 누르면 lat, lng도 현재위치로 바뀜
     try {
       const formDataToSend = new FormData();
 

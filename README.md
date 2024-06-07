@@ -1,82 +1,130 @@
-# 코드는 최대한 잘게 쪼개서 작성한다.
-  ## 이게 맞나? 싶을정도로 ㅋㅋ
+<div align="center">
 
-# Collocation
-1. 재사용이 없(적)는 코드는 해당 코드를 필요로하는 곳에 가까이둔다.(가장 가까운 위치 = 같은 파일)
-2. 재사용이 필요한 코드는 해당 코드를 필요로 하는 것들의 공통 조상(위치)를 찾아 그곳에 둔다.
-3. 단 그 위치가 app폴더일 경우 app폴더 바깥의 별도 폴더에 둔다.
-> ex) props 타입의 경우 기본적으로 해당 파일에 같이 위치하나, 공통으로 사용되는 경우 별도파일로 분리한 뒤 해당하는 위치를 찾는다. 
+## [BLOB 바로가기](https://blob-omega.vercel.app/) 
 
+<div>
+ <img src="https://github.com/PROJECT-BLOB/front-end/assets/72595163/cbc23d23-a078-46d8-bdaf-f723001c570f" alt="별 하나에 글 하나 로고">
+</div>
 
-# Naming
-## 줄임말 사용금지.
-> res, info, arr, obj, tmp
--> ex) result, information, array, object, temporary
+<h3> "BLOB으로 지도에 정보를 공유해보세요" </h3>
 
-## 함수/변수
-1. 파일명 : 명사
-2. 함수명 : 동사 + 명사
-   * 이때 동사는 가급적 구체적 행위를 명시한다.
-> ex) do, some등의 포괄적인 동사,명사를 사용하지 않는다. (모르면 gpt 센세에게...)
-> ex) 1. handleClick (권장) / 2. onClick / 3. clickHandle /4. clickHandler
-   * 명사에 숫자를 사용하지 않는다. (숫자명사도 불가)
-> ex) list1, list2
+여행 정보 공유 SNS
 
-3. 함수를 파일명으로 사용할 경우, 명사 폴더로 감싼다.
->> livemap > _utils > randomColorUtil > generateRandomColor.ts / convertToRgbNumber.ts
+<br />
 
-4. 화살표/function
-   함수 선언식: function 함수명 () {}
-   * this 바인딩과 관련된 이슈가 있는경우 화살표 함수 사용.
-   
-5. dataFetch
-   * CRUD : Create, Get, Update, Delete + fetchTarget
-   * 메서드별로 파일을 분리하고 관련된 api를 폴더에 모아둔다.
-   * 해당 파일에 관련된 type을 정의한다.
-> ex) getUser, postUserList
+지도에는 사용자들이 작성한 글을 마커를 통해 보여줍니다
 
-# type
-1. 기본적으로 객체는 interface, 단순 변수는 type으로 선언한다. (PascalCase)  
-```typescript
-interface User {
-   name: string;
-   age: number;
-   nickName: UserNickName;
-}
-type UserNickName = string || null;
+현지 상황의 정보를 사용자들게 공유해보세요
 
-```
-2. interface:
- * 컴포넌트 props 일경우에는, +Props 로 명명. // 컴포넌트 위에 위치
- * 컴포넌트에 props가 없을 경우에는? -> 안쓴다.
- * children이 있는 경우에는 PropsWithChildren 타입 활용
- * props가 한개 또는 단순해도 별도 타입(인터페이스)을 정의합니다.
-
-```typescript
-// props에 children이 포함된 경우
-import {PropsWithChildren} from "react";
-
-type ColumnContainerProps = PropsWithChildren<{ isLastColumn?: boolean; }>;
-
-const ColumnContainer = ({children, isLastColumn = false}: ColumnContainerProps) => {
-  return <S.Container $isLastColumn = {isLastColumn} > {children} < /S.Container>;
-}
-//props에 children만 있는 경우
-   const ColumnContainer = ({children}: PropsWithChildren) => {
-      return <S.Container>{children} < /S.Container>;
-   };
-   
-//props가 1개일 경우  (don't)
-   const tileClassName = ({ date }: { date: Date }): string | null => {
-     if (date.getDay() === 0) {
-       return "holiday"; // 일요일일 경우 'sunday' 클래스 추가
-     }
-   }
-```
+</br>
 
 
-////
+[🔗 notion 바로가기](https://www.notion.so/Sprint-Part4-Team4-b7b1ab535d0e4907bd730d132c5a3199)
 
-#css
-- 1rem = 10px.
-- media break point는 ___/______/_____ 기준으로 작성한다. (디자이너 확인 예정)
+</div>
+
+
+<br />
+
+# 프로젝트 소개
+
+## BLOB 만들게 된 계기
+
+혹시 여행 중 오래된 정보나 부정확한 정보로 인해 불편함을 겪은 적이 한번쯤 있지 않으신가요? 
+
+또한 교통상황, 사건 사고 등 여행 중 실시간으로 업데이트되는 정보들을 모아볼 수 있는 곳이 없어서,
+
+날씨 이슈로 행사가 취소된다든가, 시시각각 바뀌는 현지 상황을 알지 못해 여행 중 예기치 못한 일들을 겪게 되기도 합니다.
+
+저희는 이러한 불편함을 해결하기 위해 블롭이라는 서비스를 생각하게 되었습니다.
+
+<br />
+
+## 주요 기능 설명
+
+### 🗺️ 지도 페이지
+- 마커는 클러스터링으로 구현되어 줌 아웃을 하면 여러개로 모아서 보여줍니다.
+- 맵에서 보여지는 글들은 사이드바에서도 볼 수 있습니다.
+- 모바일 화면에서는 사이드바 대신 바텀시트로 구현되어 있습니다
+- 자동완성 검색창을 통해 지역과 나라를 검색하고 이동할 수 있습니다.
+- 카테고리를 지정해 원하는 정보가 담긴 글만 필터링 해서 볼 수 있습니다.
+- 글 작성 후, 24시간이 지나면 지도 페이지에서 글이 사라집니다.
+- 좋아요를 받으면 남은 시간이 30분씩 연장됩니다.
+
+
+### ✍️ 글 작성
+- 검색을 통해 현재 보고있는 위치가 아닌, 다른 나라에도 설정할 수 있습니다
+- 미니맵으로 자세한 위치를 설정할 수 있습니다.
+- 사진은 5장까지 첨부할 수 있습니다.
+
+### 🪧 피드 페이지
+- 모든 글을 조회 할 수 있습니다.
+- 필터링으로 기간도 설정할 수 있고, 이미지가 있는 글, 상세위치가 있는 글까지 모아볼 수 있습니다.
+
+### 🗂 마이 페이지
+- 프로필 정보를 다른사람이 보지 못하도록 비공개 설정을 할 수 있습니다.
+- 해당 유저가 작성한 글, 저장한글, 댓글 단 글을 모아볼 수 있습니다.
+- 내가 작성한 글, 북마크한 글, 댓글 단 글을 모아볼 수 있습니다
+
+### 🛎️ 알림
+
+- 누군가 내 글에 좋아요를 남기거나, 댓글을 달게 되면 알림창에 알림이 뜨게 됩니다.
+
+
+<br />
+
+# 기술 스택
+
+<img width="733" alt="스크린샷 2024-05-22 오후 10 07 29" src="https://github.com/PROJECT-BLOB/front-end/assets/72595163/417a364b-f4ab-487c-8a85-7c222a43d2e4">
+
+<br />
+
+## 🗂 문서
+- [API](http://ec2-13-124-35-140.ap-northeast-2.compute.amazonaws.com:9000/swagger-ui/index.html)
+- [프로토타입](https://www.figma.com/design/o4rna1cWakkNvmEke4Cgko/BLOB_DESIGN_SYSTEM?node-id=6-3611&m=dev)
+
+
+## 팀원
+<table>
+    <tr>
+        <td align="center"><img src="https://github.com/Dev-Duke-Seo.png" width="80"></td>
+        <td align="center"><img src="https://github.com/INKmin9.png" width="80"></td>
+        <td align="center"><img src="https://github.com/haeyong9701.png" width="80"></td>
+        <td align="center"><img src="https://github.com/yejiniee.png" width="80"></td>
+        <td align="center"><img src="https://github.com/chlangus.png" width="80"></td>
+    </tr>
+    <tr>
+        <td align="center"><a href="https://github.com/Dev-Duke-Seo">서인덕</a></td>
+        <td align="center"><a href="https://github.com/INKmin9">김민교</a></td>
+        <td align="center"><a href="https://github.com/haeyong9701">윤해용</a></td>
+        <td align="center"><a href="https://github.com/yejiniee">조예진</a></td>
+        <td align="center"><a href="https://github.com/chlangus">최무현</a></td>
+    </tr>
+      <tr>
+        <td align="center">팀장, FE</td>
+        <td align="center">FE</td>
+        <td align="center">FE</td>
+        <td align="center">FE</td>
+        <td align="center">FE</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td align="center"><img src="https://github.com/mawakeb.png" width="80"></td>
+        <td align="center"><img src="https://github.com/dodudi.png" width="80"></td>
+        <td align="center">
+          <img width="80" alt="스크린샷 2024-05-22 오후 10 32 29" src="https://github.com/PROJECT-BLOB/front-end/assets/72595163/a8622f1f-1250-4245-a9d5-84f5019702a1">
+        </td>
+    </tr>
+    <tr>
+        <td align="center"><a href="https://github.com/mawakeb">김채린</a></td>
+        <td align="center"><a href="https://github.com/dodudi">권덕영</a></td>
+        <td align="center"><a href="https://vsongyev.myportfolio.com/">박송이</a></td>
+    </tr>
+      <tr>
+        <td align="center">BE</td>
+        <td align="center">BE</td>
+        <td align="center">DE</td>
+    </tr>
+</table>
