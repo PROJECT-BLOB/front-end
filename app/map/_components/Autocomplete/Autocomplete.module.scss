@@ -43,6 +43,8 @@
   }
 
   ul {
+    width: 100%;
+    max-width: 60rem;
     z-index: $above + $z-index-root;
     position: absolute;
     background-color: whitesmoke;
@@ -55,6 +57,7 @@
       padding: 1.2rem 2rem 1.2rem 1.6rem;
       align-items: flex-start;
       gap: 1rem;
+      width: 100%;
 
       &:hover {
         border-bottom: 1px solid var(--BDS-Grayscale-5, #d9d9d9);
