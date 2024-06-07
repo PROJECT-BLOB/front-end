@@ -34,7 +34,6 @@ export default function MiniMap() {
         (position) => {
           const { latitude, longitude } = position.coords;
           setCurrentPosition({ lat: latitude, lng: longitude });
-          setLastMapCenter({ lat: latitude, lng: longitude });
         },
         (error) => {
           console.error('Error getting current position', error);
