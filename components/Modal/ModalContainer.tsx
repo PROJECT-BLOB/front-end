@@ -1,6 +1,6 @@
 'use client';
 
-import FilteringModal from '@/app/feed/_components/FilteringModal/FilteringModal';
+import FilterModal from '@/app/feed/_components/FilterModal/FilterModal';
 import UpdateProfileModal from '@/app/mypage/_components/UpdateProfileModal/UpdateProfileModal';
 import RegisterModal from '@/app/signin/_components/RegisterModal/RegisterModal';
 import useModalStore, { ModalName } from '@stores/useModalStore';
@@ -19,7 +19,7 @@ const ModalList: { [key in ModalName]: JSX.Element } = {
   write: <WritePost />,
   registerUser: <RegisterModal />,
   updateProfile: <UpdateProfileModal />,
-  filtering: <FilteringModal />,
+  filtering: <FilterModal />,
   showNotification: <NotificationModal />,
   showProfileDetail: <ProfileModal />,
 };

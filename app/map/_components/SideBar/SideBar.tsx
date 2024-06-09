@@ -6,6 +6,7 @@ import arrowRight from '@public/icons/chevron-right.svg';
 import { useGetSidebarItems } from '@queries/useBlobmapQueries';
 import { useCategoryStore } from '@stores/useCategoryStore';
 import { useMapStore } from '@stores/useMapStore';
+import useModalStore from '@stores/useModalStore';
 
 import CtaComponent from '@components/CtaComponent/CtaComponent';
 
@@ -14,7 +15,8 @@ import PostList from './Post/PostList';
 import styles from './SideBar.module.scss';
 
 export default function SideBar() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen } = useModalStore();
+  const [isSideOpen, setIsSideOpen] = useState(false);
   const lastBound = useMapStore((state) => state.lastBound);
   const [order, setOrder] = useState<'recent' | 'hot'>('recent');
   // 카테고리
@@ -24,7 +26,7 @@ export default function SideBar() {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (sideBarRef.current && !sideBarRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+        setIsSideOpen(false);
       }
     };
     window.addEventListener('click', handleClickOutside);
@@ -39,12 +41,21 @@ export default function SideBar() {
     refetch();
   }, [order, lastBound, categoryString]);
 
+  // 뒷배경 스크롤 방지
+  if (typeof document !== 'undefined') {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }
+
   return (
-    <div className={`${styles['side-bar']} ${isOpen ? styles.open : ''}`} ref={sideBarRef}>
+    <div className={`${styles['side-bar']} ${isSideOpen ? styles.open : ''}`} ref={sideBarRef}>
       <button
         type='button'
-        className={`${styles['arrow-wrapper']} ${isOpen ? '' : styles.close}`}
-        onClick={() => setIsOpen(!isOpen)}
+        className={`${styles['arrow-wrapper']} ${isSideOpen ? '' : styles.close}`}
+        onClick={() => setIsSideOpen(!isSideOpen)}
       >
         <Image src={arrowRight} alt='arrow-right' width={32} height={40} />
       </button>

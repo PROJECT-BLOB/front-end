@@ -31,7 +31,7 @@ interface MainContentProps {
 
 const SCROLL_WIDTH = 264;
 
-export default function MainContainer({ contentData, isFeed, postId }: MainContentProps) {
+export default function MainContainer({ contentData, isFeed = false, postId }: MainContentProps) {
   const [isKebabClicked, setIsKebabClicked] = useState(false);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const [isImageClicked, setIsImageClicked] = useState(false);
@@ -109,7 +109,12 @@ export default function MainContainer({ contentData, isFeed, postId }: MainConte
             </button>
           )}
           {isKebabClicked && (
-            <Kebab blobId={contentData.author.blobId} postId={contentData.postId} toggleKebab={toggleKebab} />
+            <Kebab
+              isFeed={isFeed}
+              blobId={contentData.author.blobId}
+              postId={contentData.postId}
+              toggleKebab={toggleKebab}
+            />
           )}
         </div>
         <CategoryBox category={contentData.category} subcategory={contentData.subcategory} />
@@ -117,12 +122,10 @@ export default function MainContainer({ contentData, isFeed, postId }: MainConte
         <div className={styles['title-wrapper']}>
           <div className={styles['title-and-distance']}>
             <h3 className={styles.title}>{contentData.title}</h3>
-            {contentData.address && (
-              <div className={styles.distance}>
-                <Image src={verifiedIcon} alt='인증마크' width={20} height={20} />
-                <strong>{contentData.distFromActual}m 이내 작성됨</strong>
-              </div>
-            )}
+            <div className={styles.distance}>
+              <Image src={verifiedIcon} alt='인증마크' width={20} height={20} />
+              <strong>{contentData.distFromActual}m 이내 작성됨</strong>
+            </div>
           </div>
           {!contentData.canDelete && (
             <button type='button' onClick={handleClickBookmark}>
@@ -181,7 +184,7 @@ export default function MainContainer({ contentData, isFeed, postId }: MainConte
         </div>
       </div>
       <p className={styles['comment-line']}>댓글</p>
-      <CommentBox isFeed postId={contentData.postId} />
+      <CommentBox isFeed={isFeed} postId={contentData.postId} />
     </section>
   );
 }

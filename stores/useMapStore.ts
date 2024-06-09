@@ -6,8 +6,8 @@ import { SearchedCity } from '@/types/Map';
 import LatLngLiteral = google.maps.LatLngLiteral;
 
 const LOCATION_SEOUL = {
-  lat: 37.5665,
-  lng: 126.978,
+  lat: 37.5518911,
+  lng: 126.9917937,
 };
 
 const DEFAULT_SEARCHED_CITY = {
