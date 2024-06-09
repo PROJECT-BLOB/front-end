@@ -1,6 +1,6 @@
-@import "/styles/global-styles/index";
+@import '/styles/global-styles/index';
 
-.navigation{
+.navigation {
   position: relative;
   width: 100%;
   max-width: 126rem;
@@ -9,6 +9,7 @@
 .align-menu {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   min-width: 20rem;
   max-width: $breakpoint-tablet;
@@ -18,7 +19,6 @@
   @include tablet {
     padding: 4rem 0;
     max-width: $breakpoint-pc;
-
   }
   @include desktop {
     padding: 4.8rem 0;
@@ -48,6 +48,3 @@
     align-items: center;
   }
 }
-
-
-

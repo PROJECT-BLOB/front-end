@@ -73,7 +73,9 @@ export default function PostList({ blobId, selectedTab, filteredData }: GetPostL
           postsPage.data.content.map((post: Post) => <PostItem key={post.postId} post={post} />),
         )
       ) : (
-        <CtaComponent />
+        <div className={cx('cta-container')}>
+          <CtaComponent />
+        </div>
       )}
 
       {isFetchingNextPage ? <Loading /> : <div ref={ref} />}

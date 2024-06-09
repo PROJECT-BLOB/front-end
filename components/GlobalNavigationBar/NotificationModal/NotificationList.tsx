@@ -28,7 +28,7 @@ export default function NotificationList() {
           <NotificationItem key={notification.notificationId} notification={notification} />
         ))
       ) : (
-        <div className={styles.empty}>알림이 없습니다.</div>
+        <div className={styles.empty}>새로운 알림이 없어요.</div>
       )}
 
       {isFetchingNextPage ? <Loading /> : <div ref={ref} />}
