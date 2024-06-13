@@ -83,7 +83,7 @@ export default function FilterCategoryButton({
     // eslint-disable-next-line
     <div className={cx('button', category, isClicked && 'clicked')} onClick={() => handleClickCategory(category)}>
       {SelectedIcon(category)}
-      <span>{CATEGORY_NAME_MAPPER[category]}</span>
+      <span className={cx('name')}>{CATEGORY_NAME_MAPPER[category]}</span>
       <ChevronRightIcon className={cx('arrow', `category`)} />
     </div>
   );
