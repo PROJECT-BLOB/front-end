@@ -86,7 +86,9 @@ export default function WritePost() {
             <Autocomplete type='mini' />
             <BlobMap isDisplaying={false} />
           </APIProvider>
-          <PositionDetail />
+          <div className={cx('minimap-wrapper')}>
+            <PositionDetail />
+          </div>
         </div>
         <div className={cx('body-image')}>
           <p className={cx('title')}>사진업로드(최대5장) - 최대 5mb</p>
