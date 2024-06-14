@@ -53,7 +53,7 @@ instance.interceptors.response.use(
 
     if (error.response?.data?.message === '유효하지 않은 토큰입니다.') {
       // 리프레시토큰 만료
-      handleRefreshTokenExpiary();
+      handleRefreshTokenExpiry();
     }
 
     if (getRefreshToken() && error.response?.status === 401 && !originalRequest._retry) {
@@ -121,7 +121,7 @@ const getCookie = (name: string) => {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 };
 
-const handleRefreshTokenExpiary = () => {
+const handleRefreshTokenExpiry = () => {
   if (typeof window !== 'undefined') {
     localStorage.clear();
     window.location.reload();
