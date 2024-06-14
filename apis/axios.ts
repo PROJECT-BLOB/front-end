@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 /* eslint-disable no-underscore-dangle */
 import axios, { AxiosError, AxiosRequestConfig, isAxiosError } from 'axios';
 
@@ -6,8 +5,6 @@ export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 const isServer = typeof window === 'undefined';
 const ACCESS_TOKEN = 'accessToken';
 const REFRESH_TOKEN = 'refreshToken';
-
-// const GET_REFRESH_URL = '/oauth/refresh';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -35,7 +32,7 @@ instance.interceptors.request.use(
   },
   (error) => {
     if (isAxiosError(error)) {
-      return; // TODO: Error처리
+      return;
     }
 
     return Promise.reject(error);
@@ -49,12 +46,18 @@ instance.interceptors.response.use(
 
   // onRejected
   async (error): Promise<AxiosError> => {
-    const originalRequest = error.config; // error.config에 담겨있는 원래 리퀘스트를 가져온다.
+    const originalRequest = error.config;
 
     const refreshToken = getCookie(REFRESH_TOKEN);
+    console.log('error.response?.message: ', error.response?.data?.message);
+
+    if (error.response?.data?.message === '유효하지 않은 토큰입니다.') {
+      // 리프레시토큰 만료
+      handleRefreshTokenExpiry();
+    }
 
     if (getRefreshToken() && error.response?.status === 401 && !originalRequest._retry) {
-      // 토큰 만료: 401
+      // 액세스 토큰 만료
       const response = await axios.post(`${BASE_URL}/oauth/refresh`, undefined, {
         headers: {
           Authorization: `Bearer ${refreshToken}`,
@@ -75,14 +78,6 @@ instance.interceptors.response.use(
       return instance(originalRequest); // 리퀘스트 재시도 하도록 설정
     }
 
-    // if (error.response?.status === 401) {
-    //   alert('로그인 후 이용 가능합니다.');
-    // } else if (error.response?.status === 409) {
-    //   alert(error.response?.data.message);
-    // } else {
-    //   alert('잘못된 요청입니다.');
-    //   console.error(error.response?.data);
-    // }
     return Promise.reject(error);
   },
 );
@@ -124,4 +119,11 @@ const getCookie = (name: string) => {
   );
 
   return matches ? decodeURIComponent(matches[1]) : undefined;
+};
+
+const handleRefreshTokenExpiry = () => {
+  if (typeof window !== 'undefined') {
+    localStorage.clear();
+    window.location.reload();
+  }
 };

@@ -37,7 +37,9 @@ export default function CommentList({ blobId }: GetCommentListProps) {
           commentsPage.data.content.map((post: Post) => <CommentedPostItem key={post.postId} commentedPost={post} />),
         )
       ) : (
-        <CtaComponent />
+        <div className={cx('cta-container')}>
+          <CtaComponent />
+        </div>
       )}
 
       {isFetchingNextPage ? <Loading /> : <div ref={ref} />}

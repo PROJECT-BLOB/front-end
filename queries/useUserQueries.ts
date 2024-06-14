@@ -8,6 +8,8 @@ import checkBlobId from '@apis/user/sign/checkBlobId';
 import deleteUser from '@apis/user/sign/deleteUser';
 import { useUserStore } from '@stores/userStore';
 
+import deleteCookies from '@utils/deleteCookies';
+
 import { users } from './keys/userQueryKeys';
 
 // 유저 상세(마이페이지) 정보
@@ -95,9 +97,4 @@ export function useDeleteUser() {
       console.error('회원탈퇴 실패ㅜㅜ:', error);
     },
   });
-}
-
-function deleteCookies() {
-  document.cookie = `accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-  document.cookie = `refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }

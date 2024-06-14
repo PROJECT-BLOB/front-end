@@ -4,7 +4,7 @@ import { useDeleteComment, useDeletePost } from '@queries/usePostQueries';
 import styles from './Kebab.module.scss';
 
 interface KebabProps {
-  isFeed: boolean;
+  isFeed?: boolean;
   toggleKebab: () => void;
   blobId?: string;
   postId?: number;
@@ -12,7 +12,7 @@ interface KebabProps {
   replyId?: number;
 }
 
-export default function Kebab({ isFeed, toggleKebab, blobId, commentId, postId, replyId }: KebabProps) {
+export default function Kebab({ isFeed = false, toggleKebab, blobId, commentId, postId, replyId }: KebabProps) {
   const { mutate: deletePostMutate } = useDeletePost(isFeed, postId, blobId);
 
   const { mutate: deleteCommentMutate } = useDeleteComment(postId, commentId);
