@@ -122,7 +122,7 @@ export default function UpdateProfileModal() {
       </main>
       <footer className={cx('form-buttons')}>
         <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
-        <BlobButton text='BLOB' type='submit' color='button-colord-contain' />
+        <BlobButton text='수정' type='submit' color='button-colord-contain' />
       </footer>
     </form>
   );
