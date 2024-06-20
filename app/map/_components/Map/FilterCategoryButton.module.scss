@@ -1,8 +1,6 @@
 @import '/styles/global-styles/index';
 
-
 .button {
-
   display: flex;
   width: fit-content;
   padding: 0.8rem 0.8rem 0.8rem 1.2rem;
@@ -12,11 +10,11 @@
 
   border-radius: 2.4rem;
   background: $BDS-Grayscale-1;
-
-  box-shadow: 0 .4rem .4rem 0 rgba(0, 0, 0, 0.12);
+  border: solid 1.2px white;
+  box-shadow: 0 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.12);
 
   cursor: pointer;
-
+  flex-shrink: 0;
   .arrow {
     width: 2.4rem;
     height: 2.4rem;
@@ -36,21 +34,27 @@
   }
 }
 
+.name {
+  user-select: none;
+}
+
+.arrow {
+  transition-duration: 0.3s;
+}
+
 .RECOMMENDED.clicked {
   border: 1.2px solid $BDS-Category-recommend_press;
 
   span {
     color: $BDS-Category-recommend_press;
   }
-
   svg.arrow {
     path {
       stroke: $BDS-Category-recommend_press;
     }
-    transform: rotate(90deg)
+    transform: rotate(90deg);
   }
 }
-
 
 .NOT_RECOMMENDED.clicked {
   border: 1.2px solid $BDS-Category-cation_press;
@@ -63,7 +67,7 @@
     path {
       stroke: $BDS-Category-cation_press;
     }
-    transform: rotate(90deg)
+    transform: rotate(90deg);
   }
 }
 
@@ -78,7 +82,7 @@
     path {
       stroke: $BDS-Category-tip_press;
     }
-    transform: rotate(90deg)
+    transform: rotate(90deg);
   }
 }
 
@@ -93,7 +97,7 @@
     path {
       stroke: $BDS-Category-question_press;
     }
-    transform: rotate(90deg)
+    transform: rotate(90deg);
   }
 }
 

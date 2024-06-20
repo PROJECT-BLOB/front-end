@@ -1,5 +1,3 @@
-'use client';
-
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -14,14 +12,12 @@ export default function useInfiniteScrollQuery(queryOptions: {
 
   const { ref, inView } = useInView();
 
-  const { isLoading, data, isPending, isError, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({
+  const { data, isPending, isError, fetchNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({
     queryKey,
     queryFn: ({ pageParam }) => queryFn(pageParam),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam: number) =>
       lastPage.data.hasMore ? lastPageParam + 1 : undefined,
-    gcTime: 0,
-    staleTime: 0,
   });
 
   useEffect(() => {
@@ -30,5 +26,5 @@ export default function useInfiniteScrollQuery(queryOptions: {
     }
   }, [inView, fetchNextPage]);
 
-  return { data, isPending, isError, isFetchingNextPage, ref, refetch, isLoading, fetchNextPage };
+  return { data, isPending, isError, fetchNextPage, isFetchingNextPage, ref, refetch };
 }

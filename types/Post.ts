@@ -57,4 +57,5 @@ export interface Comment {
   liked: boolean;
   likeCount: number;
   canDelete: boolean;
+  replyCount: number;
 }

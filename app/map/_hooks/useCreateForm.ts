@@ -16,8 +16,8 @@ export interface ContentField {
   country: string;
   cityLat: number;
   cityLng: number;
-  actualLat: number;
-  actualLng: number;
+  actualLat: number | null | undefined;
+  actualLng: number | null | undefined;
   category: string;
   subcategory: string;
   address: string;
@@ -48,16 +48,14 @@ export default function useCreateForm(toggleModal: () => void, formatArray: () =
   }
 
   async function onSubmit(formData: ContentField) {
-    console.log(formData);
-
     formData = {
       ...formData,
       cityLat: lastSearchCity?.location?.lat ?? 0,
       cityLng: lastSearchCity?.location?.lng ?? 0,
       city: lastSearchCity?.city ?? '',
       country: lastSearchCity?.country ?? '',
-      actualLat: currentPosition?.lat ?? 0,
-      actualLng: currentPosition?.lng ?? 0,
+      actualLat: currentPosition?.lat,
+      actualLng: currentPosition?.lng,
       lat: lastMapCenter?.lat ?? 0,
       lng: lastMapCenter?.lng ?? 0,
       category: category ?? '',

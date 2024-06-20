@@ -44,7 +44,7 @@ export default function AwaitSignin({ params }: { params: providerType }) {
 
     async function redirectBasedOnState() {
       const state = await setOAuthData();
-      console.log(state);
+      // console.log(state);
 
       if (state === 'COMPLETE') {
         signin();

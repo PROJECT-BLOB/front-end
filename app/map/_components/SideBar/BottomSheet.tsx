@@ -45,7 +45,7 @@ export default function BottomSheet() {
           <Image src={xClose} alt='closeIcon' width={24} height={24} />
         </button>
       </header>
-      {data?.data ? (
+      {data?.data.count ? (
         <>
           <Order setOrder={setOrder} />
           <PostList />

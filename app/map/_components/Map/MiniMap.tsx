@@ -4,13 +4,13 @@ import React, { useEffect } from 'react';
 
 import { APIProvider, ControlPosition, Map, MapControl, MapEvent } from '@vis.gl/react-google-maps';
 import classNames from 'classnames/bind';
-import Image from 'next/image';
 
 import MapHandler from '@/app/map/_components/Map/MapHandler';
 import Marker from '@/app/map/_components/Marker/Marker';
 import { MINI_MAP_STYLES } from '@/app/map/_constants/mapOptions';
-import target from '@public/icons/target-03-1.svg';
 import { useMapStore } from '@stores/useMapStore';
+
+import Checkbox from '@components/Checkbox/Checkbox';
 
 import style from './MapTest.module.scss';
 import styles from './MiniMap.module.scss';
@@ -26,28 +26,29 @@ export default function MiniMap() {
     setLastMapCenter(newLocation);
   };
   const setCurrentPosition = useMapStore((state) => state.setCurrentPosition);
-  const [, setButtonClicked] = React.useState(false); // 버튼 클릭 여부 상태 추가
 
-  const getCurrentPosition = () => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setCurrentPosition({ lat: latitude, lng: longitude });
-          setLastMapCenter({ lat: latitude, lng: longitude });
-        },
-        (error) => {
-          console.error('Error getting current position', error);
-        },
-      );
+  const getCurrentPosition = (checked: boolean) => {
+    if (checked) {
+      if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            setCurrentPosition({ lat: latitude, lng: longitude });
+          },
+          (error) => {
+            console.error('Error getting current position', error);
+          },
+        );
+      } else {
+        console.error('Geolocation is not available');
+      }
     } else {
-      console.error('Geolocation is not available');
+      setCurrentPosition(null);
     }
   };
 
-  const handleGetCurrentPosition = () => {
-    setButtonClicked(true); // 버튼 클릭됨을 상태에 저장
-    getCurrentPosition(); // getCurrentPosition 호출
+  const handleGetCurrentPosition = (value: string, isChecked: boolean) => {
+    getCurrentPosition(isChecked); // getCurrentPosition 호출
   };
 
   useEffect(() => {}, []);
@@ -58,10 +59,10 @@ export default function MiniMap() {
         <div className={style['map-container']}>
           <Map
             defaultCenter={lastMapCenter}
-            defaultZoom={14}
+            defaultZoom={17}
             style={MINI_MAP_STYLES}
-            maxZoom={14}
-            minZoom={14}
+            maxZoom={17}
+            minZoom={17}
             disableDefaultUI
             mapId={process.env.NEXT_PUBLIC_MAP_ID}
             onDrag={handleDragMap}
@@ -72,10 +73,10 @@ export default function MiniMap() {
           <Marker />
         </MapControl>
       </APIProvider>
-      <button type='button' onClick={handleGetCurrentPosition} className={cx('current-location-button')}>
-        <Image src={target} width={16} height={16} alt='target' />
-        현재 내 위치
-      </button>
+      <label className={cx('current-location-button')}>
+        <Checkbox value='' checkedItemHandler={handleGetCurrentPosition} />
+        {/* <Image src={target} width={16} height={16} alt='target' /> */}내 위치 제공
+      </label>
     </div>
   );
 }
