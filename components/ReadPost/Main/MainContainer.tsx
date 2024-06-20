@@ -122,10 +122,12 @@ export default function MainContainer({ contentData, isFeed = false, postId }: M
         <div className={styles['title-wrapper']}>
           <div className={styles['title-and-distance']}>
             <h3 className={styles.title}>{contentData.title}</h3>
-            <div className={styles.distance}>
-              <Image src={verifiedIcon} alt='인증마크' width={20} height={20} />
-              <strong>{contentData.distFromActual}m 이내 작성됨</strong>
-            </div>
+            {contentData.distFromActual && (
+              <div className={styles.distance}>
+                <Image src={verifiedIcon} alt='인증마크' width={20} height={20} />
+                <strong>{contentData.distFromActual}m 이내 작성됨</strong>
+              </div>
+            )}
           </div>
           {!contentData.canDelete && (
             <button type='button' onClick={handleClickBookmark}>

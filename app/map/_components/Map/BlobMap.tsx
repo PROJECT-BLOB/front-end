@@ -34,12 +34,11 @@ export default function BlobMap({ isDisplaying = true }: BlobMapProps) {
   useEffect(() => {}, []);
 
   return (
-    <div className={style['map-container']}>
+    <div className={style['map-container']} style={isDisplaying ? DEFAULT_STYLES : DISPLAY_NONE}>
       <Map
         defaultCenter={lastMapCenter}
         defaultZoom={15}
         gestureHandling={'greedy'}
-        style={isDisplaying ? DEFAULT_STYLES : DISPLAY_NONE}
         minZoom={4}
         disableDefaultUI
         mapId={process.env.NEXT_PUBLIC_MAP_ID}

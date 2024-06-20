@@ -26,6 +26,8 @@
 }
 
 .form {
+  max-width: 41rem;
+  max-height: 100%;
   display: flex;
   padding: 2rem 1.75rem 2rem 2.25rem;
   flex-direction: column;
@@ -82,6 +84,7 @@
 }
 
 .body-image {
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -141,4 +144,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
+}
+
+.minimap-wrapper{
+  margin-bottom: 3.2rem;
 }
