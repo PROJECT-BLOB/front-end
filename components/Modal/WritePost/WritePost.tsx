@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { FieldValues, useForm, UseFormRegister } from 'react-hook-form';
 
 import { APIProvider } from '@vis.gl/react-google-maps';
 import classNames from 'classnames/bind';
@@ -52,6 +52,14 @@ enum SUB_CATEGORY {
 }
 
 export default function WritePost() {
+  const { watch } = useForm();
+
+  const category = watch('category');
+  const title = watch('title');
+  const autocompleteValue = watch('autocomplete');
+
+  const isBlobButtonActive = category && title && autocompleteValue;
+
   const GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY || '';
   const { toggleModal } = useModalStore();
 
@@ -184,7 +192,7 @@ export default function WritePost() {
       </div>
       <div className={cx('post-footer')}>
         <BlobButton text='취소' type='button' color='button-gray-outlined' onClick={cancelForm} />
-        <BlobButton text='BLOB' type='submit' color='button-colord-contain' />
+        <BlobButton text='BLOB' type='submit' color='button-colord-contain' disabled={!isBlobButtonActive} />
       </div>
     </form>
   );
