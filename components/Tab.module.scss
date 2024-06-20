@@ -1,12 +1,13 @@
 @import '/styles/global-styles/color-pallete';
 
 .tab {
+  cursor: pointer;
   color: $BDS-Grayscale-7;
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
   line-height: 150%; /* 24px */
-
+  transition: all 0.3s;
   &.focused {
     color: $BDS-Grayscale-13;
     padding-bottom: 1.1rem;
