@@ -6,8 +6,10 @@ interface OAuthToken {
   accessToken: string;
   refreshToken: string;
 }
+let isLocal = true;
 
-export const isLocal = window.location.hostname.includes('localhost') || window.location.hostname.includes('127.0.0.1');
+if (typeof window !== 'undefined')
+  isLocal = window.location.hostname.includes('localhost') || window.location.hostname.includes('127.0.0.1');
 
 export default async function getOAuthData(
   providerType: 'naver' | 'kakao' | 'google',
