@@ -15,8 +15,6 @@ export default function NotificationItem({ notification }: { notification: Notif
 
   const handleClickDeleteNotification = () => {
     deleteNotificationMutate(notification.notificationId);
-
-    console.log(notification.notificationId, '번 알림을 삭제합니다.');
   };
 
   return (

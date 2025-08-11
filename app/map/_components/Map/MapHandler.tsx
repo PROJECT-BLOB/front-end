@@ -36,8 +36,6 @@ export default function MapHandler() {
   useEffect(() => {
     if (!map || !lastSearchCity.location) return;
 
-    console.log('lastSearchCity', lastSearchCity);
-
     const PADDING_ZOOM_OUT = 800;
     const PADDING_ZOOM_IN = 300;
 

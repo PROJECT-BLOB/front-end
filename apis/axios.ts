@@ -49,7 +49,6 @@ instance.interceptors.response.use(
     const originalRequest = error.config;
 
     const refreshToken = getCookie(REFRESH_TOKEN);
-    console.log('error.response?.message: ', error.response?.data?.message);
 
     if (error.response?.data?.message === '유효하지 않은 토큰입니다.') {
       // 리프레시토큰 만료

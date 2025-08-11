@@ -31,7 +31,6 @@ export default function Map() {
   useEffect(() => {
     if (ref.current && !map) {
       setMap(new window.google.maps.Map(ref.current, { center, zoom: 8 }));
-      console.log('map created');
     }
   }, [ref, map]);
 

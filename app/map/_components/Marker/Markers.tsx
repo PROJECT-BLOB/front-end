@@ -95,7 +95,7 @@ export default function Markers() {
             key={`${point.postId}`}
             title={point.title}
             position={{ lat: point.lat, lng: point.lng }}
-            onClick={() => console.log('MarkerClicked')}
+            // onClick={() => console.log('MarkerClicked')}
             ref={(marker) => setMarkerRef(marker, point.postId.toString())}
           >
             <MarkerWithInfoWindow
