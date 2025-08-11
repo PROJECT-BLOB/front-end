@@ -23,10 +23,10 @@ export default function Autocomplete({ type = 'normal' }: AutocompleteProps) {
 
   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompleteSessionToken
   const [sessionToken, setSessionToken] = useState<google.maps.places.AutocompleteSessionToken>();
+  // NOTE: AutocompleteService is deprecated for new customers as of March 1, 2025.
+  // TODO: Migrate to AutocompleteSuggestion when API documentation becomes available
   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service
   const [autocompleteService, setAutocompleteService] = useState<google.maps.places.AutocompleteService | null>(null);
-  // https://developers.google.com/maps/documentation/javascript/reference/places-service
-  const [placesService, setPlacesService] = useState<google.maps.places.PlacesService | null>(null);
 
   const [predictionResults, setPredictionResults] = useState<Array<google.maps.places.AutocompletePrediction>>([]);
   const [inputValue, setInputValue] = useState<string>('');
@@ -39,8 +39,9 @@ export default function Autocomplete({ type = 'normal' }: AutocompleteProps) {
   useEffect(() => {
     if (!places || !map) return;
 
+    // NOTE: AutocompleteService is deprecated but still functional for existing customers
+    // Will continue to work but should be migrated to new API when available
     setAutocompleteService(new places.AutocompleteService());
-    setPlacesService(new places.PlacesService(map));
     setSessionToken(new places.AutocompleteSessionToken());
 
     return () => setAutocompleteService(null);
@@ -76,20 +77,21 @@ export default function Autocomplete({ type = 'normal' }: AutocompleteProps) {
 
   // 검색결과 클릭 핸들러
   const handleSuggestionClick = useCallback(
-    (placeId: string) => {
+    async (placeId: string) => {
       if (!places) {
         return;
       }
 
-      const detailRequestOptions = {
-        placeId,
-        // fields: ['geometry', 'formatted_address', 'name'],
-        sessionToken,
-      };
+      try {
+        // 새로운 Place API 사용
+        const place = new places.Place({ id: placeId });
 
-      const detailsRequestCallback = (placeDetails: google.maps.places.PlaceResult | null) => {
-        console.log(placeDetails);
-        const { location } = placeDetails?.geometry || {};
+        // fetchFields로 필요한 필드 가져오기
+        await place.fetchFields({
+          fields: ['location', 'formattedAddress', 'displayName', 'addressComponents'],
+        });
+
+        const { location } = place;
 
         if (!location) {
           return;
@@ -98,21 +100,23 @@ export default function Autocomplete({ type = 'normal' }: AutocompleteProps) {
         const newSearchedCenter = location.toJSON();
 
         const newSearchResult: SearchedCity = {
-          city: placeDetails?.vicinity ?? '',
+          city: place.displayName ?? '',
           location: newSearchedCenter,
           country:
-            placeDetails?.address_components?.find((component) => component.types.includes('country'))?.long_name ?? '',
+            place.addressComponents?.find((component: google.maps.places.AddressComponent) =>
+              component.types.includes('country'),
+            )?.longText ?? '',
         };
         setLastSearchCity(newSearchResult);
         setLastMapCenter(newSearchedCenter);
         setPredictionResults([]);
-        setInputValue(placeDetails?.formatted_address ?? '');
+        setInputValue(place.formattedAddress ?? '');
         setSessionToken(new places.AutocompleteSessionToken());
-      };
-
-      placesService?.getDetails(detailRequestOptions, detailsRequestCallback);
+      } catch (error) {
+        console.error('Error fetching place details:', error);
+      }
     },
-    [places, placesService, sessionToken],
+    [places, setLastSearchCity, setLastMapCenter],
   );
 
   return (
@@ -130,7 +134,7 @@ export default function Autocomplete({ type = 'normal' }: AutocompleteProps) {
         <ul className='custom-list'>
           {predictionResults.map(({ place_id, description }) => {
             return (
-              //   eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+              // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
               <li
                 key={place_id}
                 className='custom-list-item'
