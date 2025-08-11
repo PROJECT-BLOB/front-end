@@ -5,6 +5,9 @@
   width: 100%;
   max-width: 60rem;
   margin-bottom: 5rem;
+  border-radius: 2rem 4rem 4rem 2rem; 
+
+
 
   .input-container {
     display: flex;
@@ -50,7 +53,8 @@
     background-color: whitesmoke;
     width: inherit;
     cursor: pointer;
-    border-radius: 1%;
+    border-radius: 2rem 4rem 4rem 2rem; 
+
 
     li {
       display: flex;
@@ -62,6 +66,7 @@
       &:hover {
         border-bottom: 1px solid var(--BDS-Grayscale-5, #d9d9d9);
         background: var(--BDS-Primary-1, linear-gradient(90deg, #fff2ea 0%, #fff0f8 100%));
+        border-radius: 2rem 4rem 4rem 2rem; 
       }
     }
   }
