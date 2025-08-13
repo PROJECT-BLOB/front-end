@@ -25,5 +25,5 @@ export interface IMarker {
 export default async function getMarkers(request: GetMarkerRequest): Promise<{ data: IMarker[] | []; status: number }> {
   const { data, status } = await instance.get('/post/map', { params: request });
 
-  return { data, status };
+  return { data: data.data, status };
 }
