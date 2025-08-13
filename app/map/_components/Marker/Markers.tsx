@@ -49,7 +49,7 @@ export default function Markers() {
   const categoryString = selectedCategoryList.join(',');
 
   const { data } = useGetMarkers(categoryString, lastBound);
-  const locations = data ? data.data : [];
+  const locations = data?.data ? data.data : [];
   const map = useMap();
   const [markers, setMarkers] = useState<{ [key: string]: Marker }>({});
   const clusterer = useRef<MarkerClusterer | null>(null);
@@ -86,26 +86,27 @@ export default function Markers() {
     });
   };
 
+  if (locations.length === 0) return null;
+
   return (
     <>
-      {locations.length > 0 &&
-        locations.map((point) => (
-          <AdvancedMarker
-            // animation={google.maps.Animation.BOUNCE}
-            key={`${point.postId}`}
+      {locations.map((point) => (
+        <AdvancedMarker
+          // animation={google.maps.Animation.BOUNCE}
+          key={`${point.postId}`}
+          title={point.title}
+          position={{ lat: point.lat, lng: point.lng }}
+          // onClick={() => console.log('MarkerClicked')}
+          ref={(marker) => setMarkerRef(marker, point.postId.toString())}
+        >
+          <MarkerWithInfoWindow
+            createdAt={calculateTimePastSinceItCreated(point.createdDate)}
             title={point.title}
-            position={{ lat: point.lat, lng: point.lng }}
-            // onClick={() => console.log('MarkerClicked')}
-            ref={(marker) => setMarkerRef(marker, point.postId.toString())}
-          >
-            <MarkerWithInfoWindow
-              createdAt={calculateTimePastSinceItCreated(point.createdDate)}
-              title={point.title}
-              markerType={point.category}
-              opacity={100}
-            />
-          </AdvancedMarker>
-        ))}
+            markerType={point.category}
+            opacity={100}
+          />
+        </AdvancedMarker>
+      ))}
     </>
   );
 }
