@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Map, MapEvent } from '@vis.gl/react-google-maps';
 
@@ -30,8 +30,6 @@ export default function BlobMap({ isDisplaying = true }: BlobMapProps) {
     const newBound = event.map.getBounds()?.toJSON() as LatLngBoundsLiteral;
     setLastBound(newBound);
   };
-
-  useEffect(() => {}, []);
 
   return (
     <div className={style['map-container']} style={isDisplaying ? DEFAULT_STYLES : DISPLAY_NONE}>
